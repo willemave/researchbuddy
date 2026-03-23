@@ -19,24 +19,36 @@ class CliCommandHelp:
 CLI_COMMANDS: tuple[CliCommandHelp, ...] = (
     CliCommandHelp(
         name="run",
-        usage='reviewbuddy run "<prompt>" [--stats]',
+        usage='reviewbuddy run "<prompt>" [--result-file answer.md] [--stats]',
         summary="Execute a new one-shot research run and print the synthesis.",
         details=(
             "Runs planning, search, crawl, synthesis, and writes artifacts under data/storage/<run_id>/.",
+            "Use the positional prompt for normal CLI usage.",
+            "Use --prompt-file only when you explicitly want to read the prompt from a UTF-8 text file.",
+            "Use --result-file when you want the final synthesis at a deterministic path.",
             "Use --stats when you also want the fetched/failed URL counts printed in the terminal output.",
             "Best when you want a final answer in a single command.",
         ),
-        examples=('reviewbuddy run "best dishwasher for quiet apartment"',),
+        examples=(
+            'reviewbuddy run "best dishwasher for quiet apartment"',
+            "reviewbuddy run --prompt-file prompt.txt --result-file output/synthesis.md",
+        ),
     ),
     CliCommandHelp(
         name="ask",
-        usage='reviewbuddy ask <run_id> "<question>"',
+        usage='reviewbuddy ask <run_id> "<question>" [--result-file answer.txt]',
         summary="Answer a follow-up question from a saved run without re-crawling.",
         details=(
             "Loads persisted follow-up memory from the saved session.",
+            "Use the positional question for normal CLI usage.",
+            "Use --question-file only when you explicitly want to read the question from a UTF-8 text file.",
+            "Use --result-file when you want the answer written to a deterministic path.",
             "Useful for previous-session Q&A in scripts or agent workflows.",
         ),
-        examples=('reviewbuddy ask abc123 "What were the main warranty concerns?"',),
+        examples=(
+            'reviewbuddy ask abc123 "What were the main warranty concerns?"',
+            "reviewbuddy ask abc123 --question-file question.txt --result-file answer.txt",
+        ),
     ),
     CliCommandHelp(
         name="commands",
@@ -47,6 +59,16 @@ CLI_COMMANDS: tuple[CliCommandHelp, ...] = (
             "Points to the markdown reference files under docs/.",
         ),
         examples=("reviewbuddy commands --agent",),
+    ),
+    CliCommandHelp(
+        name="runs",
+        usage="reviewbuddy runs [--limit 20]",
+        summary="List recent saved runs so you can grab a run ID for follow-up commands.",
+        details=(
+            "Reads the recent run history from the local SQLite database.",
+            "Outputs run ID, created time, status, and a truncated prompt summary.",
+        ),
+        examples=("reviewbuddy runs --limit 10",),
     ),
     CliCommandHelp(
         name="setup",

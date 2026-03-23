@@ -15,8 +15,13 @@ LANE_PLANNER_SYSTEM_PROMPT = (
     "reliability/complaints). If the topic is not a physical product (e.g., education, "
     "books, services), adapt lanes accordingly (e.g., curriculum outcomes, author "
     "credibility, service quality, alternatives). Avoid ecommerce/storefront pages; "
-    "bias toward forums, blogs, discussions, and hands-on evaluations. Prefer query "
-    "phrasing like 'forum', 'discussion', 'blog', or 'user review' over site: filters."
+    "bias toward forums, blogs, discussions, and hands-on evaluations. When the "
+    "request is about service providers (e.g., contractors, doctors, cleaners, "
+    "lawyers, agencies, movers, restaurants, salons), prefer review-oriented queries "
+    "that explicitly target customer feedback on forums, Reddit, Yelp, and local "
+    "review discussions instead of generic web results. Prefer query phrasing like "
+    "'forum', 'discussion', 'Reddit', 'Yelp reviews', or 'customer reviews' over "
+    "site: filters."
 )
 
 

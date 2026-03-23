@@ -5,6 +5,7 @@ from typer.testing import CliRunner
 from app import cli
 from app.cli_doctor import DoctorCheck
 from app.cli_help import build_command_reference
+from app.models.review import RunRecord
 from app.services.setup_runtime import SetupAction, SetupResult
 
 runner = CliRunner()
@@ -13,8 +14,9 @@ runner = CliRunner()
 def test_build_command_reference_includes_primary_commands() -> None:
     reference = build_command_reference()
 
-    assert 'reviewbuddy run "<prompt>" [--stats]' in reference
+    assert 'reviewbuddy run "<prompt>" [--result-file answer.md] [--stats]' in reference
     assert "reviewbuddy ask" in reference
+    assert "reviewbuddy runs [--limit 20]" in reference
     assert "reviewbuddy setup" in reference
     assert "reviewbuddy doctor" in reference
     assert "reviewbuddy tap export" in reference
@@ -26,7 +28,7 @@ def test_build_command_reference_agent_mode_is_machine_friendly() -> None:
 
     assert "## ask" in reference
     assert "Purpose:" in reference
-    assert "Usage: `reviewbuddy ask <run_id>" in reference
+    assert 'Usage: `reviewbuddy ask <run_id> "<question>" [--result-file answer.txt]`' in reference
 
 
 def test_commands_command_prints_agent_reference() -> None:
@@ -34,9 +36,49 @@ def test_commands_command_prints_agent_reference() -> None:
 
     assert result.exit_code == 0
     assert "ReviewBuddy CLI For Agents" in result.stdout
-    assert "Usage: `reviewbuddy ask <run_id>" in result.stdout
+    assert 'Usage: `reviewbuddy ask <run_id> "<question>" [--result-file answer.txt]`' in result.stdout
     assert "## setup" in result.stdout
     assert "## tap export" in result.stdout
+
+
+def test_runs_command_lists_recent_runs(monkeypatch) -> None:
+    async def fake_list_runs(_db_path, limit=20):  # noqa: ANN001, ANN202
+        assert limit == 5
+        return [
+            RunRecord(
+                run_id="run-123",
+                prompt="Best office chair for long coding sessions with strong lumbar support",
+                created_at=datetime(2026, 1, 1, 12, 0, tzinfo=UTC),
+                status="completed",
+                max_urls=10,
+                max_agents=4,
+                headful=True,
+                output_dir=cli.Path("/tmp/run-123"),
+            )
+        ]
+
+    monkeypatch.setattr(cli, "list_runs", fake_list_runs)
+
+    result = runner.invoke(cli.app, ["runs", "--limit", "5"])
+
+    assert result.exit_code == 0
+    assert "# Recent Runs" in result.stdout
+    assert "run-123" in result.stdout
+    assert "completed" in result.stdout
+    assert "Best office chair for long coding sessions" in result.stdout
+
+
+def test_runs_command_handles_empty_history(monkeypatch) -> None:
+    async def fake_list_runs(_db_path, limit=20):  # noqa: ANN001, ANN202
+        del limit
+        return []
+
+    monkeypatch.setattr(cli, "list_runs", fake_list_runs)
+
+    result = runner.invoke(cli.app, ["runs"])
+
+    assert result.exit_code == 0
+    assert "No runs found." in result.stdout
 
 
 def test_interactive_commands_are_not_registered() -> None:
@@ -106,6 +148,57 @@ def test_run_command_only_prints_stats_when_requested(monkeypatch) -> None:
 
     assert stats_result.exit_code == 0
     assert "Fetched 3/4 URLs (1 failed)" in stats_result.stdout
+
+
+def test_run_command_accepts_prompt_file_and_result_file(tmp_path, monkeypatch) -> None:
+    monkeypatch.setattr(cli, "setup_logging", lambda _level: None)
+    prompt_path = tmp_path / "prompt.txt"
+    result_path = tmp_path / "outputs" / "synthesis.md"
+    prompt_path.write_text("Best office chair", encoding="utf-8")
+    captured: dict[str, str] = {}
+
+    async def fake_run_review(request, _deps, reporter=None):  # noqa: ANN001, ANN202
+        del reporter
+        captured["prompt"] = request.prompt
+        return cli.ReviewRunResult(
+            run_id="run-123",
+            prompt=request.prompt,
+            created_at=datetime(2026, 1, 1, tzinfo=UTC),
+            stats=cli.ReviewRunStats(total_urls=4, fetched=3, failed=1),
+            synthesis_markdown="Saved synthesis text",
+        )
+
+    monkeypatch.setattr(cli, "run_review", fake_run_review)
+
+    result = runner.invoke(
+        cli.app,
+        [
+            "run",
+            "--prompt-file",
+            str(prompt_path),
+            "--result-file",
+            str(result_path),
+        ],
+    )
+
+    assert result.exit_code == 0
+    assert captured["prompt"] == "Best office chair"
+    assert result_path.read_text(encoding="utf-8") == "Saved synthesis text"
+    assert f"Result file: {result_path}" in result.output
+
+
+def test_run_command_rejects_argument_and_prompt_file(monkeypatch, tmp_path) -> None:
+    monkeypatch.setattr(cli, "setup_logging", lambda _level: None)
+    prompt_path = tmp_path / "prompt.txt"
+    prompt_path.write_text("Best office chair", encoding="utf-8")
+
+    result = runner.invoke(
+        cli.app,
+        ["run", "Best office chair", "--prompt-file", str(prompt_path)],
+    )
+
+    assert result.exit_code == 2
+    assert "Pass either the prompt argument or --prompt-file, not both." in result.output
 
 
 def test_tap_export_command_writes_tap_repo(tmp_path, monkeypatch) -> None:

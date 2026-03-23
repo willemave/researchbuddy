@@ -26,7 +26,7 @@ from app.models.review import (
 from app.services.followup import answer_followup_question, load_followup_memory
 from app.services.homebrew_tap import detect_github_remote, export_tap_repository
 from app.services.setup_runtime import format_setup_report, has_setup_failures, run_setup
-from app.services.storage import fetch_run, fetch_run_stats, resolve_run_dir
+from app.services.storage import fetch_run, fetch_run_stats, list_runs, resolve_run_dir
 from app.workflows.review import run_review
 
 app = typer.Typer(add_completion=False)
@@ -35,17 +35,39 @@ app.add_typer(tap_app, name="tap")
 console = Console()
 settings = get_settings()
 
-PROMPT_ARGUMENT = typer.Argument(..., help="Research question or product to investigate")
+OPTIONAL_PROMPT_ARGUMENT = typer.Argument(
+    None,
+    help="Research question or product to investigate.",
+)
 RUN_ID_ARGUMENT = typer.Argument(..., help="Saved run identifier")
-QUESTION_ARGUMENT = typer.Argument(..., help="Follow-up question to answer from saved memory")
+OPTIONAL_QUESTION_ARGUMENT = typer.Argument(
+    None,
+    help="Follow-up question to answer from saved memory.",
+)
 MAX_URLS_OPTION = typer.Option(None, help="Maximum total URLs to process")
 MAX_AGENTS_OPTION = typer.Option(None, help="Maximum parallel agents")
 HEADFUL_OPTION = typer.Option(True, help="Allow headful fallback if headless is blocked")
 TIMEOUT_OPTION = typer.Option(None, help="Navigation timeout in ms")
 OUTPUT_DIR_OPTION = typer.Option(None, help="Base output directory")
+PROMPT_FILE_OPTION = typer.Option(
+    None,
+    "--prompt-file",
+    help="Read the run prompt from a UTF-8 text file.",
+)
+QUESTION_FILE_OPTION = typer.Option(
+    None,
+    "--question-file",
+    help="Read the follow-up question from a UTF-8 text file.",
+)
+RESULT_FILE_OPTION = typer.Option(
+    None,
+    "--result-file",
+    help="Write the final text output to an explicit file path.",
+)
 PLANNER_MODEL_OPTION = typer.Option(None, help="Override model for the lane planner agent")
 SUB_AGENT_MODEL_OPTION = typer.Option(None, help="Override model for sub-agents")
 TAP_OUTPUT_OPTION = typer.Option(None, help="Output directory for the generated Homebrew tap repo")
+RUNS_LIMIT_OPTION = typer.Option(20, "--limit", min=1, help="Maximum runs to list")
 STATS_OPTION = typer.Option(False, "--stats", help="Print run statistics before the synthesis")
 INSTALL_PLAYWRIGHT_OPTION = typer.Option(
     True,
@@ -63,6 +85,89 @@ class FollowupSessionState:
     prompt: str
     synthesis_markdown: str
     memory: FollowupMemory | None = None
+
+
+def _read_utf8_text_file(path: Path, *, label: str) -> str:
+    """Read a UTF-8 text file for CLI input.
+
+    Args:
+        path: File path to read.
+        label: User-facing label for error messages.
+
+    Returns:
+        Trimmed file contents.
+
+    Raises:
+        typer.BadParameter: If the path is invalid or unreadable.
+    """
+
+    if not path.exists():
+        raise typer.BadParameter(f"{label} file not found: {path}")
+    if not path.is_file():
+        raise typer.BadParameter(f"{label} path is not a file: {path}")
+    try:
+        value = path.read_text(encoding="utf-8")
+    except UnicodeDecodeError as exc:
+        raise typer.BadParameter(f"{label} file must be valid UTF-8 text: {path}") from exc
+    except OSError as exc:
+        raise typer.BadParameter(f"Could not read {label} file {path}: {exc}") from exc
+    cleaned = value.strip()
+    if not cleaned:
+        raise typer.BadParameter(f"{label} file is empty: {path}")
+    return cleaned
+
+
+def _resolve_text_input(
+    value: str | None,
+    file_path: Path | None,
+    *,
+    field_name: str,
+) -> str:
+    """Resolve one explicit text input from CLI args/options.
+
+    Args:
+        value: Positional string value.
+        file_path: Optional file path.
+        field_name: User-facing field name.
+
+    Returns:
+        Resolved non-empty text input.
+
+    Raises:
+        typer.BadParameter: If the input is missing, duplicated, or invalid.
+    """
+
+    if value and file_path is not None:
+        raise typer.BadParameter(
+            f"Pass either the {field_name} argument or --{field_name}-file, not both."
+        )
+    if file_path is not None:
+        return _read_utf8_text_file(file_path, label=field_name)
+    cleaned = (value or "").strip()
+    if not cleaned:
+        raise typer.BadParameter(
+            f"Missing {field_name}. Pass it as an argument or provide --{field_name}-file."
+        )
+    return cleaned
+
+
+def _write_result_file(path: Path, contents: str) -> None:
+    """Write CLI output to an explicit deterministic file path."""
+
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(contents, encoding="utf-8")
+    except OSError as exc:
+        raise typer.BadParameter(f"Could not write result file {path}: {exc}") from exc
+
+
+def _truncate_text(value: str, limit: int) -> str:
+    """Return a single-line truncated string for CLI tables."""
+
+    compact = " ".join(value.split())
+    if len(compact) <= limit:
+        return compact
+    return f"{compact[: max(0, limit - 3)]}..."
 
 
 async def _ensure_followup_memory(state: FollowupSessionState) -> FollowupMemory:
@@ -126,12 +231,14 @@ async def _load_followup_state_for_run(
 
 @app.command()
 def run(
-    prompt: str = PROMPT_ARGUMENT,
+    prompt: str | None = OPTIONAL_PROMPT_ARGUMENT,
+    prompt_file: Path | None = PROMPT_FILE_OPTION,
     max_urls: int = MAX_URLS_OPTION,
     max_agents: int = MAX_AGENTS_OPTION,
     headful: bool = HEADFUL_OPTION,
     timeout_ms: int = TIMEOUT_OPTION,
     output_dir: Path = OUTPUT_DIR_OPTION,
+    result_file: Path | None = RESULT_FILE_OPTION,
     planner_model: str | None = PLANNER_MODEL_OPTION,
     sub_agent_model: str | None = SUB_AGENT_MODEL_OPTION,
     stats: bool = STATS_OPTION,
@@ -139,6 +246,7 @@ def run(
     """Run a review research workflow."""
 
     setup_logging(settings.log_level)
+    resolved_prompt = _resolve_text_input(prompt, prompt_file, field_name="prompt")
 
     config = ReviewRunConfig(
         max_urls=max_urls or settings.max_urls,
@@ -149,14 +257,18 @@ def run(
         planner_model=planner_model,
         sub_agent_model=sub_agent_model,
     )
-    request = ReviewRunRequest(prompt=prompt, **config.model_dump())
+    request = ReviewRunRequest(prompt=resolved_prompt, **config.model_dump())
 
     deps = AgentDeps(session_id="cli", job_id="cli")
 
     result = asyncio.run(run_review(request, deps, reporter=None))
+    if result_file is not None:
+        _write_result_file(result_file, result.synthesis_markdown)
 
     console.print(Panel.fit("ReviewBuddy complete", style="green"))
     console.print(f"Run ID: {result.run_id}")
+    if result_file is not None:
+        console.print(f"Result file: {result_file}", soft_wrap=True)
     if stats:
         console.print(
             f"Fetched {result.stats.fetched}/{result.stats.total_urls} URLs"
@@ -177,6 +289,23 @@ def commands(
     """Print a compact command reference."""
 
     console.print(build_command_reference(agent=agent))
+
+
+@app.command()
+def runs(limit: int = RUNS_LIMIT_OPTION) -> None:
+    """List recent run IDs."""
+
+    records = asyncio.run(list_runs(settings.database_path, limit=limit))
+    if not records:
+        console.print("No runs found.")
+        return
+
+    console.print("# Recent Runs")
+    console.print()
+    for record in records:
+        created_at = record.created_at.astimezone().strftime("%Y-%m-%d %H:%M")
+        prompt = _truncate_text(record.prompt, 72)
+        console.print(f"{record.run_id}  {created_at}  {record.status}  {prompt}")
 
 
 @app.command()
@@ -206,22 +335,28 @@ def setup(
 @app.command()
 def ask(
     run_id: str = RUN_ID_ARGUMENT,
-    question: str = QUESTION_ARGUMENT,
+    question: str | None = OPTIONAL_QUESTION_ARGUMENT,
+    question_file: Path | None = QUESTION_FILE_OPTION,
     output_dir: Path = OUTPUT_DIR_OPTION,
+    result_file: Path | None = RESULT_FILE_OPTION,
     sub_agent_model: str | None = SUB_AGENT_MODEL_OPTION,
 ) -> None:
     """Answer a follow-up question from a previous session."""
 
     setup_logging(settings.log_level)
+    resolved_question = _resolve_text_input(question, question_file, field_name="question")
 
     async def _run() -> None:
         _report, followup_state = await _load_followup_state_for_run(run_id, output_dir)
         memory = await _ensure_followup_memory(followup_state)
         answer = await answer_followup_question(
             memory,
-            question,
+            resolved_question,
             model_name=sub_agent_model,
         )
+        if result_file is not None:
+            _write_result_file(result_file, answer)
+            console.print(f"Result file: {result_file}", soft_wrap=True)
         console.print(answer)
 
     asyncio.run(_run())

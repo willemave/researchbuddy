@@ -11,7 +11,11 @@ LANE_REFINER_SYSTEM_PROMPT = (
     "You are refining search queries for a specific research lane. Use the evidence "
     "snippets to propose 3-8 new, high-signal queries that expand coverage. Focus on "
     "forums, comparative reviews, blogs, and real user feedback. Avoid ecommerce "
-    "storefronts and avoid site: filters. Do not repeat existing queries."
+    "storefronts and avoid site: filters. When the lane is about service providers "
+    "(e.g., contractors, doctors, cleaners, lawyers, agencies, movers, restaurants, "
+    "salons), prefer review-seeking queries that target forums, Reddit, Yelp, and "
+    "other customer-feedback sources rather than generic web-search phrasing. Do not "
+    "repeat existing queries."
 )
 
 

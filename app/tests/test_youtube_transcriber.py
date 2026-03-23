@@ -153,6 +153,31 @@ def test_transcribe_youtube_videos_skips_failed_video(tmp_path, monkeypatch) -> 
     assert (tmp_path / "transcripts" / "good222.txt").exists()
 
 
+def test_transcribe_youtube_videos_searches_original_prompt_once(tmp_path, monkeypatch) -> None:
+    seen_queries: list[tuple[str, int]] = []
+
+    def _search(query: str, max_videos: int) -> list[YouTubeVideo]:
+        seen_queries.append((query, max_videos))
+        return [YouTubeVideo(url="https://www.youtube.com/watch?v=good222", title="Good")]
+
+    monkeypatch.setattr("app.services.youtube_transcriber.search_youtube", _search)
+    monkeypatch.setattr(
+        "app.services.youtube_transcriber.extract_youtube_transcript",
+        lambda *_args, **_kwargs: ("good222", "Good", "Transcript text"),
+    )
+
+    transcripts = transcribe_youtube_videos(
+        prompt="best local plumber sf",
+        max_videos=2,
+        audio_dir=tmp_path / "audio",
+        transcript_dir=tmp_path / "transcripts",
+        model_name="base",
+    )
+
+    assert seen_queries == [("best local plumber sf", 2)]
+    assert len(transcripts) == 1
+
+
 def test_transcribe_youtube_videos_with_timeout_terminates_worker(
     tmp_path,
     monkeypatch,

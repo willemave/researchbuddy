@@ -207,3 +207,81 @@ def test_ask_command_answers_previous_session(monkeypatch, tmp_path: Path) -> No
 
     assert result.exit_code == 0
     assert "Answer text" in result.stdout
+
+
+def test_ask_command_accepts_question_file_and_result_file(
+    monkeypatch,
+    tmp_path: Path,
+) -> None:
+    report = cli.ReviewRunResult(
+        run_id="run-123",
+        prompt="Best office chair",
+        created_at=datetime(2026, 1, 1, tzinfo=UTC),
+        stats=cli.ReviewRunStats(total_urls=4, fetched=4, failed=0),
+        synthesis_markdown="Saved synthesis text",
+    )
+    state = cli.FollowupSessionState(
+        run_id="run-123",
+        run_dir=tmp_path / "run-123",
+        prompt="Best office chair",
+        synthesis_markdown="Saved synthesis text",
+    )
+    memory = FollowupMemory(
+        run_id="run-123",
+        prompt="Best office chair",
+        synthesis_markdown="Saved synthesis text",
+        source_cards=[],
+    )
+    question_path = tmp_path / "question.txt"
+    result_path = tmp_path / "answer.txt"
+    question_path.write_text("How is lumbar support?", encoding="utf-8")
+
+    async def fake_load_state(run_id: str, output_dir: Path | None = None):  # noqa: ANN202
+        assert run_id == "run-123"
+        assert output_dir is None
+        return report, state
+
+    async def fake_ensure_memory(_state):  # noqa: ANN001, ANN202
+        return memory
+
+    async def fake_answer(memory_arg, question: str, model_name: str | None = None):  # noqa: ANN001, ANN202
+        assert memory_arg is memory
+        assert question == "How is lumbar support?"
+        assert model_name is None
+        return "Answer text"
+
+    monkeypatch.setattr(cli, "_load_followup_state_for_run", fake_load_state)
+    monkeypatch.setattr(cli, "_ensure_followup_memory", fake_ensure_memory)
+    monkeypatch.setattr(cli, "answer_followup_question", fake_answer)
+
+    result = runner.invoke(
+        cli.app,
+        [
+            "ask",
+            "run-123",
+            "--question-file",
+            str(question_path),
+            "--result-file",
+            str(result_path),
+        ],
+    )
+
+    assert result.exit_code == 0
+    assert result_path.read_text(encoding="utf-8") == "Answer text"
+    assert f"Result file: {result_path}" in result.output
+    assert "Answer text" in result.stdout
+
+
+def test_ask_command_rejects_empty_question_file(monkeypatch, tmp_path: Path) -> None:
+    monkeypatch.setattr(cli, "setup_logging", lambda _level: None)
+    question_path = tmp_path / "question.txt"
+    question_path.write_text(" \n", encoding="utf-8")
+
+    result = runner.invoke(
+        cli.app,
+        ["ask", "run-123", "--question-file", str(question_path)],
+    )
+
+    assert result.exit_code == 2
+    assert "question file is empty:" in result.output
+    assert question_path.name in result.output

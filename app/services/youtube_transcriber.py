@@ -37,11 +37,6 @@ class YouTubeTranscript(BaseModel):
 
 
 YOUTUBE_URL_RE = re.compile(r"(https?://)?(www\.)?(youtube\.com|youtu\.be)/")
-YOUTUBE_QUERY_TEMPLATES = (
-    "{prompt} review",
-    "{prompt} comparison",
-    "{prompt} buyer guide",
-)
 YOUTUBE_CAPTION_LANGS = ("en", "en-US", "en-GB")
 YOUTUBE_CAPTION_EXTENSIONS = (".json3", ".vtt", ".ttml", ".srv3")
 
@@ -444,15 +439,7 @@ def transcribe_youtube_videos(
     if max_videos <= 0:
         return []
 
-    videos: list[YouTubeVideo] = []
-    for template in YOUTUBE_QUERY_TEMPLATES:
-        remaining = max_videos - len(videos)
-        if remaining <= 0:
-            break
-        query = template.format(prompt=prompt)
-        videos.extend(search_youtube(query, max_videos=remaining))
-
-    videos = _dedupe_videos(videos)[:max_videos]
+    videos = _dedupe_videos(search_youtube(prompt, max_videos=max_videos))[:max_videos]
     if not videos:
         return []
 
