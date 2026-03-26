@@ -309,12 +309,30 @@ def runs(limit: int = RUNS_LIMIT_OPTION) -> None:
 
 
 @app.command()
-def doctor() -> None:
-    """Check whether the local environment is ready to run ReviewBuddy."""
+def doctor(
+    fix: bool = typer.Option(
+        False,
+        "--fix",
+        help="Run setup actions before re-running doctor checks",
+    ),
+    install_playwright: bool = INSTALL_PLAYWRIGHT_OPTION,
+) -> None:
+    """Check whether the local environment is ready to run ReviewBuddy.
 
-    checks = run_doctor_checks(settings)
+    Use ``--fix`` to run setup actions before printing the final doctor report.
+    """
+
+    setup_failed = False
+    if fix:
+        result = run_setup(settings, install_playwright=install_playwright)
+        console.print(format_setup_report(result.actions))
+        console.print()
+        checks = result.doctor_checks
+        setup_failed = has_setup_failures(result.actions)
+    else:
+        checks = run_doctor_checks(settings)
     console.print(format_doctor_report(checks))
-    if has_doctor_failures(checks):
+    if setup_failed or has_doctor_failures(checks):
         raise typer.Exit(code=1)
 
 

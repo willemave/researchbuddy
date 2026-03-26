@@ -82,13 +82,14 @@ CLI_COMMANDS: tuple[CliCommandHelp, ...] = (
     ),
     CliCommandHelp(
         name="doctor",
-        usage="reviewbuddy doctor",
-        summary="Check whether the current machine is ready to run the CLI.",
+        usage="reviewbuddy doctor [--fix] [--skip-playwright]",
+        summary="Check whether the current machine is ready to run the CLI, and optionally fix local setup gaps.",
         details=(
-            "Validates required API keys, required binaries, and writable storage paths.",
+            "Validates required API keys, required binaries, Codex auth, Playwright browser launch, and writable storage paths.",
+            "Use --fix to run the setup flow first so local storage, config, and Playwright browsers are repaired before the final report.",
             "Use this before handing the tool to another bot or promoting a runtime to production.",
         ),
-        examples=("reviewbuddy doctor",),
+        examples=("reviewbuddy doctor", "reviewbuddy doctor --fix"),
     ),
     CliCommandHelp(
         name="tap export",

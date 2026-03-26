@@ -32,10 +32,10 @@ reviewbuddy tap export --output-dir /absolute/path/to/homebrew-reviewbuddy
 
 ## Publish flow
 
-1. Create and push a tagged release in the source repo, for example `v0.1.2`.
+1. Create and push a tagged release in the source repo, for example `v0.1.3`.
 2. Compute the release tarball SHA:
    ```bash
-   curl -L https://github.com/<owner>/reviewbuddy/archive/refs/tags/v0.1.2.tar.gz | shasum -a 256
+   curl -L https://github.com/<owner>/reviewbuddy/archive/refs/tags/v0.1.3.tar.gz | shasum -a 256
    ```
 3. Update `Formula/reviewbuddy.rb` with the real `sha256`.
 4. Validate the tap:
@@ -63,7 +63,7 @@ Install ReviewBuddy with Homebrew:
 brew tap willemave/reviewbuddy
 brew install reviewbuddy
 reviewbuddy commands --agent
-reviewbuddy doctor
+reviewbuddy doctor --fix
 
 If you support SKILL.md directories, load this bundled skill:
 $(brew --prefix)/opt/reviewbuddy/share/reviewbuddy/skills/reviewbuddy-cli

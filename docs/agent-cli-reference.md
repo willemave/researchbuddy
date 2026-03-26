@@ -42,13 +42,15 @@ Example:
 - `reviewbuddy setup`
 
 ## doctor
-Usage: `reviewbuddy doctor`
-Purpose: Check whether the current machine is ready to run the CLI.
+Usage: `reviewbuddy doctor [--fix] [--skip-playwright]`
+Purpose: Check whether the current machine is ready to run the CLI, and optionally fix local setup gaps.
 Behavior:
-- Validates required API keys, required binaries, and writable storage paths.
+- Validates required API keys, required binaries, Codex auth, Playwright browser launch, and writable storage paths.
+- Use `--fix` to run setup before the final report when local dependencies need remediation.
 - Use this before handing the tool to another bot or promoting a runtime to production.
 Example:
 - `reviewbuddy doctor`
+- `reviewbuddy doctor --fix`
 
 ## tap export
 Usage: `reviewbuddy tap export [--output-dir PATH]`

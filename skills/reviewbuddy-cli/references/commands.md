@@ -19,7 +19,8 @@ Primary entry points:
 - Prints a compact command reference.
 - Use `--agent` for the flatter machine-readable variant.
 
-## `reviewbuddy doctor`
-- Validates required API keys, binaries, and writable storage paths.
+## `reviewbuddy doctor [--fix] [--skip-playwright]`
+- Validates required API keys, binaries, Codex auth, Playwright browser launch, and writable storage paths.
+- Use `--fix` when local setup should be repaired before the final doctor report.
 - If it fails on a dependency such as `ffmpeg`, read `references/troubleshooting.md`.
 - Run this before handing the tool to another bot.

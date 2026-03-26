@@ -102,6 +102,43 @@ def test_doctor_command_returns_nonzero_on_failures(monkeypatch) -> None:
     assert "[FAIL] local agent harness" in result.stdout
 
 
+def test_doctor_command_fix_runs_setup_and_reports_results(monkeypatch) -> None:
+    captured: dict[str, bool] = {}
+
+    def fake_run_setup(_settings, install_playwright):  # noqa: ANN001, ANN202
+        captured["install_playwright"] = install_playwright
+        return SetupResult(
+            actions=[SetupAction(name="playwright browsers", ok=True, detail="installed")],
+            doctor_checks=[DoctorCheck(name="playwright browsers", ok=True, detail="Chromium launch OK")],
+        )
+
+    monkeypatch.setattr(cli, "run_setup", fake_run_setup)
+
+    result = runner.invoke(cli.app, ["doctor", "--fix", "--skip-playwright"])
+
+    assert result.exit_code == 0
+    assert captured["install_playwright"] is False
+    assert "ReviewBuddy Setup" in result.stdout
+    assert "ReviewBuddy Doctor" in result.stdout
+    assert "[OK] playwright browsers" in result.stdout
+
+
+def test_doctor_command_fix_returns_nonzero_on_setup_failures(monkeypatch) -> None:
+    monkeypatch.setattr(
+        cli,
+        "run_setup",
+        lambda _settings, install_playwright: SetupResult(
+            actions=[SetupAction(name="playwright browsers", ok=False, detail="install failed")],
+            doctor_checks=[DoctorCheck(name="playwright browsers", ok=True, detail="Chromium launch OK")],
+        ),
+    )
+
+    result = runner.invoke(cli.app, ["doctor", "--fix"])
+
+    assert result.exit_code == 1
+    assert "[FAIL] playwright browsers: install failed" in result.stdout
+
+
 def test_setup_command_prints_setup_and_doctor_reports(monkeypatch) -> None:
     monkeypatch.setattr(
         cli,

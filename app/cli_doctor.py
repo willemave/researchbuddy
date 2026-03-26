@@ -3,11 +3,23 @@
 from __future__ import annotations
 
 import shutil
+import subprocess
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 
 from app.core.settings import Settings
 from app.services.codex_exec import detect_local_agent_harness
+
+DOCTOR_CODEX_AUTH_TIMEOUT_SECONDS = 10
+DOCTOR_PLAYWRIGHT_TIMEOUT_SECONDS = 20
+PLAYWRIGHT_BROWSER_CHECK_SCRIPT = (
+    "from playwright.sync_api import sync_playwright\n"
+    "with sync_playwright() as playwright:\n"
+    "    browser = playwright.chromium.launch(headless=True)\n"
+    "    browser.close()\n"
+    "print('Chromium launch OK')\n"
+)
 
 SEARCH_PROVIDER_SIGNUP_URLS = {
     "exa": "https://dashboard.exa.ai/api-keys",
@@ -37,9 +49,10 @@ def run_doctor_checks(settings: Settings) -> list[DoctorCheck]:
     checks = [
         _check_search_provider(settings),
         _check_agent_hosts(),
-        _check_local_agent_harness(settings),
+        *_check_local_agent_checks(settings),
         _check_binary("uv", "uv"),
         _check_binary("ffmpeg", "ffmpeg"),
+        _check_playwright_browser(),
         _check_storage_path(settings.storage_path),
         _check_database_parent(settings.database_path),
     ]
@@ -127,21 +140,105 @@ def _check_binary(name: str, binary: str) -> DoctorCheck:
     return DoctorCheck(name=name, ok=False, detail=f"{binary} not found in PATH")
 
 
-def _check_local_agent_harness(settings: Settings) -> DoctorCheck:
+def _check_local_agent_checks(settings: Settings) -> list[DoctorCheck]:
     resolved = detect_local_agent_harness(settings)
     if resolved is None:
         candidates = ", ".join(settings.agent_exec_candidates)
-        return DoctorCheck(
-            name="local agent harness",
-            ok=False,
-            detail=f"none found (checked: {candidates})",
-        )
+        return [
+            DoctorCheck(
+                name="local agent harness",
+                ok=False,
+                detail=f"none found (checked: {candidates})",
+            )
+        ]
     harness_name, executable = resolved
+    checks = [
+        DoctorCheck(
+            name="local agent harness",
+            ok=True,
+            detail=f"{harness_name}: {executable}",
+        )
+    ]
+    if harness_name == "codex":
+        checks.append(_check_codex_auth(executable))
+    return checks
+
+
+def _check_codex_auth(executable: str) -> DoctorCheck:
+    try:
+        completed = subprocess.run(
+            [executable, "login", "status"],
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=DOCTOR_CODEX_AUTH_TIMEOUT_SECONDS,
+        )
+    except OSError as exc:
+        return DoctorCheck(name="codex auth", ok=False, detail=f"status check failed ({exc})")
+    except subprocess.TimeoutExpired:
+        return DoctorCheck(
+            name="codex auth",
+            ok=False,
+            detail=f"`codex login status` timed out after {DOCTOR_CODEX_AUTH_TIMEOUT_SECONDS}s",
+        )
+
+    summary = _summarize_command_output(completed.stdout, completed.stderr)
+    combined_output = "\n".join([completed.stdout, completed.stderr]).lower()
+    if "not logged in" not in combined_output and "logged in" in combined_output:
+        return DoctorCheck(name="codex auth", ok=True, detail=summary or "logged in")
+
+    if completed.returncode != 0:
+        detail = summary or f"`codex login status` exited with code {completed.returncode}"
+        return DoctorCheck(name="codex auth", ok=False, detail=f"{detail}; run `codex login`")
+
+    detail = summary or "not authenticated"
+    return DoctorCheck(name="codex auth", ok=False, detail=f"{detail}; run `codex login`")
+
+
+def _check_playwright_browser() -> DoctorCheck:
+    try:
+        completed = subprocess.run(
+            [sys.executable, "-c", PLAYWRIGHT_BROWSER_CHECK_SCRIPT],
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=DOCTOR_PLAYWRIGHT_TIMEOUT_SECONDS,
+        )
+    except OSError as exc:
+        return DoctorCheck(
+            name="playwright browsers",
+            ok=False,
+            detail=f"browser check failed ({exc}); run `reviewbuddy doctor --fix`",
+        )
+    except subprocess.TimeoutExpired:
+        return DoctorCheck(
+            name="playwright browsers",
+            ok=False,
+            detail=(
+                "Chromium launch check timed out "
+                f"after {DOCTOR_PLAYWRIGHT_TIMEOUT_SECONDS}s; run `reviewbuddy doctor --fix`"
+            ),
+        )
+
+    summary = _summarize_command_output(completed.stdout, completed.stderr)
+    if completed.returncode == 0:
+        return DoctorCheck(
+            name="playwright browsers",
+            ok=True,
+            detail=summary or "Chromium launch OK",
+        )
+
+    detail = summary or "Chromium launch failed"
     return DoctorCheck(
-        name="local agent harness",
-        ok=True,
-        detail=f"{harness_name}: {executable}",
+        name="playwright browsers",
+        ok=False,
+        detail=f"{detail}; run `reviewbuddy doctor --fix`",
     )
+
+
+def _summarize_command_output(stdout: str, stderr: str) -> str:
+    lines = [line.strip() for line in (*stdout.splitlines(), *stderr.splitlines()) if line.strip()]
+    return " | ".join(lines[:2])
 
 
 def _check_storage_path(path: Path) -> DoctorCheck:

@@ -21,6 +21,7 @@ brew tap willemave/reviewbuddy
 brew install reviewbuddy
 reviewbuddy commands --agent
 reviewbuddy doctor
+reviewbuddy doctor --fix
 
 Install the bundled skill from:
 $(brew --prefix)/opt/reviewbuddy/share/reviewbuddy/skills/reviewbuddy-cli

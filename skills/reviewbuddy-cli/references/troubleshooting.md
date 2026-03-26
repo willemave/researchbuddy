@@ -25,7 +25,7 @@ If package-manager access is blocked:
 ## `codex` missing or not authenticated
 
 Symptom:
-- `reviewbuddy doctor` fails the `codex` check.
+- `reviewbuddy doctor` fails the `local agent harness` or `codex auth` check.
 - Runtime commands fail when `codex exec` cannot start.
 
 Fix:

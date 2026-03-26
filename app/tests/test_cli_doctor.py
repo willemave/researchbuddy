@@ -1,12 +1,21 @@
 from pathlib import Path
+from types import SimpleNamespace
 
 from app.cli_doctor import (
     DoctorCheck,
+    _check_playwright_browser,
     format_doctor_report,
     has_doctor_failures,
     run_doctor_checks,
 )
 from app.core.settings import Settings
+
+
+def _patch_playwright_check(monkeypatch, *, ok: bool = True, detail: str = "Chromium launch OK") -> None:
+    monkeypatch.setattr(
+        "app.cli_doctor._check_playwright_browser",
+        lambda: DoctorCheck(name="playwright browsers", ok=ok, detail=detail),
+    )
 
 
 def test_format_doctor_report_includes_statuses() -> None:
@@ -39,6 +48,19 @@ def test_run_doctor_checks_includes_signup_urls_when_no_provider_configured(
     monkeypatch.delenv("FIRECRAWL_API_KEY", raising=False)
     monkeypatch.setattr("app.cli_doctor.shutil.which", lambda binary: f"/usr/bin/{binary}")
     monkeypatch.setattr("app.cli_doctor.Path.home", lambda: tmp_path)
+    _patch_playwright_check(monkeypatch)
+    monkeypatch.setattr(
+        "app.cli_doctor.detect_local_agent_harness",
+        lambda _settings: ("codex", "/usr/bin/codex"),
+    )
+    monkeypatch.setattr(
+        "app.cli_doctor.subprocess.run",
+        lambda *args, **kwargs: SimpleNamespace(
+            returncode=0,
+            stdout="Logged in using ChatGPT\n",
+            stderr="",
+        ),
+    )
 
     settings = Settings(
         exa_api_key="",
@@ -69,6 +91,19 @@ def test_run_doctor_checks_uses_selected_provider(monkeypatch, tmp_path: Path) -
     monkeypatch.delenv("FIRECRAWL_API_KEY", raising=False)
     monkeypatch.setattr("app.cli_doctor.shutil.which", lambda binary: f"/usr/bin/{binary}")
     monkeypatch.setattr("app.cli_doctor.Path.home", lambda: tmp_path)
+    _patch_playwright_check(monkeypatch)
+    monkeypatch.setattr(
+        "app.cli_doctor.detect_local_agent_harness",
+        lambda _settings: ("codex", "/usr/bin/codex"),
+    )
+    monkeypatch.setattr(
+        "app.cli_doctor.subprocess.run",
+        lambda *args, **kwargs: SimpleNamespace(
+            returncode=0,
+            stdout="Logged in using ChatGPT\n",
+            stderr="",
+        ),
+    )
 
     settings = Settings(
         exa_api_key="",
@@ -84,6 +119,9 @@ def test_run_doctor_checks_uses_selected_provider(monkeypatch, tmp_path: Path) -
     assert len(tavily_checks) == 1
     assert tavily_checks[0].ok is True
     assert "auto-selected provider" in tavily_checks[0].detail
+    codex_checks = [check for check in checks if check.name == "codex auth"]
+    assert len(codex_checks) == 1
+    assert codex_checks[0].ok is True
     assert any(check.name == "agent host" and check.ok for check in checks)
     assert all(check.name != "OPENAI_API_KEY" for check in checks)
 
@@ -93,6 +131,19 @@ def test_run_doctor_checks_detects_openclaw_install(monkeypatch, tmp_path: Path)
     monkeypatch.setenv("EXA_API_KEY", "test-exa")
     monkeypatch.setattr("app.cli_doctor.shutil.which", lambda binary: f"/usr/bin/{binary}")
     monkeypatch.setattr("app.cli_doctor.Path.home", lambda: tmp_path)
+    _patch_playwright_check(monkeypatch)
+    monkeypatch.setattr(
+        "app.cli_doctor.detect_local_agent_harness",
+        lambda _settings: ("codex", "/usr/bin/codex"),
+    )
+    monkeypatch.setattr(
+        "app.cli_doctor.subprocess.run",
+        lambda *args, **kwargs: SimpleNamespace(
+            returncode=0,
+            stdout="Logged in using ChatGPT\n",
+            stderr="",
+        ),
+    )
     (tmp_path / ".openclaw").mkdir()
 
     settings = Settings(
@@ -120,6 +171,19 @@ def test_run_doctor_checks_includes_firecrawl_signup_url_when_selected_provider_
     monkeypatch.delenv("FIRECRAWL_API_KEY", raising=False)
     monkeypatch.setattr("app.cli_doctor.shutil.which", lambda binary: f"/usr/bin/{binary}")
     monkeypatch.setattr("app.cli_doctor.Path.home", lambda: tmp_path)
+    _patch_playwright_check(monkeypatch)
+    monkeypatch.setattr(
+        "app.cli_doctor.detect_local_agent_harness",
+        lambda _settings: ("codex", "/usr/bin/codex"),
+    )
+    monkeypatch.setattr(
+        "app.cli_doctor.subprocess.run",
+        lambda *args, **kwargs: SimpleNamespace(
+            returncode=0,
+            stdout="Logged in using ChatGPT\n",
+            stderr="",
+        ),
+    )
 
     settings = Settings(
         exa_api_key="test-exa",
@@ -136,3 +200,109 @@ def test_run_doctor_checks_includes_firecrawl_signup_url_when_selected_provider_
     assert len(firecrawl_checks) == 1
     assert firecrawl_checks[0].ok is False
     assert "https://www.firecrawl.dev/app/api-keys" in firecrawl_checks[0].detail
+
+
+def test_run_doctor_checks_fails_when_codex_is_not_authenticated(
+    monkeypatch, tmp_path: Path
+) -> None:
+    monkeypatch.setenv("EXA_API_KEY", "test-exa")
+    monkeypatch.setattr("app.cli_doctor.shutil.which", lambda binary: f"/usr/bin/{binary}")
+    monkeypatch.setattr("app.cli_doctor.Path.home", lambda: tmp_path)
+    _patch_playwright_check(monkeypatch)
+    monkeypatch.setattr(
+        "app.cli_doctor.detect_local_agent_harness",
+        lambda _settings: ("codex", "/usr/bin/codex"),
+    )
+    monkeypatch.setattr(
+        "app.cli_doctor.subprocess.run",
+        lambda *args, **kwargs: SimpleNamespace(
+            returncode=1,
+            stdout="Not logged in\n",
+            stderr="",
+        ),
+    )
+
+    settings = Settings(
+        exa_api_key="test-exa",
+        tavily_api_key="",
+        firecrawl_api_key="",
+        storage_path=tmp_path / "storage",
+        database_path=tmp_path / "db" / "reviewbuddy.db",
+    )
+
+    checks = run_doctor_checks(settings)
+
+    codex_checks = [check for check in checks if check.name == "codex auth"]
+    assert len(codex_checks) == 1
+    assert codex_checks[0].ok is False
+    assert "run `codex login`" in codex_checks[0].detail
+
+
+def test_run_doctor_checks_accepts_logged_in_status_from_stderr(
+    monkeypatch, tmp_path: Path
+) -> None:
+    monkeypatch.setenv("EXA_API_KEY", "test-exa")
+    monkeypatch.setattr("app.cli_doctor.shutil.which", lambda binary: f"/usr/bin/{binary}")
+    monkeypatch.setattr("app.cli_doctor.Path.home", lambda: tmp_path)
+    _patch_playwright_check(monkeypatch)
+    monkeypatch.setattr(
+        "app.cli_doctor.detect_local_agent_harness",
+        lambda _settings: ("codex", "/usr/bin/codex"),
+    )
+    monkeypatch.setattr(
+        "app.cli_doctor.subprocess.run",
+        lambda *args, **kwargs: SimpleNamespace(
+            returncode=0,
+            stdout="",
+            stderr="Logged in using ChatGPT\n",
+        ),
+    )
+
+    settings = Settings(
+        exa_api_key="test-exa",
+        tavily_api_key="",
+        firecrawl_api_key="",
+        storage_path=tmp_path / "storage",
+        database_path=tmp_path / "db" / "reviewbuddy.db",
+    )
+
+    checks = run_doctor_checks(settings)
+
+    codex_checks = [check for check in checks if check.name == "codex auth"]
+    assert len(codex_checks) == 1
+    assert codex_checks[0].ok is True
+    assert codex_checks[0].detail == "Logged in using ChatGPT"
+
+
+def test_check_playwright_browser_reports_failure_when_launch_fails(monkeypatch) -> None:
+    monkeypatch.setattr(
+        "app.cli_doctor.subprocess.run",
+        lambda *args, **kwargs: SimpleNamespace(
+            returncode=1,
+            stdout="",
+            stderr="Executable doesn't exist at /tmp/chromium\n",
+        ),
+    )
+
+    check = _check_playwright_browser()
+
+    assert check.name == "playwright browsers"
+    assert check.ok is False
+    assert "reviewbuddy doctor --fix" in check.detail
+
+
+def test_check_playwright_browser_reports_success(monkeypatch) -> None:
+    monkeypatch.setattr(
+        "app.cli_doctor.subprocess.run",
+        lambda *args, **kwargs: SimpleNamespace(
+            returncode=0,
+            stdout="Chromium launch OK\n",
+            stderr="",
+        ),
+    )
+
+    check = _check_playwright_browser()
+
+    assert check.name == "playwright browsers"
+    assert check.ok is True
+    assert check.detail == "Chromium launch OK"
