@@ -120,6 +120,7 @@ def render_formula(request: TapExportRequest) -> str:
         - Install and authenticate codex: codex login
         - Set at least one search provider key (EXA_API_KEY, TAVILY_API_KEY, or FIRECRAWL_API_KEY)
         - Optionally set SEARCH_PROVIDER to override auto-selection
+        - In OpenClaw, first check ~/.openclaw/openclaw.json and reuse an existing exa/tavily/firecrawl key when the user approves
         - ReviewBuddy also auto-loads provider config from ~/.hermes/.env and ~/.openclaw/openclaw.json
         - Run `reviewbuddy doctor` before first use
 
@@ -158,6 +159,8 @@ If another formula with the same name ever exists, use the fully qualified name:
 ```bash
 brew install {short_tap}/{formula_name}
 ```
+
+If you are installing into OpenClaw, check `~/.openclaw/openclaw.json` before asking for search-provider credentials. When it already has `exa`, `tavily`, or `firecrawl` configured, ask whether ReviewBuddy should reuse that existing provider/key and let `reviewbuddy setup` auto-load it instead of collecting a duplicate secret.
 
 ## Update the formula for a new ReviewBuddy release
 

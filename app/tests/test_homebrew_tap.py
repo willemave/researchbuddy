@@ -7,6 +7,7 @@ from app.services.homebrew_tap import (
     detect_github_remote,
     export_tap_repository,
     render_formula,
+    render_tap_readme,
 )
 
 
@@ -32,6 +33,14 @@ def test_render_formula_includes_expected_tap_metadata(tmp_path: Path) -> None:
     assert 'depends_on "uv"' in formula
     assert 'pkgshare.install "skills"' in formula
     assert 'uv" tool run --from "git+https://github.com/willemave/reviewbuddy.git@v0.1.1"' in formula
+    assert "~/.openclaw/openclaw.json" in formula
+
+
+def test_render_tap_readme_mentions_openclaw_key_reuse(tmp_path: Path) -> None:
+    readme = render_tap_readme(build_request(tmp_path))
+
+    assert "~/.openclaw/openclaw.json" in readme
+    assert "reuse that existing provider/key" in readme
 
 
 def test_export_tap_repository_writes_expected_files(tmp_path: Path) -> None:

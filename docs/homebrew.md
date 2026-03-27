@@ -62,6 +62,11 @@ Install ReviewBuddy with Homebrew:
 
 brew tap willemave/reviewbuddy
 brew install reviewbuddy
+
+Before asking for any new search-provider key, check ~/.openclaw/openclaw.json.
+If exa, tavily, or firecrawl is already configured there, ask whether ReviewBuddy should reuse that existing provider/key.
+If the user says yes, do not collect a duplicate secret. Let ReviewBuddy setup/doctor use the OpenClaw config.
+
 reviewbuddy commands --agent
 reviewbuddy doctor --fix
 

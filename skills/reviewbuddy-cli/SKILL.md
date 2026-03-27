@@ -10,9 +10,11 @@ Use this skill when the task is about installing ReviewBuddy, running it, asking
 ## Quick Start
 
 1. Run `scripts/reviewbuddy commands --agent` to see the current command surface.
-2. Run `scripts/reviewbuddy setup` in a new environment, then rerun `scripts/reviewbuddy doctor` if setup reports any failure.
-3. Start long `scripts/reviewbuddy run "<prompt>"` jobs in the background, capture the PID, and redirect logs to a file so the agent can keep working while the crawl runs.
-4. Use `scripts/reviewbuddy ask <run_id> "<question>"` when the user wants a follow-up answer from a previous session without re-crawling.
+2. On first install inside OpenClaw, check `~/.openclaw/openclaw.json` before asking for search-provider credentials. If it already has `exa`, `tavily`, or `firecrawl` configured, ask the user whether ReviewBuddy should reuse that existing provider/key.
+3. If the user approves reuse, do not ask them to paste a duplicate API key. Run `scripts/reviewbuddy setup`, let ReviewBuddy auto-load the provider from OpenClaw config, and confirm with `scripts/reviewbuddy doctor`.
+4. If OpenClaw has no usable provider config, or the user declines reuse, run `scripts/reviewbuddy setup` in a new environment, then rerun `scripts/reviewbuddy doctor` if setup reports any failure.
+5. Start long `scripts/reviewbuddy run "<prompt>"` jobs in the background, capture the PID, and redirect logs to a file so the agent can keep working while the crawl runs.
+6. Use `scripts/reviewbuddy ask <run_id> "<question>"` when the user wants a follow-up answer from a previous session without re-crawling.
 
 ## Read These References As Needed
 
@@ -22,6 +24,8 @@ Use this skill when the task is about installing ReviewBuddy, running it, asking
 ## Operating Rules
 
 - Prefer the `scripts/reviewbuddy` wrapper over calling `uv tool run --from . reviewbuddy` directly unless the user specifically wants the raw command.
+- During first-time OpenClaw installs, prefer reusing the provider configured in `~/.openclaw/openclaw.json` over asking the user for a fresh `EXA_API_KEY`, `TAVILY_API_KEY`, or `FIRECRAWL_API_KEY`.
+- If OpenClaw config is present, ask the user once whether ReviewBuddy should use that existing provider. If they say yes, direct the runtime to use that config path and rely on ReviewBuddy setup auto-detection instead of collecting duplicate secrets.
 - Before debugging a broken runtime, run `scripts/reviewbuddy doctor`.
 - For long research runs, launch ReviewBuddy in the background. Recommended pattern:
   `scripts/reviewbuddy run "<prompt>" > /tmp/reviewbuddy.log 2>&1 & echo $!`

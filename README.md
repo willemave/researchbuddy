@@ -10,7 +10,7 @@ It can use your local coding harness for summarization and synthesis, so agent i
 
 If you are installing ReviewBuddy into Hermes, OpenClaw, or another agent that supports `SKILL.md` directories, install the CLI first and then install the bundled skill from `skills/reviewbuddy-cli`.
 
-ReviewBuddy still needs a search provider key for web discovery, but summarization can run through the local coding harness already available to the agent runtime.
+ReviewBuddy still needs a search provider for web discovery, but summarization can run through the local coding harness already available to the agent runtime. On first install in OpenClaw, agents should check `~/.openclaw/openclaw.json` and ask whether they should reuse an existing `exa`, `tavily`, or `firecrawl` key before requesting new credentials.
 
 Paste this into Hermes or another OpenClaw-style agent:
 
@@ -19,6 +19,11 @@ Install ReviewBuddy with Homebrew:
 
 brew tap willemave/reviewbuddy
 brew install reviewbuddy
+
+Before asking for any new search-provider key, check ~/.openclaw/openclaw.json.
+If exa, tavily, or firecrawl is already configured there, ask whether ReviewBuddy should reuse that existing provider/key.
+If the user says yes, do not ask for a duplicate secret. Let reviewbuddy setup/doctor use the OpenClaw config.
+
 reviewbuddy commands --agent
 reviewbuddy doctor
 reviewbuddy doctor --fix
@@ -80,6 +85,7 @@ scripts/reviewbuddy setup
 
 What `setup` does:
 - Detects search-provider settings from `~/.hermes/.env` or `~/.openclaw/openclaw.json` when available
+- Lets agents reuse an existing OpenClaw `exa`, `tavily`, or `firecrawl` key instead of collecting a duplicate secret
 - Creates storage and database paths
 - Installs Playwright browsers by default
 - Reruns `doctor` checks

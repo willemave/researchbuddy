@@ -3,7 +3,7 @@
 from pathlib import Path
 
 APP_NAME = "Review Buddy"
-APP_VERSION = "0.1.3"
+APP_VERSION = "0.1.4"
 DEFAULT_DATA_DIR = Path("./data")
 DEFAULT_STORAGE_DIR = DEFAULT_DATA_DIR / "storage"
 DEFAULT_DB_PATH = DEFAULT_DATA_DIR / "reviewbuddy.db"

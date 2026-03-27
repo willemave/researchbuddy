@@ -37,6 +37,7 @@ Usage: `reviewbuddy setup [--skip-playwright]`
 Purpose: Prepare the local machine to run the CLI, then rerun doctor checks.
 Behavior:
 - Persists detected search-provider settings into the local `.env` when possible.
+- In OpenClaw environments, agents should first check `~/.openclaw/openclaw.json` and ask whether ReviewBuddy should reuse an existing `exa`, `tavily`, or `firecrawl` provider before requesting new credentials.
 - Creates the storage/database paths and optionally installs Playwright browsers.
 Example:
 - `reviewbuddy setup`

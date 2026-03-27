@@ -21,6 +21,8 @@ def test_build_command_reference_includes_primary_commands() -> None:
     assert "reviewbuddy doctor" in reference
     assert "reviewbuddy tap export" in reference
     assert "docs/agent-cli-reference.md" in reference
+    assert "Prints a full readiness report and exits non-zero when setup or runtime checks fail." in reference
+    assert "Prints the run ID and final synthesis to stdout" in reference
 
 
 def test_build_command_reference_agent_mode_is_machine_friendly() -> None:
@@ -29,6 +31,7 @@ def test_build_command_reference_agent_mode_is_machine_friendly() -> None:
     assert "## ask" in reference
     assert "Purpose:" in reference
     assert 'Usage: `reviewbuddy ask <run_id> "<question>" [--result-file answer.txt]`' in reference
+    assert "Returns enough detail to drive scripts or agents without opening the docs first." in reference
 
 
 def test_commands_command_prints_agent_reference() -> None:
@@ -39,6 +42,18 @@ def test_commands_command_prints_agent_reference() -> None:
     assert 'Usage: `reviewbuddy ask <run_id> "<question>" [--result-file answer.txt]`' in result.stdout
     assert "## setup" in result.stdout
     assert "## tap export" in result.stdout
+
+
+def test_top_level_help_uses_descriptive_command_text() -> None:
+    result = runner.invoke(cli.app, ["--help"])
+
+    assert result.exit_code == 0
+    assert "Run ReviewBuddy research workflows, inspect saved runs, and validate local" in result.stdout
+    assert "runtime readiness." in result.stdout
+    assert "Run a new research workflow and print the final synthesis" in result.stdout
+    assert "Print usage, behavior, and examples for every CLI command." in result.stdout
+    assert "List recent saved runs with their run IDs, timestamps, status," in result.stdout
+    assert "and prompt summaries." in result.stdout
 
 
 def test_runs_command_lists_recent_runs(monkeypatch) -> None:
@@ -161,6 +176,10 @@ def test_run_command_only_prints_stats_when_requested(monkeypatch) -> None:
     monkeypatch.setattr(cli, "setup_logging", lambda _level: None)
 
     async def fake_run_review(_request, _deps, reporter=None):  # noqa: ANN001, ANN202
+        assert reporter is not None
+        reporter.on_lanes_planned(2)
+        reporter.on_urls_discovered(3)
+        reporter.on_url_done(True)
         return cli.ReviewRunResult(
             run_id="run-123",
             prompt="Best office chair",
@@ -179,6 +198,10 @@ def test_run_command_only_prints_stats_when_requested(monkeypatch) -> None:
     stats_result = runner.invoke(cli.app, ["run", "Best office chair", "--stats"])
 
     assert default_result.exit_code == 0
+    assert 'Starting ReviewBuddy run for: "Best office chair"' in default_result.stdout
+    assert "Planned 2 lanes. Starting crawl." in default_result.stdout
+    assert "Queued 3 URLs for fetch." in default_result.stdout
+    assert "Processed 1 URLs (1 fetched, 0 failed)." in default_result.stdout
     assert "Run ID: run-123" in default_result.stdout
     assert "Fetched 3/4 URLs" not in default_result.stdout
     assert "Saved synthesis text" in default_result.stdout
@@ -221,7 +244,53 @@ def test_run_command_accepts_prompt_file_and_result_file(tmp_path, monkeypatch) 
     assert result.exit_code == 0
     assert captured["prompt"] == "Best office chair"
     assert result_path.read_text(encoding="utf-8") == "Saved synthesis text"
+    assert 'Starting ReviewBuddy run for: "Best office chair"' in result.output
     assert f"Result file: {result_path}" in result.output
+
+
+def test_ask_command_prints_startup_status(monkeypatch, tmp_path) -> None:
+    monkeypatch.setattr(cli, "setup_logging", lambda _level: None)
+
+    async def fake_load_state(run_id, output_dir=None):  # noqa: ANN001, ANN202
+        del output_dir
+        report = cli.ReviewRunResult(
+            run_id=run_id,
+            prompt="Best office chair",
+            created_at=datetime(2026, 1, 1, tzinfo=UTC),
+            stats=cli.ReviewRunStats(total_urls=4, fetched=3, failed=1),
+            synthesis_markdown="Saved synthesis text",
+        )
+        state = cli.FollowupSessionState(
+            run_id=run_id,
+            run_dir=tmp_path,
+            prompt=report.prompt,
+            synthesis_markdown=report.synthesis_markdown,
+        )
+        return report, state
+
+    async def fake_ensure_memory(state):  # noqa: ANN001, ANN202
+        return cli.FollowupMemory(
+            run_id=state.run_id,
+            prompt=state.prompt,
+            synthesis_markdown=state.synthesis_markdown,
+            source_cards=[],
+        )
+
+    async def fake_answer(memory, question, model_name=None):  # noqa: ANN001, ANN202
+        del memory, model_name
+        assert question == "What broke most often?"
+        return "Answer text"
+
+    monkeypatch.setattr(cli, "_load_followup_state_for_run", fake_load_state)
+    monkeypatch.setattr(cli, "_ensure_followup_memory", fake_ensure_memory)
+    monkeypatch.setattr(cli, "answer_followup_question", fake_answer)
+
+    result = runner.invoke(cli.app, ["ask", "run-123", "What broke most often?"])
+
+    assert result.exit_code == 0
+    assert "Loading saved run run-123 for follow-up." in result.stdout
+    assert 'Running follow-up answer for: "What broke most often?"' in result.stdout
+    assert "Answer text" in result.stdout
 
 
 def test_run_command_rejects_argument_and_prompt_file(monkeypatch, tmp_path) -> None:

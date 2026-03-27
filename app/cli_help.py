@@ -23,6 +23,7 @@ CLI_COMMANDS: tuple[CliCommandHelp, ...] = (
         summary="Execute a new one-shot research run and print the synthesis.",
         details=(
             "Runs planning, search, crawl, synthesis, and writes artifacts under data/storage/<run_id>/.",
+            "Prints the run ID and final synthesis to stdout, and can also write the synthesis to --result-file.",
             "Use the positional prompt for normal CLI usage.",
             "Use --prompt-file only when you explicitly want to read the prompt from a UTF-8 text file.",
             "Use --result-file when you want the final synthesis at a deterministic path.",
@@ -40,6 +41,7 @@ CLI_COMMANDS: tuple[CliCommandHelp, ...] = (
         summary="Answer a follow-up question from a saved run without re-crawling.",
         details=(
             "Loads persisted follow-up memory from the saved session.",
+            "Prints the follow-up answer to stdout, and can also write the answer to --result-file.",
             "Use the positional question for normal CLI usage.",
             "Use --question-file only when you explicitly want to read the question from a UTF-8 text file.",
             "Use --result-file when you want the answer written to a deterministic path.",
@@ -53,10 +55,11 @@ CLI_COMMANDS: tuple[CliCommandHelp, ...] = (
     CliCommandHelp(
         name="commands",
         usage="reviewbuddy commands [--agent]",
-        summary="Print a compact command reference.",
+        summary="Print a command reference with usage, behavior, and examples for every CLI command.",
         details=(
             "Use --agent for a flatter, machine-friendly reference format.",
-            "Points to the markdown reference files under docs/.",
+            "Returns enough detail to drive scripts or agents without opening the docs first.",
+            "Points to the markdown reference files under docs/ for the longer reference text.",
         ),
         examples=("reviewbuddy commands --agent",),
     ),
@@ -67,6 +70,7 @@ CLI_COMMANDS: tuple[CliCommandHelp, ...] = (
         details=(
             "Reads the recent run history from the local SQLite database.",
             "Outputs run ID, created time, status, and a truncated prompt summary.",
+            "Use this when you need to find a prior run before calling reviewbuddy ask.",
         ),
         examples=("reviewbuddy runs --limit 10",),
     ),
@@ -77,6 +81,7 @@ CLI_COMMANDS: tuple[CliCommandHelp, ...] = (
         details=(
             "Persists detected search-provider settings into the local .env when possible.",
             "Creates the storage/database paths and optionally installs Playwright browsers.",
+            "Prints both the setup report and a follow-up doctor report, then exits non-zero if readiness problems remain.",
         ),
         examples=("reviewbuddy setup",),
     ),
@@ -88,6 +93,7 @@ CLI_COMMANDS: tuple[CliCommandHelp, ...] = (
             "Validates required API keys, required binaries, Codex auth, Playwright browser launch, and writable storage paths.",
             "Use --fix to run the setup flow first so local storage, config, and Playwright browsers are repaired before the final report.",
             "Use this before handing the tool to another bot or promoting a runtime to production.",
+            "Prints a full readiness report and exits non-zero when setup or runtime checks fail.",
         ),
         examples=("reviewbuddy doctor", "reviewbuddy doctor --fix"),
     ),
@@ -98,6 +104,7 @@ CLI_COMMANDS: tuple[CliCommandHelp, ...] = (
         details=(
             "Writes Formula/, README.md, a validation workflow, and a tap-maintainer skill.",
             "Defaults to the GitHub origin remote and writes to ../homebrew-reviewbuddy when possible.",
+            "Prints the export directory and the files written so a release bot can continue without extra discovery.",
         ),
         examples=("reviewbuddy tap export",),
     ),

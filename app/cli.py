@@ -25,12 +25,16 @@ from app.models.review import (
 )
 from app.services.followup import answer_followup_question, load_followup_memory
 from app.services.homebrew_tap import detect_github_remote, export_tap_repository
+from app.services.reporter import RunReporter
 from app.services.setup_runtime import format_setup_report, has_setup_failures, run_setup
 from app.services.storage import fetch_run, fetch_run_stats, list_runs, resolve_run_dir
 from app.workflows.review import run_review
 
-app = typer.Typer(add_completion=False)
-tap_app = typer.Typer(help="Generate Homebrew tap assets.")
+app = typer.Typer(
+    add_completion=False,
+    help="Run ReviewBuddy research workflows, inspect saved runs, and validate local runtime readiness.",
+)
+tap_app = typer.Typer(help="Generate and inspect Homebrew tap publishing assets for ReviewBuddy.")
 app.add_typer(tap_app, name="tap")
 console = Console()
 settings = get_settings()
@@ -170,6 +174,68 @@ def _truncate_text(value: str, limit: int) -> str:
     return f"{compact[: max(0, limit - 3)]}..."
 
 
+def _print_status_line(message: str) -> None:
+    """Print an immediate stdout status line for long-running CLI work."""
+
+    console.print(message, soft_wrap=True, highlight=False)
+    flush = getattr(console.file, "flush", None)
+    if callable(flush):
+        flush()
+
+
+def _build_cli_run_reporter() -> RunReporter:
+    """Return a lightweight stdout progress reporter for CLI runs."""
+
+    queued_any_urls = False
+    processed_urls = 0
+    fetched_urls = 0
+    failed_urls = 0
+    planned_lanes = 0
+    completed_lanes = 0
+
+    def on_lanes_planned(count: int) -> None:
+        nonlocal planned_lanes
+        planned_lanes = count
+        noun = "lane" if count == 1 else "lanes"
+        _print_status_line(f"Planned {count} {noun}. Starting crawl.")
+
+    def on_urls_discovered(count: int) -> None:
+        nonlocal queued_any_urls
+        if queued_any_urls or count <= 0:
+            return
+        queued_any_urls = True
+        noun = "URL" if count == 1 else "URLs"
+        _print_status_line(f"Queued {count} {noun} for fetch.")
+
+    def on_url_done(ok: bool) -> None:
+        nonlocal processed_urls, fetched_urls, failed_urls
+        processed_urls += 1
+        if ok:
+            fetched_urls += 1
+        else:
+            failed_urls += 1
+        if processed_urls != 1 and processed_urls % 5 != 0:
+            return
+        _print_status_line(
+            f"Processed {processed_urls} URLs ({fetched_urls} fetched, {failed_urls} failed)."
+        )
+
+    def on_lane_done(lane_name: str) -> None:
+        nonlocal completed_lanes
+        completed_lanes += 1
+        if planned_lanes > 0:
+            _print_status_line(f"Completed lane {completed_lanes}/{planned_lanes}: {lane_name}")
+            return
+        _print_status_line(f"Completed lane: {lane_name}")
+
+    return RunReporter(
+        on_lanes_planned=on_lanes_planned,
+        on_urls_discovered=on_urls_discovered,
+        on_url_done=on_url_done,
+        on_lane_done=on_lane_done,
+    )
+
+
 async def _ensure_followup_memory(state: FollowupSessionState) -> FollowupMemory:
     """Load cached follow-up memory for a run when needed."""
 
@@ -229,7 +295,7 @@ async def _load_followup_state_for_run(
     return report, followup_state
 
 
-@app.command()
+@app.command(help="Run a new research workflow and print the final synthesis, with optional saved output.")
 def run(
     prompt: str | None = OPTIONAL_PROMPT_ARGUMENT,
     prompt_file: Path | None = PROMPT_FILE_OPTION,
@@ -243,10 +309,11 @@ def run(
     sub_agent_model: str | None = SUB_AGENT_MODEL_OPTION,
     stats: bool = STATS_OPTION,
 ) -> None:
-    """Run a review research workflow."""
+    """Run a new research workflow and return the final synthesis."""
 
     setup_logging(settings.log_level)
     resolved_prompt = _resolve_text_input(prompt, prompt_file, field_name="prompt")
+    _print_status_line(f'Starting ReviewBuddy run for: "{_truncate_text(resolved_prompt, 80)}"')
 
     config = ReviewRunConfig(
         max_urls=max_urls or settings.max_urls,
@@ -261,7 +328,7 @@ def run(
 
     deps = AgentDeps(session_id="cli", job_id="cli")
 
-    result = asyncio.run(run_review(request, deps, reporter=None))
+    result = asyncio.run(run_review(request, deps, reporter=_build_cli_run_reporter()))
     if result_file is not None:
         _write_result_file(result_file, result.synthesis_markdown)
 
@@ -278,7 +345,7 @@ def run(
     console.print(result.synthesis_markdown)
 
 
-@app.command()
+@app.command(help="Print usage, behavior, and examples for every CLI command.")
 def commands(
     agent: bool = typer.Option(
         False,
@@ -286,14 +353,14 @@ def commands(
         help="Render a flatter command reference for agents and scripts",
     ),
 ) -> None:
-    """Print a compact command reference."""
+    """Print a command reference for users, agents, and scripts."""
 
     console.print(build_command_reference(agent=agent))
 
 
-@app.command()
+@app.command(help="List recent saved runs with their run IDs, timestamps, status, and prompt summaries.")
 def runs(limit: int = RUNS_LIMIT_OPTION) -> None:
-    """List recent run IDs."""
+    """List recent saved runs so follow-up commands can reuse a run ID."""
 
     records = asyncio.run(list_runs(settings.database_path, limit=limit))
     if not records:
@@ -308,7 +375,7 @@ def runs(limit: int = RUNS_LIMIT_OPTION) -> None:
         console.print(f"{record.run_id}  {created_at}  {record.status}  {prompt}")
 
 
-@app.command()
+@app.command(help="Run environment readiness checks and optionally repair local setup first.")
 def doctor(
     fix: bool = typer.Option(
         False,
@@ -318,6 +385,8 @@ def doctor(
     install_playwright: bool = INSTALL_PLAYWRIGHT_OPTION,
 ) -> None:
     """Check whether the local environment is ready to run ReviewBuddy.
+
+    Prints a full readiness report.
 
     Use ``--fix`` to run setup actions before printing the final doctor report.
     """
@@ -336,11 +405,11 @@ def doctor(
         raise typer.Exit(code=1)
 
 
-@app.command()
+@app.command(help="Prepare local config, storage, and browser dependencies, then rerun doctor checks.")
 def setup(
     install_playwright: bool = INSTALL_PLAYWRIGHT_OPTION,
 ) -> None:
-    """Prepare the local environment to run ReviewBuddy."""
+    """Prepare the local environment and print setup plus readiness reports."""
 
     result = run_setup(settings, install_playwright=install_playwright)
     console.print(format_setup_report(result.actions))
@@ -350,7 +419,7 @@ def setup(
         raise typer.Exit(code=1)
 
 
-@app.command()
+@app.command(help="Answer a follow-up question from a saved run without rerunning the crawl.")
 def ask(
     run_id: str = RUN_ID_ARGUMENT,
     question: str | None = OPTIONAL_QUESTION_ARGUMENT,
@@ -359,14 +428,18 @@ def ask(
     result_file: Path | None = RESULT_FILE_OPTION,
     sub_agent_model: str | None = SUB_AGENT_MODEL_OPTION,
 ) -> None:
-    """Answer a follow-up question from a previous session."""
+    """Answer a follow-up question from a previous session and print the result."""
 
     setup_logging(settings.log_level)
     resolved_question = _resolve_text_input(question, question_file, field_name="question")
+    _print_status_line(f"Loading saved run {run_id} for follow-up.")
 
     async def _run() -> None:
         _report, followup_state = await _load_followup_state_for_run(run_id, output_dir)
         memory = await _ensure_followup_memory(followup_state)
+        _print_status_line(
+            f'Running follow-up answer for: "{_truncate_text(resolved_question, 80)}"'
+        )
         answer = await answer_followup_question(
             memory,
             resolved_question,
@@ -380,14 +453,14 @@ def ask(
     asyncio.run(_run())
 
 
-@tap_app.command("export")
+@tap_app.command("export", help="Write a Homebrew tap repo with formula, docs, workflow, and maintainer skill.")
 def export_tap(
     output_dir: Path | None = TAP_OUTPUT_OPTION,
     github_owner: str | None = typer.Option(None, help="GitHub owner for source and tap repos"),
     source_repo: str | None = typer.Option(None, help="Source repository name"),
     tap_repo: str = typer.Option("homebrew-reviewbuddy", help="Tap repository name"),
 ) -> None:
-    """Generate a Homebrew tap repository for ReviewBuddy."""
+    """Generate a Homebrew tap repository and print the output path plus written files."""
 
     repo_root = Path(__file__).resolve().parents[1]
     remote = detect_github_remote(repo_root)
