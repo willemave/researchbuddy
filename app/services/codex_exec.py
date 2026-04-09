@@ -342,10 +342,10 @@ def _run_custom_harness(
     schema_path: str | None = None
     if output_type is not None:
         final_prompt = _augment_prompt_for_json(prompt, output_type)
-        schema_path = _write_json_schema(output_type, prefix="reviewbuddy-agent-schema-")
+        schema_path = _write_json_schema(output_type, prefix="researchbuddy-agent-schema-")
 
     with tempfile.NamedTemporaryFile(
-        prefix="reviewbuddy-agent-prompt-",
+        prefix="researchbuddy-agent-prompt-",
         suffix=".txt",
         delete=False,
     ) as prompt_file:
@@ -353,7 +353,7 @@ def _run_custom_harness(
         prompt_file.write(final_prompt.encode("utf-8"))
 
     with tempfile.NamedTemporaryFile(
-        prefix="reviewbuddy-agent-output-",
+        prefix="researchbuddy-agent-output-",
         suffix=".txt",
         delete=False,
     ) as output_file:
@@ -408,7 +408,7 @@ def _build_codex_command(
     resume_session_id: str | None,
 ) -> tuple[list[str], str, str | None]:
     with tempfile.NamedTemporaryFile(
-        prefix="reviewbuddy-codex-",
+        prefix="researchbuddy-codex-",
         suffix=".txt",
         delete=False,
     ) as output_file:
@@ -441,7 +441,7 @@ def _build_codex_command(
     if model:
         option_args.extend(["--model", model])
     if output_type is not None:
-        schema_path = _write_json_schema(output_type, prefix="reviewbuddy-codex-schema-")
+        schema_path = _write_json_schema(output_type, prefix="researchbuddy-codex-schema-")
         option_args.extend(["--output-schema", schema_path])
 
     return [*base_command, *option_args, *_codex_common_flags(), prompt], output_path, schema_path

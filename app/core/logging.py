@@ -1,4 +1,4 @@
-"""Logging helpers for ReviewBuddy."""
+"""Logging helpers for ResearchBuddy."""
 
 import logging
 from pathlib import Path

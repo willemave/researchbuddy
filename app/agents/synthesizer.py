@@ -3,9 +3,12 @@
 from app.agents.base import AgentDeps, LaneSynthesis, ReviewSynthesis
 from app.core.settings import get_settings
 from app.services.codex_exec import run_codex_prompt
+from app.services.research_profiles import ResearchProfile, infer_research_profile
 from app.services.usage_tracker import UsageTracker
 
 settings = get_settings()
+
+_SYNTHESIS_TIMEOUT_SECONDS = max(settings.agent_timeout_seconds, 240)
 
 LANE_SYNTHESIZER_SYSTEM_PROMPT = (
     "You synthesize one research lane into a dense evidence summary. Use only the "
@@ -13,9 +16,9 @@ LANE_SYNTHESIZER_SYSTEM_PROMPT = (
 )
 
 FINAL_SYNTHESIZER_SYSTEM_PROMPT = (
-    "You synthesize review research into a concise recommendation. Use only the "
-    "provided research summary material and evidence appendix. Keep it tight and pragmatic. "
-    "Always include source URLs."
+    "You synthesize grounded research into a concise answer. Use only the provided "
+    "research summary material and evidence appendix. Keep it tight, pragmatic, and "
+    "clear about uncertainty. Always include source URLs."
 )
 
 
@@ -24,13 +27,17 @@ def build_lane_synthesis_prompt(
     lane_name: str,
     lane_goal: str,
     source_cards_markdown: str,
+    research_profile: ResearchProfile | None = None,
 ) -> str:
     """Build the leaf lane synthesis prompt."""
 
+    profile = research_profile or infer_research_profile(prompt)
     return (
         f"{LANE_SYNTHESIZER_SYSTEM_PROMPT}\n\n"
         "You are given distilled source cards for a single lane. Produce a dense lane "
         "summary, the strongest findings, top supporting sources, and any gaps or conflicts.\n\n"
+        f"Research mode: {profile.label}\n"
+        f"Mode guidance: {profile.synthesis_guidance}\n"
         f"User prompt: {prompt}\n"
         f"Lane: {lane_name}\n"
         f"Goal: {lane_goal}\n\n"
@@ -43,15 +50,19 @@ def build_merge_synthesis_prompt(
     node_name: str,
     child_summaries_markdown: str,
     supporting_evidence_markdown: str,
+    research_profile: ResearchProfile | None = None,
 ) -> str:
     """Build the merge-node synthesis prompt."""
 
+    profile = research_profile or infer_research_profile(prompt)
     evidence_block = supporting_evidence_markdown or "(none)"
     return (
         f"{LANE_SYNTHESIZER_SYSTEM_PROMPT}\n\n"
         "You are given multiple child summaries from the same research tree plus supporting "
         "evidence cards. Merge them into one denser intermediate summary. Deduplicate repeated "
         "claims, preserve the strongest caveats and conflicts, and keep source URLs.\n\n"
+        f"Research mode: {profile.label}\n"
+        f"Mode guidance: {profile.synthesis_guidance}\n"
         f"User prompt: {prompt}\n"
         f"Merge node: {node_name}\n\n"
         f"Child summaries:\n{child_summaries_markdown}\n\n"
@@ -63,15 +74,19 @@ def build_final_synthesis_prompt(
     prompt: str,
     merged_summary_markdown: str,
     evidence_appendix_markdown: str,
+    research_profile: ResearchProfile | None = None,
 ) -> str:
     """Build the final user-facing synthesis prompt."""
 
+    profile = research_profile or infer_research_profile(prompt)
     appendix_block = evidence_appendix_markdown or "(none)"
     return (
         f"{FINAL_SYNTHESIZER_SYSTEM_PROMPT}\n\n"
         "You are given compact research summary material plus a supporting evidence appendix. "
         "The summary material may be a merged synthesis or a short set of lane summaries. "
-        "Produce a tight synthesis with recommendation and cite sources explicitly by URL.\n\n"
+        "Produce a tight synthesis with a clear bottom line and cite sources explicitly by URL.\n\n"
+        f"Research mode: {profile.label}\n"
+        f"Mode guidance: {profile.synthesis_guidance}\n\n"
         f"Prompt: {prompt}\n\n"
         f"Merged summary:\n{merged_summary_markdown}\n\n"
         f"Evidence appendix:\n{appendix_block}"
@@ -84,6 +99,7 @@ async def synthesize_lane(
     lane_goal: str,
     source_cards_markdown: str,
     deps: AgentDeps,
+    research_profile: ResearchProfile | None = None,
     usage_tracker: UsageTracker | None = None,
     model_name: str | None = None,
 ) -> LaneSynthesis:
@@ -96,9 +112,11 @@ async def synthesize_lane(
             lane_name=lane_name,
             lane_goal=lane_goal,
             source_cards_markdown=source_cards_markdown,
+            research_profile=research_profile,
         ),
         model_name=model_name or settings.synthesizer_model,
         output_type=LaneSynthesis,
+        timeout_seconds=_SYNTHESIS_TIMEOUT_SECONDS,
     )
     if usage_tracker is not None:
         await usage_tracker.add(response.usage, model_name=model_name or settings.synthesizer_model)
@@ -111,6 +129,7 @@ async def synthesize_merge_node(
     child_summaries_markdown: str,
     supporting_evidence_markdown: str,
     deps: AgentDeps,
+    research_profile: ResearchProfile | None = None,
     usage_tracker: UsageTracker | None = None,
     model_name: str | None = None,
 ) -> LaneSynthesis:
@@ -123,9 +142,11 @@ async def synthesize_merge_node(
             node_name=node_name,
             child_summaries_markdown=child_summaries_markdown,
             supporting_evidence_markdown=supporting_evidence_markdown,
+            research_profile=research_profile,
         ),
         model_name=model_name or settings.synthesizer_model,
         output_type=LaneSynthesis,
+        timeout_seconds=_SYNTHESIS_TIMEOUT_SECONDS,
     )
     if usage_tracker is not None:
         await usage_tracker.add(response.usage, model_name=model_name or settings.synthesizer_model)
@@ -137,6 +158,7 @@ async def synthesize_review(
     merged_summary_markdown: str,
     evidence_appendix_markdown: str,
     deps: AgentDeps,
+    research_profile: ResearchProfile | None = None,
     usage_tracker: UsageTracker | None = None,
     model_name: str | None = None,
 ) -> ReviewSynthesis:
@@ -148,9 +170,11 @@ async def synthesize_review(
             prompt=prompt,
             merged_summary_markdown=merged_summary_markdown,
             evidence_appendix_markdown=evidence_appendix_markdown,
+            research_profile=research_profile,
         ),
         model_name=model_name or settings.synthesizer_model,
         output_type=ReviewSynthesis,
+        timeout_seconds=_SYNTHESIS_TIMEOUT_SECONDS,
     )
     if usage_tracker is not None:
         await usage_tracker.add(response.usage, model_name=model_name or settings.synthesizer_model)

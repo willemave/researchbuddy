@@ -1,9 +1,12 @@
 """Pydantic models for the review workflow."""
 
 from datetime import datetime
+from decimal import Decimal
 from pathlib import Path
 
 from pydantic import BaseModel, Field
+
+from app.services.research_profiles import ResearchMode
 
 
 class ReviewRunRequest(BaseModel):
@@ -15,6 +18,7 @@ class ReviewRunRequest(BaseModel):
     headful: bool
     navigation_timeout_ms: int
     output_dir: Path
+    research_mode: ResearchMode | None = None
     planner_model: str | None = None
     sub_agent_model: str | None = None
 
@@ -27,6 +31,7 @@ class ReviewRunConfig(BaseModel):
     headful: bool
     navigation_timeout_ms: int = Field(ge=1000, le=120000)
     output_dir: Path
+    research_mode: ResearchMode | None = None
     planner_model: str | None = None
     sub_agent_model: str | None = None
 
@@ -49,6 +54,17 @@ class ReviewRunResult(BaseModel):
     synthesis_markdown: str
 
 
+class SearchUsage(BaseModel):
+    """Usage details for a single search request."""
+
+    provider_name: str
+    requests: int = Field(default=1, ge=1)
+    requested_results: int = Field(ge=0)
+    returned_results: int = Field(ge=0)
+    credit_amount: Decimal | None = None
+    cost_amount_usd: Decimal | None = None
+
+
 class SearchResult(BaseModel):
     """Normalized search result returned by any configured provider."""
 
@@ -64,6 +80,7 @@ class SearchResponse(BaseModel):
     """Parsed search response from the configured provider."""
 
     results: list[SearchResult]
+    usage: SearchUsage | None = None
 
 
 ExaSearchResult = SearchResult

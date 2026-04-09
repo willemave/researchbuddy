@@ -1,5 +1,5 @@
 [project]
-name = "reviewbuddy"
+name = "researchbuddy"
 version = "0.1.4"
 description = "AI-powered review research assistant with parallel crawling and synthesis"
 readme = "README.md"
@@ -9,6 +9,7 @@ dependencies = [
     "pydantic-settings>=2.6.0",
     "aiosqlite>=0.20.0",
     "httpx>=0.28.0",
+    "transformers>=4.51.0",
     "openai-whisper>=20250625",
     "praw>=7.7.1",
     "pypdf>=5.4.0",
@@ -23,7 +24,7 @@ dependencies = [
 ]
 
 [project.scripts]
-reviewbuddy = "app.cli:main"
+researchbuddy = "app.cli:main"
 
 [project.optional-dependencies]
 dev = [

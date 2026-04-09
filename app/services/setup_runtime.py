@@ -1,4 +1,4 @@
-"""Workspace setup helpers for local ReviewBuddy development."""
+"""Workspace setup helpers for local ResearchBuddy development."""
 
 from __future__ import annotations
 
@@ -36,7 +36,7 @@ def run_setup(
     cwd: Path | None = None,
     install_playwright: bool = True,
 ) -> SetupResult:
-    """Run local workspace setup for ReviewBuddy.
+    """Run local workspace setup for ResearchBuddy.
 
     Args:
         settings: Loaded application settings.
@@ -61,7 +61,7 @@ def run_setup(
 
 
 def resolve_workspace_root(start_path: Path) -> Path | None:
-    """Find the nearest ReviewBuddy workspace root from a starting path."""
+    """Find the nearest ResearchBuddy workspace root from a starting path."""
 
     current = start_path.resolve()
     for candidate in (current, *current.parents):
@@ -73,7 +73,7 @@ def resolve_workspace_root(start_path: Path) -> Path | None:
 def format_setup_report(actions: list[SetupAction]) -> str:
     """Render setup action results for terminal output."""
 
-    lines = ["# ReviewBuddy Setup", ""]
+    lines = ["# ResearchBuddy Setup", ""]
     for action in actions:
         status = "OK" if action.ok else "FAIL"
         lines.append(f"- [{status}] {action.name}: {action.detail}")

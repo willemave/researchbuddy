@@ -1,1 +1,1 @@
-"""Service layer for ReviewBuddy."""
+"""Service layer for ResearchBuddy."""

@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 import httpx
 import pytest
 
@@ -67,6 +69,11 @@ async def test_exa_provider_parses_markdown_content() -> None:
 
     assert response.results[0].content_markdown == "# Exa markdown"
     assert response.results[0].published_date == "2026-03-15"
+    assert response.usage is not None
+    assert response.usage.provider_name == "exa"
+    assert response.usage.requested_results == 5
+    assert response.usage.returned_results == 1
+    assert response.usage.cost_amount_usd == Decimal("0.007")
 
 
 @pytest.mark.asyncio
@@ -100,6 +107,12 @@ async def test_tavily_provider_parses_raw_content() -> None:
         response = await provider.search("quiet dishwasher", 5, client=client)
 
     assert response.results[0].content_markdown == "Tavily body"
+    assert response.usage is not None
+    assert response.usage.provider_name == "tavily"
+    assert response.usage.requested_results == 5
+    assert response.usage.returned_results == 1
+    assert response.usage.credit_amount == Decimal("1")
+    assert response.usage.cost_amount_usd == Decimal("0.008")
 
 
 @pytest.mark.asyncio
@@ -136,6 +149,12 @@ async def test_firecrawl_provider_parses_markdown_content() -> None:
 
     assert response.results[0].content_markdown == "# Firecrawl markdown"
     assert response.results[0].score == 1.0
+    assert response.usage is not None
+    assert response.usage.provider_name == "firecrawl"
+    assert response.usage.requested_results == 5
+    assert response.usage.returned_results == 1
+    assert response.usage.credit_amount == Decimal("3")
+    assert response.usage.cost_amount_usd is None
 
 
 @pytest.mark.asyncio

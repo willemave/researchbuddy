@@ -12,7 +12,7 @@ class TapExportRequest(BaseModel):
     github_owner: str = Field(min_length=1)
     source_repo: str = Field(min_length=1)
     tap_repo: str = Field(min_length=1)
-    formula_name: str = Field(default="reviewbuddy", min_length=1)
+    formula_name: str = Field(default="researchbuddy", min_length=1)
     python_formula: str = Field(default="python@3.13", min_length=1)
     version: str = Field(min_length=1)
     app_description: str = Field(min_length=1)

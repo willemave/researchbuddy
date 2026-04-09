@@ -8,13 +8,23 @@ import multiprocessing
 import queue
 import re
 from collections.abc import Iterable
-from functools import lru_cache
 from pathlib import Path
 
 import yt_dlp
 from pydantic import BaseModel
 
-from app.core.settings import get_settings
+from app.services.local_audio_transcriber import (
+    _load_audio_samples as _shared_load_audio_samples,
+)
+from app.services.local_audio_transcriber import (
+    _load_whisper_model as _shared_load_whisper_model,
+)
+from app.services.local_audio_transcriber import (
+    _resolve_whisper_device as _shared_resolve_whisper_device,
+)
+from app.services.local_audio_transcriber import (
+    transcribe_audio as transcribe_local_audio,
+)
 
 
 class YouTubeError(RuntimeError):
@@ -325,43 +335,25 @@ def extract_youtube_transcript(
     return audio_path.stem, title, transcript_text
 
 
-def _resolve_whisper_device(device_setting: str) -> str:
-    try:
-        import torch
-    except ImportError as exc:
-        raise YouTubeError("Torch is required for Whisper") from exc
-
-    if device_setting != "auto":
-        return device_setting
-
-    if torch.cuda.is_available():
-        return "cuda"
-    if torch.backends.mps.is_available():
-        # MPS can be unstable with Whisper; default to CPU.
-        return "cpu"
-    return "cpu"
-
-
-@lru_cache
 def _load_whisper_model(model_name: str, device: str):
     try:
-        import whisper
-    except ImportError as exc:
-        raise YouTubeError("Whisper is not installed") from exc
-
-    return whisper.load_model(model_name, device=device)
+        return _shared_load_whisper_model(model_name, device)
+    except RuntimeError as exc:
+        raise YouTubeError(str(exc)) from exc
 
 
 def _load_audio_samples(audio_path: Path):
     try:
-        import whisper
-    except ImportError as exc:
-        raise YouTubeError("Whisper is not installed") from exc
+        return _shared_load_audio_samples(audio_path)
+    except RuntimeError as exc:
+        raise YouTubeError(str(exc)) from exc
 
+
+def _resolve_whisper_device(device_setting: str) -> str:
     try:
-        return whisper.load_audio(str(audio_path))
-    except Exception as exc:
-        raise YouTubeError(f"Failed to decode audio: {exc}") from exc
+        return _shared_resolve_whisper_device(device_setting)
+    except RuntimeError as exc:
+        raise YouTubeError(str(exc)) from exc
 
 
 def transcribe_audio(audio_path: Path, model_name: str) -> str:
@@ -384,37 +376,7 @@ def transcribe_audio(audio_path: Path, model_name: str) -> str:
     if not hasattr(audio, "__len__") or len(audio) == 0:
         raise YouTubeError("Audio decode returned no samples")
 
-    settings = get_settings()
-    device = _resolve_whisper_device(settings.whisper_device)
-    model = _load_whisper_model(model_name, device)
-    try:
-        result = model.transcribe(
-            str(audio_path),
-            fp16=device != "cpu",
-            language=None,
-            task="transcribe",
-            verbose=False,
-        )
-    except RuntimeError as exc:
-        message = str(exc).lower()
-        if "cannot reshape tensor of 0 elements" in message:
-            raise YouTubeError("Whisper failed on empty audio") from exc
-        if ("mps" in message or "sparse" in message or "_sparse_coo_tensor" in message) and (
-            device != "cpu"
-        ):
-            cpu_model = _load_whisper_model(model_name, "cpu")
-            result = cpu_model.transcribe(
-                str(audio_path),
-                fp16=False,
-                language=None,
-                task="transcribe",
-                verbose=False,
-            )
-        else:
-            raise YouTubeError(f"Whisper failed: {exc}") from exc
-
-    text = result.get("text", "") if isinstance(result, dict) else ""
-    return text.strip()
+    return transcribe_local_audio(audio_path, model_name, error_cls=YouTubeError)
 
 
 def transcribe_youtube_videos(
@@ -548,9 +510,7 @@ def transcribe_youtube_videos_with_timeout(
             if process.is_alive():
                 process.kill()
                 process.join()
-            raise TimeoutError(
-                f"YouTube ingestion timed out after {timeout_seconds} seconds"
-            )
+            raise TimeoutError(f"YouTube ingestion timed out after {timeout_seconds} seconds")
 
         try:
             payload = result_queue.get_nowait()

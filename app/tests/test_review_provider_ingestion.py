@@ -3,6 +3,8 @@ from pathlib import Path
 import pytest
 
 from app.models.review import UrlTask
+from app.services.research_profiles import infer_research_profile
+from app.services.url_handlers import fetch_custom_content
 from app.workflows import review
 
 
@@ -94,7 +96,42 @@ async def test_collect_youtube_transcripts_returns_empty_on_timeout(
         transcripts_dir=tmp_path / "transcripts",
         max_videos=2,
         model_name="base",
+        research_profile=infer_research_profile("quiet dishwasher"),
         usage_tracker=None,
     )
 
     assert transcripts == []
+
+
+@pytest.mark.asyncio
+async def test_collect_podcast_transcripts_returns_empty_on_timeout(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    async def fake_search(*args, **kwargs):  # noqa: ANN002, ANN003
+        return []
+
+    monkeypatch.setattr(review, "_search_podcast_episodes", fake_search)
+
+    transcripts = await review._collect_podcast_transcripts(
+        prompt="history of fusion energy",
+        audio_dir=tmp_path / "audio",
+        transcripts_dir=tmp_path / "transcripts",
+        max_episodes=2,
+        model_name="base",
+        research_profile=infer_research_profile("history of fusion energy"),
+        usage_tracker=None,
+    )
+
+    assert transcripts == []
+
+
+def test_fetch_custom_content_does_not_route_podcast_pages(tmp_path: Path) -> None:
+    result = fetch_custom_content(
+        "https://podcasts.apple.com/us/podcast/show/id123?i=1000744678894",
+        tmp_path / "videos",
+        tmp_path / "transcripts",
+        tmp_path / "pdf",
+    )
+
+    assert result is None

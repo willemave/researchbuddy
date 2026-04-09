@@ -13,10 +13,10 @@ from app.services.homebrew_tap import (
 
 def build_request(tmp_path: Path) -> TapExportRequest:
     return TapExportRequest(
-        output_dir=tmp_path / "homebrew-reviewbuddy",
+        output_dir=tmp_path / "homebrew-researchbuddy",
         github_owner="willemave",
-        source_repo="reviewbuddy",
-        tap_repo="homebrew-reviewbuddy",
+        source_repo="researchbuddy",
+        tap_repo="homebrew-researchbuddy",
         version="0.1.1",
         app_description="AI-powered review research assistant with parallel crawling and synthesis",
     )
@@ -25,14 +25,14 @@ def build_request(tmp_path: Path) -> TapExportRequest:
 def test_render_formula_includes_expected_tap_metadata(tmp_path: Path) -> None:
     formula = render_formula(build_request(tmp_path))
 
-    assert 'homepage "https://github.com/willemave/reviewbuddy"' in formula
+    assert 'homepage "https://github.com/willemave/researchbuddy"' in formula
     assert (
-        'url "https://github.com/willemave/reviewbuddy/archive/refs/tags/v0.1.1.tar.gz"' in formula
+        'url "https://github.com/willemave/researchbuddy/archive/refs/tags/v0.1.1.tar.gz"' in formula
     )
     assert 'depends_on "ffmpeg"' in formula
     assert 'depends_on "uv"' in formula
     assert 'pkgshare.install "skills"' in formula
-    assert 'uv" tool run --from "git+https://github.com/willemave/reviewbuddy.git@v0.1.1"' in formula
+    assert 'uv" tool run --from "git+https://github.com/willemave/researchbuddy.git@v0.1.1"' in formula
     assert "~/.openclaw/openclaw.json" in formula
 
 
@@ -47,14 +47,14 @@ def test_export_tap_repository_writes_expected_files(tmp_path: Path) -> None:
     result = export_tap_repository(build_request(tmp_path))
 
     expected = {
-        tmp_path / "homebrew-reviewbuddy" / "README.md",
-        tmp_path / "homebrew-reviewbuddy" / "Formula" / "reviewbuddy.rb",
-        tmp_path / "homebrew-reviewbuddy" / ".github" / "workflows" / "validate.yml",
-        tmp_path / "homebrew-reviewbuddy" / "skills" / "reviewbuddy-tap-maintainer" / "SKILL.md",
+        tmp_path / "homebrew-researchbuddy" / "README.md",
+        tmp_path / "homebrew-researchbuddy" / "Formula" / "researchbuddy.rb",
+        tmp_path / "homebrew-researchbuddy" / ".github" / "workflows" / "validate.yml",
+        tmp_path / "homebrew-researchbuddy" / "skills" / "researchbuddy-tap-maintainer" / "SKILL.md",
         tmp_path
-        / "homebrew-reviewbuddy"
+        / "homebrew-researchbuddy"
         / "skills"
-        / "reviewbuddy-tap-maintainer"
+        / "researchbuddy-tap-maintainer"
         / "references"
         / "publishing.md",
     }
@@ -66,7 +66,7 @@ def test_export_tap_repository_writes_expected_files(tmp_path: Path) -> None:
 def test_build_short_tap_name_removes_homebrew_prefix(tmp_path: Path) -> None:
     short_tap = build_short_tap_name(build_request(tmp_path))
 
-    assert short_tap == "willemave/reviewbuddy"
+    assert short_tap == "willemave/researchbuddy"
 
 
 def test_build_source_tarball_url_uses_versioned_tag(tmp_path: Path) -> None:

@@ -1,4 +1,5 @@
 from app.agents.base import LaneSynthesis
+from app.services.research_profiles import infer_research_profile
 from app.workflows.review import (
     CandidateUrl,
     LaneSummaryPacket,
@@ -6,6 +7,7 @@ from app.workflows.review import (
     _build_final_synthesis_input,
     _distill_source_text,
     _group_summary_packets_for_merge,
+    _ordered_source_cards,
     _pack_source_cards,
     _rank_candidate_urls,
     _score_source_card,
@@ -22,6 +24,7 @@ def test_rank_candidate_urls_prefers_domain_diversity() -> None:
             score=0.99,
             domain="site-a.com",
             title_key="review a1",
+            source_kind="blog",
         ),
         CandidateUrl(
             url="https://site-a.com/review-2",
@@ -31,6 +34,7 @@ def test_rank_candidate_urls_prefers_domain_diversity() -> None:
             score=0.95,
             domain="site-a.com",
             title_key="review a2",
+            source_kind="blog",
         ),
         CandidateUrl(
             url="https://site-b.com/review-1",
@@ -40,6 +44,7 @@ def test_rank_candidate_urls_prefers_domain_diversity() -> None:
             score=0.70,
             domain="site-b.com",
             title_key="review b1",
+            source_kind="reddit",
         ),
     ]
 
@@ -94,6 +99,7 @@ def test_score_source_card_prefers_prompt_and_lane_overlap() -> None:
 
 def test_pack_source_cards_prefers_density_after_top_seed(monkeypatch) -> None:
     monkeypatch.setattr("app.workflows.review._estimate_prompt_tokens", lambda text: len(text))
+    monkeypatch.setattr("app.workflows.review.mmr_rank_texts", lambda *args, **kwargs: [0, 1, 2])
     top = SourceCard(
         lane_name="Lane",
         lane_goal="Goal",
@@ -136,6 +142,32 @@ def test_pack_source_cards_prefers_density_after_top_seed(monkeypatch) -> None:
     assert packed[0].url == "https://example.com/top"
     assert any(card.url == "https://example.com/dense" for card in packed)
     assert all(card.url != "https://example.com/bulky" for card in packed)
+
+
+def test_ordered_source_cards_uses_mmr_ranking(monkeypatch) -> None:
+    cards = [
+        SourceCard(
+            lane_name="Lane",
+            lane_goal="Goal",
+            url=f"https://example.com/{idx}",
+            title=f"Source {idx}",
+            source_query="query",
+            source_kind="web",
+            distilled_text=f"Text {idx}",
+            relevance_score=90 - idx,
+        )
+        for idx in range(3)
+    ]
+
+    monkeypatch.setattr("app.workflows.review.mmr_rank_texts", lambda *args, **kwargs: [0, 2, 1])
+
+    ordered = _ordered_source_cards(cards)
+
+    assert [card.url for card in ordered] == [
+        "https://example.com/0",
+        "https://example.com/2",
+        "https://example.com/1",
+    ]
 
 
 def test_group_summary_packets_for_merge_packs_multiple_children(monkeypatch) -> None:
@@ -217,6 +249,7 @@ def test_group_summary_packets_for_merge_packs_multiple_children(monkeypatch) ->
         prompt="best espresso grinder",
         summary_packets=summary_packets,
         level=1,
+        research_profile=infer_research_profile("best espresso grinder"),
     )
 
     assert len(groups) == 1
@@ -264,6 +297,7 @@ def test_group_summary_packets_splits_oversized_group(monkeypatch) -> None:
         prompt="best espresso grinder",
         summary_packets=summary_packets,
         level=1,
+        research_profile=infer_research_profile("best espresso grinder"),
     )
 
     assert len(groups) == 2
@@ -302,6 +336,7 @@ def test_build_final_synthesis_input_respects_hard_cap(monkeypatch) -> None:
     merged_summary, appendix, estimated = _build_final_synthesis_input(
         prompt="best espresso grinder",
         summary_packets=[root_packet],
+        research_profile=infer_research_profile("best espresso grinder"),
     )
 
     assert merged_summary
@@ -348,6 +383,7 @@ def test_build_final_synthesis_input_accepts_multiple_leaf_summaries(monkeypatch
     merged_summary, appendix, estimated = _build_final_synthesis_input(
         prompt="best espresso grinder",
         summary_packets=packets,
+        research_profile=infer_research_profile("best espresso grinder"),
     )
 
     assert "## Lane 0" in merged_summary

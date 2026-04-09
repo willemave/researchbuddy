@@ -1,173 +1,266 @@
-# ReviewBuddy
+<p align="center">
+  <strong>ResearchBuddy</strong><br>
+  <em>Parallel research lanes. Dense evidence. Cited answers.</em>
+</p>
 
-ReviewBuddy turns a messy product question into a short, cited recommendation.
+<p align="center">
+  <a href="#quickstart">Quickstart</a> &middot;
+  <a href="#how-it-works">How It Works</a> &middot;
+  <a href="#cli-reference">CLI</a> &middot;
+  <a href="#research-foundations">Research</a> &middot;
+  <a href="#agent-install">Agent Install</a>
+</p>
 
-Instead of one giant prompt, it plans parallel research lanes, crawls the web locally, distills each source into dense evidence cards, and merges lane summaries into one final answer. It is built for agents first, but it is also a solid local CLI.
+---
 
-It can use your local coding harness for summarization and synthesis, so agent installs that already run through Codex, Claude, or similar local harnesses do not need separate LLM API keys for that layer.
+ResearchBuddy turns a messy research question into a short, cited answer. Instead of one giant prompt, it plans parallel research lanes, crawls the web locally, distills each source into dense evidence cards, and merges lane summaries into one final answer.
 
-## Agent install
-
-If you are installing ReviewBuddy into Hermes, OpenClaw, or another agent that supports `SKILL.md` directories, install the CLI first and then install the bundled skill from `skills/reviewbuddy-cli`.
-
-ReviewBuddy still needs a search provider for web discovery, but summarization can run through the local coding harness already available to the agent runtime. On first install in OpenClaw, agents should check `~/.openclaw/openclaw.json` and ask whether they should reuse an existing `exa`, `tavily`, or `firecrawl` key before requesting new credentials.
-
-Paste this into Hermes or another OpenClaw-style agent:
-
-```text
-Install ReviewBuddy with Homebrew:
-
-brew tap willemave/reviewbuddy
-brew install reviewbuddy
-
-Before asking for any new search-provider key, check ~/.openclaw/openclaw.json.
-If exa, tavily, or firecrawl is already configured there, ask whether ReviewBuddy should reuse that existing provider/key.
-If the user says yes, do not ask for a duplicate secret. Let reviewbuddy setup/doctor use the OpenClaw config.
-
-reviewbuddy commands --agent
-reviewbuddy doctor
-reviewbuddy doctor --fix
-
-Install the bundled skill from:
-$(brew --prefix)/opt/reviewbuddy/share/reviewbuddy/skills/reviewbuddy-cli
-
-Read:
-- $(brew --prefix)/opt/reviewbuddy/share/reviewbuddy/skills/reviewbuddy-cli/SKILL.md
-
-Do not start research runs until `reviewbuddy doctor` passes.
+```
+prompt ── plan 4-8 lanes ── crawl in parallel ── compress evidence ── synthesize with citations
 ```
 
-Repository skill path:
-```text
-skills/reviewbuddy-cli
-```
+It adapts automatically to three research modes:
 
-Codex skill installer example:
-```text
-$skill-installer https://github.com/<owner>/<repo>/tree/main/skills/reviewbuddy-cli
-```
+| Mode | Biases toward | Example |
+|------|---------------|---------|
+| **Product reviews** | Blog posts, Reddit, YouTube reviews, owner discussions | *"best dishwasher for quiet apartment"* |
+| **Restaurant picks** | Local magazines, neighborhood guides, Reddit, forums | *"best sushi restaurants in portland"* |
+| **General research** | Podcasts, YouTube, interviews, broader web analysis | *"history and current debate around nuclear fusion"* |
 
-## Why it works
-
-- `Parallel lanes`: ReviewBuddy breaks a query into 4-8 independent lanes like owner feedback, reliability, value, alternatives, and complaints.
-- `Refinement loops`: early evidence inside a lane generates better follow-up queries before the full crawl is finished.
-- `Dense evidence cards`: each source is compressed into highlights, quantitative signals, caveats, and URLs before synthesis.
-- `Hierarchical summaries`: each lane is summarized first, and larger runs are merged again before the final answer so long evidence sets stay usable.
-- `Follow-up memory`: `reviewbuddy ask <run_id> "..."` answers new questions from stored evidence instead of re-crawling.
-- `Local ingestion`: Playwright crawling, Reddit handling, YouTube captions with Whisper fallback, PDF summaries, and headful retry when sites block headless browsers.
-
-Single-shot prompts are faster. This architecture is usually harder to fool.
-
-## Research precedent
-
-ReviewBuddy does not implement these papers directly, but the design lines up with a few strong ideas:
-
-- `Task decomposition`: [Least-to-Most Prompting Enables Complex Reasoning in Large Language Models](https://arxiv.org/abs/2205.10625)
-- `Relevance + diversity`: [The Use of MMR, Diversity-Based Reranking for Reordering Documents and Producing Summaries](https://www.cs.cmu.edu/~jgc/publication/The_Use_MMR_Diversity_Based_LTMIR_1998.pdf)
-- `Hierarchical merging for long inputs`: [BooookScore: A systematic exploration of book-length summarization in the era of LLMs](https://arxiv.org/html/2310.00785v4)
-- `Hierarchical LLM-agent summarization`: [NexusSum: Hierarchical LLM Agents for Long-Form Narrative Summarization](https://arxiv.org/html/2505.24575v1)
-- `Evidence-grounded generation`: [Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/abs/2005.11401)
-
-That is the basic shape: split the job, collect diverse evidence, compress aggressively, then synthesize with citations.
+---
 
 ## Quickstart
 
-Requirements:
-- Python 3.13
-- `uv`
-- Playwright browsers
-
-Setup:
+**Requirements:** Python 3.11+, [uv](https://docs.astral.sh/uv/), one search provider key (Exa, Tavily, or Firecrawl).
 
 ```bash
-scripts/reviewbuddy setup
+# Install
+brew tap willemave/researchbuddy && brew install researchbuddy
+
+# Or from source
+git clone https://github.com/willemave/researchbuddy && cd researchbuddy
+uv sync && uv run playwright install
+
+# Configure
+researchbuddy setup          # auto-detects keys from Hermes/OpenClaw if available
+researchbuddy doctor         # validate everything is ready
+
+# Run
+researchbuddy run "best dishwasher for quiet apartment"
 ```
 
-What `setup` does:
-- Detects search-provider settings from `~/.hermes/.env` or `~/.openclaw/openclaw.json` when available
-- Lets agents reuse an existing OpenClaw `exa`, `tavily`, or `firecrawl` key instead of collecting a duplicate secret
-- Creates storage and database paths
-- Installs Playwright browsers by default
-- Reruns `doctor` checks
+Each run writes artifacts to `data/storage/<run_id>/` including `synthesis.md` (the final report), per-lane snapshots, captured source material, and follow-up memory.
 
-Manual equivalent:
+---
+
+## How It Works
+
+ResearchBuddy uses a **hierarchical task decomposition** architecture. The pipeline breaks a single question into independent lanes, crawls and compresses evidence in parallel, and synthesizes upward through a merge tree.
+
+```
+                        ┌─────────────────────────────────────┐
+                        │           User Prompt               │
+                        └──────────────┬──────────────────────┘
+                                       │
+                        ┌──────────────▼──────────────────────┐
+                        │         Lane Planner                │
+                        │   breaks prompt into 4-8 lanes      │
+                        │   with seed queries per lane        │
+                        └──────────────┬──────────────────────┘
+                                       │
+              ┌────────────────────────┼────────────────────────┐
+              │                        │                        │
+     ┌────────▼────────┐     ┌────────▼────────┐     ┌────────▼────────┐
+     │   Lane: Owner   │     │  Lane: Expert   │     │ Lane: Alterna-  │
+     │   Feedback      │     │  Analysis       │     │ tives           │
+     │                 │     │                 │     │                 │
+     │ search → crawl  │     │ search → crawl  │     │ search → crawl  │
+     │ → refine query  │     │ → refine query  │     │ → refine query  │
+     │ → crawl again   │     │ → crawl again   │     │ → crawl again   │
+     │ → evidence cards│     │ → evidence cards│     │ → evidence cards│
+     └────────┬────────┘     └────────┬────────┘     └────────┬────────┘
+              │                        │                        │
+     ┌────────▼────────┐     ┌────────▼────────┐     ┌────────▼────────┘
+     │ Lane Summary    │     │ Lane Summary    │     │ Lane Summary    │
+     └────────┬────────┘     └────────┬────────┘     └────────┬────────┘
+              │                        │                        │
+              └────────────────────────┼────────────────────────┘
+                                       │
+                        ┌──────────────▼──────────────────────┐
+                        │     Hierarchical Merge              │
+                        │  (intermediate nodes for large runs)│
+                        └──────────────┬──────────────────────┘
+                                       │
+                        ┌──────────────▼──────────────────────┐
+                        │       Final Synthesis               │
+                        │   cited markdown answer             │
+                        └─────────────────────────────────────┘
+```
+
+### Key mechanisms
+
+**Parallel lanes.** The planner breaks a query into 4-8 independent research lanes based on the detected mode -- owner feedback, expert analysis, competing alternatives, local consensus, complaints, etc. Each lane runs its own search-crawl-refine cycle.
+
+**Refinement loops.** After the initial seed queries in each lane, early evidence generates better follow-up queries before the full crawl is finished. This catches early misses and improves relevance without exhausting the search budget.
+
+**Dense evidence cards.** Each crawled source is compressed into structured highlights, quantitative signals, caveats, and URLs. Sources are ranked using BM25 + semantic matching on mode-specific signal keywords. This keeps synthesis prompts small and grounded.
+
+**Hierarchical synthesis.** Lane summaries are produced first, then merged through intermediate nodes for large runs, then a final synthesis step generates the user-facing answer. This avoids a single giant prompt and keeps long evidence sets usable.
+
+**Follow-up memory.** After a run, `researchbuddy followup <run_id> "..."` answers new questions from stored evidence instead of re-crawling. Evidence cards and synthesis are persisted for later Q&A.
+
+**Local ingestion.** Playwright crawling with headful fallback, Reddit API integration, YouTube captions with Whisper fallback, podcast RSS parsing and local Whisper transcription, and PDF extraction -- all running locally.
+
+---
+
+## CLI Reference
 
 ```bash
-uv sync
-uv run playwright install
+researchbuddy run "<prompt>" [--mode auto|product|restaurant|research] [--stats]
 ```
-
-If auto-detection is unavailable, copy `.env.example` to `.env` and add your provider keys.
-
-Run a research pass:
+Execute a research run. Prints the synthesis and writes all artifacts to `data/storage/<run_id>/`.
 
 ```bash
-scripts/reviewbuddy run "best dishwasher for quiet apartment"
+researchbuddy followup <run_id> "<question>"
 ```
-
-Ask a saved run a follow-up:
+Answer a follow-up from stored evidence without re-crawling.
 
 ```bash
-scripts/reviewbuddy ask <run_id> "What were the main reliability complaints?"
+researchbuddy inspect <run_id> [--sources] [--lanes] [--transcripts]
 ```
-
-The `run` command prints the `run_id`.
-
-## Common commands
+Inspect saved artifacts for a completed run.
 
 ```bash
-scripts/reviewbuddy commands
-scripts/reviewbuddy commands --agent
-scripts/reviewbuddy setup
-scripts/reviewbuddy doctor
+researchbuddy transcribe <source> [--type auto|youtube|podcast|audio]
+```
+Transcribe a local audio file or URL with local Whisper.
+
+```bash
+researchbuddy setup [--skip-playwright]    # configure environment
+researchbuddy doctor [--fix]               # validate readiness
+researchbuddy commands [--agent]           # print command reference
+researchbuddy tap export                   # generate Homebrew tap repo
 ```
 
-## Environment
+Full reference: [`docs/cli-reference.md`](docs/cli-reference.md) and [`docs/agent-cli-reference.md`](docs/agent-cli-reference.md).
 
-Required:
-- One search provider API key. If `SEARCH_PROVIDER` is unset, ReviewBuddy auto-selects from `EXA_API_KEY`, `TAVILY_API_KEY`, then `FIRECRAWL_API_KEY`.
+---
 
-Common optional settings:
-- `SEARCH_PROVIDER` (`exa`, `tavily`, or `firecrawl`)
-- `REDDIT_CLIENT_ID`, `REDDIT_CLIENT_SECRET`
+## Configuration
 
-ReviewBuddy also auto-loads search settings from local agent installs:
-- Hermes: `~/.hermes/.env`
-- OpenClaw: `~/.openclaw/openclaw.json`
+ResearchBuddy requires **one search provider API key**. If `SEARCH_PROVIDER` is unset, it auto-selects from `EXA_API_KEY`, `TAVILY_API_KEY`, then `FIRECRAWL_API_KEY`.
+
+It also auto-loads search settings from local agent installs:
+- **Hermes:** `~/.hermes/.env`
+- **OpenClaw:** `~/.openclaw/openclaw.json`
+
+Copy `.env.example` to `.env` for manual configuration. Common settings:
+
+| Variable | Default | Purpose |
+|----------|---------|---------|
+| `SEARCH_PROVIDER` | auto | `exa`, `tavily`, or `firecrawl` |
+| `EXA_API_KEY` | -- | Exa search key |
+| `TAVILY_API_KEY` | -- | Tavily search key |
+| `FIRECRAWL_API_KEY` | -- | Firecrawl search key |
+| `REDDIT_CLIENT_ID` | -- | Reddit API (optional, improves forum sourcing) |
+| `PLANNER_MODEL` | `gpt-5.4` | LLM for lane planning |
+| `SYNTHESIZER_MODEL` | `gpt-5.4` | LLM for synthesis |
+| `MAX_URLS` | `100` | URL budget per run |
+| `YOUTUBE_MAX_VIDEOS` | `6` | YouTube transcript cap |
+| `PODCAST_MAX_EPISODES` | `4` | Podcast episode cap |
+| `WHISPER_MODEL` | `base` | Local Whisper model size |
+
+---
 
 ## Output
 
-Each run writes a research bundle under:
+Each run produces a research bundle at `data/storage/<run_id>/`:
+
+```
+data/storage/<run_id>/
+  synthesis.md              # final cited report
+  run.log                   # detailed execution log
+  followup_memory.json      # persisted evidence for Q&A
+  lanes/                    # per-lane crawl snapshots
+  markdown/                 # converted source material
+  html/                     # raw captured pages
+  youtube_transcripts.json  # transcript metadata
+  podcast_transcripts.json  # podcast transcript metadata
+```
+
+---
+
+## Research Foundations
+
+ResearchBuddy does not implement these papers directly, but the design aligns with several strong ideas from the literature:
+
+> **Task decomposition** -- breaking a complex question into smaller, solvable sub-problems that can be addressed independently.
+>
+> Zhou et al., [*Least-to-Most Prompting Enables Complex Reasoning in Large Language Models*](https://arxiv.org/abs/2205.10625), 2022
+
+> **Relevance + diversity** -- using Maximal Marginal Relevance to balance information gain against redundancy when selecting and ranking documents.
+>
+> Carbonell & Goldstein, [*The Use of MMR, Diversity-Based Reranking for Reordering Documents and Producing Summaries*](https://www.cs.cmu.edu/~jgc/publication/The_Use_MMR_Diversity_Based_LTMIR_1998.pdf), 1998
+
+> **Hierarchical merging for long inputs** -- compressing book-length content through staged summarization rather than a single pass.
+>
+> Chang et al., [*BooookScore: A Systematic Exploration of Book-Length Summarization in the Era of LLMs*](https://arxiv.org/abs/2310.00785), 2023
+
+> **Hierarchical LLM-agent summarization** -- using multiple specialized agents in a tree structure to summarize long-form narratives.
+>
+> [*NexusSum: Hierarchical LLM Agents for Long-Form Narrative Summarization*](https://arxiv.org/abs/2505.24575), 2025
+
+> **Evidence-grounded generation** -- augmenting generation with retrieved documents to reduce hallucination in knowledge-intensive tasks.
+>
+> Lewis et al., [*Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks*](https://arxiv.org/abs/2005.11401), 2020
+
+The core thesis: split the job, collect diverse evidence, compress aggressively, then synthesize with citations. Single-shot prompts are faster. This architecture is harder to fool.
+
+---
+
+## Agent Install
+
+ResearchBuddy installs as a skill in Hermes, OpenClaw, or any agent that supports `SKILL.md` directories.
 
 ```text
-data/storage/<run_id>/
+Install ResearchBuddy with Homebrew:
+
+brew tap willemave/researchbuddy
+brew install researchbuddy
+
+Before asking for any new search-provider key, check ~/.openclaw/openclaw.json.
+If exa, tavily, or firecrawl is already configured there, ask whether
+ResearchBuddy should reuse that existing provider/key.
+
+researchbuddy commands --agent
+researchbuddy doctor
+researchbuddy doctor --fix
+
+Install the bundled skill from:
+$(brew --prefix)/opt/researchbuddy/share/researchbuddy/skills/researchbuddy-cli
+
+Read:
+- $(brew --prefix)/opt/researchbuddy/share/researchbuddy/skills/researchbuddy-cli/SKILL.md
+
+Do not start research runs until researchbuddy doctor passes.
 ```
 
-Useful files:
-- `synthesis.md`: final report
-- `run.log`: detailed logs
-- `lanes/`: per-lane crawl snapshots
-- `markdown/` and `html/`: captured source material
+Repository skill path: `skills/researchbuddy-cli`
 
-## Notes
+---
 
-- Run `codex login` locally before using LLM-backed workflows.
-- `codex` must be installed and authenticated for agent execution paths.
-- `reviewbuddy doctor` is the hard stop before production or automation use.
-
-## Homebrew tap export
-
-Generate a sibling tap repository:
+## Development
 
 ```bash
-reviewbuddy tap export
+uv sync                          # install dependencies
+source .venv/bin/activate        # activate venv
+cp .env.example .env             # add your API keys
+pytest app/tests/ -v             # run tests
+ruff check . && ruff format .    # lint and format
 ```
 
-This writes a `homebrew-reviewbuddy` repository next to the source repo with the formula, README, validation workflow, and tap-maintainer skill.
+---
 
-## Docs
-
-- `docs/cli-reference.md`
-- `docs/agent-cli-reference.md`
-- `docs/deploy.md`
-- `docs/homebrew.md`
+<p align="center">
+  <sub>MIT License</sub>
+</p>

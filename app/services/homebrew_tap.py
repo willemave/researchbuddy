@@ -20,7 +20,7 @@ def export_tap_repository(request: TapExportRequest) -> TapExportResult:
 
     formula_dir = request.output_dir / "Formula"
     workflow_dir = request.output_dir / ".github" / "workflows"
-    skill_dir = request.output_dir / "skills" / "reviewbuddy-tap-maintainer"
+    skill_dir = request.output_dir / "skills" / "researchbuddy-tap-maintainer"
     references_dir = skill_dir / "references"
 
     formula_dir.mkdir(parents=True, exist_ok=True)
@@ -87,7 +87,7 @@ def render_formula(request: TapExportRequest) -> str:
     class_name = request.formula_name.replace("-", " ").replace("_", " ").title().replace(" ", "")
     source_url = build_source_tarball_url(request)
     homepage = build_source_homepage(request)
-    skill_path = "#{opt_pkgshare}/skills/reviewbuddy-cli"
+    skill_path = "#{opt_pkgshare}/skills/researchbuddy-cli"
     bootstrap_url = (
         f"git+https://github.com/{request.github_owner}/{request.source_repo}.git@v{request.version}"
     )
@@ -101,10 +101,10 @@ def render_formula(request: TapExportRequest) -> str:
   depends_on "uv"
 
   def install
-    (bin/"reviewbuddy").write <<~SH
+    (bin/"researchbuddy").write <<~SH
       #!/usr/bin/env bash
       set -euo pipefail
-      exec "#{{Formula["uv"].opt_bin}}/uv" tool run --from "{bootstrap_url}" reviewbuddy "$@"
+      exec "#{{Formula["uv"].opt_bin}}/uv" tool run --from "{bootstrap_url}" researchbuddy "$@"
     SH
     pkgshare.install "skills"
     pkgshare.install "docs"
@@ -112,17 +112,17 @@ def render_formula(request: TapExportRequest) -> str:
 
   def caveats
     <<~EOS
-      ReviewBuddy bootstraps the tagged CLI package through uv on first run:
-        #{{Formula["uv"].opt_bin}}/uv tool run --from "{bootstrap_url}" reviewbuddy
+      ResearchBuddy bootstraps the tagged CLI package through uv on first run:
+        #{{Formula["uv"].opt_bin}}/uv tool run --from "{bootstrap_url}" researchbuddy
 
       Additional runtime setup:
-        - Install Playwright browsers after bootstrap if `reviewbuddy doctor` reports they are missing
+        - Install Playwright browsers after bootstrap if `researchbuddy doctor` reports they are missing
         - Install and authenticate codex: codex login
         - Set at least one search provider key (EXA_API_KEY, TAVILY_API_KEY, or FIRECRAWL_API_KEY)
         - Optionally set SEARCH_PROVIDER to override auto-selection
         - In OpenClaw, first check ~/.openclaw/openclaw.json and reuse an existing exa/tavily/firecrawl key when the user approves
-        - ReviewBuddy also auto-loads provider config from ~/.hermes/.env and ~/.openclaw/openclaw.json
-        - Run `reviewbuddy doctor` before first use
+        - ResearchBuddy also auto-loads provider config from ~/.hermes/.env and ~/.openclaw/openclaw.json
+        - Run `researchbuddy doctor` before first use
 
       Tap maintenance skill:
         {skill_path}
@@ -130,8 +130,8 @@ def render_formula(request: TapExportRequest) -> str:
   end
 
   test do
-    assert_match "tool run --from", (bin/"reviewbuddy").read
-    assert_path_exists pkgshare/"skills/reviewbuddy-cli/SKILL.md"
+    assert_match "tool run --from", (bin/"researchbuddy").read
+    assert_path_exists pkgshare/"skills/researchbuddy-cli/SKILL.md"
   end
 end
 '''
@@ -160,9 +160,9 @@ If another formula with the same name ever exists, use the fully qualified name:
 brew install {short_tap}/{formula_name}
 ```
 
-If you are installing into OpenClaw, check `~/.openclaw/openclaw.json` before asking for search-provider credentials. When it already has `exa`, `tavily`, or `firecrawl` configured, ask whether ReviewBuddy should reuse that existing provider/key and let `reviewbuddy setup` auto-load it instead of collecting a duplicate secret.
+If you are installing into OpenClaw, check `~/.openclaw/openclaw.json` before asking for search-provider credentials. When it already has `exa`, `tavily`, or `firecrawl` configured, ask whether ResearchBuddy should reuse that existing provider/key and let `researchbuddy setup` auto-load it instead of collecting a duplicate secret.
 
-## Update the formula for a new ReviewBuddy release
+## Update the formula for a new ResearchBuddy release
 
 1. Create and push a new tagged release in the source repo, for example `v{request.version}`.
 2. Download the release tarball and compute its SHA256:
@@ -183,7 +183,7 @@ If you are installing into OpenClaw, check `~/.openclaw/openclaw.json` before as
 This tap also ships a maintainer skill at:
 
 ```text
-skills/reviewbuddy-tap-maintainer
+skills/researchbuddy-tap-maintainer
 ```
 
 Use it when an agent needs to bump the formula or validate the tap release.
@@ -195,33 +195,33 @@ def render_tap_skill(request: TapExportRequest) -> str:
 
     short_tap = build_short_tap_name(request)
     return f"""---
-name: reviewbuddy-tap-maintainer
-description: Use when publishing or updating the ReviewBuddy Homebrew tap. Covers formula version bumps, SHA updates, local brew validation, and push readiness checks.
+name: researchbuddy-tap-maintainer
+description: Use when publishing or updating the ResearchBuddy Homebrew tap. Covers formula version bumps, SHA updates, local brew validation, and push readiness checks.
 metadata: {{"openclaw":{{"requires":{{"bins":["brew","curl","shasum"]}}}}}}
 ---
 
-# ReviewBuddy Homebrew Tap Maintainer
+# ResearchBuddy Homebrew Tap Maintainer
 
-Use this skill when the task is to publish or update the ReviewBuddy Homebrew tap.
+Use this skill when the task is to publish or update the ResearchBuddy Homebrew tap.
 
 ## Publishing Workflow
 
 1. Confirm the source repo has a pushed Git tag for the target release.
-2. Open `Formula/reviewbuddy.rb`.
+2. Open `Formula/researchbuddy.rb`.
 3. Update `url` and `sha256`.
 4. Run:
    ```bash
-   brew audit --strict --online reviewbuddy
-   brew install --build-from-source ./Formula/reviewbuddy.rb
-   brew test reviewbuddy
+   brew audit --strict --online researchbuddy
+   brew install --build-from-source ./Formula/researchbuddy.rb
+   brew test researchbuddy
    ```
 5. If validation passes, commit and push the tap repo.
 
 ## Install Reference
 
 - Tap: `brew tap {short_tap}`
-- Install: `brew install reviewbuddy`
-- Fully qualified install: `brew install {short_tap}/reviewbuddy`
+- Install: `brew install researchbuddy`
+- Fully qualified install: `brew install {short_tap}/researchbuddy`
 
 ## Read These References As Needed
 
@@ -233,13 +233,13 @@ def render_skill_publishing_reference(request: TapExportRequest) -> str:
     """Render the maintainer reference document."""
 
     source_url = build_source_tarball_url(request)
-    return f"""# Publishing ReviewBuddy To Homebrew
+    return f"""# Publishing ResearchBuddy To Homebrew
 
 ## Release Inputs
 
 - Source repository: `{build_source_homepage(request)}`
 - Release tarball pattern: `{source_url}`
-- Formula file: `Formula/reviewbuddy.rb`
+- Formula file: `Formula/researchbuddy.rb`
 
 ## Release Checklist
 
@@ -253,17 +253,17 @@ def render_skill_publishing_reference(request: TapExportRequest) -> str:
    - `sha256`
 4. Validate:
    ```bash
-   brew audit --strict --online reviewbuddy
-   brew install --build-from-source ./Formula/reviewbuddy.rb
-   brew test reviewbuddy
+   brew audit --strict --online researchbuddy
+   brew install --build-from-source ./Formula/researchbuddy.rb
+   brew test researchbuddy
    ```
 5. Commit and push the tap changes.
 
 ## Runtime Notes
 
-- `reviewbuddy` still needs `codex` installed and authenticated.
+- `researchbuddy` still needs `codex` installed and authenticated.
 - Playwright browsers are installed after brew install with:
-  - `$(brew --prefix)/opt/reviewbuddy/libexec/bin/python -m playwright install`
+  - `$(brew --prefix)/opt/researchbuddy/libexec/bin/python -m playwright install`
 - Required environment:
   - one search provider key: `EXA_API_KEY`, `TAVILY_API_KEY`, or `FIRECRAWL_API_KEY`
   - optional override: `SEARCH_PROVIDER`
@@ -292,11 +292,11 @@ jobs:
       - name: Set up Homebrew
         run: brew update
       - name: Audit formula
-        run: brew audit --strict --online ./Formula/reviewbuddy.rb
+        run: brew audit --strict --online ./Formula/researchbuddy.rb
       - name: Install formula
-        run: brew install --build-from-source ./Formula/reviewbuddy.rb
+        run: brew install --build-from-source ./Formula/researchbuddy.rb
       - name: Test formula
-        run: brew test reviewbuddy
+        run: brew test researchbuddy
 """
 
 

@@ -1,19 +1,24 @@
-"""YouTube transcript summarization helpers."""
+"""Transcript summarization helpers."""
 
 from __future__ import annotations
 
 import asyncio
 import logging
+from typing import TypeVar
+
+from pydantic import BaseModel
 
 from app.services.codex_exec import CodexUsage, run_codex_prompt
+from app.services.podcast_transcriber import PodcastTranscript
 from app.services.youtube_transcriber import YouTubeTranscript
 
 logger = logging.getLogger(__name__)
+TranscriptItem = TypeVar("TranscriptItem", bound=BaseModel)
 
 SUMMARY_SYSTEM_PROMPT = (
     "You summarize transcripts for research synthesis. Keep only high-signal content and "
     "avoid filler. Return concise markdown with sections: Highlights, Quantitative Details, "
-    "Caveats, and Who It Fits. Use only information present in the transcript."
+    "Caveats, and Why It Matters. Use only information present in the transcript."
 )
 
 
@@ -28,6 +33,7 @@ async def summarize_transcript(
     transcript: str,
     title: str | None,
     url: str,
+    source_label: str,
     model_name: str,
     max_chars: int,
 ) -> tuple[str, CodexUsage | None]:
@@ -40,8 +46,8 @@ async def summarize_transcript(
         response = await run_codex_prompt(
             (
                 f"{SUMMARY_SYSTEM_PROMPT}\n\n"
-                "Summarize this YouTube transcript for research usage.\n"
-                "Focus on concrete claims, quantitative details, caveats, and recommendation fit.\n\n"
+                f"Summarize this {source_label} transcript for research usage.\n"
+                "Focus on concrete claims, quantitative details, caveats, and why it matters.\n\n"
                 f"Title: {title or '(untitled)'}\n"
                 f"URL: {url}\n\n"
                 f"Transcript:\n{transcript}"
@@ -65,19 +71,55 @@ async def summarize_youtube_transcripts(
 ) -> tuple[list[YouTubeTranscript], list[CodexUsage]]:
     """Summarize all transcripts with bounded concurrency."""
 
+    return await _summarize_transcript_items(
+        transcripts=transcripts,
+        source_label="YouTube",
+        model_name=model_name,
+        max_chars=max_chars,
+        concurrency=concurrency,
+    )
+
+
+async def summarize_podcast_transcripts(
+    transcripts: list[PodcastTranscript],
+    model_name: str,
+    max_chars: int,
+    concurrency: int,
+) -> tuple[list[PodcastTranscript], list[CodexUsage]]:
+    """Summarize podcast transcripts with bounded concurrency."""
+
+    return await _summarize_transcript_items(
+        transcripts=transcripts,
+        source_label="podcast",
+        model_name=model_name,
+        max_chars=max_chars,
+        concurrency=concurrency,
+    )
+
+
+async def _summarize_transcript_items(
+    transcripts: list[TranscriptItem],
+    source_label: str,
+    model_name: str,
+    max_chars: int,
+    concurrency: int,
+) -> tuple[list[TranscriptItem], list[CodexUsage]]:
+    """Summarize transcript-like objects with bounded concurrency."""
+
     if not transcripts:
         return [], []
 
     semaphore = asyncio.Semaphore(max(1, concurrency))
 
     async def _summarize_one(
-        transcript: YouTubeTranscript,
-    ) -> tuple[YouTubeTranscript, CodexUsage | None]:
+        transcript: TranscriptItem,
+    ) -> tuple[TranscriptItem, CodexUsage | None]:
         async with semaphore:
             summary, usage = await summarize_transcript(
                 transcript=transcript.transcript,
                 title=transcript.title,
                 url=transcript.url,
+                source_label=source_label,
                 model_name=model_name,
                 max_chars=max_chars,
             )

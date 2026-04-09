@@ -163,7 +163,7 @@ def _get_reddit_client() -> Any | None:
     reddit_kwargs: dict[str, Any] = {
         "client_id": settings.reddit_client_id,
         "client_secret": settings.reddit_client_secret,
-        "user_agent": settings.reddit_user_agent or "reviewbuddy/1.0",
+        "user_agent": settings.reddit_user_agent or "researchbuddy/1.0",
         "check_for_updates": False,
         "timeout": 30,
     }
@@ -327,10 +327,10 @@ def _summarize_pdf_with_codex(pdf_path: Path, source_url: str) -> tuple[str, Cod
 
     response = run_codex_prompt_sync(
         (
-            "You are a research assistant summarizing PDFs for product reviews. "
-            "Extract key findings, caveats, and any quantitative specs.\n\n"
-            "Summarize this PDF for a product research dossier. Provide key points, "
-            "relevant specs, and any cautions.\n"
+            "You are a research assistant summarizing PDFs for grounded research. "
+            "Extract key findings, caveats, and any quantitative details.\n\n"
+            "Summarize this PDF for a research dossier. Provide the most relevant "
+            "claims, context, evidence, and cautions.\n"
             f"Source URL: {source_url}\n\n"
             f"PDF text:\n{pdf_text}"
         ),

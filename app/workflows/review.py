@@ -5,8 +5,10 @@ import json
 import logging
 import re
 import uuid
+from collections.abc import Awaitable, Callable
 from dataclasses import asdict, dataclass
 from pathlib import Path
+from typing import TypeVar
 from urllib.parse import urlparse
 
 from playwright.async_api import async_playwright
@@ -24,6 +26,7 @@ from app.agents.synthesizer import (
 )
 from app.constants import (
     FOLLOWUP_MEMORY_FILENAME,
+    PODCAST_TRANSCRIPTS_FILENAME,
     RUN_STATUS_COMPLETED,
     RUN_STATUS_FAILED,
     YOUTUBE_TRANSCRIPTS_FILENAME,
@@ -41,9 +44,19 @@ from app.models.review import (
 )
 from app.services.markdown_converter import MarkdownError, html_file_to_markdown
 from app.services.playwright_fetcher import FetchError, capture_html, should_retry_headful
+from app.services.podcast_transcriber import (
+    PodcastEpisode,
+    PodcastError,
+    PodcastTranscript,
+    is_podcast_url,
+    select_podcast_episodes,
+    transcribe_podcast_episodes_with_timeout,
+)
 from app.services.query_shaper import QueryShapeRequest, shape_query
 from app.services.reporter import RunReporter
+from app.services.research_profiles import ResearchProfile, resolve_research_profile
 from app.services.search_provider import SearchProviderError, build_search_provider
+from app.services.semantic_dedupe import SOURCE_CARD_EMBEDDING_TASK, mmr_rank_texts
 from app.services.storage import (
     build_run_paths,
     create_run,
@@ -57,18 +70,24 @@ from app.services.storage import (
     url_to_filename,
 )
 from app.services.token_estimator import estimate_tokens
-from app.services.transcript_summarizer import summarize_youtube_transcripts
+from app.services.transcript_summarizer import (
+    summarize_podcast_transcripts,
+    summarize_youtube_transcripts,
+)
 from app.services.url_handlers import CustomContent, fetch_custom_content
 from app.services.usage_tracker import UsageSnapshot, UsageTracker
 from app.services.youtube_transcriber import (
     YouTubeError,
     YouTubeTranscript,
+    is_youtube_url,
     transcribe_youtube_videos_with_timeout,
 )
 
 settings = get_settings()
 search_provider = build_search_provider(settings)
 logger = logging.getLogger(__name__)
+_SYNTHESIS_CONCURRENCY = 3
+T = TypeVar("T")
 
 NUMERIC_SIGNAL_RE = re.compile(
     r"\b\d+(?:[.,]\d+)?(?:%|x|ms|gb|tb|w|wh|mah|hz|fps|in|inch|hours?|mins?|minutes?|years?)?\b",
@@ -123,6 +142,7 @@ class CandidateUrl:
     score: float
     domain: str
     title_key: str
+    source_kind: str
     provider_name: str | None = None
     provider_markdown: str | None = None
     provider_html: str | None = None
@@ -202,6 +222,7 @@ async def run_review(
     run_id = uuid.uuid4().hex
     run_paths = build_run_paths(request.output_dir, run_id)
     usage_tracker = UsageTracker()
+    research_profile = resolve_research_profile(request.prompt, request.research_mode)
     run_record = new_run_record(
         run_id=run_id,
         prompt=request.prompt,
@@ -213,42 +234,59 @@ async def run_review(
     await create_run(settings.database_path, run_record)
     add_run_file_handler(run_paths["run"] / "run.log", settings.log_level)
     logger.info(
-        "Run initialized",
-        extra={
-            "run_id": run_id,
-            "max_urls": request.max_urls,
-            "max_agents": request.max_agents,
-            "headful_fallback": request.headful,
-        },
+        "Run initialized: run_id=%s max_urls=%d max_agents=%d headful_fallback=%s research_mode=%s",
+        run_id,
+        request.max_urls,
+        request.max_agents,
+        request.headful,
+        research_profile.mode,
     )
 
     try:
         youtube_transcripts: list[YouTubeTranscript] = []
-        if settings.youtube_max_videos > 0:
+        if settings.youtube_max_videos > 0 and research_profile.youtube_results > 0:
             youtube_transcripts = await _collect_youtube_transcripts(
                 request.prompt,
                 run_paths["videos"],
                 run_paths["transcripts"],
-                settings.youtube_max_videos,
+                min(settings.youtube_max_videos, research_profile.youtube_results),
                 settings.whisper_model,
+                research_profile=research_profile,
+                usage_tracker=usage_tracker,
+            )
+
+        podcast_transcripts: list[PodcastTranscript] = []
+        if settings.podcast_max_episodes > 0 and research_profile.podcast_results > 0:
+            podcast_transcripts = await _collect_podcast_transcripts(
+                request.prompt,
+                run_paths["videos"],
+                run_paths["transcripts"],
+                min(settings.podcast_max_episodes, research_profile.podcast_results),
+                settings.whisper_model,
+                research_profile=research_profile,
                 usage_tracker=usage_tracker,
             )
 
         lane_plan = await plan_lanes(
             request.prompt,
             deps,
+            research_profile=research_profile,
             usage_tracker=usage_tracker,
             model_name=request.planner_model,
         )
         lanes = _select_lanes(lane_plan.lanes, request.max_agents)
         lanes = _allocate_lane_budgets(lanes, request.max_urls)
+        search_budgets = _allocate_search_query_budgets(lanes, settings.search_query_budget)
         logger.info("Planned %d lanes", len(lanes))
         _emit_reporter(reporter, "on_lanes_planned", len(lanes))
-        for lane in lanes:
+        for lane, search_budget in zip(lanes, search_budgets, strict=True):
             logger.info(
-                "Lane planned: %s",
+                "Lane planned: %s | goal=%s | url_budget=%d | search_budget=%d | seed_queries=%s",
                 lane.name,
-                extra={"goal": lane.goal, "budget": lane.url_budget},
+                lane.goal,
+                lane.url_budget or 0,
+                search_budget,
+                _format_query_list(lane.seed_queries),
             )
 
         async with async_playwright() as playwright:
@@ -260,17 +298,19 @@ async def run_review(
                     _run_lane(
                         run_id=run_id,
                         lane=lane,
+                        search_query_budget=search_budget,
                         prompt=request.prompt,
                         browser=browser,
                         headful_fallback=headful_fallback,
                         run_paths=run_paths,
                         timeout_ms=request.navigation_timeout_ms,
                         deps=deps,
+                        research_profile=research_profile,
                         usage_tracker=usage_tracker,
                         model_name=request.sub_agent_model,
                         reporter=reporter,
                     )
-                    for lane in lanes
+                    for lane, search_budget in zip(lanes, search_budgets, strict=True)
                 ]
                 lane_results = await asyncio.gather(*lane_tasks)
             finally:
@@ -283,7 +323,9 @@ async def run_review(
             run_paths["markdown"],
             lane_results,
             youtube_transcripts,
+            podcast_transcripts,
             deps,
+            research_profile,
             usage_tracker,
             model_name=request.sub_agent_model,
         )
@@ -306,6 +348,7 @@ async def run_review(
             lane_results=lane_results,
             markdown_dir=run_paths["markdown"],
             youtube_transcripts=youtube_transcripts,
+            podcast_transcripts=podcast_transcripts,
         )
 
         return ReviewRunResult(
@@ -367,15 +410,57 @@ def _allocate_lane_budgets(lanes: list[LaneSpec], max_urls: int) -> list[LaneSpe
     ]
 
 
+def _allocate_search_query_budgets(
+    lanes: list[LaneSpec],
+    max_search_queries: int,
+) -> list[int]:
+    if not lanes:
+        return []
+    if max_search_queries <= 0:
+        return [0 for _ in lanes]
+    if max_search_queries <= len(lanes):
+        budgets = [0 for _ in lanes]
+        for idx in range(max_search_queries):
+            budgets[idx] = 1
+        return budgets
+
+    weights = [max(1, lane.url_budget or 0) for lane in lanes]
+    total_weight = sum(weights)
+    if total_weight <= 0:
+        base = max_search_queries // len(lanes)
+        budgets = [base for _ in lanes]
+        remainder = max_search_queries - sum(budgets)
+        for idx in range(remainder):
+            budgets[idx % len(budgets)] += 1
+        return budgets
+
+    raw_budgets = [weight * max_search_queries / total_weight for weight in weights]
+    budgets = [int(value) for value in raw_budgets]
+    assigned = sum(budgets)
+    remainder = max_search_queries - assigned
+    if remainder > 0:
+        order = sorted(
+            range(len(lanes)),
+            key=lambda idx: (raw_budgets[idx] - budgets[idx], weights[idx]),
+            reverse=True,
+        )
+        for idx in order[:remainder]:
+            budgets[idx] += 1
+
+    return budgets
+
+
 async def _run_lane(
     run_id: str,
     lane: LaneSpec,
+    search_query_budget: int,
     prompt: str,
     browser,
     headful_fallback: dict,
     run_paths: dict[str, Path],
     timeout_ms: int,
     deps: AgentDeps,
+    research_profile: ResearchProfile,
     usage_tracker: UsageTracker | None = None,
     model_name: str | None = None,
     reporter: RunReporter | None = None,
@@ -388,18 +473,27 @@ async def _run_lane(
     lane_slug = _slugify(lane.name)
     lane_deps = deps.model_copy(update={"job_id": f"{deps.job_id}-{lane_slug}"})
     seed_budget = _seed_budget(budget)
+    remaining_search_queries = max(0, search_query_budget)
 
     logger.info(
-        "Lane starting: %s",
+        "Lane starting: %s | goal=%s | url_budget=%d | seed_budget=%d | search_budget=%d",
         lane.name,
-        extra={"goal": lane.goal, "budget": budget, "seed_budget": seed_budget},
+        lane.goal,
+        budget,
+        seed_budget,
+        remaining_search_queries,
     )
+    seed_queries = lane.seed_queries[:remaining_search_queries]
+    logger.info("Lane %s seed queries: %s", lane.name, _format_query_list(seed_queries))
     initial_tasks = await _collect_urls_for_queries(
         lane,
-        lane.seed_queries,
+        seed_queries,
         seed_budget,
         seen_urls,
+        research_profile,
+        usage_tracker=usage_tracker,
     )
+    remaining_search_queries = max(0, remaining_search_queries - len(seed_queries))
     logger.info(
         "Lane %s seed search collected %d urls",
         lane.name,
@@ -433,6 +527,13 @@ async def _run_lane(
         refinement_targets = _refinement_targets(budget)
         max_rounds = max(0, settings.refinement_rounds)
         for round_index, target in enumerate(refinement_targets[:max_rounds], start=1):
+            if remaining_search_queries <= 0:
+                logger.info(
+                    "Lane %s search budget exhausted before refinement round %d",
+                    lane.name,
+                    round_index,
+                )
+                break
             budget_remaining = max(0, budget - len(all_tasks))
             if budget_remaining <= 0 or not evidence_tasks:
                 break
@@ -447,6 +548,7 @@ async def _run_lane(
                 lane.goal,
                 evidence,
                 lane_deps,
+                research_profile=research_profile,
                 usage_tracker=usage_tracker,
                 model_name=model_name,
             )
@@ -456,11 +558,29 @@ async def _run_lane(
                 round_index,
                 len(refinement.queries),
             )
+            refinement_queries = refinement.queries[:remaining_search_queries]
+            if not refinement_queries:
+                logger.info(
+                    "Lane %s search budget exhausted before refinement queries",
+                    lane.name,
+                )
+                break
+            logger.info(
+                "Lane %s refinement round %d queries: %s",
+                lane.name,
+                round_index,
+                _format_query_list(refinement_queries),
+            )
             new_tasks = await _collect_urls_for_queries(
                 lane,
-                refinement.queries,
+                refinement_queries,
                 budget_remaining,
                 seen_urls,
+                research_profile,
+                usage_tracker=usage_tracker,
+            )
+            remaining_search_queries = max(
+                0, remaining_search_queries - len(refinement_queries)
             )
             if new_tasks:
                 await _store_url_records(run_id, new_tasks)
@@ -560,27 +680,44 @@ async def _collect_urls_for_queries(
     queries,
     budget: int,
     seen_urls: set[str],
+    research_profile: ResearchProfile,
+    usage_tracker: UsageTracker | None = None,
 ) -> list[UrlTask]:
     if budget <= 0:
+        return []
+    if not queries:
         return []
 
     candidates: list[CandidateUrl] = []
     candidate_urls: set[str] = set()
-    per_query_results = min(
-        settings.search_num_results,
-        max(settings.search_min_results_per_query, budget * 3),
-    )
+    seen_search_queries: set[str] = set()
+    per_query_results = _search_result_request_size(budget)
 
     for query in queries:
         shaped = shape_query(
             QueryShapeRequest(
                 query=query.query,
-                suffix=settings.query_shaping_suffix,
+                suffix=research_profile.query_suffix or settings.query_shaping_suffix,
                 enabled=settings.query_shaping_enabled,
             )
         )
         search_query = shaped.query
-        logger.info("%s search (%s): %s", search_provider.provider_name, lane.name, search_query)
+        normalized_search_query = search_query.strip().lower()
+        if normalized_search_query in seen_search_queries:
+            logger.info(
+                "Skipping duplicate shaped query (%s): %s",
+                lane.name,
+                search_query,
+            )
+            continue
+        seen_search_queries.add(normalized_search_query)
+        logger.info(
+            "%s search (%s): original=%s | shaped=%s",
+            search_provider.provider_name,
+            lane.name,
+            query.query,
+            search_query,
+        )
         try:
             response = await search_provider.search(
                 query=search_query,
@@ -588,6 +725,8 @@ async def _collect_urls_for_queries(
             )
         except SearchProviderError:
             continue
+        if usage_tracker is not None:
+            await usage_tracker.add_search_usage(response.usage)
 
         for item in response.results:
             if not item.url:
@@ -604,16 +743,33 @@ async def _collect_urls_for_queries(
                     score=float(item.score or 0.0),
                     domain=_extract_domain(item.url),
                     title_key=_title_key(item.title),
+                    source_kind=_infer_source_kind(item.url, item.title),
                     provider_name=search_provider.provider_name,
                     provider_markdown=item.content_markdown,
                     provider_html=item.content_html,
                 )
             )
 
-    selected = _rank_candidate_urls(candidates, budget)
+    selected = _rank_candidate_urls(candidates, budget, research_profile=research_profile)
     for task in selected:
         seen_urls.add(task.url)
     return selected
+
+
+def _search_result_request_size(target_count: int) -> int:
+    """Return a conservative result count for a search request."""
+
+    if target_count <= 0:
+        return 0
+    return min(
+        settings.search_num_results,
+        max(settings.search_min_results_per_query, target_count * 2),
+    )
+
+
+def _format_query_list(queries) -> str:
+    values = [query.query.strip() for query in queries if getattr(query, "query", "").strip()]
+    return " | ".join(values) if values else "(none)"
 
 
 def _extract_domain(url: str) -> str:
@@ -632,11 +788,19 @@ def _title_key(title: str | None) -> str:
     return re.sub(r"[^a-z0-9]+", " ", title.lower()).strip()
 
 
-def _rank_candidate_urls(candidates: list[CandidateUrl], budget: int) -> list[UrlTask]:
+def _rank_candidate_urls(
+    candidates: list[CandidateUrl],
+    budget: int,
+    research_profile: ResearchProfile | None = None,
+) -> list[UrlTask]:
     if budget <= 0 or not candidates:
         return []
 
-    ordered = sorted(candidates, key=lambda candidate: candidate.score, reverse=True)
+    ordered = sorted(
+        candidates,
+        key=lambda candidate: _candidate_priority_score(candidate, research_profile),
+        reverse=True,
+    )
     selected: list[CandidateUrl] = []
     backlog: list[CandidateUrl] = []
     selected_urls: set[str] = set()
@@ -681,6 +845,22 @@ def _rank_candidate_urls(candidates: list[CandidateUrl], budget: int) -> list[Ur
             selected_urls.add(candidate.url)
 
     return [_candidate_to_url_task(item) for item in selected]
+
+
+def _candidate_priority_score(
+    candidate: CandidateUrl,
+    research_profile: ResearchProfile | None,
+) -> float:
+    score = candidate.score * 100
+    if research_profile is None:
+        return score
+
+    if candidate.source_kind in research_profile.preferred_source_kinds:
+        preferred_rank = research_profile.preferred_source_kinds.index(candidate.source_kind)
+        score += max(12, 28 - (preferred_rank * 4))
+    if candidate.source_kind in research_profile.discouraged_source_kinds:
+        score -= 18
+    return score
 
 
 def _candidate_to_url_task(candidate: CandidateUrl) -> UrlTask:
@@ -851,6 +1031,7 @@ async def _collect_youtube_transcripts(
     transcripts_dir: Path,
     max_videos: int,
     model_name: str,
+    research_profile: ResearchProfile,
     usage_tracker: UsageTracker | None = None,
 ) -> list[YouTubeTranscript]:
     """Collect and transcribe YouTube videos in a background thread."""
@@ -864,7 +1045,7 @@ async def _collect_youtube_transcripts(
     try:
         transcripts = await asyncio.to_thread(
             transcribe_youtube_videos_with_timeout,
-            prompt,
+            _build_media_query(prompt, research_profile, source_kind="youtube"),
             bounded_max,
             videos_dir,
             transcripts_dir,
@@ -895,6 +1076,123 @@ async def _collect_youtube_transcripts(
         return []
 
 
+async def _collect_podcast_transcripts(
+    prompt: str,
+    audio_dir: Path,
+    transcripts_dir: Path,
+    max_episodes: int,
+    model_name: str,
+    research_profile: ResearchProfile,
+    usage_tracker: UsageTracker | None = None,
+) -> list[PodcastTranscript]:
+    """Collect and transcribe podcast episodes."""
+
+    if max_episodes <= 0:
+        return []
+
+    logger.info("Collecting up to %d podcast episodes", max_episodes)
+    episodes = await _search_podcast_episodes(
+        prompt,
+        max_episodes,
+        research_profile,
+        usage_tracker=usage_tracker,
+    )
+    if not episodes:
+        logger.info("Podcast ingestion found 0 resolvable episodes")
+        return []
+
+    logger.info("Podcast ingestion resolved %d episodes", len(episodes))
+    try:
+        transcripts = await asyncio.to_thread(
+            transcribe_podcast_episodes_with_timeout,
+            episodes,
+            audio_dir,
+            transcripts_dir,
+            model_name,
+            settings.podcast_ingest_timeout_seconds,
+        )
+        if transcripts and settings.podcast_summarize_transcripts:
+            transcripts, summary_usages = await summarize_podcast_transcripts(
+                transcripts=transcripts,
+                model_name=settings.podcast_summary_model,
+                max_chars=settings.podcast_transcript_max_chars,
+                concurrency=settings.podcast_summary_concurrency,
+            )
+            if usage_tracker is not None:
+                for usage in summary_usages:
+                    await usage_tracker.add(usage, model_name=settings.podcast_summary_model)
+        if usage_tracker is not None and transcripts:
+            await usage_tracker.add_source("podcast", count=len(transcripts))
+        logger.info("Podcast ingestion completed %d transcripts", len(transcripts))
+        return transcripts
+    except TimeoutError:
+        logger.warning(
+            "Podcast ingestion timed out after %d seconds",
+            settings.podcast_ingest_timeout_seconds,
+        )
+        return []
+    except PodcastError as exc:
+        logger.warning("Podcast ingestion failed: %s", exc)
+        return []
+
+
+async def _search_podcast_episodes(
+    prompt: str,
+    max_episodes: int,
+    research_profile: ResearchProfile,
+    usage_tracker: UsageTracker | None = None,
+) -> list[PodcastEpisode]:
+    """Search the web for podcast episodes relevant to the prompt."""
+
+    if max_episodes <= 0:
+        return []
+
+    try:
+        response = await search_provider.search(
+            query=_build_media_query(prompt, research_profile, source_kind="podcast"),
+            num_results=_search_result_request_size(max_episodes),
+        )
+    except SearchProviderError:
+        return []
+    if usage_tracker is not None:
+        await usage_tracker.add_search_usage(response.usage)
+
+    episodes = await asyncio.to_thread(
+        select_podcast_episodes,
+        response.results,
+        max_episodes=max_episodes,
+    )
+    logger.info(
+        "Podcast search resolved %d episodes from %d results",
+        len(episodes),
+        len(response.results),
+    )
+    return episodes
+
+
+def _build_media_query(
+    prompt: str,
+    research_profile: ResearchProfile,
+    *,
+    source_kind: str,
+) -> str:
+    """Build a source-specific media search query."""
+
+    if source_kind == "youtube":
+        if research_profile.mode == "product_review":
+            return f"{prompt} review comparison youtube"
+        if research_profile.mode == "general_research":
+            return f"{prompt} explainer interview youtube"
+        return prompt
+
+    if source_kind == "podcast":
+        if research_profile.mode == "product_review":
+            return f"{prompt} podcast owner interview"
+        return f"{prompt} podcast interview discussion"
+
+    return prompt
+
+
 async def _snapshot_usage(usage_tracker: UsageTracker | None) -> UsageSnapshot | None:
     if usage_tracker is None:
         return None
@@ -916,6 +1214,19 @@ def _log_usage_snapshot(snapshot: UsageSnapshot) -> None:
             "LLM cost unavailable for models: %s",
             ", ".join(snapshot.cost_unavailable_models),
         )
+    if snapshot.search_requests or snapshot.search_requested_results or snapshot.search_returned_results:
+        logger.info(
+            "Search usage: requests=%d requested_results=%d returned_results=%d",
+            snapshot.search_requests,
+            snapshot.search_requested_results,
+            snapshot.search_returned_results,
+        )
+    if snapshot.search_credit_total is not None:
+        logger.info("Search credit total: %s", snapshot.search_credit_total)
+    if snapshot.search_cost_total_usd is not None:
+        logger.info("Search spend total: $%.6f", snapshot.search_cost_total_usd)
+    elif snapshot.search_credit_total is not None:
+        logger.info("Search spend total: %s credits", snapshot.search_credit_total)
     if snapshot.sources:
         sources = ", ".join(f"{key}={value}" for key, value in sorted(snapshot.sources.items()))
         logger.info("Source counts: %s", sources)
@@ -1190,6 +1501,7 @@ def _build_raw_synthesis_context(
     lane_results: list[LaneResult],
     markdown_dir: Path,
     youtube_transcripts: list[YouTubeTranscript],
+    podcast_transcripts: list[PodcastTranscript],
 ) -> str:
     parts: list[str] = []
     for lane in lane_results:
@@ -1213,6 +1525,15 @@ def _build_raw_synthesis_context(
             if not snippet:
                 continue
             parts.append(f"## {title}\nURL: {video.url}\n\n{snippet}\n")
+
+    if podcast_transcripts:
+        parts.append("# Podcast Transcripts\n")
+        for episode in podcast_transcripts:
+            title = episode.title or "(untitled)"
+            snippet = episode.transcript.strip()
+            if not snippet:
+                continue
+            parts.append(f"## {title}\nURL: {episode.url}\n\n{snippet}\n")
     return "\n".join(parts)
 
 
@@ -1221,6 +1542,8 @@ def _build_lane_context_packets(
     lane_results: list[LaneResult],
     markdown_dir: Path,
     youtube_transcripts: list[YouTubeTranscript],
+    podcast_transcripts: list[PodcastTranscript],
+    research_profile: ResearchProfile,
 ) -> list[LaneContextPacket]:
     packets: list[LaneContextPacket] = []
     for lane in lane_results:
@@ -1240,6 +1563,7 @@ def _build_lane_context_packets(
                 lane_name=lane_name,
                 lane_goal=lane_goal,
                 source_cards_markdown=source_cards_markdown,
+                research_profile=research_profile,
             ),
             max_target_tokens=settings.synthesis_merge_target_tokens,
             max_hard_tokens=settings.synthesis_merge_hard_max_tokens,
@@ -1254,27 +1578,22 @@ def _build_lane_context_packets(
                 )
             )
 
-    video_cards = _build_youtube_source_cards(prompt, youtube_transcripts)
-    packed_video_cards = _pack_source_cards(
-        video_cards,
-        prompt_builder=lambda source_cards_markdown: build_lane_synthesis_prompt(
-            prompt=prompt,
-            lane_name="Video Evidence",
-            lane_goal="Supplementary evidence from YouTube transcripts",
-            source_cards_markdown=source_cards_markdown,
-        ),
-        max_target_tokens=settings.synthesis_merge_target_tokens,
-        max_hard_tokens=settings.synthesis_merge_hard_max_tokens,
-        max_sources=settings.synthesis_merge_max_sources,
+    _append_transcript_lane_packet(
+        packets=packets,
+        prompt=prompt,
+        transcripts=youtube_transcripts,
+        lane_name="Video Evidence",
+        lane_goal="Supplementary evidence from YouTube transcripts",
+        research_profile=research_profile,
     )
-    if packed_video_cards:
-        packets.append(
-            LaneContextPacket(
-                lane_name="Video Evidence",
-                lane_goal="Supplementary evidence from YouTube transcripts",
-                cards=packed_video_cards,
-            )
-        )
+    _append_transcript_lane_packet(
+        packets=packets,
+        prompt=prompt,
+        transcripts=podcast_transcripts,
+        lane_name="Podcast Evidence",
+        lane_goal="Supplementary evidence from podcast transcripts",
+        research_profile=research_profile,
+    )
     return packets
 
 
@@ -1285,6 +1604,7 @@ def _build_followup_memory(
     lane_results: list[LaneResult],
     markdown_dir: Path,
     youtube_transcripts: list[YouTubeTranscript],
+    podcast_transcripts: list[PodcastTranscript],
 ) -> FollowupMemory:
     source_cards: list[FollowupSourceCard] = []
     for lane in lane_results:
@@ -1299,7 +1619,21 @@ def _build_followup_memory(
 
     source_cards.extend(
         FollowupSourceCard.model_validate(asdict(card))
-        for card in _build_youtube_source_cards(prompt, youtube_transcripts)
+        for card in _build_transcript_source_cards(
+            prompt=prompt,
+            transcripts=youtube_transcripts,
+            lane_name="Video Evidence",
+            lane_goal="Supplementary evidence from YouTube transcripts",
+        )
+    )
+    source_cards.extend(
+        FollowupSourceCard.model_validate(asdict(card))
+        for card in _build_transcript_source_cards(
+            prompt=prompt,
+            transcripts=podcast_transcripts,
+            lane_name="Podcast Evidence",
+            lane_goal="Supplementary evidence from podcast transcripts",
+        )
     )
     return FollowupMemory(
         run_id=run_id,
@@ -1317,6 +1651,7 @@ def _persist_followup_artifacts(
     lane_results: list[LaneResult],
     markdown_dir: Path,
     youtube_transcripts: list[YouTubeTranscript],
+    podcast_transcripts: list[PodcastTranscript],
 ) -> None:
     memory = _build_followup_memory(
         run_id=run_id,
@@ -1325,17 +1660,13 @@ def _persist_followup_artifacts(
         lane_results=lane_results,
         markdown_dir=markdown_dir,
         youtube_transcripts=youtube_transcripts,
+        podcast_transcripts=podcast_transcripts,
     )
     memory_path = run_dir / FOLLOWUP_MEMORY_FILENAME
     memory_path.write_text(memory.model_dump_json(indent=2), encoding="utf-8")
 
-    transcripts_path = run_dir / YOUTUBE_TRANSCRIPTS_FILENAME
-    transcripts_path.write_text(
-        json.dumps(
-            [item.model_dump() for item in youtube_transcripts], ensure_ascii=True, indent=2
-        ),
-        encoding="utf-8",
-    )
+    _write_transcripts_json(run_dir / YOUTUBE_TRANSCRIPTS_FILENAME, youtube_transcripts)
+    _write_transcripts_json(run_dir / PODCAST_TRANSCRIPTS_FILENAME, podcast_transcripts)
 
 
 def _build_source_cards_for_lane(
@@ -1365,16 +1696,18 @@ def _build_source_cards_for_lane(
     return cards
 
 
-def _build_youtube_source_cards(
+def _build_transcript_source_cards(
     prompt: str,
-    transcripts: list[YouTubeTranscript],
+    transcripts: list[YouTubeTranscript] | list[PodcastTranscript],
+    lane_name: str,
+    lane_goal: str,
 ) -> list[SourceCard]:
     cards: list[SourceCard] = []
     for transcript in transcripts:
         card = _build_source_card(
             prompt=prompt,
-            lane_name="Video Evidence",
-            lane_goal="Supplementary evidence from YouTube transcripts",
+            lane_name=lane_name,
+            lane_goal=lane_goal,
             url=transcript.url,
             title=transcript.title,
             raw=transcript.transcript,
@@ -1383,6 +1716,54 @@ def _build_youtube_source_cards(
         if card is not None:
             cards.append(card)
     return cards
+
+
+def _append_transcript_lane_packet(
+    packets: list[LaneContextPacket],
+    prompt: str,
+    transcripts: list[YouTubeTranscript] | list[PodcastTranscript],
+    lane_name: str,
+    lane_goal: str,
+    research_profile: ResearchProfile,
+) -> None:
+    cards = _build_transcript_source_cards(
+        prompt=prompt,
+        transcripts=transcripts,
+        lane_name=lane_name,
+        lane_goal=lane_goal,
+    )
+    packed_cards = _pack_source_cards(
+        cards,
+        prompt_builder=lambda source_cards_markdown: build_lane_synthesis_prompt(
+            prompt=prompt,
+            lane_name=lane_name,
+            lane_goal=lane_goal,
+            source_cards_markdown=source_cards_markdown,
+            research_profile=research_profile,
+        ),
+        max_target_tokens=settings.synthesis_merge_target_tokens,
+        max_hard_tokens=settings.synthesis_merge_hard_max_tokens,
+        max_sources=settings.synthesis_merge_max_sources,
+    )
+    if not packed_cards:
+        return
+    packets.append(
+        LaneContextPacket(
+            lane_name=lane_name,
+            lane_goal=lane_goal,
+            cards=packed_cards,
+        )
+    )
+
+
+def _write_transcripts_json(
+    output_path: Path,
+    transcripts: list[YouTubeTranscript] | list[PodcastTranscript],
+) -> None:
+    output_path.write_text(
+        json.dumps([item.model_dump() for item in transcripts], ensure_ascii=True, indent=2),
+        encoding="utf-8",
+    )
 
 
 def _build_source_card(
@@ -1397,7 +1778,7 @@ def _build_source_card(
     distilled_text = _distill_source_text(raw, max_chars=settings.evidence_max_chars)
     if not distilled_text:
         return None
-    source_kind = _infer_source_kind(url)
+    source_kind = _infer_source_kind(url, title)
     return SourceCard(
         lane_name=lane_name,
         lane_goal=lane_goal,
@@ -1419,12 +1800,23 @@ def _build_source_card(
     )
 
 
-def _infer_source_kind(url: str) -> str:
+def _infer_source_kind(url: str, title: str | None = None) -> str:
     lowered = url.lower()
-    if "youtube.com" in lowered or "youtu.be" in lowered:
+    if is_youtube_url(url):
         return "youtube"
     if "reddit.com" in lowered:
         return "reddit"
+    if is_podcast_url(url, title):
+        return "podcast"
+    if any(marker in lowered for marker in ("forum", "community", "board", "discourse")):
+        return "forum"
+    if any(marker in lowered for marker in ("substack.com", "medium.com", "/blog", "blog.")):
+        return "blog"
+    if any(
+        marker in lowered
+        for marker in ("eater.com", "infatuation.com", "timeout.com", "magazine", "local")
+    ):
+        return "local-publication"
     if lowered.endswith(".pdf") or ".pdf?" in lowered:
         return "pdf"
     return "web"
@@ -1465,7 +1857,7 @@ def _score_source_card(
         score += 5
     if "### Highlights" in distilled_text:
         score += 3
-    if source_kind in {"reddit", "youtube"}:
+    if source_kind in {"reddit", "youtube", "podcast", "forum", "local-publication"}:
         score += 2
     if 200 <= len(distilled_text) <= settings.evidence_max_chars:
         score += 4
@@ -1477,25 +1869,27 @@ def _estimate_prompt_tokens(prompt_text: str) -> int:
 
 
 def _ordered_source_cards(cards: list[SourceCard]) -> list[SourceCard]:
-    score_sorted = sorted(
-        cards,
-        key=lambda card: (card.relevance_score, card.value_density, len(card.distilled_text)),
-        reverse=True,
-    )
-    density_sorted = sorted(
-        cards,
-        key=lambda card: (card.value_density, card.relevance_score, -len(card.distilled_text)),
-        reverse=True,
-    )
+    if len(cards) <= 2:
+        return sorted(
+            cards,
+            key=lambda card: (card.relevance_score, card.value_density, len(card.distilled_text)),
+            reverse=True,
+        )
 
-    ordered: list[SourceCard] = []
-    seen_urls: set[str] = set()
-    for candidate in [*score_sorted[:2], *density_sorted]:
-        if candidate.url in seen_urls:
-            continue
-        seen_urls.add(candidate.url)
-        ordered.append(candidate)
-    return ordered
+    card_texts = [
+        "\n".join(part for part in (card.title or "", card.distilled_text) if part)
+        for card in cards
+    ]
+    relevance_scores = [
+        float(card.relevance_score) + min(card.value_density * 40.0, 8.0) for card in cards
+    ]
+    ordered_indices = mmr_rank_texts(
+        card_texts,
+        relevance_scores,
+        task_description=SOURCE_CARD_EMBEDDING_TASK,
+        lambda_mult=settings.semantic_card_mmr_lambda,
+    )
+    return [cards[idx] for idx in ordered_indices]
 
 
 def _pack_source_cards(
@@ -1529,6 +1923,7 @@ def _pack_merge_supporting_cards(
     node_name: str,
     summary_packets: list[LaneSummaryPacket],
     child_summaries_markdown: str,
+    research_profile: ResearchProfile,
 ) -> list[SourceCard]:
     combined_cards = [card for packet in summary_packets for card in packet.cards]
     return _pack_source_cards(
@@ -1538,6 +1933,7 @@ def _pack_merge_supporting_cards(
             node_name=node_name,
             child_summaries_markdown=child_summaries_markdown,
             supporting_evidence_markdown=evidence_markdown,
+            research_profile=research_profile,
         ),
         max_target_tokens=settings.synthesis_merge_target_tokens,
         max_hard_tokens=settings.synthesis_merge_hard_max_tokens,
@@ -1602,6 +1998,7 @@ def _prepare_merge_group(
     summary_packets: list[LaneSummaryPacket],
     level: int,
     group_index: int,
+    research_profile: ResearchProfile,
 ) -> tuple[str, str, list[SourceCard], str, int]:
     node_name = f"Merge L{level} G{group_index}"
     child_summaries_markdown = _format_child_summaries(summary_packets)
@@ -1610,6 +2007,7 @@ def _prepare_merge_group(
         node_name=node_name,
         summary_packets=summary_packets,
         child_summaries_markdown=child_summaries_markdown,
+        research_profile=research_profile,
     )
     supporting_evidence_markdown = _format_source_cards(supporting_cards)
     prompt_text = build_merge_synthesis_prompt(
@@ -1617,6 +2015,7 @@ def _prepare_merge_group(
         node_name=node_name,
         child_summaries_markdown=child_summaries_markdown,
         supporting_evidence_markdown=supporting_evidence_markdown,
+        research_profile=research_profile,
     )
     return (
         node_name,
@@ -1631,6 +2030,7 @@ def _group_summary_packets_for_merge(
     prompt: str,
     summary_packets: list[LaneSummaryPacket],
     level: int,
+    research_profile: ResearchProfile,
 ) -> list[list[LaneSummaryPacket]]:
     groups: list[list[LaneSummaryPacket]] = []
     current: list[LaneSummaryPacket] = []
@@ -1642,6 +2042,7 @@ def _group_summary_packets_for_merge(
             summary_packets=candidate,
             level=level,
             group_index=len(groups) + 1,
+            research_profile=research_profile,
         )
         if current and (
             len(candidate) > settings.synthesis_merge_max_children
@@ -1661,6 +2062,7 @@ async def _merge_summary_tree(
     prompt: str,
     summary_packets: list[LaneSummaryPacket],
     deps: AgentDeps,
+    research_profile: ResearchProfile,
     usage_tracker: UsageTracker | None,
     model_name: str | None,
 ) -> LaneSummaryPacket:
@@ -1668,13 +2070,14 @@ async def _merge_summary_tree(
     level = 1
 
     while len(current) > 1:
-        groups = _group_summary_packets_for_merge(prompt, current, level)
+        groups = _group_summary_packets_for_merge(prompt, current, level, research_profile)
         prepared_groups = [
             _prepare_merge_group(
                 prompt=prompt,
                 summary_packets=group,
                 level=level,
                 group_index=index,
+                research_profile=research_profile,
             )
             for index, group in enumerate(groups, start=1)
         ]
@@ -1685,19 +2088,23 @@ async def _merge_summary_tree(
                 estimated_tokens,
             )
 
-        merged_syntheses = await asyncio.gather(
-            *[
-                synthesize_merge_node(
+        merged_syntheses = await _gather_with_limit(
+            [
+                lambda node_name=node_name,
+                child_summaries_markdown=child_summaries_markdown,
+                supporting_evidence_markdown=supporting_evidence_markdown: synthesize_merge_node(
                     prompt=prompt,
                     node_name=node_name,
                     child_summaries_markdown=child_summaries_markdown,
                     supporting_evidence_markdown=supporting_evidence_markdown,
                     deps=deps,
+                    research_profile=research_profile,
                     usage_tracker=usage_tracker,
                     model_name=model_name,
                 )
                 for node_name, child_summaries_markdown, _, supporting_evidence_markdown, _ in prepared_groups
-            ]
+            ],
+            limit=_SYNTHESIS_CONCURRENCY,
         )
         current = [
             LaneSummaryPacket(
@@ -1720,6 +2127,7 @@ async def _merge_summary_tree(
 def _build_final_synthesis_input(
     prompt: str,
     summary_packets: list[LaneSummaryPacket],
+    research_profile: ResearchProfile,
 ) -> tuple[str, str, int]:
     merged_summary_markdown = _format_child_summaries(summary_packets)
     supporting_cards = _pack_source_cards(
@@ -1728,6 +2136,7 @@ def _build_final_synthesis_input(
             prompt=prompt,
             merged_summary_markdown=merged_summary_markdown,
             evidence_appendix_markdown=evidence_markdown,
+            research_profile=research_profile,
         ),
         max_target_tokens=settings.synthesis_final_target_tokens,
         max_hard_tokens=settings.synthesis_final_hard_max_tokens,
@@ -1738,6 +2147,7 @@ def _build_final_synthesis_input(
         prompt=prompt,
         merged_summary_markdown=merged_summary_markdown,
         evidence_appendix_markdown=evidence_appendix_markdown,
+        research_profile=research_profile,
     )
     estimated_tokens = _estimate_prompt_tokens(prompt_text)
     if estimated_tokens > settings.synthesis_final_hard_max_tokens:
@@ -1746,9 +2156,29 @@ def _build_final_synthesis_input(
             prompt=prompt,
             merged_summary_markdown=merged_summary_markdown,
             evidence_appendix_markdown=evidence_appendix_markdown,
+            research_profile=research_profile,
         )
         estimated_tokens = _estimate_prompt_tokens(prompt_text)
     return merged_summary_markdown, evidence_appendix_markdown, estimated_tokens
+
+
+async def _gather_with_limit(
+    factories: list[Callable[[], Awaitable[T]]],
+    *,
+    limit: int,
+) -> list[T]:
+    """Run awaitables with bounded concurrency while preserving input order."""
+
+    if limit <= 0:
+        limit = 1
+
+    semaphore = asyncio.Semaphore(limit)
+
+    async def _run(factory: Callable[[], Awaitable[T]]) -> T:
+        async with semaphore:
+            return await factory()
+
+    return await asyncio.gather(*[_run(factory) for factory in factories])
 
 
 async def _synthesize(
@@ -1756,28 +2186,37 @@ async def _synthesize(
     markdown_dir: Path,
     lane_results: list[LaneResult],
     youtube_transcripts: list[YouTubeTranscript],
+    podcast_transcripts: list[PodcastTranscript],
     deps: AgentDeps,
+    research_profile: ResearchProfile,
     usage_tracker: UsageTracker | None = None,
     model_name: str | None = None,
 ) -> tuple[str, UsageSnapshot]:
     lane_packets = _build_lane_context_packets(
-        prompt, lane_results, markdown_dir, youtube_transcripts
+        prompt,
+        lane_results,
+        markdown_dir,
+        youtube_transcripts,
+        podcast_transcripts,
+        research_profile,
     )
 
     if lane_packets:
-        leaf_syntheses = await asyncio.gather(
-            *[
-                synthesize_lane(
+        leaf_syntheses = await _gather_with_limit(
+            [
+                lambda packet=packet: synthesize_lane(
                     prompt,
                     packet.lane_name,
                     packet.lane_goal,
                     _format_source_cards(packet.cards),
                     deps,
+                    research_profile=research_profile,
                     usage_tracker=usage_tracker,
                     model_name=model_name,
                 )
                 for packet in lane_packets
-            ]
+            ],
+            limit=_SYNTHESIS_CONCURRENCY,
         )
         leaf_summary_packets = [
             LaneSummaryPacket(
@@ -1789,22 +2228,28 @@ async def _synthesize(
             for packet, synthesis in zip(lane_packets, leaf_syntheses, strict=True)
         ]
         merged_summary_markdown, evidence_appendix_markdown, estimated_tokens = (
-            _build_final_synthesis_input(prompt, leaf_summary_packets)
+            _build_final_synthesis_input(prompt, leaf_summary_packets, research_profile)
         )
         if estimated_tokens > settings.synthesis_final_hard_max_tokens:
             root_packet = await _merge_summary_tree(
                 prompt=prompt,
                 summary_packets=leaf_summary_packets,
                 deps=deps,
+                research_profile=research_profile,
                 usage_tracker=usage_tracker,
                 model_name=model_name,
             )
             merged_summary_markdown, evidence_appendix_markdown, estimated_tokens = (
-                _build_final_synthesis_input(prompt, [root_packet])
+                _build_final_synthesis_input(prompt, [root_packet], research_profile)
             )
         logger.info("Final synthesis estimated input tokens=%d", estimated_tokens)
     else:
-        raw_context = _build_raw_synthesis_context(lane_results, markdown_dir, youtube_transcripts)
+        raw_context = _build_raw_synthesis_context(
+            lane_results,
+            markdown_dir,
+            youtube_transcripts,
+            podcast_transcripts,
+        )
         merged_summary_markdown = raw_context
         evidence_appendix_markdown = ""
 
@@ -1813,19 +2258,20 @@ async def _synthesize(
         merged_summary_markdown,
         evidence_appendix_markdown,
         deps,
+        research_profile=research_profile,
         usage_tracker=usage_tracker,
         model_name=model_name,
     )
 
     lines = [
-        "# ReviewBuddy Synthesis",
+        "# Research Synthesis",
         "",
         synthesis.summary,
         "",
         "## Key Findings",
         *[f"- {item}" for item in synthesis.key_findings],
         "",
-        "## Recommendation",
+        "## Bottom Line",
         synthesis.recommendation,
         "",
         "## Sources",
@@ -1836,32 +2282,4 @@ async def _synthesize(
         lines.extend(["", "## Gaps", *[f"- {gap}" for gap in synthesis.gaps]])
 
     usage_snapshot = await _snapshot_usage(usage_tracker)
-    if usage_snapshot:
-        lines.extend(
-            [
-                "",
-                "## Usage",
-                f"- Input tokens: {usage_snapshot.input_tokens}",
-                f"- Output tokens: {usage_snapshot.output_tokens}",
-                f"- Total tokens: {usage_snapshot.total_tokens}",
-                f"- Requests: {usage_snapshot.requests}",
-            ]
-        )
-        if usage_snapshot.sources:
-            source_counts = ", ".join(
-                f"{key}={value}" for key, value in sorted(usage_snapshot.sources.items())
-            )
-            lines.append(f"- Sources: {source_counts}")
-        if usage_snapshot.cost_total is not None:
-            lines.append(f"- Total cost: ${usage_snapshot.cost_total:.6f}")
-        if usage_snapshot.cost_by_model:
-            model_costs = ", ".join(
-                f"{model}=${cost.total_cost:.6f}"
-                for model, cost in sorted(usage_snapshot.cost_by_model.items())
-            )
-            lines.append(f"- Cost by model: {model_costs}")
-        if usage_snapshot.cost_unavailable_models:
-            missing = ", ".join(usage_snapshot.cost_unavailable_models)
-            lines.append(f"- Cost unavailable for: {missing}")
-
     return "\n".join(lines), usage_snapshot or UsageSnapshot(0, 0, 0)

@@ -88,3 +88,16 @@ def test_settings_prefers_explicit_search_provider_override() -> None:
     )
 
     assert settings.get_effective_search_provider() == "firecrawl"
+
+
+def test_settings_use_lower_search_defaults() -> None:
+    settings = Settings()
+
+    assert settings.search_num_results == 20
+    assert settings.search_min_results_per_query == 10
+    assert settings.search_query_budget == 80
+    assert settings.semantic_dedupe_enabled is True
+    assert settings.semantic_embedding_model_id == "Qwen/Qwen3-Embedding-0.6B"
+    assert settings.semantic_query_similarity_threshold == 0.92
+    assert settings.semantic_lane_similarity_threshold == 0.88
+    assert settings.semantic_card_mmr_lambda == 0.72

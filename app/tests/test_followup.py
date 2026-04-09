@@ -81,7 +81,7 @@ def test_rank_followup_source_cards_prefers_question_overlap() -> None:
 
 
 def test_load_followup_memory_rebuilds_from_storage(monkeypatch, tmp_path: Path) -> None:
-    db_path = tmp_path / "reviewbuddy.db"
+    db_path = tmp_path / "researchbuddy.db"
     run_dir = tmp_path / "run-123"
     run_dir.mkdir()
     markdown_path = run_dir / "source.md"
@@ -164,7 +164,7 @@ async def test_answer_followup_question_uses_saved_memory(monkeypatch) -> None:
     assert "https://example.com/review" in captured["prompt"]
 
 
-def test_ask_command_answers_previous_session(monkeypatch, tmp_path: Path) -> None:
+def test_followup_command_answers_previous_session(monkeypatch, tmp_path: Path) -> None:
     report = cli.ReviewRunResult(
         run_id="run-123",
         prompt="Best office chair",
@@ -203,13 +203,14 @@ def test_ask_command_answers_previous_session(monkeypatch, tmp_path: Path) -> No
     monkeypatch.setattr(cli, "_ensure_followup_memory", fake_ensure_memory)
     monkeypatch.setattr(cli, "answer_followup_question", fake_answer)
 
-    result = runner.invoke(cli.app, ["ask", "run-123", "How is lumbar support?"])
+    result = runner.invoke(cli.app, ["followup", "run-123", "How is lumbar support?"])
 
     assert result.exit_code == 0
     assert "Answer text" in result.stdout
+    assert "Continue this conversation in ChatGPT:" in result.stdout
 
 
-def test_ask_command_accepts_question_file_and_result_file(
+def test_followup_command_accepts_question_file_and_result_file(
     monkeypatch,
     tmp_path: Path,
 ) -> None:
@@ -257,7 +258,7 @@ def test_ask_command_accepts_question_file_and_result_file(
     result = runner.invoke(
         cli.app,
         [
-            "ask",
+            "followup",
             "run-123",
             "--question-file",
             str(question_path),
@@ -270,18 +271,29 @@ def test_ask_command_accepts_question_file_and_result_file(
     assert result_path.read_text(encoding="utf-8") == "Answer text"
     assert f"Result file: {result_path}" in result.output
     assert "Answer text" in result.stdout
+    assert "Continue this conversation in ChatGPT:" in result.stdout
 
 
-def test_ask_command_rejects_empty_question_file(monkeypatch, tmp_path: Path) -> None:
+def test_followup_command_rejects_empty_question_file(monkeypatch, tmp_path: Path) -> None:
     monkeypatch.setattr(cli, "setup_logging", lambda _level: None)
     question_path = tmp_path / "question.txt"
     question_path.write_text(" \n", encoding="utf-8")
 
     result = runner.invoke(
         cli.app,
-        ["ask", "run-123", "--question-file", str(question_path)],
+        ["followup", "run-123", "--question-file", str(question_path)],
     )
 
     assert result.exit_code == 2
     assert "question file is empty:" in result.output
+    assert 'Usage: researchbuddy followup <run_id> "<question>" [--result-file answer.txt]' in result.output
     assert question_path.name in result.output
+
+
+def test_followup_command_missing_run_id_shows_guidance() -> None:
+    result = runner.invoke(cli.app, ["followup"])
+
+    assert result.exit_code == 2
+    assert "Missing run_id. Use `researchbuddy runs` to find a saved run first." in result.output
+    assert "Usage: researchbuddy followup [OPTIONS] RUN_ID [QUESTION]" in result.output
+    assert "researchbuddy runs" in result.output

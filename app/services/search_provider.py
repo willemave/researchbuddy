@@ -1,16 +1,17 @@
-"""Pluggable search providers for ReviewBuddy."""
+"""Pluggable search providers for ResearchBuddy."""
 
 from __future__ import annotations
 
 from collections.abc import Iterable
 from dataclasses import dataclass
+from decimal import Decimal
 from typing import Protocol
 
 import httpx
 from pydantic import ValidationError
 
 from app.core.settings import Settings
-from app.models.review import SearchResponse, SearchResult
+from app.models.review import SearchResponse, SearchResult, SearchUsage
 
 
 class SearchProviderError(RuntimeError):
@@ -88,6 +89,50 @@ def _float_or_none(value: object) -> float | None:
     return None
 
 
+def _build_search_usage(
+    *,
+    provider_name: str,
+    requested_results: int,
+    returned_results: int,
+    credit_amount: Decimal | None = None,
+    cost_amount_usd: Decimal | None = None,
+) -> SearchUsage:
+    return SearchUsage(
+        provider_name=provider_name,
+        requested_results=max(0, requested_results),
+        returned_results=max(0, returned_results),
+        credit_amount=credit_amount,
+        cost_amount_usd=cost_amount_usd,
+    )
+
+
+def _exa_search_cost(search_type: str, requested_results: int) -> Decimal | None:
+    if requested_results <= 0:
+        return None
+
+    normalized = search_type.strip().lower()
+    if normalized in {"instant", "auto", "fast", "keyword", "neural"}:
+        return Decimal("0.007")
+    if normalized == "deep-lite":
+        return Decimal("0.010")
+    if normalized == "deep":
+        return Decimal("0.012")
+    if normalized == "deep-reasoning":
+        return Decimal("0.015")
+    return None
+
+
+def _tavily_search_usage(search_depth: str) -> tuple[Decimal, Decimal]:
+    credits = Decimal("2") if search_depth.strip().lower() == "advanced" else Decimal("1")
+    return credits, credits * Decimal("0.008")
+
+
+def _firecrawl_search_credits(returned_results: int) -> Decimal:
+    result_count = max(0, returned_results)
+    search_chunks = max(1, (result_count + 9) // 10)
+    return Decimal(search_chunks * 2 + result_count)
+
+
 @dataclass(frozen=True)
 class ExaSearchProvider:
     """Exa-backed search provider."""
@@ -108,10 +153,11 @@ class ExaSearchProvider:
         if not self.api_key:
             raise SearchProviderError("EXA_API_KEY is not configured")
 
+        requested_results = max(0, min(num_results, 100))
         payload = {
             "query": query,
             "type": self.search_type,
-            "numResults": min(num_results, 100),
+            "numResults": requested_results,
             "userLocation": self.user_location,
             "contents": {"text": True},
         }
@@ -123,7 +169,13 @@ class ExaSearchProvider:
             error_label="Exa search",
         )
         results = _parse_exa_results(data.get("results", []))
-        return SearchResponse(results=results)
+        usage = _build_search_usage(
+            provider_name=self.provider_name,
+            requested_results=requested_results,
+            returned_results=len(results),
+            cost_amount_usd=_exa_search_cost(self.search_type, requested_results),
+        )
+        return SearchResponse(results=results, usage=usage)
 
 
 def _parse_exa_results(items: Iterable[object]) -> list[SearchResult]:
@@ -163,12 +215,13 @@ class TavilySearchProvider:
         if not self.api_key:
             raise SearchProviderError("TAVILY_API_KEY is not configured")
 
+        requested_results = max(0, min(num_results, self.max_results))
         payload = {
             "query": query,
             "search_depth": self.search_depth,
             "topic": self.topic,
             "auto_parameters": self.auto_parameters,
-            "max_results": min(num_results, self.max_results),
+            "max_results": requested_results,
             "include_answer": False,
             "include_raw_content": True,
         }
@@ -180,7 +233,15 @@ class TavilySearchProvider:
             error_label="Tavily search",
         )
         results = _parse_tavily_results(data.get("results", []))
-        return SearchResponse(results=results)
+        credit_amount, cost_amount_usd = _tavily_search_usage(self.search_depth)
+        usage = _build_search_usage(
+            provider_name=self.provider_name,
+            requested_results=requested_results,
+            returned_results=len(results),
+            credit_amount=credit_amount,
+            cost_amount_usd=cost_amount_usd,
+        )
+        return SearchResponse(results=results, usage=usage)
 
 
 def _parse_tavily_results(items: Iterable[object]) -> list[SearchResult]:
@@ -217,9 +278,10 @@ class FirecrawlSearchProvider:
         if not self.api_key:
             raise SearchProviderError("FIRECRAWL_API_KEY is not configured")
 
+        requested_results = max(0, min(num_results, 100))
         payload = {
             "query": query,
-            "limit": min(num_results, 100),
+            "limit": requested_results,
             "country": self.country,
             "sources": ["web"],
             "scrapeOptions": {"formats": ["markdown"]},
@@ -235,7 +297,13 @@ class FirecrawlSearchProvider:
             error_label="Firecrawl search",
         )
         results = _parse_firecrawl_results(data)
-        return SearchResponse(results=results)
+        usage = _build_search_usage(
+            provider_name=self.provider_name,
+            requested_results=requested_results,
+            returned_results=len(results),
+            credit_amount=_firecrawl_search_credits(len(results)),
+        )
+        return SearchResponse(results=results, usage=usage)
 
 
 def _parse_firecrawl_results(payload: dict) -> list[SearchResult]:

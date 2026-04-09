@@ -1,4 +1,4 @@
-"""Shared agent models for ReviewBuddy."""
+"""Shared agent models for ResearchBuddy."""
 
 from pydantic import BaseModel, Field
 
@@ -20,7 +20,7 @@ class SearchQuery(BaseModel):
 class SearchQuerySet(BaseModel):
     """Collection of search queries."""
 
-    queries: list[SearchQuery] = Field(min_length=3, max_length=8)
+    queries: list[SearchQuery] = Field(min_length=3, max_length=12)
 
 
 class LaneSpec(BaseModel):
@@ -30,7 +30,7 @@ class LaneSpec(BaseModel):
     goal: str = Field(description="What this lane should discover")
     seed_queries: list[SearchQuery] = Field(
         min_length=2,
-        max_length=6,
+        max_length=10,
         description="Initial queries to run for this lane",
     )
     url_budget: int | None = Field(
@@ -43,13 +43,13 @@ class LaneSpec(BaseModel):
 class LanePlan(BaseModel):
     """Plan containing multiple research lanes."""
 
-    lanes: list[LaneSpec] = Field(min_length=3, max_length=10)
+    lanes: list[LaneSpec] = Field(min_length=3, max_length=12)
 
 
 class LaneRefinement(BaseModel):
     """Additional queries based on lane findings."""
 
-    queries: list[SearchQuery] = Field(min_length=1, max_length=8)
+    queries: list[SearchQuery] = Field(min_length=1, max_length=12)
 
 
 class SourceDigest(BaseModel):
@@ -65,7 +65,7 @@ class ReviewSynthesis(BaseModel):
 
     summary: str = Field(description="Concise synthesis of findings")
     key_findings: list[str] = Field(description="Bulleted key findings")
-    recommendation: str = Field(description="Actionable recommendation")
+    recommendation: str = Field(description="Actionable conclusion, recommendation, or next step")
     sources: list[SourceDigest] = Field(description="Top sources used")
     gaps: list[str] = Field(default_factory=list, description="Open questions or gaps")
 
@@ -76,4 +76,6 @@ class LaneSynthesis(BaseModel):
     summary: str = Field(description="Concise synthesis of this lane's findings")
     key_findings: list[str] = Field(description="Highest-signal findings from this lane")
     sources: list[SourceDigest] = Field(description="Top sources used for this lane")
-    gaps: list[str] = Field(default_factory=list, description="Open questions or conflicts in this lane")
+    gaps: list[str] = Field(
+        default_factory=list, description="Open questions or conflicts in this lane"
+    )

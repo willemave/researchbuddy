@@ -67,7 +67,7 @@ def test_run_doctor_checks_includes_signup_urls_when_no_provider_configured(
         tavily_api_key="",
         firecrawl_api_key="",
         storage_path=tmp_path / "storage",
-        database_path=tmp_path / "db" / "reviewbuddy.db",
+        database_path=tmp_path / "db" / "researchbuddy.db",
     )
 
     checks = run_doctor_checks(settings)
@@ -110,7 +110,7 @@ def test_run_doctor_checks_uses_selected_provider(monkeypatch, tmp_path: Path) -
         tavily_api_key="test-tavily",
         firecrawl_api_key="",
         storage_path=tmp_path / "storage",
-        database_path=tmp_path / "db" / "reviewbuddy.db",
+        database_path=tmp_path / "db" / "researchbuddy.db",
     )
 
     checks = run_doctor_checks(settings)
@@ -151,7 +151,7 @@ def test_run_doctor_checks_detects_openclaw_install(monkeypatch, tmp_path: Path)
         tavily_api_key="",
         firecrawl_api_key="",
         storage_path=tmp_path / "storage",
-        database_path=tmp_path / "db" / "reviewbuddy.db",
+        database_path=tmp_path / "db" / "researchbuddy.db",
     )
 
     checks = run_doctor_checks(settings)
@@ -191,7 +191,7 @@ def test_run_doctor_checks_includes_firecrawl_signup_url_when_selected_provider_
         firecrawl_api_key="",
         search_provider="firecrawl",
         storage_path=tmp_path / "storage",
-        database_path=tmp_path / "db" / "reviewbuddy.db",
+        database_path=tmp_path / "db" / "researchbuddy.db",
     )
 
     checks = run_doctor_checks(settings)
@@ -227,7 +227,7 @@ def test_run_doctor_checks_fails_when_codex_is_not_authenticated(
         tavily_api_key="",
         firecrawl_api_key="",
         storage_path=tmp_path / "storage",
-        database_path=tmp_path / "db" / "reviewbuddy.db",
+        database_path=tmp_path / "db" / "researchbuddy.db",
     )
 
     checks = run_doctor_checks(settings)
@@ -263,7 +263,7 @@ def test_run_doctor_checks_accepts_logged_in_status_from_stderr(
         tavily_api_key="",
         firecrawl_api_key="",
         storage_path=tmp_path / "storage",
-        database_path=tmp_path / "db" / "reviewbuddy.db",
+        database_path=tmp_path / "db" / "researchbuddy.db",
     )
 
     checks = run_doctor_checks(settings)
@@ -288,7 +288,7 @@ def test_check_playwright_browser_reports_failure_when_launch_fails(monkeypatch)
 
     assert check.name == "playwright browsers"
     assert check.ok is False
-    assert "reviewbuddy doctor --fix" in check.detail
+    assert "researchbuddy doctor --fix" in check.detail
 
 
 def test_check_playwright_browser_reports_success(monkeypatch) -> None:

@@ -1,4 +1,4 @@
-# ReviewBuddy Deploy And Release
+# ResearchBuddy Deploy And Release
 
 ## Current production shape
 
@@ -7,33 +7,33 @@ This repository is production-ready as a packaged CLI.
 It is not yet a generic hosted web service:
 - There is no FastAPI or frontend entrypoint in the current tree.
 - Core agent execution depends on the external `codex` CLI in [app/services/codex_exec.py](/Users/willem/Development/reviewbuddy/app/services/codex_exec.py).
-- Any runtime that executes ReviewBuddy must have `codex` installed and authenticated.
+- Any runtime that executes ResearchBuddy must have `codex` installed and authenticated.
 
 For bots, the shortest path is:
 1. Push the repo to GitHub.
 2. Let the bot install the CLI from Git or from a release artifact.
-3. Let the bot install the skill from `skills/reviewbuddy-cli` if it supports SKILL.md skills.
-4. Run `reviewbuddy doctor` inside the bot environment.
+3. Let the bot install the skill from `skills/researchbuddy-cli` if it supports SKILL.md skills.
+4. Run `researchbuddy doctor` inside the bot environment.
 
 For Hermes/OpenClaw-style agents, the easiest install prompt is:
 
 ```text
-Install ReviewBuddy with Homebrew:
+Install ResearchBuddy with Homebrew:
 
-brew tap willemave/reviewbuddy
-brew install reviewbuddy
+brew tap willemave/researchbuddy
+brew install researchbuddy
 
 Before asking for any new search-provider key, check ~/.openclaw/openclaw.json.
-If exa, tavily, or firecrawl is already configured there, ask whether ReviewBuddy should reuse that existing provider/key.
-If the user says yes, do not ask for a duplicate secret. Let ReviewBuddy setup/doctor use the OpenClaw config.
+If exa, tavily, or firecrawl is already configured there, ask whether ResearchBuddy should reuse that existing provider/key.
+If the user says yes, do not ask for a duplicate secret. Let ResearchBuddy setup/doctor use the OpenClaw config.
 
-reviewbuddy commands --agent
-reviewbuddy doctor
+researchbuddy commands --agent
+researchbuddy doctor
 
 If you support SKILL.md directories, load:
-$(brew --prefix)/opt/reviewbuddy/share/reviewbuddy/skills/reviewbuddy-cli
+$(brew --prefix)/opt/researchbuddy/share/researchbuddy/skills/researchbuddy-cli
 
-Do not start research runs until `reviewbuddy doctor` passes.
+Do not start research runs until `researchbuddy doctor` passes.
 ```
 
 ## Skill repository format
@@ -54,13 +54,13 @@ Only `SKILL.md` is required. `references/`, `scripts/`, and `assets/` are option
 This repository now exposes the skill at:
 
 ```text
-skills/reviewbuddy-cli
+skills/researchbuddy-cli
 ```
 
 Example Codex install URL:
 
 ```text
-$skill-installer https://github.com/<owner>/<repo>/tree/main/skills/reviewbuddy-cli
+$skill-installer https://github.com/<owner>/<repo>/tree/main/skills/researchbuddy-cli
 ```
 
 ## Bot install paths
@@ -68,14 +68,14 @@ $skill-installer https://github.com/<owner>/<repo>/tree/main/skills/reviewbuddy-
 From Git:
 ```bash
 uv tool install git+https://github.com/<owner>/<repo>.git
-reviewbuddy commands --agent
-reviewbuddy doctor
+researchbuddy commands --agent
+researchbuddy doctor
 ```
 
 From a release wheel:
 ```bash
-uv tool install reviewbuddy-0.1.1-py3-none-any.whl
-reviewbuddy doctor
+uv tool install researchbuddy-0.1.4-py3-none-any.whl
+researchbuddy doctor
 ```
 
 ## Local pre-release check
@@ -135,8 +135,8 @@ Recommended setup sequence:
 ```bash
 uv sync
 uv run playwright install
-reviewbuddy doctor
-reviewbuddy commands --agent
+researchbuddy doctor
+researchbuddy commands --agent
 ```
 
 ## Important limitation

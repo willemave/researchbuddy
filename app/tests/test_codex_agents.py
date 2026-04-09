@@ -1,7 +1,8 @@
 import pytest
 
+from app.agents import synthesizer as synthesizer_module
 from app.agents.base import AgentDeps, LanePlan, LaneRefinement, LaneSynthesis, ReviewSynthesis
-from app.agents.lane_planner import plan_lanes
+from app.agents.lane_planner import _postprocess_lane_plan, plan_lanes
 from app.agents.lane_refiner import refine_lane_queries
 from app.agents.synthesizer import synthesize_lane, synthesize_merge_node, synthesize_review
 from app.services.codex_exec import CodexResponse, CodexUsage
@@ -79,6 +80,73 @@ async def test_refine_lane_queries_uses_codex_runner(monkeypatch) -> None:
     assert result == expected
 
 
+def test_postprocess_lane_plan_merges_similar_lanes(monkeypatch) -> None:
+    plan = LanePlan.model_validate(
+        {
+            "lanes": [
+                {
+                    "name": "Owner Reviews",
+                    "goal": "Collect owner reports",
+                    "seed_queries": [
+                        {"query": "dishwasher owner reviews", "rationale": "owner signal"},
+                        {"query": "dishwasher owner complaints", "rationale": "owner negatives"},
+                    ],
+                    "url_budget": 3,
+                },
+                {
+                    "name": "User Reviews",
+                    "goal": "Collect owner reports and complaints",
+                    "seed_queries": [
+                        {"query": "dishwasher user reviews", "rationale": "same lane"},
+                        {"query": "dishwasher owner complaints", "rationale": "duplicate query"},
+                    ],
+                    "url_budget": 2,
+                },
+                {
+                    "name": "Benchmarks",
+                    "goal": "Collect test data",
+                    "seed_queries": [
+                        {"query": "dishwasher dB test", "rationale": "quantitative"},
+                        {"query": "dishwasher energy usage test", "rationale": "quantitative"},
+                    ],
+                    "url_budget": 2,
+                },
+                {
+                    "name": "Alternatives",
+                    "goal": "Collect competitor tradeoffs",
+                    "seed_queries": [
+                        {"query": "dishwasher comparison alternatives", "rationale": "alternatives"},
+                        {"query": "dishwasher competitor reliability", "rationale": "alternatives"},
+                    ],
+                    "url_budget": 2,
+                },
+            ]
+        }
+    )
+
+    def fake_dedupe(items, **kwargs):  # noqa: ANN001, ANN202
+        deduped = []
+        seen: set[str] = set()
+        for item in items:
+            if item.query in seen:
+                continue
+            seen.add(item.query)
+            deduped.append(item)
+        return deduped
+
+    monkeypatch.setattr(
+        "app.agents.lane_planner.cluster_texts_by_similarity",
+        lambda texts, task_description, similarity_threshold: [[0, 1], [2], [3]],
+    )
+    monkeypatch.setattr("app.agents.lane_planner.dedupe_items_by_text", fake_dedupe)
+
+    result = _postprocess_lane_plan(plan)
+
+    assert len(result.lanes) == 3
+    assert result.lanes[0].name == "Owner Reviews"
+    assert len(result.lanes[0].seed_queries) == 3
+
+
 @pytest.mark.asyncio
 async def test_synthesize_lane_uses_codex_runner(monkeypatch) -> None:
     expected = LaneSynthesis.model_validate(
@@ -91,6 +159,7 @@ async def test_synthesize_lane_uses_codex_runner(monkeypatch) -> None:
     )
 
     async def fake_run(*args, **kwargs):  # noqa: ANN002, ANN003
+        assert kwargs["timeout_seconds"] == synthesizer_module._SYNTHESIS_TIMEOUT_SECONDS
         return expected, CodexResponse(message="", usage=CodexUsage())
 
     monkeypatch.setattr("app.agents.synthesizer.run_codex_prompt", fake_run)
@@ -119,6 +188,7 @@ async def test_synthesize_review_uses_codex_runner(monkeypatch) -> None:
     )
 
     async def fake_run(*args, **kwargs):  # noqa: ANN002, ANN003
+        assert kwargs["timeout_seconds"] == synthesizer_module._SYNTHESIS_TIMEOUT_SECONDS
         return expected, CodexResponse(message="", usage=CodexUsage())
 
     monkeypatch.setattr("app.agents.synthesizer.run_codex_prompt", fake_run)
@@ -145,6 +215,7 @@ async def test_synthesize_merge_node_uses_codex_runner(monkeypatch) -> None:
     )
 
     async def fake_run(*args, **kwargs):  # noqa: ANN002, ANN003
+        assert kwargs["timeout_seconds"] == synthesizer_module._SYNTHESIS_TIMEOUT_SECONDS
         return expected, CodexResponse(message="", usage=CodexUsage())
 
     monkeypatch.setattr("app.agents.synthesizer.run_codex_prompt", fake_run)

@@ -1,1 +1,1 @@
-"""Workflow orchestration for ReviewBuddy."""
+"""Workflow orchestration for ResearchBuddy."""

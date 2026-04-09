@@ -21,13 +21,13 @@ def test_run_setup_persists_detected_provider_to_local_env(
 ) -> None:
     workspace_root = tmp_path / "workspace"
     workspace_root.mkdir()
-    (workspace_root / "pyproject.toml").write_text("[project]\nname='reviewbuddy'\n", encoding="utf-8")
+    (workspace_root / "pyproject.toml").write_text("[project]\nname='researchbuddy'\n", encoding="utf-8")
     (workspace_root / ".env.example").write_text("EXA_API_KEY=\n", encoding="utf-8")
 
     settings = Settings(
         exa_api_key="openclaw-exa",
         storage_path=workspace_root / "data" / "storage",
-        database_path=workspace_root / "data" / "reviewbuddy.db",
+        database_path=workspace_root / "data" / "researchbuddy.db",
     )
     monkeypatch.setattr(
         "app.services.setup_runtime.get_settings",
@@ -48,7 +48,7 @@ def test_run_setup_persists_detected_provider_to_local_env(
         "EXA_SEARCH_TYPE=auto",
     ]
     assert (workspace_root / "data" / "storage").is_dir()
-    assert (workspace_root / "data" / "reviewbuddy.db").exists()
+    assert (workspace_root / "data" / "researchbuddy.db").exists()
 
 
 def test_run_setup_fails_when_no_provider_key_is_available(
@@ -57,7 +57,7 @@ def test_run_setup_fails_when_no_provider_key_is_available(
 ) -> None:
     workspace_root = tmp_path / "workspace"
     workspace_root.mkdir()
-    (workspace_root / "pyproject.toml").write_text("[project]\nname='reviewbuddy'\n", encoding="utf-8")
+    (workspace_root / "pyproject.toml").write_text("[project]\nname='researchbuddy'\n", encoding="utf-8")
     (workspace_root / ".env.example").write_text("EXA_API_KEY=\n", encoding="utf-8")
 
     settings = Settings(
@@ -65,7 +65,7 @@ def test_run_setup_fails_when_no_provider_key_is_available(
         tavily_api_key="",
         firecrawl_api_key="",
         storage_path=workspace_root / "data" / "storage",
-        database_path=workspace_root / "data" / "reviewbuddy.db",
+        database_path=workspace_root / "data" / "researchbuddy.db",
     )
     monkeypatch.setattr(
         "app.services.setup_runtime.get_settings",

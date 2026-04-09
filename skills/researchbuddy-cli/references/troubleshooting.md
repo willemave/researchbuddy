@@ -1,11 +1,11 @@
-# ReviewBuddy Troubleshooting
+# ResearchBuddy Troubleshooting
 
-Use this file when `reviewbuddy doctor` fails or a target machine is missing runtime dependencies.
+Use this file when `researchbuddy doctor` fails or a target machine is missing runtime dependencies.
 
 ## `ffmpeg` missing
 
 Symptom:
-- `reviewbuddy doctor` reports `ffmpeg not found in PATH`.
+- `researchbuddy doctor` reports `ffmpeg not found in PATH`.
 
 Fix:
 - macOS with Homebrew: `brew install ffmpeg`
@@ -16,7 +16,7 @@ Fix:
 
 Verify:
 - Run `ffmpeg -version`
-- Then rerun `scripts/reviewbuddy doctor`
+- Then rerun `scripts/researchbuddy doctor`
 
 If package-manager access is blocked:
 - Report the exact install command needed for the host OS.
@@ -25,22 +25,22 @@ If package-manager access is blocked:
 ## `codex` missing or not authenticated
 
 Symptom:
-- `reviewbuddy doctor` fails the `local agent harness` or `codex auth` check.
+- `researchbuddy doctor` fails the `local agent harness` or `codex auth` check.
 - Runtime commands fail when `codex exec` cannot start.
 
 Fix:
 - Install the `codex` CLI for that machine.
 - Authenticate it with `codex login`.
-- Rerun `scripts/reviewbuddy doctor`.
+- Rerun `scripts/researchbuddy doctor`.
 
 ## Search provider key missing
 
 Symptom:
-- `reviewbuddy doctor` fails the selected search provider check.
+- `researchbuddy doctor` fails the selected search provider check.
 
 Fix:
 - Set the API key for the configured provider:
   - `EXA_API_KEY`
   - `TAVILY_API_KEY`
   - `FIRECRAWL_API_KEY`
-- Rerun `scripts/reviewbuddy doctor`.
+- Rerun `scripts/researchbuddy doctor`.

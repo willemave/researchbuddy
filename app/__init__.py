@@ -1,1 +1,1 @@
-"""ReviewBuddy application package."""
+"""ResearchBuddy application package."""

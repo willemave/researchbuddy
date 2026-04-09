@@ -35,8 +35,17 @@ class Settings(BaseSettings):
 
     # External APIs
     search_provider: SearchProviderName = "exa"
-    search_num_results: int = Field(default=30, ge=1, le=100)
-    search_min_results_per_query: int = Field(default=20, ge=1, le=100)
+    search_num_results: int = Field(default=20, ge=1, le=100)
+    search_min_results_per_query: int = Field(default=10, ge=1, le=100)
+    search_query_budget: int = Field(default=80, ge=1, le=200)
+    semantic_dedupe_enabled: bool = True
+    semantic_embedding_model_id: str = "Qwen/Qwen3-Embedding-0.6B"
+    semantic_embedding_device: str = "auto"
+    semantic_embedding_max_length: int = Field(default=512, ge=32, le=32768)
+    semantic_embedding_batch_size: int = Field(default=16, ge=1, le=256)
+    semantic_query_similarity_threshold: float = Field(default=0.92, ge=0.0, le=1.0)
+    semantic_lane_similarity_threshold: float = Field(default=0.88, ge=0.0, le=1.0)
+    semantic_card_mmr_lambda: float = Field(default=0.72, ge=0.0, le=1.0)
     exa_api_key: str = ""
     tavily_api_key: str = ""
     firecrawl_api_key: str = ""
@@ -107,9 +116,7 @@ class Settings(BaseSettings):
 
     # Query shaping
     query_shaping_enabled: bool = True
-    query_shaping_suffix: str = (
-        'forum OR reddit OR discussion OR "user review" OR blog OR "hands on"'
-    )
+    query_shaping_suffix: str = 'forum OR reddit OR discussion OR blog OR "hands on"'
 
     # YouTube + Whisper
     youtube_max_videos: int = Field(default=6, ge=0, le=10)
@@ -120,6 +127,14 @@ class Settings(BaseSettings):
     youtube_summary_concurrency: int = Field(default=3, ge=1, le=10)
     youtube_transcript_max_chars: int = Field(default=2500, ge=500, le=20000)
     youtube_ingest_timeout_seconds: int = Field(default=45, ge=5, le=600)
+
+    # Podcasts + Whisper
+    podcast_max_episodes: int = Field(default=4, ge=0, le=10)
+    podcast_summarize_transcripts: bool = True
+    podcast_summary_model: str = "gpt-5.4"
+    podcast_summary_concurrency: int = Field(default=3, ge=1, le=10)
+    podcast_transcript_max_chars: int = Field(default=2500, ge=500, le=20000)
+    podcast_ingest_timeout_seconds: int = Field(default=90, ge=5, le=900)
 
     # Markdown
     markdown_max_chars: int = Field(default=2500, ge=500, le=20000)

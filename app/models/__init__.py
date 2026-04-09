@@ -1,1 +1,1 @@
-"""Pydantic models for ReviewBuddy."""
+"""Pydantic models for ResearchBuddy."""

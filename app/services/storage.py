@@ -1,4 +1,4 @@
-"""SQLite storage helpers for ReviewBuddy."""
+"""SQLite storage helpers for ResearchBuddy."""
 
 import hashlib
 from datetime import datetime

@@ -7,10 +7,16 @@ from pathlib import Path
 
 from pydantic import RootModel
 
-from app.constants import FOLLOWUP_MEMORY_FILENAME, URL_STATUS_FETCHED, YOUTUBE_TRANSCRIPTS_FILENAME
+from app.constants import (
+    FOLLOWUP_MEMORY_FILENAME,
+    PODCAST_TRANSCRIPTS_FILENAME,
+    URL_STATUS_FETCHED,
+    YOUTUBE_TRANSCRIPTS_FILENAME,
+)
 from app.core.settings import get_settings
 from app.models.review import FollowupMemory, FollowupSourceCard
 from app.services.codex_exec import run_codex_prompt
+from app.services.podcast_transcriber import PodcastTranscript
 from app.services.storage import list_run_urls
 from app.services.youtube_transcriber import YouTubeTranscript
 from app.workflows.review import (
@@ -24,7 +30,7 @@ from app.workflows.review import (
 settings = get_settings()
 
 FOLLOWUP_ANSWER_SYSTEM_PROMPT = (
-    "You answer follow-up questions for an existing ReviewBuddy research run. "
+    "You answer follow-up questions for an existing ResearchBuddy research run. "
     "Use only the stored synthesis and stored source cards that are provided. "
     "Do not browse, search, or invent facts. If the evidence is incomplete, say so clearly. "
     "Cite source URLs explicitly in the answer."
@@ -32,6 +38,8 @@ FOLLOWUP_ANSWER_SYSTEM_PROMPT = (
 
 VIDEO_EVIDENCE_LANE_NAME = "Video Evidence"
 VIDEO_EVIDENCE_LANE_GOAL = "Supplementary evidence from YouTube transcripts"
+PODCAST_EVIDENCE_LANE_NAME = "Podcast Evidence"
+PODCAST_EVIDENCE_LANE_GOAL = "Supplementary evidence from podcast transcripts"
 STORED_EVIDENCE_LANE_GOAL = "Persisted evidence from a prior run"
 
 
@@ -237,22 +245,50 @@ async def _rebuild_followup_memory(
 
 
 def _load_transcript_source_cards(run_dir: Path, prompt: str) -> list[FollowupSourceCard]:
-    transcript_path = run_dir / YOUTUBE_TRANSCRIPTS_FILENAME
-    if not transcript_path.exists():
-        return []
-    transcripts = [
-        YouTubeTranscript.model_validate(item)
-        for item in FollowupTranscriptList.model_validate_json(
-            transcript_path.read_text(encoding="utf-8")
-        ).root
-    ]
+    cards: list[FollowupSourceCard] = []
+    for transcripts_path, lane_name, lane_goal, root_model in (
+        (
+            run_dir / YOUTUBE_TRANSCRIPTS_FILENAME,
+            VIDEO_EVIDENCE_LANE_NAME,
+            VIDEO_EVIDENCE_LANE_GOAL,
+            FollowupTranscriptList,
+        ),
+        (
+            run_dir / PODCAST_TRANSCRIPTS_FILENAME,
+            PODCAST_EVIDENCE_LANE_NAME,
+            PODCAST_EVIDENCE_LANE_GOAL,
+            FollowupPodcastTranscriptList,
+        ),
+    ):
+        cards.extend(
+            _build_transcript_cards(
+                prompt=prompt,
+                transcripts_path=transcripts_path,
+                lane_name=lane_name,
+                lane_goal=lane_goal,
+                root_model=root_model,
+            )
+        )
+    return cards
 
+
+def _build_transcript_cards(
+    prompt: str,
+    transcripts_path: Path,
+    lane_name: str,
+    lane_goal: str,
+    root_model: type[RootModel],
+) -> list[FollowupSourceCard]:
+    if not transcripts_path.exists():
+        return []
+
+    transcripts = root_model.model_validate_json(transcripts_path.read_text(encoding="utf-8")).root
     cards: list[FollowupSourceCard] = []
     for transcript in transcripts:
         card = _build_source_card(
             prompt=prompt,
-            lane_name=VIDEO_EVIDENCE_LANE_NAME,
-            lane_goal=VIDEO_EVIDENCE_LANE_GOAL,
+            lane_name=lane_name,
+            lane_goal=lane_goal,
             url=transcript.url,
             title=transcript.title,
             raw=transcript.transcript,
@@ -275,3 +311,7 @@ def _split_source_query(value: str | None) -> tuple[str, str | None]:
 
 class FollowupTranscriptList(RootModel[list[YouTubeTranscript]]):
     """Stored transcript list for follow-up reconstruction."""
+
+
+class FollowupPodcastTranscriptList(RootModel[list[PodcastTranscript]]):
+    """Stored podcast transcript list for follow-up reconstruction."""

@@ -37,7 +37,7 @@ class DoctorCheck:
 
 
 def run_doctor_checks(settings: Settings) -> list[DoctorCheck]:
-    """Run runtime checks needed for ReviewBuddy.
+    """Run runtime checks needed for ResearchBuddy.
 
     Args:
         settings: Loaded application settings.
@@ -69,7 +69,7 @@ def format_doctor_report(checks: list[DoctorCheck]) -> str:
         Multi-line report string.
     """
 
-    lines = ["# ReviewBuddy Doctor", ""]
+    lines = ["# ResearchBuddy Doctor", ""]
     for check in checks:
         status = "OK" if check.ok else "FAIL"
         lines.append(f"- [{status}] {check.name}: {check.detail}")
@@ -208,7 +208,7 @@ def _check_playwright_browser() -> DoctorCheck:
         return DoctorCheck(
             name="playwright browsers",
             ok=False,
-            detail=f"browser check failed ({exc}); run `reviewbuddy doctor --fix`",
+            detail=f"browser check failed ({exc}); run `researchbuddy doctor --fix`",
         )
     except subprocess.TimeoutExpired:
         return DoctorCheck(
@@ -216,7 +216,7 @@ def _check_playwright_browser() -> DoctorCheck:
             ok=False,
             detail=(
                 "Chromium launch check timed out "
-                f"after {DOCTOR_PLAYWRIGHT_TIMEOUT_SECONDS}s; run `reviewbuddy doctor --fix`"
+                f"after {DOCTOR_PLAYWRIGHT_TIMEOUT_SECONDS}s; run `researchbuddy doctor --fix`"
             ),
         )
 
@@ -232,7 +232,7 @@ def _check_playwright_browser() -> DoctorCheck:
     return DoctorCheck(
         name="playwright browsers",
         ok=False,
-        detail=f"{detail}; run `reviewbuddy doctor --fix`",
+        detail=f"{detail}; run `researchbuddy doctor --fix`",
     )
 
 

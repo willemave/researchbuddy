@@ -1,1 +1,1 @@
-"""Test package for ReviewBuddy."""
+"""Test package for ResearchBuddy."""
