@@ -418,35 +418,30 @@ def _allocate_search_query_budgets(
         return []
     if max_search_queries <= 0:
         return [0 for _ in lanes]
-    if max_search_queries <= len(lanes):
-        budgets = [0 for _ in lanes]
-        for idx in range(max_search_queries):
-            budgets[idx] = 1
-        return budgets
+    per_lane_cap = settings.search_query_budget_per_lane
+    if per_lane_cap <= 0:
+        return [0 for _ in lanes]
 
+    budgets = [0 for _ in lanes]
+    remaining = max_search_queries
     weights = [max(1, lane.url_budget or 0) for lane in lanes]
-    total_weight = sum(weights)
-    if total_weight <= 0:
-        base = max_search_queries // len(lanes)
-        budgets = [base for _ in lanes]
-        remainder = max_search_queries - sum(budgets)
-        for idx in range(remainder):
-            budgets[idx % len(budgets)] += 1
-        return budgets
-
-    raw_budgets = [weight * max_search_queries / total_weight for weight in weights]
-    budgets = [int(value) for value in raw_budgets]
-    assigned = sum(budgets)
-    remainder = max_search_queries - assigned
-    if remainder > 0:
-        order = sorted(
-            range(len(lanes)),
-            key=lambda idx: (raw_budgets[idx] - budgets[idx], weights[idx]),
-            reverse=True,
-        )
-        for idx in order[:remainder]:
+    order = sorted(
+        range(len(lanes)),
+        key=lambda idx: (weights[idx], len(lanes[idx].seed_queries), lanes[idx].name),
+        reverse=True,
+    )
+    while remaining > 0:
+        allocated_this_round = False
+        for idx in order:
+            if remaining <= 0:
+                break
+            if budgets[idx] >= per_lane_cap:
+                continue
             budgets[idx] += 1
-
+            remaining -= 1
+            allocated_this_round = True
+        if not allocated_this_round:
+            break
     return budgets
 
 
@@ -473,7 +468,14 @@ async def _run_lane(
     lane_slug = _slugify(lane.name)
     lane_deps = deps.model_copy(update={"job_id": f"{deps.job_id}-{lane_slug}"})
     seed_budget = _seed_budget(budget)
-    remaining_search_queries = max(0, search_query_budget)
+    remaining_search_queries = min(
+        max(0, search_query_budget),
+        settings.search_query_budget_per_lane,
+    )
+    initial_search_query_count = min(
+        remaining_search_queries,
+        settings.initial_search_queries_per_lane,
+    )
 
     logger.info(
         "Lane starting: %s | goal=%s | url_budget=%d | seed_budget=%d | search_budget=%d",
@@ -483,7 +485,7 @@ async def _run_lane(
         seed_budget,
         remaining_search_queries,
     )
-    seed_queries = lane.seed_queries[:remaining_search_queries]
+    seed_queries = lane.seed_queries[:initial_search_query_count]
     logger.info("Lane %s seed queries: %s", lane.name, _format_query_list(seed_queries))
     initial_tasks = await _collect_urls_for_queries(
         lane,

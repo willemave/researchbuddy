@@ -11,7 +11,7 @@ settings = get_settings()
 
 LANE_REFINER_SYSTEM_PROMPT = (
     "You are refining search queries for a specific research lane. Use the evidence "
-    "snippets to propose 6-12 new, high-signal queries that expand coverage. Focus on "
+    "snippets to propose 2-4 new, high-signal queries that expand coverage. Focus on "
     "evidence gaps, counterpoints, and richer source types. Avoid ecommerce storefronts, "
     "avoid brittle site: filters, and do not repeat existing queries. Overgenerate enough "
     "candidates that a later semantic dedupe pass can remove near-duplicates without losing "
@@ -38,8 +38,10 @@ async def refine_lane_queries(
             f"{LANE_REFINER_SYSTEM_PROMPT}\n\n"
             f"Research mode: {profile.label}\n"
             f"Mode guidance: {profile.refiner_guidance}\n\n"
-            "Generate 6-12 new queries for this lane based on evidence.\n"
-            "Intentionally spread queries across distinct evidence angles and source types.\n\n"
+            "Generate 2-4 new queries for this lane based on evidence.\n"
+            "Assume the lane already spent its first 3 searches. Use the remaining search budget "
+            "on the strongest unanswered directions, and intentionally spread queries across "
+            "distinct evidence angles and source types.\n\n"
             f"Prompt: {prompt}\n"
             f"Lane: {lane_name}\n"
             f"Goal: {lane_goal}\n\n"
@@ -58,7 +60,11 @@ async def refine_lane_queries(
                 task_description=QUERY_EMBEDDING_TASK,
                 similarity_threshold=settings.semantic_query_similarity_threshold,
                 utility_scorer=_query_score,
-                max_items=12,
+                max_items=max(
+                    1,
+                    settings.search_query_budget_per_lane
+                    - settings.initial_search_queries_per_lane,
+                ),
             )
         }
     )

@@ -15,9 +15,9 @@ from app.services.usage_tracker import UsageTracker
 settings = get_settings()
 
 LANE_PLANNER_SYSTEM_PROMPT = (
-    "You are a research planner. Break the user's prompt into 5-10 independent "
-    "research lanes that can run in parallel. Each lane must include a short name, "
-    "a clear goal, and 4-8 seed search queries. Lanes should cover source diversity, "
+    "You are a research planner. Break the user's prompt into 8-10 independent "
+    "research lanes when the prompt supports it. Each lane must include a short name, "
+    "a clear goal, and 3 highly differentiated seed search queries. Lanes should cover source diversity, "
     "competing viewpoints, first-hand experience, expert analysis, and unresolved gaps. "
     "Avoid ecommerce/storefront pages unless they contribute unique primary information. "
     "Prefer natural-language queries over brittle site: filters. Overgenerate enough query "
@@ -42,9 +42,10 @@ async def plan_lanes(
             f"{LANE_PLANNER_SYSTEM_PROMPT}\n\n"
             f"Research mode: {profile.label}\n"
             f"Mode guidance: {profile.planner_guidance}\n\n"
-            "Design research lanes for this request. Provide 4-8 seed queries per lane.\n"
+            "Design research lanes for this request. Provide 3 seed queries per lane.\n"
             "Queries inside a lane must intentionally span distinct evidence angles such as "
-            "hands-on reviews, complaints, comparisons, benchmarks, alternatives, and edge cases.\n\n"
+            "hands-on reviews, complaints, comparisons, benchmarks, alternatives, edge cases, "
+            "expert analysis, community discussion, and primary-source material.\n\n"
             f"Prompt: {prompt}"
         ),
         model_name=model_name or settings.planner_model,
@@ -84,7 +85,10 @@ def _merge_lane_cluster(cluster: list[LaneSpec]) -> LaneSpec:
     combined_queries: list[SearchQuery] = []
     for lane in cluster:
         combined_queries.extend(lane.seed_queries)
-    deduped_queries = _dedupe_queries(combined_queries, max_queries=10)
+    deduped_queries = _dedupe_queries(
+        combined_queries,
+        max_queries=settings.search_query_budget_per_lane,
+    )
     return primary.model_copy(
         update={
             "seed_queries": deduped_queries,
@@ -94,7 +98,14 @@ def _merge_lane_cluster(cluster: list[LaneSpec]) -> LaneSpec:
 
 
 def _normalize_lane_queries(lane: LaneSpec) -> LaneSpec:
-    return lane.model_copy(update={"seed_queries": _dedupe_queries(lane.seed_queries, max_queries=10)})
+    return lane.model_copy(
+        update={
+            "seed_queries": _dedupe_queries(
+                lane.seed_queries,
+                max_queries=settings.search_query_budget_per_lane,
+            )
+        }
+    )
 
 
 def _dedupe_queries(queries: list[SearchQuery], *, max_queries: int) -> list[SearchQuery]:

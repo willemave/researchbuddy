@@ -37,7 +37,9 @@ class Settings(BaseSettings):
     search_provider: SearchProviderName = "exa"
     search_num_results: int = Field(default=20, ge=1, le=100)
     search_min_results_per_query: int = Field(default=10, ge=1, le=100)
-    search_query_budget: int = Field(default=80, ge=1, le=200)
+    search_query_budget: int = Field(default=40, ge=1, le=200)
+    search_query_budget_per_lane: int = Field(default=5, ge=1, le=20)
+    initial_search_queries_per_lane: int = Field(default=3, ge=1, le=10)
     semantic_dedupe_enabled: bool = True
     semantic_embedding_model_id: str = "Qwen/Qwen3-Embedding-0.6B"
     semantic_embedding_device: str = "auto"

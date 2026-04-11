@@ -63,3 +63,23 @@ def test_allocate_search_query_budgets_caps_total_queries() -> None:
     assert sum(budgets) == 10
     assert all(budget >= 0 for budget in budgets)
     assert budgets[-1] >= budgets[0]
+
+
+def test_allocate_search_query_budgets_caps_queries_per_lane() -> None:
+    lanes = [
+        LaneSpec(
+            name=f"Lane {idx}",
+            goal="Test",
+            seed_queries=[
+                SearchQuery(query="q1", rationale="r"),
+                SearchQuery(query="q2", rationale="r"),
+                SearchQuery(query="q3", rationale="r"),
+            ],
+            url_budget=10,
+        )
+        for idx in range(4)
+    ]
+
+    budgets = _allocate_search_query_budgets(lanes, max_search_queries=40)
+
+    assert budgets == [5, 5, 5, 5]
