@@ -6,7 +6,9 @@ This repository is production-ready as a packaged CLI.
 
 It is not yet a generic hosted web service:
 - There is no FastAPI or frontend entrypoint in the current tree.
-- Core agent execution depends on the external `codex` CLI in [app/services/codex_exec.py](/Users/willem/Development/reviewbuddy/app/services/codex_exec.py).
+- Core agent execution depends on a local agent harness behind
+  [`app/services/codex_exec.py`](../app/services/codex_exec.py). Codex is the
+  default harness.
 - Any runtime that executes ResearchBuddy must have `codex` installed and authenticated.
 
 For bots, the shortest path is:
@@ -74,7 +76,7 @@ researchbuddy doctor
 
 From a release wheel:
 ```bash
-uv tool install researchbuddy-0.1.4-py3-none-any.whl
+uv tool install researchbuddy-0.1.5-py3-none-any.whl
 researchbuddy doctor
 ```
 
@@ -91,15 +93,12 @@ This performs:
 - `pytest`
 - `uv build`
 
-## GitHub CI
+## GitHub release workflow
 
-The repository now includes:
-- `.github/workflows/ci.yml`
-- `.github/workflows/release.yml`
+The repository includes `.github/workflows/release.yml`.
 
 Behavior:
-- CI runs on pushes and pull requests.
-- Release runs when you push a tag like `v0.1.1`.
+- The release workflow runs when you push a tag like `v0.1.5`.
 - The release workflow builds `dist/` artifacts and attaches them to a GitHub Release.
 
 ## Production push flow
@@ -113,8 +112,8 @@ git push origin <branch>
 
 Create a tagged release:
 ```bash
-git tag v0.1.1
-git push origin v0.1.1
+git tag v0.1.5
+git push origin v0.1.5
 ```
 
 After the tag push:

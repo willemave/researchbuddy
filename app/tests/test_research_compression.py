@@ -14,6 +14,11 @@ from app.workflows.review import (
 )
 
 
+def _preserve_source_order(*args, **kwargs):  # noqa: ANN002, ANN003, ANN202
+    del kwargs
+    return list(range(len(args[0])))
+
+
 def test_rank_candidate_urls_prefers_domain_diversity() -> None:
     candidates = [
         CandidateUrl(
@@ -171,6 +176,7 @@ def test_ordered_source_cards_uses_mmr_ranking(monkeypatch) -> None:
 
 
 def test_group_summary_packets_for_merge_packs_multiple_children(monkeypatch) -> None:
+    monkeypatch.setattr("app.workflows.review.mmr_rank_texts", _preserve_source_order)
     lane_a = SourceCard(
         lane_name="Lane A",
         lane_goal="Goal A",
@@ -257,6 +263,8 @@ def test_group_summary_packets_for_merge_packs_multiple_children(monkeypatch) ->
 
 
 def test_group_summary_packets_splits_oversized_group(monkeypatch) -> None:
+    monkeypatch.setattr("app.workflows.review.mmr_rank_texts", _preserve_source_order)
+
     def fake_estimate(text: str) -> int:
         return 200000 if "Lane A" in text and "Lane B" in text else 100
 
@@ -307,6 +315,7 @@ def test_group_summary_packets_splits_oversized_group(monkeypatch) -> None:
 
 def test_build_final_synthesis_input_respects_hard_cap(monkeypatch) -> None:
     monkeypatch.setattr("app.workflows.review._estimate_prompt_tokens", lambda text: len(text))
+    monkeypatch.setattr("app.workflows.review.mmr_rank_texts", _preserve_source_order)
     root_packet = LaneSummaryPacket(
         lane_name="Root",
         lane_goal="Goal",
@@ -346,6 +355,7 @@ def test_build_final_synthesis_input_respects_hard_cap(monkeypatch) -> None:
 
 def test_build_final_synthesis_input_accepts_multiple_leaf_summaries(monkeypatch) -> None:
     monkeypatch.setattr("app.workflows.review._estimate_prompt_tokens", lambda text: len(text))
+    monkeypatch.setattr("app.workflows.review.mmr_rank_texts", _preserve_source_order)
     packets = [
         LaneSummaryPacket(
             lane_name=f"Lane {idx}",

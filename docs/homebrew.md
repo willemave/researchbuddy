@@ -32,10 +32,10 @@ researchbuddy tap export --output-dir /absolute/path/to/homebrew-researchbuddy
 
 ## Publish flow
 
-1. Create and push a tagged release in the source repo, for example `v0.1.4`.
+1. Create and push a tagged release in the source repo, for example `v0.1.5`.
 2. Compute the release tarball SHA:
    ```bash
-   curl -L https://github.com/<owner>/researchbuddy/archive/refs/tags/v0.1.4.tar.gz | shasum -a 256
+   curl -L https://github.com/<owner>/researchbuddy/archive/refs/tags/v0.1.5.tar.gz | shasum -a 256
    ```
 3. Update `Formula/researchbuddy.rb` with the real `sha256`.
 4. Validate the tap:

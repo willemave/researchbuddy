@@ -8,8 +8,22 @@ from app.agents.synthesizer import synthesize_lane, synthesize_merge_node, synth
 from app.services.codex_exec import CodexResponse, CodexUsage
 
 
+@pytest.fixture
+def lightweight_semantic_dedupe(monkeypatch):
+    def fake_dedupe(items, **kwargs):  # noqa: ANN001, ANN202
+        del kwargs
+        return items
+
+    monkeypatch.setattr(
+        "app.agents.lane_planner.cluster_texts_by_similarity",
+        lambda texts, task_description, similarity_threshold: [[idx] for idx, _ in enumerate(texts)],
+    )
+    monkeypatch.setattr("app.agents.lane_planner.dedupe_items_by_text", fake_dedupe)
+    monkeypatch.setattr("app.agents.lane_refiner.dedupe_items_by_text", fake_dedupe)
+
+
 @pytest.mark.asyncio
-async def test_plan_lanes_uses_codex_runner(monkeypatch) -> None:
+async def test_plan_lanes_uses_codex_runner(monkeypatch, lightweight_semantic_dedupe) -> None:
     expected = LanePlan.model_validate(
         {
             "lanes": [
@@ -55,7 +69,7 @@ async def test_plan_lanes_uses_codex_runner(monkeypatch) -> None:
 
 
 @pytest.mark.asyncio
-async def test_refine_lane_queries_uses_codex_runner(monkeypatch) -> None:
+async def test_refine_lane_queries_uses_codex_runner(monkeypatch, lightweight_semantic_dedupe) -> None:
     expected = LaneRefinement.model_validate(
         {
             "queries": [

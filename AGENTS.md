@@ -1,141 +1,127 @@
 ## Application Overview
 
-Writing Buddy is an AI-powered writing assistant that transforms notes/outlines into polished prose. It uses a pipeline of specialized pydantic-ai agents for expansion, critique, and rewriting.
+ResearchBuddy is a local-first AI research CLI. It turns broad questions into
+parallel research lanes, searches and crawls sources, compresses source material
+into evidence cards, and synthesizes cited markdown reports.
 
 **Key Components:**
-- **CLI** (`app/cli.py`): Typer-based run and follow-up commands
-- **API** (`app/main.py`): FastAPI REST endpoints for React frontend
-- **Agents** (`app/agents/`): Expander, Critics (3), Rewriters (2), Researcher
-- **Research** (`app/research/`): MCP tools + deep research providers (OpenAI/Google)
+- **CLI** (`app/cli.py`): Typer commands for runs, follow-ups, inspection, setup, doctor checks, transcription, and tap export
+- **Workflow** (`app/workflows/review.py`): run orchestration, lane execution, crawling, evidence packing, and synthesis
+- **Agents** (`app/agents/`): lane planning, lane refinement, lane synthesis, merge synthesis, and final synthesis prompts
+- **Services** (`app/services/`): search providers, local agent execution, Playwright crawling, transcription, storage, setup, and Homebrew tap rendering
+- **Models** (`app/models/`): Pydantic v2 request/response models and persisted run data
 
 **Workflows:**
 | Type | Flow |
 |------|------|
-| Basic | outline → expand → critique → rewrite |
-| Research | outline → research → expand (with citations) → critique → rewrite |
-| Quick | paste text → critique → rewrite |
+| Research run | prompt -> lane plan -> search/crawl/refine -> evidence cards -> lane summaries -> final synthesis |
+| Follow-up | saved run -> follow-up memory -> answer from stored evidence |
+| Transcription | YouTube, podcast, or local audio -> local Whisper transcript |
+| Release | version bump -> release checks -> GitHub tag -> Homebrew tap SHA update |
 
-See [docs/architecture.md](docs/architecture.md) for detailed architecture documentation.
-
----
-
-## 1. Python / FastAPI Coding Rules
-
-* **Functions over classes**.
-* **Full type hints**; validate with **Pydantic v2** models. Use `typing` for complex types.
-* **RORO** pattern (receive object, return object).
-* `lower_snake_case` for files/dirs; verbs in variables (`is_valid`, `has_permission`).
-* Guard-clause error handling; early returns over nested `else`.
-* **Docstrings**: Use Google-style for all public functions/classes.
-* **Constants**: Define in `app/constants.py` or module-level UPPER_CASE.
+See [docs/architecture.md](docs/architecture.md) for the technical architecture.
 
 ---
 
-## 2. FastAPI Best Practices
+## 1. Python CLI Coding Rules
 
-* Use **lifespan** context, not `startup/shutdown` events.
-* Inject DB/session with dependencies; use `Annotated` for cleaner signatures.
-* Middleware order matters: logging → tracing → CORS → error capture.
-
----
-
-## 3. Code Quality & Safety
-
-* **No hardcoded secrets**; use `pydantic-settings` for config management.
-* **Input validation**: Always validate at boundaries (API, external services).
-* **SQL injection prevention**: Use parameterized queries, never f-strings.
-* **Graceful degradation**: Circuit breakers for external services.
-* **Error context**: Include request IDs, user context in error logs.
+* Prefer **functions over classes** unless a Pydantic model, dataclass, or command type makes state/contracts clearer.
+* Use **full type hints** and validate boundaries with **Pydantic v2** models.
+* Keep command handlers thin; push behavior into services/workflows that can be tested directly.
+* Use RORO-style functions where payloads are structured.
+* Use `lower_snake_case` for files/dirs; use verb-style booleans such as `is_valid` and `has_permission`.
+* Use guard-clause error handling and early returns over nested `else`.
+* Use Google-style docstrings for public functions/classes.
+* Define constants in `app/constants.py` or module-level UPPER_CASE.
 
 ---
 
-## 4. Testing Requirements
+## 2. Runtime Boundaries
 
-* **Write tests for all new functionality** in `app/tests/` using idiomatic pytest.
-* Test structure mirrors app structure: `tests/routers/`, `tests/services/`, etc.
-* Test file naming: `test_<module_name>.py`.
-* **Test categories**:
-  - Unit tests: isolated function/class testing
-  - Integration tests: API endpoints with test DB
-  - Contract tests: external service interactions
-* Use pytest fixtures for setup/teardown.
-* **TestClient** from FastAPI for endpoint testing.
-* Mock external dependencies with `pytest-mock` or `unittest.mock`.
-* **Run tests**: `pytest app/tests/ -v`
-* **Test data**: Use factories or fixtures, never production data.
+* No hardcoded secrets; use `app/core/settings.py` and `pydantic-settings`.
+* Validate inputs at CLI, settings, external-service, and persistence boundaries.
+* Never build SQL with f-strings; use parameterized queries.
+* Treat network, browser, transcript, and local-agent execution failures as expected runtime states with useful error messages.
+* Keep local-agent execution behind `app/services/codex_exec.py`; do not scatter subprocess calls through the workflow.
+* Keep user-facing setup checks in `doctor`/`setup` so install failures are diagnosable before a long run starts.
 
 ---
 
-## 5. Development Workflow
+## 3. Testing Requirements
 
-* **Pre-commit hooks**: `ruff` for linting/formatting
-* **Environment management**: `.env.example` template; never commit `.env`. Use `app/core/settings.py` and Pydantic for settings.
-* **Database migrations**: Alembic with descriptive revision messages.
-* **Error responses**: Consistent format with error codes, messages, details.
-* **Versioned releases**: If the user asks to "commit and push" changes that should ship through Homebrew/tap, also bump the app version in `pyproject.toml` and `app/constants.py`, create/push a new git tag, and update the tap formula to point at the new tagged release and SHA.
+* Write tests for all new behavior in `app/tests/` using idiomatic pytest.
+* Mirror the touched module when naming tests where practical: `test_<module_name>.py`.
+* Prefer focused unit tests for services and prompt builders; use workflow tests for integration behavior.
+* Mock external providers, browser work, local agents, and transcription.
+* Run tests with:
+  ```bash
+  uv run pytest app/tests/ -v
+  ```
+* Use fixtures/factories for test data. Never use production data.
 
 ---
 
-## 6. Package & Dev Tools
+## 4. Development Workflow
 
-### Package Management (uv)
+* Use `uv` for dependency and environment management.
+* Keep `.env.example` current; never commit `.env`.
+* Before handoff after Python changes, run `uv run ruff check .` and fix violations.
+* For broader changes, also run `uv run pytest app/tests/ -q`.
+* If asked to "commit and push" changes that should ship through Homebrew/tap, also bump the app version in `pyproject.toml` and `app/constants.py`, create/push a new git tag, and update the tap formula to point at the new tagged release and SHA.
+
+---
+
+## 5. Package & Dev Tools
+
+### Package Management
 ```bash
-uv sync                    # Install all dependencies
+uv sync                    # Install dependencies
 uv add <package>           # Add dependency
 uv add --dev <package>     # Add dev dependency
 source .venv/bin/activate  # Activate venv
 ```
 
-### Database
-```bash
-alembic upgrade head       # Apply migrations
-alembic revision -m "..."  # Create migration
-```
-
 ### Code Quality
 ```bash
-ruff check .               # Lint
-ruff format .              # Format
-pytest app/tests/ -v       # Run tests
+uv run ruff check .        # Lint
+uv run ruff format .       # Format
+uv run pytest app/tests/ -v
 ```
 
-### Running the App
+### Running The CLI
 ```bash
-# Setup
-uv sync && . .venv/bin/activate
-cp .env.example .env                 # Add your API keys
-alembic upgrade head                 # Apply migrations
+uv sync
+uv run playwright install
+cp .env.example .env       # Add one search-provider API key
+uv run researchbuddy doctor
+uv run researchbuddy run "your research question"
+```
 
-# CLI
-python -m app.cli run "your prompt"
-
-# API server (for React frontend)
-uvicorn app.main:app --reload        # Port 8000
-
-# Frontend (separate terminal)
-cd frontend && npm install && npm run dev  # Port 5173
+Useful commands:
+```bash
+uv run researchbuddy commands --agent
+uv run researchbuddy followup <run_id> "question"
+uv run researchbuddy inspect <run_id> --sources --lanes --transcripts
+uv run researchbuddy tap export
+./scripts/release-check.sh
 ```
 
 ---
 
-## 7. Preferred Dev Tools
+## 6. Preferred Dev Tools
 
-* **LLM internet search**: Use the EXA MCP `web_search_exa` tool for any web/internet lookups (and `get_code_context_exa` for external API/library docs).
-* **LLM code search**: Use the Morph MCP `warp_grep` tool for repository code searches before opening files.
+* **LLM internet search**: Use the EXA MCP `web_search_exa` tool for web/internet lookups when available.
+* **LLM code search**: Use the Morph MCP `warp_grep` tool for repository code searches when available; otherwise use `rg`.
 
 | Tool | Purpose | Example |
 |------|---------|---------|
 | **fd** | Fast file finder | `fd -e py foo` |
 | **rg** | Fast code search | `rg "TODO"` |
 | **ast-grep (sg)** | AST-aware search | `sg -p 'if ($A) { $B }'` |
-| **jq** | JSON processor | `cat data.json \| jq '.items'` |
-| **fzf** | Fuzzy finder | `history \| fzf` |
+| **jq** | JSON processor | `cat data.json | jq '.items'` |
 | **bat** | Better cat | `bat file.py` |
-| **eza** | Modern ls | `eza -l --git` |
 | **httpie** | HTTP client | `http GET api/foo` |
-| **delta** | Better git diff | `git diff` (with config) |
 
+**Keep replies short, technical, and complete.**
 
-**Keep all replies short, technical, and complete.**
-
-**Always run `ruff check` on touched Python files (or the repo) after a set of changes, and fix violations before final handoff whenever possible.**
+**Always run `ruff check` on touched Python files or the repo after a set of changes, and fix violations before final handoff whenever possible.**

@@ -13,7 +13,7 @@
 
 ---
 
-ResearchBuddy turns a messy research question into a short, cited answer. Instead of one giant prompt, it plans parallel research lanes, crawls the web locally, distills each source into dense evidence cards, and merges lane summaries into one final answer.
+ResearchBuddy turns a messy research question into a short, cited answer. Instead of one giant prompt, it plans parallel research lanes, searches and crawls the web locally, distills each source into dense evidence cards, and merges lane summaries into one final report.
 
 ```
 prompt ── plan 4-8 lanes ── crawl in parallel ── compress evidence ── synthesize with citations
@@ -50,6 +50,8 @@ researchbuddy run "best dishwasher for quiet apartment"
 ```
 
 Each run writes artifacts to `data/storage/<run_id>/` including `synthesis.md` (the final report), per-lane snapshots, captured source material, and follow-up memory.
+
+Technical overview: [`docs/architecture.md`](docs/architecture.md).
 
 ---
 
@@ -129,6 +131,11 @@ Answer a follow-up from stored evidence without re-crawling.
 researchbuddy inspect <run_id> [--sources] [--lanes] [--transcripts]
 ```
 Inspect saved artifacts for a completed run.
+
+```bash
+researchbuddy runs [--limit 20]
+```
+List recent saved runs so you can copy a run ID for follow-up questions.
 
 ```bash
 researchbuddy transcribe <source> [--type auto|youtube|podcast|audio]
@@ -252,11 +259,12 @@ Repository skill path: `skills/researchbuddy-cli`
 ## Development
 
 ```bash
-uv sync                          # install dependencies
-source .venv/bin/activate        # activate venv
-cp .env.example .env             # add your API keys
-pytest app/tests/ -v             # run tests
-ruff check . && ruff format .    # lint and format
+uv sync                              # install dependencies
+cp .env.example .env                 # add one search-provider key
+uv run researchbuddy doctor          # validate local readiness
+uv run pytest app/tests/ -v          # run tests
+uv run ruff check .                  # lint
+uv run ruff format .                 # format
 ```
 
 ---
