@@ -1,0 +1,110 @@
+Every influencer is drooling over Claude Code skills files. Every product team is chasing the next model release. But for two years, the data has been screaming the same thing: capability isn’t the bottleneck. Context is. This edition unpacks what that actually means — why structured business knowledge is the highest-leverage investment a product team can make, what the “context wars” look like from the inside, and why the teams winning aren’t the ones with the best models. They’re the ones whose AI actually understands their business.
+
+This edition confronts the structural reason most AI products fail — they’re missing the context that makes capability useful.
+
+- Why Juan Sequeda from ServiceNow says “hope is not a strategy” — and what to build instead of better prompts
+
+- The three-layer knowledge framework that gives AI a shared language across your entire organization
+
+- CNBC’s “silent failure at scale” investigation reveals why 91% of AI models degrade without anyone noticing
+
+- Microsoft just adopted ontology — the same concept Juan has championed for 20 years — as the foundation of its agentic AI architecture
+
+- Citadel Securities data shows software engineer job postings rising 11% YoY despite the displacement narrative
+
+[https://www.youtube-nocookie.com/embed/2_21_ht5JoU?rel=0&amp;autoplay=0&amp;showinfo=0&amp;enablejsapi=0](https://www.youtube-nocookie.com/embed/2_21_ht5JoU?rel=0&amp;autoplay=0&amp;showinfo=0&amp;enablejsapi=0)
+
+Every influencer is drooling over skills files and prompt templates. Juan Sequeda, Principal Scientist at data.world (acquired by ServiceNow), has spent 20 years proving that none of it works without structured business knowledge underneath. In this episode, Juan breaks down the three-layer framework — business metadata, technical metadata, and the mapping layer that creates real semantics — and explains why the teams investing in ontology today will compound value across every AI use case they build next. His blunt assessment of skills files as a production strategy: “Hope is an interesting strategy. It’s not one that I add to my strategy.”
+> “If you just edit in skills, I don’t think that’s gonna be the solution to your problem. You’ll have a great POC. It’ll work for the use cases you tested on. Are you willing to put your career on the line and put that in production?” — Juan Sequeda
+
+[Listen on Spotify](https://open.spotify.com/show/3O11vQKPpKI5ZlJhdRGwnf) | [Apple Podcasts](https://podcasts.apple.com/us/podcast/product-impact-podcast-formerly-design-of-ai/id1734499859) | [YouTube](https://www.youtube.com/channel/UCb1nY02YcJYZZ_XtvcIBcrw)
+
+[https://substackcdn.com/image/fetch/$s_!MZ8d!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9096c36b-d7a7-46a0-b014-a5fc249b5b9d_2752x1536.png](https://substackcdn.com/image/fetch/$s_!MZ8d!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9096c36b-d7a7-46a0-b014-a5fc249b5b9d_2752x1536.png)
+
+Context isn’t a nice-to-have. It’s the architecture layer that determines whether your AI product delivers consistent, measurable value or drifts into silent failure. PH1 built this framework to illustrate what Juan Sequeda has been researching for two decades: intent, background, examples, and templates aren’t prompt engineering tricks — they’re the structural foundation that transforms an AI system from a “forever intern” into a strategic partner. Without them, you’re hoping the model figures out what “order” means in your business. Hope, as Juan puts it, is not a strategy.
+
+[https://www.youtube-nocookie.com/embed/UabBYexBD4k?rel=0&amp;autoplay=0&amp;showinfo=0&amp;enablejsapi=0](https://www.youtube-nocookie.com/embed/UabBYexBD4k?rel=0&amp;autoplay=0&amp;showinfo=0&amp;enablejsapi=0)
+
+RAG dominated for two years as the default way to give LLMs context. But as context windows expanded from 8K to a million tokens, the question shifted. This video breaks down when RAG still matters — vast, dynamic datasets and cost efficiency — and when long context windows make the retrieval layer unnecessary. The strategic implication for product teams: RAG was always a workaround for a deeper problem. The real question was never “how do I retrieve the right document?” It was “does my system actually understand my business?” That’s the context layer Juan Sequeda is building — and it sits beneath RAG, long context, and every other implementation detail.
+
+[https://substackcdn.com/image/fetch/$s_!569c!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24d25592-aa60-4499-a882-d523d7ba60d7_800x1081.jpeg](https://substackcdn.com/image/fetch/$s_!569c!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24d25592-aa60-4499-a882-d523d7ba60d7_800x1081.jpeg)
+
+In spite of the displacement signals, software engineer job postings are up 11% year over year. But read the fine print: a posting titled “Software Engineer” increasingly means “engineer who can operate LLMs in production” or “build RAG pipelines.” The title stayed the same — the job changed. If your team hasn’t redefined what “engineering” means in the context of AI-augmented workflows, you’re hiring for yesterday’s role.
+
+The pattern across these resources is consistent: the teams pulling ahead are the ones investing in context, knowledge, and governance infrastructure — not chasing the next model release. Capability is table stakes. The moat is how deeply your product understands the business it serves.
+
+- Gartner predicts 80% of enterprises pursuing AI will use knowledge graphs by 2026 to enhance context and reasoning. The shift from “better prompts” to “structured knowledge” is no longer theoretical. **[The Role of Knowledge Graphs in Building Agentic AI Systems](https://zbrain.ai/knowledge-graphs-for-agentic-ai/)**
+
+- Microsoft adopted ontology as the foundation of its agentic AI architecture — Fabric IQ, Foundry IQ, and Work IQ create a semantic layer that gives agents shared business understanding. **[Microsoft Adopts Ontology-Based IQ Layer for Agentic AI](https://www.softwarereviews.com/research/microsoft-adopts-ontology-based-iq-layer-for-agentic-ai)**
+
+- Nathan Lasnoski argues that enterprise knowledge graphs are the foundation for moving from vibe coding to scalable agentic development — without semantic grounding, agents can’t reason across systems. **[Building an Enterprise Knowledge Graph for the SDLC](https://nathanlasnoski.com/2026/03/01/building-an-enterprise-knowledge-graph-for-the-sdlc-is-the-foundation-of-agentic-first-development-and-a-move-from-vibe-to-scale/)**
+
+- HBR analysis reveals AI adoption stalls because of employee anxiety about relevance and identity — not technical limitations. The behavioral barriers are harder than the technical ones. **[Why AI Adoption Stalls, According to Industry Data](https://hbr.org/2026/02/why-ai-adoption-stalls-according-to-industry-data)**
+
+- WEF data shows organizations with strong governance and >5% IT budget allocated to AI see 70-75% positive outcomes vs. 50-55% without. Governance is infrastructure, not a bottleneck. **[Strong AI Governance Is a Business Advantage, Not a Bottleneck](https://www.weforum.org/stories/2026/02/ai-governance-businesses-hold-them-back/)**
+
+- Deloitte’s agentic AI strategy report calls for governance and observability as first-class product features — agentic systems should expose provenance, tool-call traces, and policy decisions by default. **[Agentic AI Strategy](https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/agentic-ai-strategy.html)**
+
+- Teresa Torres warns that AI without product discovery just means “shipping the wrong stuff faster.” The line lands directly on this edition’s thesis — capability without context is an accelerant of bad decisions, not good ones. Strong potential guest. **[Shipping the Wrong Stuff Faster](https://www.producttalk.org/2026/03/shipping-the-wrong-stuff-faster/)**
+
+- Roger Wong unpacks Jenny Wen’s (Anthropic Head of Design) “ship fast, iterate publicly, build trust through speed” approach as a new design paradigm for AI products. Jenny Wen is a compelling guest lead given her role building Claude’s product experience. **[The Design Process Is Dead](https://rogerwong.me/posts/the-design-process-is-dead/)**
+
+- Meta’s alignment director had an OpenClaw agent start rapidly deleting her inbox — she thought it would confirm first. It didn’t. She ran to a Mac mini “like I was defusing a bomb.” Stuart Winter-Tear’s breakdown is a vivid, concrete case study of agentic AI failure in practice. **[Human in the Loop Is a Job](https://unhyped.ai/2026/03/human-in-the-loop-is-a-job/)**
+
+- Academic paper in *Communications Psychology* (Nature) argues that friction in AI design is a feature, not a bug — challenging the default “make it seamless” paradigm. Co-authors from U of T, Wharton, and Yale. Emily Zohar is a strong potential guest with a contrarian take that plays well on the podcast. **[Against Frictionless AI](https://www.nature.com/articles/s44271-026-00001-0)**
+
+The news this edition reinforces a single uncomfortable truth: the biggest AI failures aren’t technical — they’re contextual. Systems that lack business knowledge don’t crash dramatically. They drift silently, producing outputs that look right but are wrong in ways no telemetry catches.
+
+- CNBC investigated “silent failure at scale” — a beverage manufacturer’s AI ordered thousands of excess cans because it couldn’t contextualize new holiday labels. 91% of ML models degrade over time, and most enterprises never detect it. **[‘Silent Failure at Scale’: The AI Risk That Can Tip the Business World Into Disorder](https://www.cnbc.com/2026/03/01/ai-artificial-intelligence-economy-business-risks.html)**
+
+- Agentic AI’s dominant failure mode isn’t catastrophic breakdown — it’s silent drift. CIO reports that only 6% of organizations have fully deployed agents, and the Cloud Security Alliance now classifies cognitive degradation as systemic risk. **[Agentic AI Systems Don’t Fail Suddenly — They Drift Over Time](https://www.cio.com/article/4134051/agentic-ai-systems-dont-fail-suddenly-they-drift-over-time.html)**
+
+- Gartner predicts 40% of agentic AI projects will be scrapped by 2027. 90% of legacy agents fail within weeks. The primary driver is governance, not technology. **[Why 40% of Agentic AI Projects Will Fail](https://squirro.com/squirro-blog/avoiding-agentic-ai-failure)**
+
+- Internal Microsoft data shows only 30% of Copilot enterprise licenses see weekly active usage after 6 months — despite unmatched distribution through Office. Workflow friction and unclear ROI are the barriers. **[Microsoft Copilot Adoption Stalls at 30% Active Usage](https://www.theinformation.com/articles/microsoft-copilot-adoption-challenges)**
+
+- Virtana surveyed 350+ senior IT leaders this month: 75% of enterprises report double-digit AI job failure rates, a third exceed 25%. Meanwhile, 59% of executives think they’re prepared — but 62% of practitioners report fragmented systems and visibility gaps. The disconnect is the risk. **[75% of Enterprises Report Double-Digit AI Failure Rates](https://venturebeat.com/orchestration/ai-is-exposing-why-the-enterprise-monitoring-playbook-no-longer-works)**
+
+- Citadel Securities rebuts the AI displacement narrative with data: software engineer postings up 11% YoY. But job postings requiring AI literacy grew 70% YoY — the title stayed the same, the job changed. **[Software Engineer Job Postings Are ‘Rapidly Rising’](https://finance.yahoo.com/news/data-shows-surprising-rebound-tech-141608296.html)**
+
+- Tech Mahindra and Microsoft launched an ontology-driven agentic AI platform for telecoms — the first major enterprise deployment built on Microsoft’s Fabric IQ semantic layer. The context wars are real. **[Tech Mahindra and Microsoft Launch Ontology-Driven Agentic AI Platform](https://channelpostmea.com/2026/03/09/tech-mahindra-and-microsoft-to-launch-ontology-driven-agentic-ai-platform/)**
+
+The throughline is unmistakable: the AI products failing at scale aren’t missing capability — they’re missing context. From CNBC’s investigation into silent failures to Microsoft betting its entire agentic architecture on ontology, the market is converging on what Juan Sequeda has been saying for 20 years: structured business knowledge is the highest-leverage investment you can make.
+
+- **Context is infrastructure, not a feature.** Skills files and prompt templates are band-aids. The teams compounding value across AI use cases are the ones that defined “what does order mean?” before they shipped anything. If your AI can’t disambiguate your business terminology, it can’t deliver consistent results.
+
+- **Governance accelerates adoption.** The WEF data is clear: organizations with strong AI governance see 20 percentage points higher positive outcomes. Governance isn’t the thing slowing you down — the absence of it is why 40% of agentic projects get scrapped.
+
+- **The job didn’t disappear — it transformed.** Software engineer postings are up 11%, but the role now requires AI literacy. The same is true for product managers, designers, and strategists. The question isn’t whether AI will replace you. It’s whether you’ll invest in the context that makes AI actually useful.
+
+[https://www.youtube-nocookie.com/embed/1ixq-khIfck?rel=0&amp;autoplay=0&amp;showinfo=0&amp;enablejsapi=0](https://www.youtube-nocookie.com/embed/1ixq-khIfck?rel=0&amp;autoplay=0&amp;showinfo=0&amp;enablejsapi=0)
+
+**[Episode 2: Defensibility > Capability — Five Actions to Defend Your Product Value](https://open.spotify.com/show/3O11vQKPpKI5ZlJhdRGwnf)** $73.6 billion went into GenAI startups in 2025, but 85% of AI startups will be out of business within three years. This episode tackles the economics of abundance and delivers five specific actions to redirect investment toward what actually survives: workflow depth, outcome visibility, and trust engineering. If you’re competing on features, you’re already exposed.
+
+**[Episode 1: Why Your AI Metrics Are Lying to You](https://open.spotify.com/episode/0Fh65pOkBHR7NJZHyAUUiN)** The bullseye framework for AI products — Power, Speed, Impact, and Joy. Most teams are measuring Power and calling it success. This episode introduces a three-layer evaluation approach and shows why completion metrics hide the signals that actually matter for growth.
+
+- [Staff Product Designer, AI Workflows — ServiceNow](https://builtin.com/jobs/design-ux/artificial-intelligence) (Remote/Hybrid)
+
+- [AI Product Manager — ServiceNow](https://builtin.com/jobs/remote/product/artificial-intelligence) (Remote)
+
+- [Product Designer, ChatGPT — OpenAI](https://openai.com/careers/product-designer-chatgpt-san-francisco/) (San Francisco)
+
+- [Product Designer, Platform & Tools — OpenAI](https://openai.com/careers/product-designer-platform-and-tools-san-francisco/) (San Francisco)
+
+- [AI Product Manager, Strategic Roadmap — IDC](https://builtin.com/jobs/remote/product/artificial-intelligence) (Remote)
+
+- [Principal Product Manager, AI Personalization — Cedar](https://www.trueup.io/ai-product) (New York)
+
+- [Senior Product Designer, Generative AI — Coda](https://builtin.com/jobs/design-ux/artificial-intelligence) (Remote)
+
+- [Product Designer, AI Agents — Simular](https://builtin.com/jobs/design-ux/artificial-intelligence) (Palo Alto)
+
+- [Director, Product Design, AI Transformation — Element AI](https://builtin.com/jobs/design-ux/artificial-intelligence) (Santa Clara, CA — On-site, 65% travel)
+
+- [Product Designer — Fidelity](https://builtin.com/jobs/design-ux/artificial-intelligence) (Merrimack, NH / Jersey City, NJ / Westlake, TX — Hybrid)
+
+If your AI product demos well but can’t prove it drives value in production, that’s a context problem — and it’s the gap **[PH1](https://ph1.ca/)** closes. We help teams build the measurement and knowledge infrastructure that turns AI capability into measurable business impact. From defining what success means to proving it with data. **[ph1.ca](https://ph1.ca/)**
+
+Every episode goes deeper than the headlines to uncover what actually drives AI product success — and what’s quietly killing it. If Juan’s take on context and ontology challenged how you think about your AI product’s foundation, share this episode with your team. Follow the show so you never miss one. That’s how we grow this community of builders who refuse to settle for capability without impact.
+
+[Browse all episodes at productimpactpod.com](https://productimpactpod.com/) — filter by topic to find the episode that fits what you’re working on right now. We’re at 56 episodes across the two seasons.

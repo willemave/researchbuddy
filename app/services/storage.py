@@ -1,7 +1,7 @@
 """SQLite storage helpers for ResearchBuddy."""
 
 import hashlib
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
 
 import aiosqlite
@@ -12,7 +12,7 @@ from app.constants import (
     URL_STATUS_FETCHED,
     URL_STATUS_PENDING,
 )
-from app.models.review import RunRecord, UrlRecord
+from app.models.review import RunRecord, RunRuntimeRecord, UrlRecord
 
 
 def build_run_paths(base_dir: Path, run_id: str) -> dict[str, Path]:
@@ -101,6 +101,22 @@ async def init_db(db_path: Path) -> None:
                 error TEXT,
                 fetched_at TEXT,
                 UNIQUE(run_id, url)
+            );
+
+            CREATE TABLE IF NOT EXISTS current_run (
+                scope TEXT PRIMARY KEY,
+                run_id TEXT NOT NULL,
+                updated_at TEXT NOT NULL
+            );
+
+            CREATE TABLE IF NOT EXISTS run_runtime (
+                run_id TEXT PRIMARY KEY,
+                pid INTEGER,
+                log_path TEXT,
+                started_at TEXT NOT NULL,
+                updated_at TEXT NOT NULL,
+                finished_at TEXT,
+                exit_code INTEGER
             );
             """
         )
@@ -215,6 +231,36 @@ async def list_runs(db_path: Path, limit: int = 20) -> list[RunRecord]:
     return records
 
 
+async def list_in_progress_runs(db_path: Path) -> list[RunRecord]:
+    """List runs that have not reached a terminal status."""
+
+    async with aiosqlite.connect(db_path) as conn:
+        cursor = await conn.execute(
+            """
+            SELECT run_id, prompt, created_at, status, max_urls, max_agents, headful, output_dir
+            FROM runs
+            WHERE status = ?
+            ORDER BY created_at DESC
+            """,
+            (RUN_STATUS_IN_PROGRESS,),
+        )
+        rows = await cursor.fetchall()
+
+    return [
+        RunRecord(
+            run_id=row[0],
+            prompt=row[1],
+            created_at=datetime.fromisoformat(row[2]),
+            status=row[3],
+            max_urls=int(row[4]),
+            max_agents=int(row[5]),
+            headful=bool(row[6]),
+            output_dir=Path(row[7]),
+        )
+        for row in rows
+    ]
+
+
 async def update_run_status(db_path: Path, run_id: str, status: str) -> None:
     """Update run status.
 
@@ -228,6 +274,114 @@ async def update_run_status(db_path: Path, run_id: str, status: str) -> None:
         await conn.execute(
             "UPDATE runs SET status = ? WHERE run_id = ?",
             (status, run_id),
+        )
+        await conn.commit()
+
+
+async def set_current_run_id(db_path: Path, run_id: str, scope: str = "default") -> None:
+    """Persist the current run pointer for prompt-scoped commands."""
+
+    await init_db(db_path)
+    async with aiosqlite.connect(db_path) as conn:
+        await conn.execute(
+            """
+            INSERT INTO current_run (scope, run_id, updated_at)
+            VALUES (?, ?, ?)
+            ON CONFLICT(scope) DO UPDATE SET
+                run_id = excluded.run_id,
+                updated_at = excluded.updated_at
+            """,
+            (scope, run_id, datetime.now(UTC).isoformat()),
+        )
+        await conn.commit()
+
+
+async def fetch_current_run_id(db_path: Path, scope: str = "default") -> str | None:
+    """Fetch the current run pointer for prompt-scoped commands."""
+
+    await init_db(db_path)
+    async with aiosqlite.connect(db_path) as conn:
+        cursor = await conn.execute(
+            "SELECT run_id FROM current_run WHERE scope = ?",
+            (scope,),
+        )
+        row = await cursor.fetchone()
+    return str(row[0]) if row else None
+
+
+async def upsert_run_runtime(db_path: Path, runtime: RunRuntimeRecord) -> None:
+    """Insert or update runtime metadata for a run process."""
+
+    await init_db(db_path)
+    async with aiosqlite.connect(db_path) as conn:
+        await conn.execute(
+            """
+            INSERT INTO run_runtime (
+                run_id, pid, log_path, started_at, updated_at, finished_at, exit_code
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(run_id) DO UPDATE SET
+                pid = excluded.pid,
+                log_path = excluded.log_path,
+                started_at = excluded.started_at,
+                updated_at = excluded.updated_at,
+                finished_at = excluded.finished_at,
+                exit_code = excluded.exit_code
+            """,
+            (
+                runtime.run_id,
+                runtime.pid,
+                str(runtime.log_path) if runtime.log_path else None,
+                runtime.started_at.isoformat(),
+                runtime.updated_at.isoformat(),
+                runtime.finished_at.isoformat() if runtime.finished_at else None,
+                runtime.exit_code,
+            ),
+        )
+        await conn.commit()
+
+
+async def fetch_run_runtime(db_path: Path, run_id: str) -> RunRuntimeRecord | None:
+    """Fetch runtime metadata for a run process."""
+
+    await init_db(db_path)
+    async with aiosqlite.connect(db_path) as conn:
+        cursor = await conn.execute(
+            """
+            SELECT run_id, pid, log_path, started_at, updated_at, finished_at, exit_code
+            FROM run_runtime
+            WHERE run_id = ?
+            """,
+            (run_id,),
+        )
+        row = await cursor.fetchone()
+
+    if row is None:
+        return None
+    return RunRuntimeRecord(
+        run_id=row[0],
+        pid=int(row[1]) if row[1] is not None else None,
+        log_path=Path(row[2]) if row[2] else None,
+        started_at=datetime.fromisoformat(row[3]),
+        updated_at=datetime.fromisoformat(row[4]),
+        finished_at=datetime.fromisoformat(row[5]) if row[5] else None,
+        exit_code=int(row[6]) if row[6] is not None else None,
+    )
+
+
+async def finish_run_runtime(db_path: Path, run_id: str, exit_code: int) -> None:
+    """Mark runtime metadata as finished for a run process."""
+
+    await init_db(db_path)
+    finished_at = datetime.now(UTC).isoformat()
+    async with aiosqlite.connect(db_path) as conn:
+        await conn.execute(
+            """
+            UPDATE run_runtime
+            SET finished_at = ?, updated_at = ?, exit_code = ?
+            WHERE run_id = ?
+            """,
+            (finished_at, finished_at, exit_code, run_id),
         )
         await conn.commit()
 
@@ -430,7 +584,7 @@ def new_run_record(
     return RunRecord(
         run_id=run_id,
         prompt=prompt,
-        created_at=datetime.utcnow(),
+        created_at=datetime.now(UTC),
         status=RUN_STATUS_IN_PROGRESS,
         max_urls=max_urls,
         max_agents=max_agents,

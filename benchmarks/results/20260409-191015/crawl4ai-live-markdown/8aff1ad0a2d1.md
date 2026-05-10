@@ -1,0 +1,86 @@
+#  From Roadmaps to R&D: How AI Is Changing Product Development - with Richard White, Founder of Fathom AI 
+From [Beyond The Prompt - How to use AI in your company](https://podscan.fm/podcasts/beyond-the-prompt-how-to-use-ai-in-your-company)
+56 min
+Duration
+Feb 18, 2026
+Published
+### Topics
+Jenga model  R&D vs roadmap  AI team  hallucination  second brain  memory  build vs buy  LLMs as interns  qualitative QA  organization design  failure tolerance in AI  narrative is source code 
+#  From Roadmaps to R&D: How AI Is Changing Product Development - with Richard White, Founder of Fathom AI 
+From [Beyond The Prompt - How to use AI in your company](https://podscan.fm/podcasts/beyond-the-prompt-how-to-use-ai-in-your-company)
+### Episode Description
+Fathom was built on the assumption that transcription would become commoditized and generative models would steadily improve. Rather than training proprietary models, Richard focused on building the infrastructure around them and waiting for model capabilities to reach the right threshold.
+In this conversation, he explains why AI has made effort and impact harder to predict, and why that shifts product development from roadmap execution toward experimentation. He describes separating an exploratory AI team from core engineering, structuring that team to prototype and write specs, and expecting a meaningful portion of experiments not to work.Richard introduces his Jenga model for AI development, testing different models and use cases to find where resistance is lowest. He also discusses the operational realities of rapid model updates, hallucination rates, and what he calls the LLM treadmill.
+The discussion explores qualitative QA, organizational design, buy versus build decisions, and why leadership taste plays an increasingly important role as AI lowers the barrier to generating outputs.
+**Key takeaways:**
+  * **Estimating effort and impact is becoming harder** As model capabilities improve quickly, features that require months today may take far less time in the near future. This makes traditional planning assumptions less stable.
+  * **Product development increasingly resembles R &D**With shifting capabilities and uncertain outcomes, teams must experiment, prototype, and iterate rather than rely solely on long term roadmaps.
+  * **Organizational structure must reflect experimentation** Separating exploratory AI work from core engineering can allow faster iteration while maintaining stability elsewhere.
+  * **Rapid model updates create operational pressure** Frequent improvements and changing performance levels can require teams to revisit and adjust features more often than in traditional software cycles.
+  * **Qualitative judgment plays a larger role** As AI lowers the cost of generating outputs, evaluating quality and deciding what to ship becomes increasingly important.
+
+
+Fathom: [fathom.ai](https://www.fathom.ai/)Fathom LinkedIn: [linkedin/company/fathom-video/](https://www.linkedin.com/company/fathom-video/)Richard's LinkedIn: [linkedin/in/rrwhite/](https://www.linkedin.com/in/rrwhite/)**00:00** Intro: Why AI Breaks Roadmaps**00:19** Meet Richard White (Fathom AI)**02:16** From Roadmaps to R&D**04:49** Designing AI Teams for Speed**07:11** The Jenga Model**09:56** Failing 50% & AI Team Psychology**13:40** LLMs as Interns & Anti-Planning**21:01** QA, Data Pain & Developing Taste**24:59** Executive Taste & Culture Rules**27:20** Reacting to AI Waves**28:50** Fathom’s 4-Step Product Plan**30:47** What New Models Unlock**32:13** From Scribe to Second Brain**40:32** Build vs Buy in AI**45:32** The Debrief📜 Read the transcript for this episode:
+For more prompts, tips, and AI tools. Check out our website: https://www.beyondtheprompt.ai/ or follow Jeremy or Henrik on Linkedin:
+Henrik: https://www.linkedin.com/in/werdelinJeremy: https://www.linkedin.com/in/jeremyutley
+Show edited by Emma Cecilie Jensen. 
+###  About this Podcast 
+#### [Beyond The Prompt - How to use AI in your company](https://podscan.fm/podcasts/beyond-the-prompt-how-to-use-ai-in-your-company)
+Jeremy Utley & Henrik Werdelin
+Beyond the Prompt dives deep into the world of AI and its expanding impact on business and daily work. Hosted by Jeremy Utley of Stanford's d.school, alongside Henrik Werdelin, an entrepreneur known f... 
+## Episode Transcript
+00:00:00 
+It's really hard to estimate effort impact. I could spec out a project today using an LLM model and maybe it'll take me six months to build it and if I wait six months maybe it'll take me six hours to build it. Now not only does it take six hours instead of six months, but the output is way better. So the impact is way higher. Everything you knew about product management kind of gets thrown out the window.
+00:00:18 
+So hi, I'm Richard White, Founder of Fathom AI, one of the top AI note takers. Really excited to have this conversation getting to talk about how we think about how AI has changed product development, our Jenga model of software development that we use to build AI features and how to get off the LLM tribunal. For folks who don't know the name Richard White and maybe you don't even know Fathom, would you just give a quick intro? Why should you be interested in this conversation today?
+00:00:45 
+I'm a software engineer by trade, but kind of termed product designer, you know, Jack and Mel Trades product person. You know, we sort of Fathom about five years ago. Fathom now is one of the top kind of AI note takers. Jointer meeting takes notes, figures out your action, et cetera, et cetera. We started this company five years ago before Gen AI really ever kicked off and we started with two hypotheses. One was we thought transcription cost was going to go to zero and we thought Gen AI is going to get really good.
+00:01:12 
+We kind of believed that we shouldn't build models, but we kind of should apply models. And I think I was fortunate enough to have this insight because I've been kind of surrounded by like Y Combinary folks for about almost 20 years. And so new people are investing in things like Anthropica and OpenAI. And I think kind of all in that five year journey from this hypothesis to those hypotheses clearly paying off, right? Transcription is basically free now and Gen AI obviously works. Unlike the AI that we had five years ago.
+00:01:40 
+I think two things that we've kind of discovered along the way is like one, how Gen AI is kind of completely upended, how I think about software development. We do software development for 20, 25 years and it's almost completely inverted now. It's much more of an R and D process than it is a roadmap process.
+00:01:56 
+And I think also we think a lot about kind of what I call the Jenga model of product development with AI, as well as kind of like, when do we think about just internally when we buy or build basically AI automations within our org? Sure. And like, how do we scope them and how do we decide? And when do we use our AI and when do we not sort of thing? So maybe we can start there with the question of R and D versus we, I can't remember exactly what you said, but I would love to start there.
+00:02:25 
+Yeah. I mean, so I think, look, I think if you've, if you've done product management, you've done software development for the last 15 years, right? You, you kind of put stuff on the roadmap and there's not a lot of risk in things you put on the roadmap, right? Like technical risk, if you're doing SAS, you're doing anything for the last 10, 15 years, technical risk wasn't a big component. The big challenge was kind of estimating effort and impact, right? We'd spend a lot of time trying to figure out those two things. And if you could do those two things accurately, you can pretty much have an optimized roadmap. I mean, this is what Senga was pretty famous for 10, 15 years ago.
+00:02:54 
+They had amazing kind of quantitative prowess. And so they're really good at like knowing if we add this, this thing to Farmville, we'll see this lift. Right. And that was the whole game. But now with like AI, it's kind of shifted in that it's really hard to estimate effort impact. Yeah. For example, you know, effort shifts very quickly, right? You could, I could spec out a project today using an LL model and maybe it'll take me six months to build it. And if I wait six months, maybe it'll take me six hours to build it. Right. Right.
+00:03:25 
+And then the other dimension impact also shifts, right? Like that, that version I was going to build six months ago, that it would take me six months to build. Cause that's kind of brute forcing an LLN that really wasn't quite ready for that use case. Maybe now, not only does it take six hours instead of six months, but the output is way better. So the impact is way higher. And so it's kind of funny now. It's like everything you knew about kind of product management kind of gets thrown out the, out the window. Um, and you kind of have to think of a new model. Do you feel you already have changed the way that you build?
+00:03:55 
+I'm asking because I have businesses that are big, you know, like I started that public listed, blah, blah. And then I've involved in new companies and there's obviously a completely different mindset in the companies that have been started in the last 24 months, because they almost have been able to go completely to this kind of new AI stack where the organizational design is a little bit different because a lot of people can do a lot of different things.
+00:04:19 
+And software, for example, is often pitched now and actually functionally code that is being basically submitted as in like, do you want to merge this to the master copy already? Right. Rather than just kind of like a concept and a wireframe and design, blah, blah, blah. When you have a company that's five years old, but that's born basically on AI, do you feel you kind of have to morph your organization in a way of thinking about it just because you're five years old? Or do you think that you kind of are already in the new way of operating?
+00:04:49 
+I mean, I think there's kind of two sides of where I think AI has an impact. One is taking away kind of a lot of the current work of software development, which I think is what you're alluding to. It's like, you know, I wouldn't want to be a front end engineer in 2026. Right. Like a lot of that stuff just gets generated automatically. There's another side of that, which is like if you're actually building AI features yourself and your product, the way you think about vetting and building them also is very different.
+00:05:13 
+I would say we're still kind of traditional in the first sense because Fathom is actually not a traditional kind of SaaS product. Like traditional SaaS product is candidly just a lot of forms and workflows. Right. A lot of our technical engineering challenges are actually one of like it's a distributed system that's a real time system that has to be highly reliable. And, you know, we try to get you your transcripts and your meeting recordings and your summaries within 30 seconds of meeting ending. And we're trying to do it for hundreds of thousands of people a day.
+00:05:42 
+That's like a big technical challenge that's way beyond what you can have spit out of cloud code today. But on the other side, when it comes to like building AI features, yes, I think we've completely shifted how we build AI features. And I think one of the things I see people get wrong about this and I talk to people all the time, it's like, dare you have an engineering team? And they're like, great, I've got 10 engineers. Three of them are now going to start building AI features. And that means they're going to start writing the prompts, figuring out which models, figure out how to host the models, et cetera, et cetera.
+00:06:08 
+And the one big shift that we made that I think has been paid a lot of dividends is we kind of separated out the what model, what prompt, what pipeline from the how do we host it? How do we serve it? Like, how do we scale it? And so we have a separate team that's kind of called just the AI team, AI engineering team. And they spend all their time just kind of honestly kind of prototyping. And they use tools like magic patterns to kind of make really high fidelity functional prototypes. But it's all in service of writing a spec. They throw away that prototype.
+00:06:38 
+They just that output is a spec that then goes to engineering. Hey, here's the five models we're going to use to build a feature that finds actual items, right? That makes a lot of sense. And what's challenging about it is that like the the service space continues to grow. Right. In that, like for 24 months ago, it was like, well, we've got called to we've got GP4 and we kind of play with, oh, it's called two is better at some of these things. GPT-4 better at this. Well, now we've got Gemini, OpenAI, Anthropic, as well as like we have DeepSeek.
+00:07:07 
+We got Quinn, got all these sorts of things. Right. And so I kind of teach us, you know, we we call it the Jenga model. So it's like you play Jenga, right? Like push on a block and, you know, it's like if you could play the game where you get to touch the block. Right. Some people don't play the rules. Once you touch it, you got your committed to it. Let's assume you're playing where it's like I can touch the block and I can untouch it. Wait, are those the rules? Just as an aside, are the rules of Jenga that once you touch, you have to try to? I didn't even know. Technically, yes. OK, I believe it's like. And so do you enforce those rules with AI or are you saying you're a loser?
+00:07:36 
+You touch, you go, whoa, whoa, whoa, whoa. That's going to move the tower. Yeah. We're much more of the house rules that I think everyone plays. Yeah. It's like you can kind of drill some test wells. You can touch it. Right. OK. And I think about I think about blocks in the Jenga tower being kind of models and use cases. Right. And so if you push on a block and it, you know, you get resistance, our thing is find another block. Yeah. Right. That means that model is not the right tool for the job. Well, I like that where you said model and use case. Right. Because sometimes the challenge is the use case is the wrong use case for the model.
+00:08:06 
+And other times the model is the wrong model for the use case. And what you're saying is even having that kind of fluidity as a development team. Hey, if you're trying on this use case, try these four models and see and kind of do a horse race. Or if you're working in this model and you're not making progress in this use case, you've got a whole tower. Is that how like how do you think about if just to use your metaphor, where does the tower of use cases live? If a developer is trying to think of what are other blocks I could push on?
+00:08:34 
+Is that in an internal kind of leaderboard of ideas in the organization? Where do they go to find blocks? And so this is where also where it really differs from traditional software development. Right. I meet with our team once a month and we kind of just brainstorm like, you know, they have a lot of context on the product. They kind of know what kind of things we're talking about. You know, they've got my wish list. I'm like, I wish we had this feature. I wish we could do this. We should we do that. I'd always tell them like 60% of what we explore should probably be coming from the wish list of things that myself and the product team of brainstorm.
+... 104 more lines
+Showing first 20 lines  [ View Full Transcript → ](https://podscan.fm/register)
+### More Episodes from Beyond The Prompt - How to use AI in your company
+#### [ AI-Native or Not: The Defining Choice for Companies Right Now - with Melissa Cheals, CEO of Smartly  ](https://podscan.fm/podcasts/beyond-the-prompt-how-to-use-ai-in-your-company/episodes/ai-native-or-not-the-defining-choice-for-companies-right-now-with-melissa-cheals-ceo-of-smartly)
+April 1, 2026 
+#### [ Greg Shove on Why Most Companies Are Not Seeing ROI On AI (yet)  ](https://podscan.fm/podcasts/beyond-the-prompt-how-to-use-ai-in-your-company/episodes/greg-shove-on-why-most-companies-are-not-seeing-roi-on-ai-yet)
+March 18, 2026 
+#### [ How to Subtract: The Most Underrated Skill of the AI Era - with Leidy Klotz  ](https://podscan.fm/podcasts/beyond-the-prompt-how-to-use-ai-in-your-company/episodes/how-to-subtract-the-most-underrated-skill-of-the-ai-era-with-leidy-klotz)
+March 4, 2026 
+#### [ Here’s How to Know If You’re Getting the Most Out of AI – with Bryan McCann, CTO of You.com  ](https://podscan.fm/podcasts/beyond-the-prompt-how-to-use-ai-in-your-company/episodes/heres-how-to-know-if-youre-getting-the-most-out-of-ai-with-bryan-mccann-cto-of-youcom)
+February 4, 2026 
+## Get More Podcast Analytics
+Unlock full access to podcast analytics, audience demographics, contact information, and more for Beyond The Prompt - How to use AI in your company and thousands of other podcasts. 
+[ Sign up for free access ](https://podscan.fm/register)
+Found an issue with this page? [ Report this content ](https://podscan.fm/report?type=episode&podcast=pd_kwgp3jzkwapjxnby&episode=ep_9lmar2lodez7x2nw)

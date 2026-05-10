@@ -1,0 +1,2472 @@
+{
+  "generated_at": "2026-04-10T02:21:14.554753+00:00",
+  "manifest": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/live-corpus.json",
+  "benchmark": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/rust-static-live.json",
+  "tool": "rust-static",
+  "mode": "live",
+  "summary": {
+    "total": 100,
+    "successes": 95,
+    "failures": 5,
+    "overall_score": {
+      "mean": 0.5497202600036948,
+      "median": 0.6645624932672234,
+      "min": 0.0,
+      "max": 0.994316302335162
+    },
+    "metric_means": {
+      "token_f1": 0.5965565125979523,
+      "sequence_ratio": 0.5314169627599079,
+      "heading_recall": 0.39280183013904135,
+      "length_score": 0.5966354274918867
+    },
+    "by_category": {
+      "general": {
+        "mean": 0.6605046826050822,
+        "median": 0.7768136870136051,
+        "min": 0.0,
+        "max": 0.9666202691433936
+      },
+      "js_heavy": {
+        "mean": 0.6379517844032409,
+        "median": 0.7150696369691618,
+        "min": 0.19945592706171394,
+        "max": 0.9286898808511893
+      },
+      "podcast": {
+        "mean": 0.48161127965807693,
+        "median": 0.5276075794810597,
+        "min": 0.0,
+        "max": 0.994316302335162
+      },
+      "youtube": {
+        "mean": 0.43427746866444183,
+        "median": 0.4352622089358641,
+        "min": 0.3742372926952895,
+        "max": 0.5358231554918425
+      }
+    },
+    "by_tag": {
+      "js_heavy": {
+        "mean": 0.513588948763926,
+        "median": 0.4727065361688322,
+        "min": 0.03985132959475121,
+        "max": 0.9286898808511893
+      },
+      "podcast": {
+        "mean": 0.48161127965807693,
+        "median": 0.5276075794810597,
+        "min": 0.0,
+        "max": 0.994316302335162
+      },
+      "youtube": {
+        "mean": 0.43427746866444183,
+        "median": 0.4352622089358641,
+        "min": 0.3742372926952895,
+        "max": 0.5358231554918425
+      }
+    },
+    "by_domain": {
+      "www.youtube.com": {
+        "mean": 0.43427746866444183,
+        "median": 0.4352622089358641,
+        "min": 0.3742372926952895,
+        "max": 0.5358231554918425
+      },
+      "www.linkedin.com": {
+        "mean": 0.29005033288692916,
+        "median": 0.2386136210083432,
+        "min": 0.19945592706171394,
+        "max": 0.48351816246931634
+      },
+      "getpodcast.com": {
+        "mean": 0.21823252659101397,
+        "median": 0.2213247845064516,
+        "min": 0.20599221440580648,
+        "max": 0.22738058086078386
+      },
+      "medium.com": {
+        "mean": 0.8094203747936984,
+        "median": 0.7990812003754992,
+        "min": 0.7004900431544067,
+        "max": 0.9286898808511893
+      },
+      "pod.wave.co": {
+        "mean": 0.006572850508357736,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.019718551525073208
+      },
+      "podcasts.apple.com": {
+        "mean": 0.6206276259153052,
+        "median": 0.8106126357520695,
+        "min": 0.21806728435480938,
+        "max": 0.8332029576390365
+      },
+      "podscan.fm": {
+        "mean": 0.5375117677306178,
+        "median": 0.6479663006541216,
+        "min": 0.27807673331165883,
+        "max": 0.686492269226073
+      },
+      "creators.spotify.com": {
+        "mean": 0.04026136196373128,
+        "median": 0.04026136196373128,
+        "min": 0.03985132959475121,
+        "max": 0.040671394332711344
+      },
+      "hugobowne.substack.com": {
+        "mean": 0.6702249358067218,
+        "median": 0.6702249358067218,
+        "min": 0.6479740167250607,
+        "max": 0.6924758548883828
+      },
+      "launchpod.logrocket.com": {
+        "mean": 0.8690614592072134,
+        "median": 0.8690614592072134,
+        "min": 0.8505944794024792,
+        "max": 0.8875284390119476
+      },
+      "open.spotify.com": {
+        "mean": 0.15176737679395363,
+        "median": 0.15176737679395363,
+        "min": 0.15113767559221405,
+        "max": 0.1523970779956932
+      },
+      "www.news.aakashg.com": {
+        "mean": 0.6479645429504224,
+        "median": 0.6479645429504224,
+        "min": 0.6143913241845509,
+        "max": 0.6815377617162939
+      },
+      "8allocate.com": {
+        "mean": 0.9417855380110827,
+        "median": 0.9417855380110827,
+        "min": 0.9417855380110827,
+        "max": 0.9417855380110827
+      },
+      "aakashgupta.medium.com": {
+        "mean": 0.727531277322184,
+        "median": 0.727531277322184,
+        "min": 0.727531277322184,
+        "max": 0.727531277322184
+      },
+      "aetherlink.ai": {
+        "mean": 0.9421604088216976,
+        "median": 0.9421604088216976,
+        "min": 0.9421604088216976,
+        "max": 0.9421604088216976
+      },
+      "aireadyrva.com": {
+        "mean": 0.1934809572609788,
+        "median": 0.1934809572609788,
+        "min": 0.1934809572609788,
+        "max": 0.1934809572609788
+      },
+      "alhena.ai": {
+        "mean": 0.8435761856655304,
+        "median": 0.8435761856655304,
+        "min": 0.8435761856655304,
+        "max": 0.8435761856655304
+      },
+      "arize.com": {
+        "mean": 0.9717458530750542,
+        "median": 0.9717458530750542,
+        "min": 0.9717458530750542,
+        "max": 0.9717458530750542
+      },
+      "axrp.net": {
+        "mean": 0.957350249503562,
+        "median": 0.957350249503562,
+        "min": 0.957350249503562,
+        "max": 0.957350249503562
+      },
+      "blog.ravi-mehta.com": {
+        "mean": 0.8114345665362241,
+        "median": 0.8114345665362241,
+        "min": 0.8114345665362241,
+        "max": 0.8114345665362241
+      },
+      "blog.sshh.io": {
+        "mean": 0.7971780508052317,
+        "median": 0.7971780508052317,
+        "min": 0.7971780508052317,
+        "max": 0.7971780508052317
+      },
+      "callsphere.tech": {
+        "mean": 0.026770607196981957,
+        "median": 0.026770607196981957,
+        "min": 0.026770607196981957,
+        "max": 0.026770607196981957
+      },
+      "clarivate.com": {
+        "mean": 0.49044332505281885,
+        "median": 0.49044332505281885,
+        "min": 0.49044332505281885,
+        "max": 0.49044332505281885
+      },
+      "dexibit.com": {
+        "mean": 0.088328938411377,
+        "median": 0.088328938411377,
+        "min": 0.088328938411377,
+        "max": 0.088328938411377
+      },
+      "elevateyouraiq.substack.com": {
+        "mean": 0.7616483973221122,
+        "median": 0.7616483973221122,
+        "min": 0.7616483973221122,
+        "max": 0.7616483973221122
+      },
+      "en.zarza.com": {
+        "mean": 0.5647718339093007,
+        "median": 0.5647718339093007,
+        "min": 0.5647718339093007,
+        "max": 0.5647718339093007
+      },
+      "engineeringleadership.buzzsprout.com": {
+        "mean": 0.3422468520090408,
+        "median": 0.3422468520090408,
+        "min": 0.3422468520090408,
+        "max": 0.3422468520090408
+      },
+      "fountain.fm": {
+        "mean": 0.688331372968349,
+        "median": 0.688331372968349,
+        "min": 0.688331372968349,
+        "max": 0.688331372968349
+      },
+      "fundbuildscale.podbean.com": {
+        "mean": 0.8594818729370198,
+        "median": 0.8594818729370198,
+        "min": 0.8594818729370198,
+        "max": 0.8594818729370198
+      },
+      "getaigovernance.net": {
+        "mean": 0.7630236286075119,
+        "median": 0.7630236286075119,
+        "min": 0.7630236286075119,
+        "max": 0.7630236286075119
+      },
+      "harshalpatil.substack.com": {
+        "mean": 0.7033198045249464,
+        "median": 0.7033198045249464,
+        "min": 0.7033198045249464,
+        "max": 0.7033198045249464
+      },
+      "highsignal.fireside.fm": {
+        "mean": 0.7743236065643453,
+        "median": 0.7743236065643453,
+        "min": 0.7743236065643453,
+        "max": 0.7743236065643453
+      },
+      "leadwithaipodcast.com": {
+        "mean": 0.8318629053008088,
+        "median": 0.8318629053008088,
+        "min": 0.8318629053008088,
+        "max": 0.8318629053008088
+      },
+      "lexfridman.com": {
+        "mean": 0.74658687080874,
+        "median": 0.74658687080874,
+        "min": 0.74658687080874,
+        "max": 0.74658687080874
+      },
+      "metacast.app": {
+        "mean": 0.0629407904451424,
+        "median": 0.0629407904451424,
+        "min": 0.0629407904451424,
+        "max": 0.0629407904451424
+      },
+      "music.amazon.com": {
+        "mean": 0.3580857701620413,
+        "median": 0.3580857701620413,
+        "min": 0.3580857701620413,
+        "max": 0.3580857701620413
+      },
+      "natesnewsletter.substack.com": {
+        "mean": 0.7526560418255517,
+        "median": 0.7526560418255517,
+        "min": 0.7526560418255517,
+        "max": 0.7526560418255517
+      },
+      "notion.notion.site": {
+        "mean": 0.2111651515151515,
+        "median": 0.2111651515151515,
+        "min": 0.2111651515151515,
+        "max": 0.2111651515151515
+      },
+      "nzpod.co.nz": {
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "osmu.app": {
+        "mean": 0.005500250936221321,
+        "median": 0.005500250936221321,
+        "min": 0.005500250936221321,
+        "max": 0.005500250936221321
+      },
+      "plinkhq.com": {
+        "mean": 0.8151441303845453,
+        "median": 0.8151441303845453,
+        "min": 0.8151441303845453,
+        "max": 0.8151441303845453
+      },
+      "pmhub.tech": {
+        "mean": 0.5930823454170449,
+        "median": 0.5930823454170449,
+        "min": 0.5930823454170449,
+        "max": 0.5930823454170449
+      },
+      "pod.co": {
+        "mean": 0.896674865596864,
+        "median": 0.896674865596864,
+        "min": 0.896674865596864,
+        "max": 0.896674865596864
+      },
+      "podcast.pragmaticmarketing.com": {
+        "mean": 0.7792953065982283,
+        "median": 0.7792953065982283,
+        "min": 0.7792953065982283,
+        "max": 0.7792953065982283
+      },
+      "podscript.ai": {
+        "mean": 0.9296092224539811,
+        "median": 0.9296092224539811,
+        "min": 0.9296092224539811,
+        "max": 0.9296092224539811
+      },
+      "podwise.ai": {
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "productimpactpod.substack.com": {
+        "mean": 0.7268194694133773,
+        "median": 0.7268194694133773,
+        "min": 0.7268194694133773,
+        "max": 0.7268194694133773
+      },
+      "productschool.com": {
+        "mean": 0.8846919965985879,
+        "median": 0.8846919965985879,
+        "min": 0.8846919965985879,
+        "max": 0.8846919965985879
+      },
+      "sfelc.com": {
+        "mean": 0.4332169665864166,
+        "median": 0.4332169665864166,
+        "min": 0.4332169665864166,
+        "max": 0.4332169665864166
+      },
+      "shapeoftomorrow.substack.com": {
+        "mean": 0.681150969809386,
+        "median": 0.681150969809386,
+        "min": 0.681150969809386,
+        "max": 0.681150969809386
+      },
+      "substack.com": {
+        "mean": 0.8017648735609935,
+        "median": 0.8017648735609935,
+        "min": 0.8017648735609935,
+        "max": 0.8017648735609935
+      },
+      "thecuberesearch.com": {
+        "mean": 0.7579469275257241,
+        "median": 0.7579469275257241,
+        "min": 0.7579469275257241,
+        "max": 0.7579469275257241
+      },
+      "thehotfixpodcast.substack.com": {
+        "mean": 0.5778301246699519,
+        "median": 0.5778301246699519,
+        "min": 0.5778301246699519,
+        "max": 0.5778301246699519
+      },
+      "turingpost.substack.com": {
+        "mean": 0.8045763589404333,
+        "median": 0.8045763589404333,
+        "min": 0.8045763589404333,
+        "max": 0.8045763589404333
+      },
+      "uk-podcasts.co.uk": {
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "vanishinggradients.fireside.fm": {
+        "mean": 0.9339464423890352,
+        "median": 0.9339464423890352,
+        "min": 0.9339464423890352,
+        "max": 0.9339464423890352
+      },
+      "www.airealizedsummit.com": {
+        "mean": 0.994316302335162,
+        "median": 0.994316302335162,
+        "min": 0.994316302335162,
+        "max": 0.994316302335162
+      },
+      "www.danielphilipjohnson.com": {
+        "mean": 0.831033020216222,
+        "median": 0.831033020216222,
+        "min": 0.831033020216222,
+        "max": 0.831033020216222
+      },
+      "www.digitalapplied.com": {
+        "mean": 0.7768136870136051,
+        "median": 0.7768136870136051,
+        "min": 0.7768136870136051,
+        "max": 0.7768136870136051
+      },
+      "www.earley.com": {
+        "mean": 0.8751114891640174,
+        "median": 0.8751114891640174,
+        "min": 0.8751114891640174,
+        "max": 0.8751114891640174
+      },
+      "www.edisonresearch.com": {
+        "mean": 0.8076848622032908,
+        "median": 0.8076848622032908,
+        "min": 0.8076848622032908,
+        "max": 0.8076848622032908
+      },
+      "www.it-labs.com": {
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "www.ivoox.com": {
+        "mean": 0.39596392769786243,
+        "median": 0.39596392769786243,
+        "min": 0.39596392769786243,
+        "max": 0.39596392769786243
+      },
+      "www.kalviumlabs.ai": {
+        "mean": 0.8819289772287063,
+        "median": 0.8819289772287063,
+        "min": 0.8819289772287063,
+        "max": 0.8819289772287063
+      },
+      "www.moderndescartes.com": {
+        "mean": 0.9666202691433936,
+        "median": 0.9666202691433936,
+        "min": 0.9666202691433936,
+        "max": 0.9666202691433936
+      },
+      "www.orinococomms.com": {
+        "mean": 0.7999327224836797,
+        "median": 0.7999327224836797,
+        "min": 0.7999327224836797,
+        "max": 0.7999327224836797
+      },
+      "www.podcast.de": {
+        "mean": 0.030440232768531198,
+        "median": 0.030440232768531198,
+        "min": 0.030440232768531198,
+        "max": 0.030440232768531198
+      },
+      "www.sundeepteki.org": {
+        "mean": 0.7985380190741445,
+        "median": 0.7985380190741445,
+        "min": 0.7985380190741445,
+        "max": 0.7985380190741445
+      },
+      "www.thoughtspot.com": {
+        "mean": 0.8760486759171567,
+        "median": 0.8760486759171567,
+        "min": 0.8760486759171567,
+        "max": 0.8760486759171567
+      },
+      "www.tryexponent.com": {
+        "mean": 0.23098397362272094,
+        "median": 0.23098397362272094,
+        "min": 0.23098397362272094,
+        "max": 0.23098397362272094
+      },
+      "www.yuan-meng.com": {
+        "mean": 0.8531708703856596,
+        "median": 0.8531708703856596,
+        "min": 0.8531708703856596,
+        "max": 0.8531708703856596
+      },
+      "yuvalyeret.com": {
+        "mean": 0.7470495867541017,
+        "median": 0.7470495867541017,
+        "min": 0.7470495867541017,
+        "max": 0.7470495867541017
+      }
+    }
+  },
+  "results": [
+    {
+      "url": "https://www.youtube.com/watch?v=z7T1pCxgvlA",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "strategy": "youtube-rusty_ytdl",
+      "success": true,
+      "overall_score": 0.3915866007986752,
+      "token_f1": 0.3447669305189094,
+      "sequence_ratio": 0.035169381949831914,
+      "heading_recall": 1.0,
+      "length_score": 0.5176609105180534,
+      "reference_chars": 2638,
+      "output_chars": 5096,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/000-www_youtube_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/6c07189f77664e4d.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "strategy": "youtube-rusty_ytdl",
+      "success": true,
+      "overall_score": 0.4125783485948872,
+      "token_f1": 0.35981735159817346,
+      "sequence_ratio": 0.02920353982300885,
+      "heading_recall": 1.0,
+      "length_score": 0.6223977027997128,
+      "reference_chars": 2601,
+      "output_chars": 4179,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/001-www_youtube_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/95f838bf44f847f7.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/shorts/z5YrGY-mNN0",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "strategy": "youtube-rusty_ytdl",
+      "success": true,
+      "overall_score": 0.45538625054991727,
+      "token_f1": 0.3720930232558139,
+      "sequence_ratio": 0.16547619047619047,
+      "heading_recall": 1.0,
+      "length_score": 0.6438356164383562,
+      "reference_chars": 658,
+      "output_chars": 1022,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/002-www_youtube_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/d70f53ff9d40e83e.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ZuQHYTDDuTU",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "strategy": "youtube-rusty_ytdl",
+      "success": true,
+      "overall_score": 0.44130059682595557,
+      "token_f1": 0.32552954292084724,
+      "sequence_ratio": 0.04647836968180193,
+      "heading_recall": 1.0,
+      "length_score": 0.8879514006074924,
+      "reference_chars": 2631,
+      "output_chars": 2963,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/003-www_youtube_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/7b9902608a02f7c9.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=rzAGo_XML1U",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "strategy": "youtube-rusty_ytdl",
+      "success": true,
+      "overall_score": 0.4162210034115376,
+      "token_f1": 0.32908704883227174,
+      "sequence_ratio": 0.03696560591449695,
+      "heading_recall": 1.0,
+      "length_score": 0.7259361997226075,
+      "reference_chars": 2617,
+      "output_chars": 3605,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/004-www_youtube_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/dc56af33752f4f22.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=cv9xYnurGIc",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "strategy": "youtube-rusty_ytdl",
+      "success": true,
+      "overall_score": 0.4101496659680884,
+      "token_f1": 0.3216216216216216,
+      "sequence_ratio": 0.06786608972899112,
+      "heading_recall": 1.0,
+      "length_score": 0.6563560920407393,
+      "reference_chars": 2651,
+      "output_chars": 1740,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/005-www_youtube_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/de92ec57339831e3.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=sni_-awZTgw",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "strategy": "youtube-rusty_ytdl",
+      "success": true,
+      "overall_score": 0.4352622089358641,
+      "token_f1": 0.325782092772384,
+      "sequence_ratio": 0.034987504462691894,
+      "heading_recall": 1.0,
+      "length_score": 0.866089273817455,
+      "reference_chars": 2600,
+      "output_chars": 3002,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/006-www_youtube_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/8aa043bea84d6018.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=-5_6HQR0WhA",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "strategy": "youtube-rusty_ytdl",
+      "success": true,
+      "overall_score": 0.461894909868348,
+      "token_f1": 0.4527777777777778,
+      "sequence_ratio": 0.055776892430278883,
+      "heading_recall": 1.0,
+      "length_score": 0.6280045784051889,
+      "reference_chars": 2621,
+      "output_chars": 1646,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/007-www_youtube_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/b2ef31db26c3a3a0.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=h98dLRJFHMM",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "strategy": "youtube-rusty_ytdl",
+      "success": true,
+      "overall_score": 0.5358231554918425,
+      "token_f1": 0.5147579693034239,
+      "sequence_ratio": 0.05707584050039093,
+      "heading_recall": 1.0,
+      "length_score": 0.9327540612013601,
+      "reference_chars": 2647,
+      "output_chars": 2469,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/008-www_youtube_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/cc84d5a777fb3170.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ifPjwirY8kY",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "strategy": "youtube-rusty_ytdl",
+      "success": true,
+      "overall_score": 0.442612122168455,
+      "token_f1": 0.36243386243386244,
+      "sequence_ratio": 0.062285223367697595,
+      "heading_recall": 1.0,
+      "length_score": 0.7596371882086168,
+      "reference_chars": 2646,
+      "output_chars": 2010,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/009-www_youtube_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/3d2e1ad863bebc27.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=B26CwKm5C1k",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "strategy": "youtube-rusty_ytdl",
+      "success": true,
+      "overall_score": 0.3742372926952895,
+      "token_f1": 0.29471733086190915,
+      "sequence_ratio": 0.035622722979355016,
+      "heading_recall": 1.0,
+      "length_score": 0.5513920870839438,
+      "reference_chars": 2634,
+      "output_chars": 4777,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/010-www_youtube_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/91121856c627c0cb.md",
+      "error": null
+    },
+    {
+      "url": "https://podscan.fm/podcasts/lennys-podcast-product-career-growth/episodes/the-100-person-ai-lab-that-became-anthropic-and-googles-secret-weapon-edwin-chen-surge-ai",
+      "domain": "podscan.fm",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.27807673331165883,
+      "token_f1": 0.33938100320170755,
+      "sequence_ratio": 0.3591663407274962,
+      "heading_recall": 0.0,
+      "length_score": 0.2370913112601092,
+      "reference_chars": 14467,
+      "output_chars": 3430,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/011-podscan_fm.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/ac0cc54a8fd76e02.md",
+      "error": null
+    },
+    {
+      "url": "https://podcasts.apple.com/us/podcast/why-most-ai-products-fail-lessons-from-50-ai-deployments/id1627920305?i=1000744678894",
+      "domain": "podcasts.apple.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.8106126357520695,
+      "token_f1": 0.9581993569131833,
+      "sequence_ratio": 0.9544891385149087,
+      "heading_recall": 0.0,
+      "length_score": 0.9386709367493995,
+      "reference_chars": 6245,
+      "output_chars": 5862,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/012-podcasts_apple_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/4699b801eb76ce54.md",
+      "error": null
+    },
+    {
+      "url": "https://pod.wave.co/podcast/lennys-podcast-product-career-growth-b65486a6-7cff-4966-bbea-2bc239e90aa4/what-openai-and-google-engineers-learned-deploying-50-ai-products-in-production",
+      "domain": "pod.wave.co",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.019718551525073208,
+      "token_f1": 0.027901077996195307,
+      "sequence_ratio": 0.017475903071795335,
+      "heading_recall": 0.0,
+      "length_score": 0.018627271058909895,
+      "reference_chars": 10898,
+      "output_chars": 203,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/013-pod_wave_co.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/b729c89fdbaa13e4.md",
+      "error": null
+    },
+    {
+      "url": "https://getpodcast.com/podcast/the-engineering-leadership-podcast/from-research-lab-to-record-breaking-product-how-openai-engineered-for_1d326d694f",
+      "domain": "getpodcast.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.22738058086078386,
+      "token_f1": 0.21119270701443402,
+      "sequence_ratio": 0.42576536484309063,
+      "heading_recall": 0.047619047619047616,
+      "length_score": 0.12506442900439152,
+      "reference_chars": 48503,
+      "output_chars": 6066,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/014-getpodcast_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/1c11bfbf4b29baea.md",
+      "error": null
+    },
+    {
+      "url": "https://launchpod.logrocket.com/linear-secret-building-powerful-ai-products-nan-yu",
+      "domain": "launchpod.logrocket.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.8505944794024792,
+      "token_f1": 0.8610169491525423,
+      "sequence_ratio": 0.8093480934809348,
+      "heading_recall": 1.0,
+      "length_score": 0.7386655260906758,
+      "reference_chars": 1727,
+      "output_chars": 2338,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/015-launchpod_logrocket_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/edc66f8f839a3bbd.md",
+      "error": null
+    },
+    {
+      "url": "https://open.spotify.com/show/0MKtLYdJs6CABS9wnNZPUx",
+      "domain": "open.spotify.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.15113767559221405,
+      "token_f1": 0.0,
+      "sequence_ratio": 0.003891827162957789,
+      "heading_recall": 1.0,
+      "length_score": 0.00109812534316417,
+      "reference_chars": 42,
+      "output_chars": 38247,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/016-open_spotify_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/75365cb2b5343536.md",
+      "error": null
+    },
+    {
+      "url": "https://creators.spotify.com/pod/profile/engineeringleadership/episodes/Building-Autonomous-Teams--Engineering-Career-Ladders-with-Sri-Viswanath-65-e18ko44",
+      "domain": "creators.spotify.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.03985132959475121,
+      "token_f1": 0.051706927530445194,
+      "sequence_ratio": 0.04888533018669139,
+      "heading_recall": 0.0,
+      "length_score": 0.029079197729186813,
+      "reference_chars": 128236,
+      "output_chars": 3729,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/017-creators_spotify_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/b59b123d9ef237d6.md",
+      "error": null
+    },
+    {
+      "url": "https://sfelc.com/podcasts",
+      "domain": "sfelc.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.4332169665864166,
+      "token_f1": 0.8158269285510958,
+      "sequence_ratio": 0.07785585473540203,
+      "heading_recall": 0.08695652173913043,
+      "length_score": 0.22391604529135598,
+      "reference_chars": 12162,
+      "output_chars": 54315,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/018-sfelc_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/a9de4e0d131321e4.md",
+      "error": null
+    },
+    {
+      "url": "https://vanishinggradients.fireside.fm/39",
+      "domain": "vanishinggradients.fireside.fm",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.9339464423890352,
+      "token_f1": 0.9375907111756169,
+      "sequence_ratio": 0.8839851431068385,
+      "heading_recall": 1.0,
+      "length_score": 0.9402289105553201,
+      "reference_chars": 2218,
+      "output_chars": 2359,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/019-vanishinggradients_fireside_fm.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/4dc44f6ddb96152f.md",
+      "error": null
+    },
+    {
+      "url": "https://fundbuildscale.podbean.com/e/building-an-enterprise-ai-startup-from-day-zero/",
+      "domain": "fundbuildscale.podbean.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.8594818729370198,
+      "token_f1": 0.8688741721854304,
+      "sequence_ratio": 0.8596767836026803,
+      "heading_recall": 0.8,
+      "length_score": 0.890461997019374,
+      "reference_chars": 2390,
+      "output_chars": 2684,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/020-fundbuildscale_podbean_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/61cd6f0327c0d1d6.md",
+      "error": null
+    },
+    {
+      "url": "https://nzpod.co.nz/podcast/lenny-s-podcast-product-growth-career/why-most-ai-products-fail-lessons-from-50-ai-deplo",
+      "domain": "nzpod.co.nz",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "failed",
+      "success": false,
+      "overall_score": 0.0,
+      "token_f1": 0.0,
+      "sequence_ratio": 0.0,
+      "heading_recall": 0.0,
+      "length_score": 0.0,
+      "reference_chars": 6406,
+      "output_chars": 0,
+      "markdown_output_path": null,
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/86eb442333d122db.md",
+      "error": "non-success status for https://nzpod.co.nz/podcast/lenny-s-podcast-product-growth-career/why-most-ai-products-fail-lessons-from-50-ai-deplo"
+    },
+    {
+      "url": "https://plinkhq.com/i/1627920305/e/1000744678894",
+      "domain": "plinkhq.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.8151441303845453,
+      "token_f1": 0.8401709401709402,
+      "sequence_ratio": 0.8049205190136494,
+      "heading_recall": 0.8333333333333334,
+      "length_score": 0.7389138503613987,
+      "reference_chars": 7565,
+      "output_chars": 10238,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/022-plinkhq_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/8b391b11920889c7.md",
+      "error": null
+    },
+    {
+      "url": "https://aireadyrva.com/podcast",
+      "domain": "aireadyrva.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-metadata",
+      "success": true,
+      "overall_score": 0.1934809572609788,
+      "token_f1": 0.2537313432835821,
+      "sequence_ratio": 0.07589285714285714,
+      "heading_recall": 0.0,
+      "length_score": 0.40219092331768386,
+      "reference_chars": 639,
+      "output_chars": 257,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/023-aireadyrva_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/e7cbe02ca17dc594.md",
+      "error": null
+    },
+    {
+      "url": "https://arize.com/ai-podcasts/",
+      "domain": "arize.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.9717458530750542,
+      "token_f1": 0.9835696601395453,
+      "sequence_ratio": 0.9648118671046838,
+      "heading_recall": 0.9375,
+      "length_score": 0.9820769282405855,
+      "reference_chars": 14630,
+      "output_chars": 14897,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/024-arize_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/e5e81dba7adfbf53.md",
+      "error": null
+    },
+    {
+      "url": "https://clarivate.com/blog/demonstrating-real-world-outcomes-and-the-future-of-research-evaluation-podcast",
+      "domain": "clarivate.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.49044332505281885,
+      "token_f1": 0.5891126025354213,
+      "sequence_ratio": 0.5376757358147062,
+      "heading_recall": 0.09090909090909091,
+      "length_score": 0.5152490421455939,
+      "reference_chars": 6525,
+      "output_chars": 3362,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/025-clarivate_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/daff61571a9f1560.md",
+      "error": null
+    },
+    {
+      "url": "https://dexibit.com/resource-types/podcast/",
+      "domain": "dexibit.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.088328938411377,
+      "token_f1": 0.11542214581106826,
+      "sequence_ratio": 0.10995,
+      "heading_recall": 0.0,
+      "length_score": 0.05934315197597519,
+      "reference_chars": 813826,
+      "output_chars": 48295,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/026-dexibit_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/72ab1e487cf6b0ad.md",
+      "error": null
+    },
+    {
+      "url": "https://en.zarza.com/podcasts/machine-learning-engineered-1064836/episodio/managing-data-science-teams-and-hiring-machine-learning-engineers-with-harikrishna-narayanan-yc-stealth-startup",
+      "domain": "en.zarza.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.5647718339093007,
+      "token_f1": 0.6377204884667571,
+      "sequence_ratio": 0.6516252390057361,
+      "heading_recall": 0.25,
+      "length_score": 0.5159420289855072,
+      "reference_chars": 3450,
+      "output_chars": 1780,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/027-en_zarza_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/47bc1bad8030f8da.md",
+      "error": null
+    },
+    {
+      "url": "https://highsignal.fireside.fm/35",
+      "domain": "highsignal.fireside.fm",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.7743236065643453,
+      "token_f1": 0.8129496402877697,
+      "sequence_ratio": 0.7553241836251775,
+      "heading_recall": 0.8,
+      "length_score": 0.6644348168570303,
+      "reference_chars": 1687,
+      "output_chars": 2539,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/028-highsignal_fireside_fm.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/355861290f2edaa8.md",
+      "error": null
+    },
+    {
+      "url": "https://leadwithaipodcast.com/blog/he-built-an-ai-interviewer-that-found-the-best-candidate-out-of-1200-and-no-human-would-have-spotted-them-1",
+      "domain": "leadwithaipodcast.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.8318629053008088,
+      "token_f1": 0.9812206572769953,
+      "sequence_ratio": 0.981175613310663,
+      "heading_recall": 0.0,
+      "length_score": 0.966798041323301,
+      "reference_chars": 8373,
+      "output_chars": 8095,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/029-leadwithaipodcast_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/3da0cd8a98a9765e.md",
+      "error": null
+    },
+    {
+      "url": "https://metacast.app/podcast/the-engineering-leadership-podcast/hereHPAV",
+      "domain": "metacast.app",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.0629407904451424,
+      "token_f1": 0.07283274250725104,
+      "sequence_ratio": 0.07158815420449684,
+      "heading_recall": 0.03125,
+      "length_score": 0.050543451771701525,
+      "reference_chars": 20517,
+      "output_chars": 1037,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/030-metacast_app.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/663e8447e7b34691.md",
+      "error": null
+    },
+    {
+      "url": "https://music.amazon.com/podcasts/9cd1a9fe-22c4-4a85-9d5a-f2fb74176c9f/ai-with-bry-podcast",
+      "domain": "music.amazon.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.3580857701620413,
+      "token_f1": 0.2857142857142857,
+      "sequence_ratio": 0.23728813559322035,
+      "heading_recall": 1.0,
+      "length_score": 0.1346153846153846,
+      "reference_chars": 14,
+      "output_chars": 104,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/031-music_amazon_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/bd594496cb060383.md",
+      "error": null
+    },
+    {
+      "url": "https://podcast.pragmaticmarketing.com/e/building-the-products-of-the-future-with-ai-with-jonathan-evens-of-google-deepmind/",
+      "domain": "podcast.pragmaticmarketing.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.7792953065982283,
+      "token_f1": 0.8625792811839323,
+      "sequence_ratio": 0.8211357424840571,
+      "heading_recall": 0.3333333333333333,
+      "length_score": 0.9056712962962963,
+      "reference_chars": 1565,
+      "output_chars": 1728,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/032-podcast_pragmaticmarketing_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/9f353fa2fd38faa9.md",
+      "error": null
+    },
+    {
+      "url": "https://podscript.ai/podcasts/lex-fridman-podcast/367-sam-altman-openai-ceo-on-gpt-4-chatgpt-and-the-future-of-ai/",
+      "domain": "podscript.ai",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.9296092224539811,
+      "token_f1": 0.9978508192519274,
+      "sequence_ratio": 0.9668,
+      "heading_recall": 0.625,
+      "length_score": 0.9675090252707582,
+      "reference_chars": 143648,
+      "output_chars": 148472,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/033-podscript_ai.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/2abef9468c5d098d.md",
+      "error": null
+    },
+    {
+      "url": "https://shapeoftomorrow.substack.com/p/podcast-episode-174-your-ai-isnt",
+      "domain": "shapeoftomorrow.substack.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.681150969809386,
+      "token_f1": 0.8200692041522492,
+      "sequence_ratio": 0.798201533985718,
+      "heading_recall": 0.0,
+      "length_score": 0.750462962962963,
+      "reference_chars": 2160,
+      "output_chars": 1621,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/034-shapeoftomorrow_substack_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/795a3d888ee899af.md",
+      "error": null
+    },
+    {
+      "url": "https://thecuberesearch.com/podcasts/appdevangle-where-innovation-meets-insight-in-application-development/",
+      "domain": "thecuberesearch.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.7579469275257241,
+      "token_f1": 0.9283684386492811,
+      "sequence_ratio": 0.8645,
+      "heading_recall": 0.0,
+      "length_score": 0.8270408675569836,
+      "reference_chars": 82365,
+      "output_chars": 99590,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/035-thecuberesearch_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/00c6aa0c66dcc67f.md",
+      "error": null
+    },
+    {
+      "url": "https://thehotfixpodcast.substack.com/p/we-spent-years-on-an-ai-featureand",
+      "domain": "thehotfixpodcast.substack.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.5778301246699519,
+      "token_f1": 0.6806056236481614,
+      "sequence_ratio": 0.6625550660792952,
+      "heading_recall": 0.0,
+      "length_score": 0.7061255167230365,
+      "reference_chars": 5322,
+      "output_chars": 3758,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/036-thehotfixpodcast_substack_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/f4751ada1e1b7c48.md",
+      "error": null
+    },
+    {
+      "url": "https://uk-podcasts.co.uk/podcast/deepmind-the-podcast/gemini-2-0-and-the-evolution-of-agentic-ai-with-or",
+      "domain": "uk-podcasts.co.uk",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "failed",
+      "success": false,
+      "overall_score": 0.0,
+      "token_f1": 0.0,
+      "sequence_ratio": 0.0,
+      "heading_recall": 0.0,
+      "length_score": 0.0,
+      "reference_chars": 2448,
+      "output_chars": 0,
+      "markdown_output_path": null,
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/1a4ea95114164c35.md",
+      "error": "non-success status for https://uk-podcasts.co.uk/podcast/deepmind-the-podcast/gemini-2-0-and-the-evolution-of-agentic-ai-with-or"
+    },
+    {
+      "url": "https://www.airealizedsummit.com/podcast",
+      "domain": "www.airealizedsummit.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.994316302335162,
+      "token_f1": 0.997633056062758,
+      "sequence_ratio": 0.9925,
+      "heading_recall": 0.9871794871794872,
+      "length_score": 0.9945300268666524,
+      "reference_chars": 51454,
+      "output_chars": 51737,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/038-www_airealizedsummit_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/9658100e26af106b.md",
+      "error": null
+    },
+    {
+      "url": "https://www.earley.com/insights/earley-ai-podcast-episode-27-gordon-hart",
+      "domain": "www.earley.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.8751114891640174,
+      "token_f1": 0.9891304347826088,
+      "sequence_ratio": 0.92135,
+      "heading_recall": 0.3333333333333333,
+      "length_score": 0.9977686234122898,
+      "reference_chars": 29130,
+      "output_chars": 29065,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/039-www_earley_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/42dd1bad3ae7afe1.md",
+      "error": null
+    },
+    {
+      "url": "https://www.edisonresearch.com/is-ai-the-newest-talent-in-podcast-narration/",
+      "domain": "www.edisonresearch.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.8076848622032908,
+      "token_f1": 0.9074355083459786,
+      "sequence_ratio": 0.88,
+      "heading_recall": 0.2,
+      "length_score": 0.9955925563173359,
+      "reference_chars": 2042,
+      "output_chars": 2033,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/040-www_edisonresearch_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/7fc85911e5d94c2b.md",
+      "error": null
+    },
+    {
+      "url": "https://www.it-labs.com/podcast-how-to-structure-a-growing-ai-company-with-lightricks-co-founder-cto-yaron-inger/",
+      "domain": "www.it-labs.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "failed",
+      "success": false,
+      "overall_score": 0.0,
+      "token_f1": 0.0,
+      "sequence_ratio": 0.0,
+      "heading_recall": 0.0,
+      "length_score": 0.0,
+      "reference_chars": 3597,
+      "output_chars": 0,
+      "markdown_output_path": null,
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/7afa5938ef35b733.md",
+      "error": "non-success status for https://www.it-labs.com/podcast-how-to-structure-a-growing-ai-company-with-lightricks-co-founder-cto-yaron-inger/"
+    },
+    {
+      "url": "https://www.ivoox.com/en/ep-83-owning-the-system-of-record-ai-native-audios-mp3_rf_171247104_1.html",
+      "domain": "www.ivoox.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.39596392769786243,
+      "token_f1": 0.49817739975698666,
+      "sequence_ratio": 0.4892703862660944,
+      "heading_recall": 0.0,
+      "length_score": 0.3297766749379652,
+      "reference_chars": 4030,
+      "output_chars": 1329,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/042-www_ivoox_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/b81df2c26a16a165.md",
+      "error": null
+    },
+    {
+      "url": "https://www.orinococomms.com/research-comms-blog-podcast/professor-mark-reed",
+      "domain": "www.orinococomms.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.7999327224836797,
+      "token_f1": 0.9165337586390218,
+      "sequence_ratio": 0.903173311635476,
+      "heading_recall": 0.25,
+      "length_score": 0.8279946879150066,
+      "reference_chars": 18825,
+      "output_chars": 15587,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/043-www_orinococomms_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/ba1f64d72f2e8d8e.md",
+      "error": null
+    },
+    {
+      "url": "https://www.podcast.de/episode/696081238/012-successfully-defining-okrs-with-the-help-of-the-ai-okr-coach-with-kathrin-falkenstein-notebooklm-version",
+      "domain": "www.podcast.de",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.030440232768531198,
+      "token_f1": 0.025260029717682025,
+      "sequence_ratio": 0.007858546168958742,
+      "heading_recall": 0.0,
+      "length_score": 0.11405721902223069,
+      "reference_chars": 2396,
+      "output_chars": 21007,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/044-www_podcast_de.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/d6ce1d31bb0cff93.md",
+      "error": null
+    },
+    {
+      "url": "https://www.thoughtspot.com/data-and-ai-chief/podcast",
+      "domain": "www.thoughtspot.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.8760486759171567,
+      "token_f1": 0.8996074468498583,
+      "sequence_ratio": 0.7948,
+      "heading_recall": 0.9925373134328358,
+      "length_score": 0.8242981854653008,
+      "reference_chars": 80543,
+      "output_chars": 97711,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/045-www_thoughtspot_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/e97f409c14e418db.md",
+      "error": null
+    },
+    {
+      "url": "https://podscan.fm/podcasts/the-engineering-leadership-podcast/episodes/how-openais-engineering-org-is-reshaping-teams-roles-and-workflows-w-sulman-choudhry-250",
+      "domain": "podscan.fm",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.6479663006541216,
+      "token_f1": 0.8066938425230636,
+      "sequence_ratio": 0.7667654091866234,
+      "heading_recall": 0.0,
+      "length_score": 0.6217514614805811,
+      "reference_chars": 17277,
+      "output_chars": 10742,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/046-podscan_fm.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/046a3a07a3aed3c1.md",
+      "error": null
+    },
+    {
+      "url": "https://podcasts.apple.com/us/podcast/the-engineering-leadership-podcast/id1481996448",
+      "domain": "podcasts.apple.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.21806728435480938,
+      "token_f1": 0.29233804669516605,
+      "sequence_ratio": 0.239467680608365,
+      "heading_recall": 0.0,
+      "length_score": 0.17765495459928937,
+      "reference_chars": 35462,
+      "output_chars": 6300,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/047-podcasts_apple_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/b2cc63a107a12491.md",
+      "error": null
+    },
+    {
+      "url": "https://pod.wave.co/podcast/lennys-podcast-product-career-growth/why-ai-evals-are-the-hottest-new-skill-for-product-builders-hamel-husain-shreya-shankar-creators-of-",
+      "domain": "pod.wave.co",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "failed",
+      "success": false,
+      "overall_score": 0.0,
+      "token_f1": 0.0,
+      "sequence_ratio": 0.0,
+      "heading_recall": 0.0,
+      "length_score": 0.0,
+      "reference_chars": 193,
+      "output_chars": 0,
+      "markdown_output_path": null,
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/a45fbe83d20380b0.md",
+      "error": "failed to decode body for https://pod.wave.co/podcast/lennys-podcast-product-career-growth/why-ai-evals-are-the-hottest-new-skill-for-product-builders-hamel-husain-shreya-shankar-creators-of-"
+    },
+    {
+      "url": "https://getpodcast.com/podcast/the-engineering-leadership-podcast/how-openais-engineering-org-is-reshaping-teams-roles-and-workflows-w-s_4f399d8b89",
+      "domain": "getpodcast.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.20599221440580648,
+      "token_f1": 0.1766803116334346,
+      "sequence_ratio": 0.37851126425663967,
+      "heading_recall": 0.1111111111111111,
+      "length_score": 0.101277276266229,
+      "reference_chars": 47523,
+      "output_chars": 4813,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/049-getpodcast_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/5366da8741bd1da9.md",
+      "error": null
+    },
+    {
+      "url": "http://launchpod.logrocket.com/how-to-avoid-ai-fomo-like-patagonia-angela-clark",
+      "domain": "launchpod.logrocket.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.8875284390119476,
+      "token_f1": 0.8958333333333334,
+      "sequence_ratio": 0.8607115821347464,
+      "heading_recall": 1.0,
+      "length_score": 0.7948369565217391,
+      "reference_chars": 2340,
+      "output_chars": 2944,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/050-launchpod_logrocket_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/83f776f4e6aad411.md",
+      "error": null
+    },
+    {
+      "url": "https://open.spotify.com/show/1wIytRQ4Ub8McXSP1iDwVX",
+      "domain": "open.spotify.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.1523970779956932,
+      "token_f1": 0.0019599608007839844,
+      "sequence_ratio": 0.005385190725504862,
+      "heading_recall": 1.0,
+      "length_score": 0.0011253196930946288,
+      "reference_chars": 55,
+      "output_chars": 48875,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/051-open_spotify_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/be8283d1cc83f94f.md",
+      "error": null
+    },
+    {
+      "url": "https://creators.spotify.com/pod/profile/jasdeep-garcha/episodes/Episode-52---Ken-Babcock-Tango-ai-e2tf2sg",
+      "domain": "creators.spotify.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.040671394332711344,
+      "token_f1": 0.05937696006690362,
+      "sequence_ratio": 0.03646761427209813,
+      "heading_recall": 0.0,
+      "length_score": 0.03223239156386789,
+      "reference_chars": 128163,
+      "output_chars": 4131,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/052-creators_spotify_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/f3abfc0e797f18c8.md",
+      "error": null
+    },
+    {
+      "url": "https://www.linkedin.com/posts/lennyrachitsky_building-ai-product-sense-part-2-activity-7427022933702762496-pu01",
+      "domain": "www.linkedin.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.2262965698294935,
+      "token_f1": 0.13048306496390893,
+      "sequence_ratio": 0.13257318673363197,
+      "heading_recall": 0.8,
+      "length_score": 0.09623929274884338,
+      "reference_chars": 21831,
+      "output_chars": 2101,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/053-www_linkedin_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/73ed1421f268b0f0.md",
+      "error": null
+    },
+    {
+      "url": "https://medium.com/@deepthi.sudharsan/inside-ai-interviews-stories-patterns-and-what-actually-matters-555684c38598",
+      "domain": "medium.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.7990812003754992,
+      "token_f1": 0.968503937007874,
+      "sequence_ratio": 0.7158425736448865,
+      "heading_recall": 0.25,
+      "length_score": 0.9786252354048964,
+      "reference_chars": 10620,
+      "output_chars": 10393,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/054-medium_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/29cdadfa9f3441f5.md",
+      "error": null
+    },
+    {
+      "url": "https://hugobowne.substack.com/p/episode-70-1400-production-ai-deployments",
+      "domain": "hugobowne.substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.6479740167250607,
+      "token_f1": 0.8058864751226349,
+      "sequence_ratio": 0.7105769230769231,
+      "heading_recall": 0.0,
+      "length_score": 0.7178724810042947,
+      "reference_chars": 4346,
+      "output_chars": 6054,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/055-hugobowne_substack_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/c425d95cf1d30153.md",
+      "error": null
+    },
+    {
+      "url": "https://aakashgupta.medium.com/i-interviewed-100-ai-product-managers-heres-what-they-actually-do-9e55d393a287",
+      "domain": "aakashgupta.medium.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.727531277322184,
+      "token_f1": 0.7905882352941177,
+      "sequence_ratio": 0.7810894141829393,
+      "heading_recall": 0.4,
+      "length_score": 0.7766281192939745,
+      "reference_chars": 1643,
+      "output_chars": 1276,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/056-aakashgupta_medium_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/b7b884f92f8c3383.md",
+      "error": null
+    },
+    {
+      "url": "https://elevateyouraiq.substack.com/p/ep-77-distilling-interview-data-into",
+      "domain": "elevateyouraiq.substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.7616483973221122,
+      "token_f1": 0.9054263565891473,
+      "sequence_ratio": 0.8799099606077659,
+      "heading_recall": 0.0,
+      "length_score": 0.8948603113670293,
+      "reference_chars": 4689,
+      "output_chars": 4196,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/057-elevateyouraiq_substack_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/186b4257f4072ba7.md",
+      "error": null
+    },
+    {
+      "url": "https://harshalpatil.substack.com/p/premortem-ai-pm-role-growth-startup-25q4",
+      "domain": "harshalpatil.substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.7033198045249464,
+      "token_f1": 0.8541423570595098,
+      "sequence_ratio": 0.7733118971061094,
+      "heading_recall": 0.0,
+      "length_score": 0.8375184638109305,
+      "reference_chars": 5670,
+      "output_chars": 6770,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/058-harshalpatil_substack_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/ec2f73ab871c39f4.md",
+      "error": null
+    },
+    {
+      "url": "https://natesnewsletter.substack.com/p/the-complete-ai-interview-guide-what",
+      "domain": "natesnewsletter.substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.7526560418255517,
+      "token_f1": 0.9035294117647059,
+      "sequence_ratio": 0.8912101910828025,
+      "heading_recall": 0.0,
+      "length_score": 0.8217683917382224,
+      "reference_chars": 4309,
+      "output_chars": 3541,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/059-natesnewsletter_substack_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/54316580f5040c7f.md",
+      "error": null
+    },
+    {
+      "url": "https://productimpactpod.substack.com/p/75-of-enterprise-ai-fails-the-fix",
+      "domain": "productimpactpod.substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.7268194694133773,
+      "token_f1": 0.8807041927264303,
+      "sequence_ratio": 0.8339998688782535,
+      "heading_recall": 0.0,
+      "length_score": 0.8133507697794686,
+      "reference_chars": 13683,
+      "output_chars": 16823,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/060-productimpactpod_substack_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/3d7a66317347ba0c.md",
+      "error": null
+    },
+    {
+      "url": "https://substack.com/home/post/p-187741497?autoPlay=true",
+      "domain": "substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.8017648735609935,
+      "token_f1": 0.9893352065904593,
+      "sequence_ratio": 0.83765,
+      "heading_recall": 0.0,
+      "length_score": 0.9810102039685793,
+      "reference_chars": 88545,
+      "output_chars": 90259,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/061-substack_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/88f80d37b50ac920.md",
+      "error": null
+    },
+    {
+      "url": "https://turingpost.substack.com/p/inside-reflection-ai-the-20b-open",
+      "domain": "turingpost.substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.8045763589404333,
+      "token_f1": 0.946547015216543,
+      "sequence_ratio": 0.9421062084655452,
+      "heading_recall": 0.0,
+      "length_score": 0.9540243331773515,
+      "reference_chars": 8548,
+      "output_chars": 8155,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/062-turingpost_substack_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/0c9b0327a8a50f69.md",
+      "error": null
+    },
+    {
+      "url": "https://www.linkedin.com/posts/kapilsurlaker_episode-183-ai-will-not-save-you-reinvention-activity-7432848510179241986-t6_8",
+      "domain": "www.linkedin.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.48351816246931634,
+      "token_f1": 0.47791677304059227,
+      "sequence_ratio": 0.4335766987290918,
+      "heading_recall": 0.7142857142857143,
+      "length_score": 0.3527905518394649,
+      "reference_chars": 19136,
+      "output_chars": 6751,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/063-www_linkedin_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/afa1d4a701369bd2.md",
+      "error": null
+    },
+    {
+      "url": "https://medium.com/@theBotGroup/why-85-of-ml-projects-fail-and-how-yours-wont-f53c02d0875e",
+      "domain": "medium.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.7004900431544067,
+      "token_f1": 0.8315018315018315,
+      "sequence_ratio": 0.8302088912694162,
+      "heading_recall": 0.0,
+      "length_score": 0.791746641074856,
+      "reference_chars": 2084,
+      "output_chars": 1650,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/064-medium_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/719fec325cccf72f.md",
+      "error": null
+    },
+    {
+      "url": "https://hugobowne.substack.com/p/episode-59-patterns-and-anti-patterns-340",
+      "domain": "hugobowne.substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.6924758548883828,
+      "token_f1": 0.7931034482758621,
+      "sequence_ratio": 0.7481219619973487,
+      "heading_recall": 0.0,
+      "length_score": 0.990325417766051,
+      "reference_chars": 2274,
+      "output_chars": 2252,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/065-hugobowne_substack_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/4cd579d31e19700a.md",
+      "error": null
+    },
+    {
+      "url": "https://www.linkedin.com/posts/gregnudelman_something-interesting-is-happening-in-ai-activity-7425574887034937345-1IL5",
+      "domain": "www.linkedin.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.19945592706171394,
+      "token_f1": 0.13669769720725133,
+      "sequence_ratio": 0.16391493254058997,
+      "heading_recall": 0.5714285714285714,
+      "length_score": 0.07499296312678437,
+      "reference_chars": 24869,
+      "output_chars": 1865,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/066-www_linkedin_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/10f0da4a9f4f426e.md",
+      "error": null
+    },
+    {
+      "url": "https://medium.com/@ivanperaltasantana/from-big-crews-to-fast-ships-org-design-after-ai-cabb3fe55ee6",
+      "domain": "medium.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.9286898808511893,
+      "token_f1": 0.9685800604229607,
+      "sequence_ratio": 0.9561395391875637,
+      "heading_recall": 0.7142857142857143,
+      "length_score": 0.9776740781407265,
+      "reference_chars": 10929,
+      "output_chars": 10685,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/067-medium_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/68f5ce8c2b0ed2cf.md",
+      "error": null
+    },
+    {
+      "url": "https://www.linkedin.com/posts/areganti_why-most-ai-products-fail-lessons-from-50-activity-7416320569282887681-XLBB",
+      "domain": "www.linkedin.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.25093067218719295,
+      "token_f1": 0.20208704504963096,
+      "sequence_ratio": 0.2150250129377264,
+      "heading_recall": 0.5714285714285714,
+      "length_score": 0.136806419774278,
+      "reference_chars": 23303,
+      "output_chars": 3188,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/068-www_linkedin_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/6a97395eabd17868.md",
+      "error": null
+    },
+    {
+      "url": "https://www.news.aakashg.com/p/the-ai-product-design-interview-your",
+      "domain": "www.news.aakashg.com",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.6815377617162939,
+      "token_f1": 0.806146572104019,
+      "sequence_ratio": 0.752764894755619,
+      "heading_recall": 0.0,
+      "length_score": 0.8705372038705372,
+      "reference_chars": 2609,
+      "output_chars": 2997,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/069-www_news_aakashg_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/fd4c871c5d10e540.md",
+      "error": null
+    },
+    {
+      "url": "https://osmu.app/en/blog/ai-engineering-leaders-the-next-12-24-months-of-ai-transform",
+      "domain": "osmu.app",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.005500250936221321,
+      "token_f1": 0.005924672027084214,
+      "sequence_ratio": 0.009554140127388535,
+      "heading_recall": 0.0,
+      "length_score": 0.002970756614575275,
+      "reference_chars": 32315,
+      "output_chars": 96,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/070-osmu_app.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/6bae505fccff7501.md",
+      "error": null
+    },
+    {
+      "url": "https://pmhub.tech/the-agile-data-science-playbook-quarterly-sprints-to-ml-success-featuring-lauren-creedon/",
+      "domain": "pmhub.tech",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.5930823454170449,
+      "token_f1": 0.7062200956937799,
+      "sequence_ratio": 0.5545420467324753,
+      "heading_recall": 0.125,
+      "length_score": 0.7859852711448337,
+      "reference_chars": 4481,
+      "output_chars": 3522,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/071-pmhub_tech.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/824231e574cc728f.md",
+      "error": null
+    },
+    {
+      "url": "https://www.kalviumlabs.ai/blog/why-most-ai-products-fail/",
+      "domain": "www.kalviumlabs.ai",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.8819289772287063,
+      "token_f1": 0.9248927038626611,
+      "sequence_ratio": 0.8936312104034678,
+      "heading_recall": 0.68,
+      "length_score": 0.9354630525976121,
+      "reference_chars": 15495,
+      "output_chars": 14495,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/072-www_kalviumlabs_ai.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/9fdc92c15630de88.md",
+      "error": null
+    },
+    {
+      "url": "http://www.sundeepteki.org/advice/the-ultimate-ai-research-engineer-interview-guide-cracking-openai-anthropic-google-deepmind-top-ai-labs",
+      "domain": "www.sundeepteki.org",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.7985380190741445,
+      "token_f1": 0.939763858314989,
+      "sequence_ratio": 0.9193404754837142,
+      "heading_recall": 0.0,
+      "length_score": 0.9720610930764728,
+      "reference_chars": 18791,
+      "output_chars": 18266,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/073-www_sundeepteki_org.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/cc444c63b66bb031.md",
+      "error": null
+    },
+    {
+      "url": "https://8allocate.com/blog/how-to-structure-an-ai-enabled-product-team/",
+      "domain": "8allocate.com",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.9417855380110827,
+      "token_f1": 0.96667649660867,
+      "sequence_ratio": 0.89885,
+      "heading_recall": 0.9285714285714286,
+      "length_score": 0.951886001676446,
+      "reference_chars": 22712,
+      "output_chars": 23860,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/074-8allocate_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/f1d743a873205cc4.md",
+      "error": null
+    },
+    {
+      "url": "https://aetherlink.ai/en/blog/agentic-ai-multi-agent-systems-enterprise-governance-in-2026",
+      "domain": "aetherlink.ai",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.9421604088216976,
+      "token_f1": 0.9652932819159732,
+      "sequence_ratio": 0.93225,
+      "heading_recall": 0.8918918918918919,
+      "length_score": 0.93954765450484,
+      "reference_chars": 20189,
+      "output_chars": 21488,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/075-aetherlink_ai.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/55bd2fa520ca7a32.md",
+      "error": null
+    },
+    {
+      "url": "https://alhena.ai/blog/ai-human-escalation-chatbot-handoff-best-practices/",
+      "domain": "alhena.ai",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.8435761856655304,
+      "token_f1": 0.8601941747572814,
+      "sequence_ratio": 0.9032863373567299,
+      "heading_recall": 0.7272727272727273,
+      "length_score": 0.8105087572977481,
+      "reference_chars": 23980,
+      "output_chars": 19436,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/076-alhena_ai.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/dc992b6895436f3b.md",
+      "error": null
+    },
+    {
+      "url": "https://axrp.net/episode/2026/01/03/episode-47-david-rein-metr-time-horizons.html",
+      "domain": "axrp.net",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.957350249503562,
+      "token_f1": 0.9867022235035497,
+      "sequence_ratio": 0.92285,
+      "heading_recall": 0.9285714285714286,
+      "length_score": 0.9555735642750013,
+      "reference_chars": 79003,
+      "output_chars": 82676,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/077-axrp_net.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/516ec5990478732f.md",
+      "error": null
+    },
+    {
+      "url": "https://blog.ravi-mehta.com/p/building-ai-products-lessons-from",
+      "domain": "blog.ravi-mehta.com",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.8114345665362241,
+      "token_f1": 0.953610441197333,
+      "sequence_ratio": 0.9313,
+      "heading_recall": 0.0,
+      "length_score": 0.9965657866494956,
+      "reference_chars": 23295,
+      "output_chars": 23215,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/078-blog_ravi-mehta_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/41e286dbab4fa309.md",
+      "error": null
+    },
+    {
+      "url": "https://blog.sshh.io/p/the-transposed-organization",
+      "domain": "blog.sshh.io",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.7971780508052317,
+      "token_f1": 0.9405389131416528,
+      "sequence_ratio": 0.9137,
+      "heading_recall": 0.0,
+      "length_score": 0.9700702659432535,
+      "reference_chars": 21813,
+      "output_chars": 22486,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/079-blog_sshh_io.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/fc39241ec25311e8.md",
+      "error": null
+    },
+    {
+      "url": "https://callsphere.tech/blog/post-mortem-analysis-ai-agent-failures-learning-production-incidents",
+      "domain": "callsphere.tech",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.026770607196981957,
+      "token_f1": 0.012499880726328948,
+      "sequence_ratio": 0.07670062438383174,
+      "heading_recall": 0.0,
+      "length_score": 0.013136698494506644,
+      "reference_chars": 793959,
+      "output_chars": 10430,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/080-callsphere_tech.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/84f7cc2272f39201.md",
+      "error": null
+    },
+    {
+      "url": "https://engineeringleadership.buzzsprout.com/1124402/episodes/15961706-what-staff-engineers-need-to-be-successful-in-the-ml-field-with-zilvinas-girenas",
+      "domain": "engineeringleadership.buzzsprout.com",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.3422468520090408,
+      "token_f1": 0.4494949494949495,
+      "sequence_ratio": 0.4067289719626168,
+      "heading_recall": 0.0,
+      "length_score": 0.25527921163772876,
+      "reference_chars": 2131,
+      "output_chars": 544,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/081-engineeringleadership_buzzsprout_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/022c0ab363af102d.md",
+      "error": null
+    },
+    {
+      "url": "https://fountain.fm/show/743839",
+      "domain": "fountain.fm",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.688331372968349,
+      "token_f1": 0.6666666666666666,
+      "sequence_ratio": 0.6586826347305389,
+      "heading_recall": 1.0,
+      "length_score": 0.49107142857142855,
+      "reference_chars": 112,
+      "output_chars": 55,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/082-fountain_fm.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/f250643e17f92899.md",
+      "error": null
+    },
+    {
+      "url": "https://getaigovernance.net/blog/best-ai-compliance-platforms-2026",
+      "domain": "getaigovernance.net",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.7630236286075119,
+      "token_f1": 0.9027288732394365,
+      "sequence_ratio": 0.8985885285337507,
+      "heading_recall": 0.0,
+      "length_score": 0.880990023442185,
+      "reference_chars": 18343,
+      "output_chars": 16160,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/083-getaigovernance_net.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/aaa1688445c9f4b7.md",
+      "error": null
+    },
+    {
+      "url": "https://lexfridman.com/dario-amodei",
+      "domain": "lexfridman.com",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.74658687080874,
+      "token_f1": 0.9092827004219408,
+      "sequence_ratio": 0.8639977285633162,
+      "heading_recall": 0.0,
+      "length_score": 0.8094014898535834,
+      "reference_chars": 3151,
+      "output_chars": 3893,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/084-lexfridman_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/b95235c2fa98349d.md",
+      "error": null
+    },
+    {
+      "url": "https://notion.notion.site/2edefdeead058052bda4ea3834e992f9",
+      "domain": "notion.notion.site",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-metadata",
+      "success": true,
+      "overall_score": 0.2111651515151515,
+      "token_f1": 0.125,
+      "sequence_ratio": 0.10606060606060606,
+      "heading_recall": 0.8,
+      "length_score": 0.05599999999999999,
+      "reference_chars": 14,
+      "output_chars": 250,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/085-notion_notion_site.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/aab038db7beda70f.md",
+      "error": null
+    },
+    {
+      "url": "https://pod.co/human-first/ai-fluency-is-the-new-hiring-litmus-test-for-go-to-market-leaders",
+      "domain": "pod.co",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.896674865596864,
+      "token_f1": 0.9678147939017504,
+      "sequence_ratio": 0.9606085302906818,
+      "heading_recall": 0.5,
+      "length_score": 0.97337383845604,
+      "reference_chars": 5596,
+      "output_chars": 5447,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/086-pod_co.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/630c1916eb11b857.md",
+      "error": null
+    },
+    {
+      "url": "https://podwise.ai/dashboard/episodes/3016978",
+      "domain": "podwise.ai",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.0,
+      "token_f1": 0.0,
+      "sequence_ratio": 0.0,
+      "heading_recall": 0.0,
+      "length_score": 0.0,
+      "reference_chars": 1669,
+      "output_chars": 0,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/087-podwise_ai.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/e1e9bb626e743a9e.md",
+      "error": null
+    },
+    {
+      "url": "https://productschool.com/blog/artificial-intelligence/evaluation-metrics",
+      "domain": "productschool.com",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.8846919965985879,
+      "token_f1": 0.9423468588438039,
+      "sequence_ratio": 0.84525,
+      "heading_recall": 0.7804878048780488,
+      "length_score": 0.8816682625811256,
+      "reference_chars": 41434,
+      "output_chars": 46995,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/088-productschool_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/a16bf8dfd487d995.md",
+      "error": null
+    },
+    {
+      "url": "https://www.danielphilipjohnson.com/blog/why-80-of-ai-projects-fail-and-how-staff-engineers-can-save-them-hbr-strategy",
+      "domain": "www.danielphilipjohnson.com",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.831033020216222,
+      "token_f1": 0.9857948139797068,
+      "sequence_ratio": 0.9657014157014157,
+      "heading_recall": 0.0,
+      "length_score": 0.9733333333333333,
+      "reference_chars": 15330,
+      "output_chars": 15750,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/089-www_danielphilipjohnson_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/5748c2b9b932a437.md",
+      "error": null
+    },
+    {
+      "url": "https://www.digitalapplied.com/blog/agentic-ai-maturity-model-enterprise-self-assessment-guide",
+      "domain": "www.digitalapplied.com",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.7768136870136051,
+      "token_f1": 0.8365247665769899,
+      "sequence_ratio": 0.76285,
+      "heading_recall": 0.6190476190476191,
+      "length_score": 0.7787193279787783,
+      "reference_chars": 27142,
+      "output_chars": 21136,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/090-www_digitalapplied_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/50047e08a4e1f5f0.md",
+      "error": null
+    },
+    {
+      "url": "https://www.moderndescartes.com/essays/ml_eng_interviewing/",
+      "domain": "www.moderndescartes.com",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.9666202691433936,
+      "token_f1": 0.9840119377531443,
+      "sequence_ratio": 0.9367016925690556,
+      "heading_recall": 0.95,
+      "length_score": 0.9809298267480993,
+      "reference_chars": 15740,
+      "output_chars": 16046,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/091-www_moderndescartes_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/8a2099d6cecc2823.md",
+      "error": null
+    },
+    {
+      "url": "https://www.tryexponent.com/guides/anthropic-software-engineer-interview",
+      "domain": "www.tryexponent.com",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.23098397362272094,
+      "token_f1": 0.2775956284153005,
+      "sequence_ratio": 0.1866781017724414,
+      "heading_recall": 0.16666666666666666,
+      "length_score": 0.22930943595150238,
+      "reference_chars": 1305,
+      "output_chars": 5691,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/092-www_tryexponent_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/2e580164a995af3b.md",
+      "error": null
+    },
+    {
+      "url": "https://www.yuan-meng.com/posts/mle_interviews_2.0/",
+      "domain": "www.yuan-meng.com",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.8531708703856596,
+      "token_f1": 0.9356443461781427,
+      "sequence_ratio": 0.6718,
+      "heading_recall": 0.8985507246376812,
+      "length_score": 0.8626553727322882,
+      "reference_chars": 79743,
+      "output_chars": 92439,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/093-www_yuan-meng_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/b5b069a04fa3fe54.md",
+      "error": null
+    },
+    {
+      "url": "https://yuvalyeret.com/blog/ai-isnt-the-problem-your-operating-system-is/",
+      "domain": "yuvalyeret.com",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.7470495867541017,
+      "token_f1": 0.8106312292358803,
+      "sequence_ratio": 0.8041170794467675,
+      "heading_recall": 0.5,
+      "length_score": 0.7082417582417583,
+      "reference_chars": 3640,
+      "output_chars": 2578,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/094-yuvalyeret_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/7f9c50aac3f4023a.md",
+      "error": null
+    },
+    {
+      "url": "https://www.news.aakashg.com/p/ai-success-metrics-interview",
+      "domain": "www.news.aakashg.com",
+      "category": "general",
+      "tags": [],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.6143913241845509,
+      "token_f1": 0.7644661776691116,
+      "sequence_ratio": 0.6786892975011787,
+      "heading_recall": 0.0,
+      "length_score": 0.6713947990543736,
+      "reference_chars": 3408,
+      "output_chars": 5076,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/095-www_news_aakashg_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/29904c7315aeeebb.md",
+      "error": null
+    },
+    {
+      "url": "https://podscan.fm/podcasts/beyond-the-prompt-how-to-use-ai-in-your-company/episodes/from-roadmaps-to-rampd-how-ai-is-changing-product-development-with-richard-white-founder-of-fathom-ai",
+      "domain": "podscan.fm",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.686492269226073,
+      "token_f1": 0.8446150737522732,
+      "sequence_ratio": 0.8139231327048586,
+      "heading_recall": 0.0,
+      "length_score": 0.686231352408902,
+      "reference_chars": 16356,
+      "output_chars": 11224,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/096-podscan_fm.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/57122b6afb013150.md",
+      "error": null
+    },
+    {
+      "url": "https://podcasts.apple.com/us/podcast/ai-engineering-podcast/id1626358243",
+      "domain": "podcasts.apple.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.8332029576390365,
+      "token_f1": 0.9889518413597733,
+      "sequence_ratio": 0.97335,
+      "heading_recall": 0.0,
+      "length_score": 0.9655808601809236,
+      "reference_chars": 48673,
+      "output_chars": 50408,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/097-podcasts_apple_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/18b5ce163fa09f4e.md",
+      "error": null
+    },
+    {
+      "url": "https://pod.wave.co/podcast/lennys-podcast-product-career-growth-b65486a6-7cff-4966-bbea-2bc239e90aa4/engineers-are-becoming-sorcerers-the-future-of-software-development-with-openais-sherwin-wu",
+      "domain": "pod.wave.co",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "failed",
+      "success": false,
+      "overall_score": 0.0,
+      "token_f1": 0.0,
+      "sequence_ratio": 0.0,
+      "heading_recall": 0.0,
+      "length_score": 0.0,
+      "reference_chars": 165,
+      "output_chars": 0,
+      "markdown_output_path": null,
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/91efd7b749626368.md",
+      "error": "failed to decode body for https://pod.wave.co/podcast/lennys-podcast-product-career-growth-b65486a6-7cff-4966-bbea-2bc239e90aa4/engineers-are-becoming-sorcerers-the-future-of-software-development-with-openais-sherwin-wu"
+    },
+    {
+      "url": "https://getpodcast.com/podcast/the-engineering-leadership-podcast/the-ai-distribution-shift-navigating-pmf-collapse-and-building-ai-nati_0317944216",
+      "domain": "getpodcast.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "strategy": "static-readability",
+      "success": true,
+      "overall_score": 0.2213247845064516,
+      "token_f1": 0.20693183271518095,
+      "sequence_ratio": 0.4067887931034483,
+      "heading_recall": 0.05263157894736842,
+      "length_score": 0.12409016444435225,
+      "reference_chars": 48223,
+      "output_chars": 5984,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-live-markdown/099-getpodcast_com.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/930a05f4b13293bf.md",
+      "error": null
+    }
+  ]
+}

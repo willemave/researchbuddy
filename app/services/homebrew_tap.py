@@ -160,7 +160,7 @@ If another formula with the same name ever exists, use the fully qualified name:
 brew install {short_tap}/{formula_name}
 ```
 
-If you are installing into OpenClaw, check `~/.openclaw/openclaw.json` before asking for search-provider credentials. When it already has `exa`, `tavily`, or `firecrawl` configured, ask whether ResearchBuddy should reuse that existing provider/key and let `researchbuddy setup` auto-load it instead of collecting a duplicate secret.
+If you are installing into OpenClaw, check `~/.openclaw/openclaw.json` before asking for search-provider credentials. When it already has `exa`, `tavily`, or `firecrawl` configured, ask whether ResearchBuddy should reuse that existing provider/key and let `researchbuddy doctor --fix` auto-load it instead of collecting a duplicate secret.
 
 ## Update the formula for a new ResearchBuddy release
 

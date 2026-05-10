@@ -1,0 +1,1305 @@
+{
+  "generated_at": "2026-04-10T02:10:15.107333+00:00",
+  "db_path": "/Users/willem/Development/researchbuddy/data/researchbuddy.db",
+  "run_id": null,
+  "all_runs": true,
+  "require_html": false,
+  "total_fetched_urls": 160,
+  "available_by_category": {
+    "youtube": 11,
+    "podcast": 101,
+    "js_heavy": 16,
+    "general": 32
+  },
+  "available_by_tag": {
+    "js_heavy": 50,
+    "podcast": 101,
+    "youtube": 11
+  },
+  "sample_targets": {
+    "youtube": 11,
+    "podcast": 42,
+    "js_heavy": 16,
+    "general": 31
+  },
+  "selected_by_category": {
+    "youtube": 11,
+    "podcast": 46,
+    "js_heavy": 16,
+    "general": 27
+  },
+  "selected_by_tag": {
+    "js_heavy": 36,
+    "podcast": 46,
+    "youtube": 11
+  },
+  "sample_size": 100,
+  "entries": [
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.youtube.com/watch?v=z7T1pCxgvlA",
+      "title": "Why most AI products fail: Lessons from 50+ AI ... - YouTube",
+      "source_query": "Failure Modes: podcast interview AI product teams failure modes unclear ownership handoffs research engineering",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/html/6c07189f77664e4d.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/6c07189f77664e4d.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+      "title": "If You Don\u2019t Understand AI Evals, Don\u2019t Build AI",
+      "source_query": "PM in AI: AI product management ambiguity roadmap evaluation customer discovery podcast interview",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/html/95f838bf44f847f7.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/95f838bf44f847f7.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.youtube.com/shorts/z5YrGY-mNN0",
+      "title": "How Top US Engineers Stay Relevant in AI #podcast ... - YouTube",
+      "source_query": "Talent, Culture, and Leadership: podcast interview AI native engineering leadership hiring barbell talent mentorship junior engineers",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/html/d70f53ff9d40e83e.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/d70f53ff9d40e83e.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.youtube.com/watch?v=ZuQHYTDDuTU",
+      "title": "Beyond the Pilot: The AI-Native Product Operating Model - YouTube",
+      "source_query": "Org Design Patterns: AI-native org design podcast research engineering product decision rights mission teams DRI interview",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/html/7b9902608a02f7c9.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/7b9902608a02f7c9.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.youtube.com/watch?v=rzAGo_XML1U",
+      "title": "This AI Expert's Method Will Change How You Do Customer Research",
+      "source_query": "Research-Product Interface: AI product research engineering interface podcast founder interview translating research into roadmap experiments",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/html/dc56af33752f4f22.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/dc56af33752f4f22.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.youtube.com/watch?v=cv9xYnurGIc",
+      "title": "Human in the Loop with Scale AI: Episode 1 - YouTube",
+      "source_query": "Interview Ready Synthesis: podcast interview AI product leaders organizational patterns human-in-the-loop autonomy evaluation culture",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/html/de92ec57339831e3.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/de92ec57339831e3.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.youtube.com/watch?v=sni_-awZTgw",
+      "title": "AI Agent Development Tradeoffs You NEED to Know - YouTube",
+      "source_query": "Research To Product Transfer: podcast interview research to product transfer AI teams handoffs ownership evaluation loops",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/html/8aa043bea84d6018.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/8aa043bea84d6018.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.youtube.com/watch?v=-5_6HQR0WhA",
+      "title": "The State of AI Adoption in Engineering Teams \u2014 with Matt McClernan",
+      "source_query": "Large Company Patterns: YouTube interview large AI lab product engineering org design research product engineering collaboration vertical horizontal teams",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/html/b2ef31db26c3a3a0.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/b2ef31db26c3a3a0.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.youtube.com/watch?v=h98dLRJFHMM",
+      "title": "Inside Reducto: From Pivot to Fortune 10 Customers, How to Build AI Products | CEO Adit Abraham",
+      "source_query": "Smaller Company Operator Voices: AI startup founder podcast product engineering org lessons learned small elite team research culture",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/html/cc84d5a777fb3170.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/cc84d5a777fb3170.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.youtube.com/watch?v=ifPjwirY8kY",
+      "title": "The Silent Failure of Your AI Products - Product Impact e01 - YouTube",
+      "source_query": "Failure Modes: podcast interview AI product failures research handoff breakdowns product engineering",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/html/3d2e1ad863bebc27.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/3d2e1ad863bebc27.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.youtube.com/watch?v=B26CwKm5C1k",
+      "title": "OpenAI\u2019s head of platform engineering on the next 12-24 months of AI | Sherwin Wu",
+      "source_query": "Org Design Patterns: podcast interview on how AI companies structure product engineering research teams and decision rights across model, platform, and application groups",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/html/91121856c627c0cb.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/91121856c627c0cb.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://podscan.fm/podcasts/lennys-podcast-product-career-growth/episodes/the-100-person-ai-lab-that-became-anthropic-and-googles-secret-weapon-edwin-chen-surge-ai",
+      "title": "The 100-person AI lab that became Anthropic and Google's secret weapon | Edwin Chen (Surge AI)",
+      "source_query": "Smaller Company Voices: startup founder blog AI team structure product engineering research",
+      "domain": "podscan.fm",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/ac0cc54a8fd76e02.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://podcasts.apple.com/us/podcast/why-most-ai-products-fail-lessons-from-50-ai-deployments/id1627920305?i=1000744678894",
+      "title": "Why most AI products fail: Lessons from 50+ AI deployments at OpenAI, Google, and Amazon",
+      "source_query": "Smaller Company Voices: lessons learned building an AI startup team product research engineering",
+      "domain": "podcasts.apple.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/4699b801eb76ce54.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://pod.wave.co/podcast/lennys-podcast-product-career-growth-b65486a6-7cff-4966-bbea-2bc239e90aa4/what-openai-and-google-engineers-learned-deploying-50-ai-products-in-production",
+      "title": "What OpenAI and Google engineers learned deploying 50+ AI products in production - Lenny's Podcast: Product | Career | Growth | Wave AI Podcast Notes",
+      "source_query": "Smaller Company Voices: lessons learned building an AI startup team product research engineering",
+      "domain": "pod.wave.co",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/b729c89fdbaa13e4.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://getpodcast.com/podcast/the-engineering-leadership-podcast/from-research-lab-to-record-breaking-product-how-openai-engineered-for_1d326d694f",
+      "title": "From Research Lab to Record-Breaking Product: How OpenAI Engineered for Unprecedented Scale w/ Sulman Choudhry, Samir Ahmed & Lawrence Bruhmeller #242 - The Engineering Leadership Podcast",
+      "source_query": "Talent, Culture, and Leadership: leadership patterns in successful AI product engineering research organizations",
+      "domain": "getpodcast.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/1c11bfbf4b29baea.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://launchpod.logrocket.com/linear-secret-building-powerful-ai-products-nan-yu",
+      "title": "LaunchPod | Product Management Podcast: Linear\u2019s Secret to Building Powerful AI Products | Nan Yu, VP of Product (Linear)",
+      "source_query": "PM in AI: best product management practices in AI companies blog post",
+      "domain": "launchpod.logrocket.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/edc66f8f839a3bbd.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://open.spotify.com/show/0MKtLYdJs6CABS9wnNZPUx",
+      "title": "AI Product Leader | Podcast on Spotify",
+      "source_query": "Talent, Culture, and Leadership: leadership patterns in successful AI product engineering research organizations",
+      "domain": "open.spotify.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/75365cb2b5343536.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://creators.spotify.com/pod/profile/engineeringleadership/episodes/Building-Autonomous-Teams--Engineering-Career-Ladders-with-Sri-Viswanath-65-e18ko44",
+      "title": "The Engineering Leadership Podcast - Spotify for Creators",
+      "source_query": "Talent, Culture, and Leadership: engineering blog AI native teams career ladders staff engineer manager research product organization",
+      "domain": "creators.spotify.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/b59b123d9ef237d6.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://sfelc.com/podcasts",
+      "title": "The Engineering Leadership Podcast - ELC",
+      "source_query": "Large Company Contrasts: OpenAI engineering org podcast DRI mission-driven teams vertical horizontal teams managers as systems designers",
+      "domain": "sfelc.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/a9de4e0d131321e4.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://vanishinggradients.fireside.fm/39",
+      "title": "Vanishing Gradients Episode 39: From Models to Products: Bridging Research and Practice in Generative AI at Google Labs",
+      "source_query": "Org Design Patterns: AI lab productization interface between research and product engineering thought piece",
+      "domain": "vanishinggradients.fireside.fm",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/4dc44f6ddb96152f.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://fundbuildscale.podbean.com/e/building-an-enterprise-ai-startup-from-day-zero/",
+      "title": "Building an Enterprise AI Startup from Day Zero | Fund/Build/Scale",
+      "source_query": "Smaller Company Voices: lessons learned building an AI startup team product research engineering",
+      "domain": "fundbuildscale.podbean.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/61cd6f0327c0d1d6.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://nzpod.co.nz/podcast/lenny-s-podcast-product-growth-career/why-most-ai-products-fail-lessons-from-50-ai-deplo",
+      "title": "Why most AI products fail: Lessons from 50+ AI deployments at OpenAI, Google, and Amazon \u2013 Lenny's Podcast: Product | Career | Growth",
+      "source_query": "Failure Modes: machine learning teams common failure modes product engineering research",
+      "domain": "nzpod.co.nz",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/86eb442333d122db.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://plinkhq.com/i/1627920305/e/1000744678894",
+      "title": "Why most AI products fail: Lessons from 50+ AI deployments at OpenAI, Google, and Amazon - Podcast Episode Links - Plink",
+      "source_query": "Failure Modes: machine learning teams common failure modes product engineering research",
+      "domain": "plinkhq.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/8b391b11920889c7.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://aireadyrva.com/podcast",
+      "title": "Inspire AI Podcast | AI Ready RVA",
+      "source_query": "Failure Modes: podcast interview AI product teams failure modes unclear ownership handoffs research engineering",
+      "domain": "aireadyrva.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/e7cbe02ca17dc594.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://arize.com/ai-podcasts/",
+      "title": "AI Podcasts 2026: Top Pods for AI Engineers and Founders - Arize AI",
+      "source_query": "Smaller Company Operator Voices: founder blog on building AI product engineering research teams at startup",
+      "domain": "arize.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/e5e81dba7adfbf53.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://clarivate.com/blog/demonstrating-real-world-outcomes-and-the-future-of-research-evaluation-podcast",
+      "title": "Demonstrating real-world outcomes and the future of research evaluation [Podcast] | Clarivate",
+      "source_query": "Incentives Process And Metrics: how to evaluate success in applied research organizations article",
+      "domain": "clarivate.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/daff61571a9f1560.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://dexibit.com/resource-types/podcast/",
+      "title": "Podcast - Dexibit",
+      "source_query": "Incentives Process And Metrics: ML team review cadence retrospectives model evals launch decisions podcast",
+      "domain": "dexibit.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/72ab1e487cf6b0ad.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://en.zarza.com/podcasts/machine-learning-engineered-1064836/episodio/managing-data-science-teams-and-hiring-machine-learning-engineers-with-harikrishna-narayanan-yc-stealth-startup",
+      "title": "Managing Data Science Teams and Hiring Machine Learning Engineers with Harikrishna Narayanan (YC Stealth Startup) | Machine Learning Engineered | ZARZA Podcasts",
+      "source_query": "Failure Modes: common mistakes managing machine learning teams startup",
+      "domain": "en.zarza.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/47bc1bad8030f8da.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://highsignal.fireside.fm/35",
+      "title": "High Signal: Data Science | Career | AI Episode 35: Beyond Online Experimentation: Generative Software That Optimizes Itself",
+      "source_query": "Execution, Metrics, and Evaluation: how applied AI teams run experiments roadmap uncertainty essay",
+      "domain": "highsignal.fireside.fm",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/355861290f2edaa8.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://leadwithaipodcast.com/blog/he-built-an-ai-interviewer-that-found-the-best-candidate-out-of-1200-and-no-human-would-have-spotted-them-1",
+      "title": "He Built an AI Interviewer That Found the Best Candidate Out of 1,200 and No Human Would Have Spotted Them",
+      "source_query": "Interview Synthesis Gaps: podcast interview AI product leaders what hiring managers want candidates to say about evals monitoring and human-in-the-loop",
+      "domain": "leadwithaipodcast.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/3da0cd8a98a9765e.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://metacast.app/podcast/the-engineering-leadership-podcast/hereHPAV",
+      "title": "The Engineering Leadership Podcast - Metacast",
+      "source_query": "Large Company Contrasts: OpenAI engineering org podcast DRI mission-driven teams vertical horizontal teams managers as systems designers",
+      "domain": "metacast.app",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/663e8447e7b34691.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://music.amazon.com/podcasts/9cd1a9fe-22c4-4a85-9d5a-f2fb74176c9f/ai-with-bry-podcast",
+      "title": "AI with Bry Podcast | Listen on Amazon Music",
+      "source_query": "Research-Product Interface: AI product research engineering interface podcast founder interview translating research into roadmap experiments",
+      "domain": "music.amazon.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/bd594496cb060383.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://podcast.pragmaticmarketing.com/e/building-the-products-of-the-future-with-ai-with-jonathan-evens-of-google-deepmind/",
+      "title": "Building the Products of the Future with AI with Jonathan Evens of Google DeepMind | Product Chats Podcast",
+      "source_query": "Product Management In AI: YouTube talk AI product manager discovery evals roadmap non-deterministic systems production monitoring",
+      "domain": "podcast.pragmaticmarketing.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/9f353fa2fd38faa9.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://podscript.ai/podcasts/lex-fridman-podcast/367-sam-altman-openai-ceo-on-gpt-4-chatgpt-and-the-future-of-ai/",
+      "title": "#367 \u2013 Sam Altman: OpenAI CEO on GPT-4, ChatGPT, and the Future of AI | Lex Fridman Podcast | PodScript",
+      "source_query": "Smaller Company Voices: YouTube podcast startup AI company building product team engineering team research team mistakes",
+      "domain": "podscript.ai",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/2abef9468c5d098d.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://shapeoftomorrow.substack.com/p/podcast-episode-174-your-ai-isnt",
+      "title": "Podcast: Episode 174 - Your AI Isn\u2019t Stalling. Your Org Chart Is.",
+      "source_query": "Org Design Patterns: what org structure fails in machine learning companies leadership essay",
+      "domain": "shapeoftomorrow.substack.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/795a3d888ee899af.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://thecuberesearch.com/podcasts/appdevangle-where-innovation-meets-insight-in-application-development/",
+      "title": "AppDev ANGLE Podcast - theCUBE Research",
+      "source_query": "Research-Product Interface: AI product research engineering interface podcast founder interview translating research into roadmap experiments",
+      "domain": "thecuberesearch.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/00c6aa0c66dcc67f.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://thehotfixpodcast.substack.com/p/we-spent-years-on-an-ai-featureand",
+      "title": "#012 w/ Trisha Price: We Spent Years on an AI Feature\u2014And Still Got It Wrong",
+      "source_query": "Failure Modes: podcast interview AI product failures research handoff breakdowns product engineering",
+      "domain": "thehotfixpodcast.substack.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/f4751ada1e1b7c48.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://uk-podcasts.co.uk/podcast/deepmind-the-podcast/gemini-2-0-and-the-evolution-of-agentic-ai-with-or",
+      "title": "Gemini 2.0 and the evolution of agentic AI with Oriol Vinyals \u2013 Google DeepMind: The Podcast",
+      "source_query": "Large Company Contrasts: OpenAI Anthropic Google DeepMind product research engineering collaboration interview",
+      "domain": "uk-podcasts.co.uk",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/1a4ea95114164c35.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.airealizedsummit.com/podcast",
+      "title": "Podcast | AI Insights from AI Leaders - AI Realized",
+      "source_query": "Product Management In AI: podcast or interview on AI product management failure patterns in enterprise AI teams roadmap evals trust human in the loop",
+      "domain": "www.airealizedsummit.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/9658100e26af106b.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.earley.com/insights/earley-ai-podcast-episode-27-gordon-hart",
+      "title": "Earley AI Podcast - Episode 27: Why Your ML Model Is Failing ...",
+      "source_query": "Execution, Metrics, and Evaluation: failure modes using the wrong metrics in machine learning product teams",
+      "domain": "www.earley.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/42dd1bad3ae7afe1.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.edisonresearch.com/is-ai-the-newest-talent-in-podcast-narration/",
+      "title": "Is AI the Newest Talent in Podcast Narration? - Edison Research",
+      "source_query": "Incentives Process And Metrics: AI research organization incentives quality over speed interview podcast metrics",
+      "domain": "www.edisonresearch.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/7fc85911e5d94c2b.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.it-labs.com/podcast-how-to-structure-a-growing-ai-company-with-lightricks-co-founder-cto-yaron-inger/",
+      "title": "Podcast: How to Structure a Growing AI Company with Lightricks Co-Founder & CTO Yaron Inger - IT Labs",
+      "source_query": "Interview Synthesis Gaps: YouTube talk AI product org lessons interview preparation leadership culture technical prowess smaller startup",
+      "domain": "www.it-labs.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/7afa5938ef35b733.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.ivoox.com/en/ep-83-owning-the-system-of-record-ai-native-audios-mp3_rf_171247104_1.html",
+      "title": "Ep 83: Owning the System of Record, AI-Native Org Charts, & Why ITSM is The Most Vulnerable Legacy Category - Unsupervised Learning - Podcast on iVoox",
+      "source_query": "Org Design Patterns: AI-native org design podcast research engineering product decision rights mission teams DRI interview",
+      "domain": "www.ivoox.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/b81df2c26a16a165.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.orinococomms.com/research-comms-blog-podcast/professor-mark-reed",
+      "title": "Research Comms Podcast: Unpacking \u2018impact\u2019: What does it mean, and how do you know if you\u2019re achieving it? \u2014 Orinoco Communications",
+      "source_query": "Incentives Process And Metrics: how to evaluate success in applied research organizations article",
+      "domain": "www.orinococomms.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/ba1f64d72f2e8d8e.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.podcast.de/episode/696081238/012-successfully-defining-okrs-with-the-help-of-the-ai-okr-coach-with-kathrin-falkenstein-notebooklm-version",
+      "title": "012 - Successfully defining OKRs with the help of the AI OKR Coach \u2013 With Kathrin Falkenstein - NotebookLM Version ~ AI 4 L&D by New Learning Lab Podcast",
+      "source_query": "Incentives Process And Metrics: OKRs for machine learning teams product engineering research",
+      "domain": "www.podcast.de",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/d6ce1d31bb0cff93.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.thoughtspot.com/data-and-ai-chief/podcast",
+      "title": "The Data & AI Chief Podcast - ThoughtSpot",
+      "source_query": "Incentives Process And Metrics: AI research organization incentives quality over speed interview podcast metrics",
+      "domain": "www.thoughtspot.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/e97f409c14e418db.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://podscan.fm/podcasts/the-engineering-leadership-podcast/episodes/how-openais-engineering-org-is-reshaping-teams-roles-and-workflows-w-sulman-choudhry-250",
+      "title": "How OpenAI\u2019s engineering org is reshaping teams, roles and workflows w/ Sulman Choudhry #250 - The Engineering Leadership Podcast - Podcast Episode - Podscan.fm",
+      "source_query": "Large Company Contrasts: how large AI companies organize product engineering research blog",
+      "domain": "podscan.fm",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/046a3a07a3aed3c1.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://podcasts.apple.com/us/podcast/the-engineering-leadership-podcast/id1481996448",
+      "title": "The Engineering Leadership Podcast",
+      "source_query": "Talent, Culture, and Leadership: leadership patterns in successful AI product engineering research organizations",
+      "domain": "podcasts.apple.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/b2cc63a107a12491.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://pod.wave.co/podcast/lennys-podcast-product-career-growth/why-ai-evals-are-the-hottest-new-skill-for-product-builders-hamel-husain-shreya-shankar-creators-of-",
+      "title": "Why AI evals are the hottest new skill for product builders | Hamel Husain & Shreya Shankar (creators of the #1 eval course) - Lenny's Podcast: Product | Career | Growth | Wave AI Podcast Notes",
+      "source_query": "Execution, Metrics, and Evaluation: LLM product teams evaluation framework organizational best practices",
+      "domain": "pod.wave.co",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/a45fbe83d20380b0.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://getpodcast.com/podcast/the-engineering-leadership-podcast/how-openais-engineering-org-is-reshaping-teams-roles-and-workflows-w-s_4f399d8b89",
+      "title": "How OpenAI\u2019s engineering org is reshaping teams, roles and workflows w/ Sulman Choudhry #250 - The Engineering Leadership Podcast",
+      "source_query": "Org Design Patterns: how AI product engineering research teams should be organized lessons learned blog post",
+      "domain": "getpodcast.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/5366da8741bd1da9.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "http://launchpod.logrocket.com/how-to-avoid-ai-fomo-like-patagonia-angela-clark",
+      "title": "LaunchPod | Product Management Podcast: How to Avoid AI FOMO like Patagonia | Angela Clark, VP Digital",
+      "source_query": "PM in AI: AI PM anti-patterns customer discovery evals workflow redesign founder interview",
+      "domain": "launchpod.logrocket.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/83f776f4e6aad411.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://open.spotify.com/show/1wIytRQ4Ub8McXSP1iDwVX",
+      "title": "The Engineering Leadership Podcast - Spotify",
+      "source_query": "Talent, Culture, and Leadership: podcast interview AI native engineering leadership hiring barbell talent mentorship junior engineers",
+      "domain": "open.spotify.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/be8283d1cc83f94f.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://creators.spotify.com/pod/profile/jasdeep-garcha/episodes/Episode-52---Ken-Babcock-Tango-ai-e2tf2sg",
+      "title": "Episode 52 - Ken Babcock (Tango.ai) by Monetizing SaaS",
+      "source_query": "Research-Product Interface: AI product research engineering interface podcast founder interview translating research into roadmap experiments",
+      "domain": "creators.spotify.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/f3abfc0e797f18c8.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.linkedin.com/posts/lennyrachitsky_building-ai-product-sense-part-2-activity-7427022933702762496-pu01",
+      "title": "Meta's New PM Interview: Building AI Product Sense with Uncertainty",
+      "source_query": "PM in AI: how AI product teams decide what to build under model uncertainty blog post",
+      "domain": "www.linkedin.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/73ed1421f268b0f0.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://medium.com/@deepthi.sudharsan/inside-ai-interviews-stories-patterns-and-what-actually-matters-555684c38598",
+      "title": "Inside AI Interviews: Stories, Patterns, and What Actually Matters",
+      "source_query": "Interview Synthesis Gaps: how to talk about AI product engineering research collaboration in interviews",
+      "domain": "medium.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/29cdadfa9f3441f5.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://hugobowne.substack.com/p/episode-70-1400-production-ai-deployments",
+      "title": "Episode 70: 1,400 Production AI Deployments",
+      "source_query": "Execution, Metrics, and Evaluation: YouTube talk scenario-based evaluation AI product metrics silent failures production ML teams",
+      "domain": "hugobowne.substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/c425d95cf1d30153.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://aakashgupta.medium.com/i-interviewed-100-ai-product-managers-heres-what-they-actually-do-9e55d393a287",
+      "title": "I Interviewed 100+ AI Product Managers. Here's What They Actually ...",
+      "source_query": "Product Management In AI: small startup blog AI product development lifecycle evals feedback loops product management",
+      "domain": "aakashgupta.medium.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/b7b884f92f8c3383.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://elevateyouraiq.substack.com/p/ep-77-distilling-interview-data-into",
+      "title": "Ep 77: Distilling Interview Data into Hiring Intelligence with Siadhal Magos",
+      "source_query": "Interview Synthesis Gaps: podcast interview AI product leaders what hiring managers want candidates to say about evals monitoring and human-in-the-loop",
+      "domain": "elevateyouraiq.substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/186b4257f4072ba7.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://harshalpatil.substack.com/p/premortem-ai-pm-role-growth-startup-25q4",
+      "title": "Premortem Of My AI Product Manager Role At A Fast-Growing Tech ...",
+      "source_query": "Smaller Company Voices: startup AI team postmortem product engineering research organization what worked what failed blog",
+      "domain": "harshalpatil.substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/ec2f73ab871c39f4.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://natesnewsletter.substack.com/p/the-complete-ai-interview-guide-what",
+      "title": "The Complete AI Interview Guide: What Actually Works in 2025",
+      "source_query": "Interview Synthesis Gaps: how to talk about AI product engineering research collaboration in interviews",
+      "domain": "natesnewsletter.substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/54316580f5040c7f.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://productimpactpod.substack.com/p/75-of-enterprise-ai-fails-the-fix",
+      "title": "75% of Enterprise AI Fails. The Fix Isn't a Better Model.",
+      "source_query": "Failure Modes: YouTube talk why gen AI products fail organizational anti-patterns product engineering research",
+      "domain": "productimpactpod.substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/3d7a66317347ba0c.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://substack.com/home/post/p-187741497?autoPlay=true",
+      "title": "Owning the AI Pareto Frontier \u2014 Jeff Dean - Latent.Space",
+      "source_query": "Large Company Patterns: podcast frontier AI company engineering leadership mission-driven teams DRI product research organization",
+      "domain": "substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/88f80d37b50ac920.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://turingpost.substack.com/p/inside-reflection-ai-the-20b-open",
+      "title": "Inside Reflection AI: The $20B Open-Model Startup That Has Yet to Ship",
+      "source_query": "Smaller Company Operator Voices: contrarian AI startup company building interview avoid blitzscaling product engineering research team",
+      "domain": "turingpost.substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/0c9b0327a8a50f69.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.linkedin.com/posts/kapilsurlaker_episode-183-ai-will-not-save-you-reinvention-activity-7432848510179241986-t6_8",
+      "title": "AI Won't Save You, Reinvention Will: Gopi Rangan Podcast - LinkedIn",
+      "source_query": "Talent, Culture, and Leadership: YouTube panel product engineering research teams AI company org design failures leadership bottlenecks",
+      "domain": "www.linkedin.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/afa1d4a701369bd2.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://medium.com/@theBotGroup/why-85-of-ml-projects-fail-and-how-yours-wont-f53c02d0875e",
+      "title": "Why 85% of ML Projects Fail (And How Yours Won't) - Medium",
+      "source_query": "Failure Modes: why AI research never ships blog post productization failure modes ML teams",
+      "domain": "medium.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/719fec325cccf72f.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://hugobowne.substack.com/p/episode-59-patterns-and-anti-patterns-340",
+      "title": "Episode 59: Patterns and Anti-Patterns For Building with AI",
+      "source_query": "Failure Modes: anti patterns in product management for AI products",
+      "domain": "hugobowne.substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/4cd579d31e19700a.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.linkedin.com/posts/gregnudelman_something-interesting-is-happening-in-ai-activity-7425574887034937345-1IL5",
+      "title": "AI Product Leadership Interviews Shift: UX Evaluation Returns",
+      "source_query": "Interview Synthesis Gaps: podcast interview AI product leaders what hiring managers want candidates to say about evals monitoring and human-in-the-loop",
+      "domain": "www.linkedin.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/10f0da4a9f4f426e.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://medium.com/@ivanperaltasantana/from-big-crews-to-fast-ships-org-design-after-ai-cabb3fe55ee6",
+      "title": "From Big Crews to Fast Ships: Org Design After AI | by Ivan Peralta | Mar, 2026 | Medium",
+      "source_query": "Org Design Patterns: blog post AI native organization design directly responsible individual DRI mission driven teams research product engineering",
+      "domain": "medium.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/68f5ce8c2b0ed2cf.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.linkedin.com/posts/areganti_why-most-ai-products-fail-lessons-from-50-activity-7416320569282887681-XLBB",
+      "title": "AI Hype vs Reality: Lenny's Podcast Takeaways - LinkedIn",
+      "source_query": "Interview Ready Synthesis: YouTube talk AI product teams failure modes evals feedback loops enterprise deployment",
+      "domain": "www.linkedin.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/6a97395eabd17868.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.news.aakashg.com/p/the-ai-product-design-interview-your",
+      "title": "The AI Product Design Interview: Your Complete Guide",
+      "source_query": "PM in AI: AI PM anti-patterns customer discovery evals workflow redesign founder interview",
+      "domain": "www.news.aakashg.com",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/fd4c871c5d10e540.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://osmu.app/en/blog/ai-engineering-leaders-the-next-12-24-months-of-ai-transform",
+      "title": "(Lenny's Podcast) AI Engineering Leaders: The Next 12-24 Months of AI Transformation | OSMU Blog",
+      "source_query": "Talent, Culture, and Leadership: engineering blog AI native teams career ladders staff engineer manager research product organization",
+      "domain": "osmu.app",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/6bae505fccff7501.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://pmhub.tech/the-agile-data-science-playbook-quarterly-sprints-to-ml-success-featuring-lauren-creedon/",
+      "title": "The Agile Data Science Playbook: Quarterly Sprints to ML Success featuring Lauren Creedon - PM Hub Podcast",
+      "source_query": "PM in AI: how product managers work with ML engineers and researchers effectively",
+      "domain": "pmhub.tech",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/824231e574cc728f.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.kalviumlabs.ai/blog/why-most-ai-products-fail/",
+      "title": "Why Most AI Products Fail: A Systems-Level View | Kalvium Labs",
+      "source_query": "Failure Modes: AI research to product handoff failure blog post org design",
+      "domain": "www.kalviumlabs.ai",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/9fdc92c15630de88.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "http://www.sundeepteki.org/advice/the-ultimate-ai-research-engineer-interview-guide-cracking-openai-anthropic-google-deepmind-top-ai-labs",
+      "title": "AI Research Engineer Interview Guide 2025: OpenAI, Anthropic ...",
+      "source_query": "Large Company Contrasts: OpenAI Anthropic Google DeepMind product research engineering collaboration interview",
+      "domain": "www.sundeepteki.org",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/cc444c63b66bb031.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://8allocate.com/blog/how-to-structure-an-ai-enabled-product-team/",
+      "title": "AI Team Structure: How to Build AI Development Team in 2026",
+      "source_query": "Research-Product Interface: applied AI team structure research team product team engineering handoff blog experimentation cadence",
+      "domain": "8allocate.com",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/f1d743a873205cc4.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://aetherlink.ai/en/blog/agentic-ai-multi-agent-systems-enterprise-governance-in-2026",
+      "title": "Agentic AI & Multi-Agent Systems: Enterprise Governance in 2026 | AetherLink",
+      "source_query": "Interview Ready Synthesis: podcast interview AI product leaders organizational patterns human-in-the-loop autonomy evaluation culture",
+      "domain": "aetherlink.ai",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/55bd2fa520ca7a32.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://alhena.ai/blog/ai-human-escalation-chatbot-handoff-best-practices/",
+      "title": "AI-to-Human Handoff in Ecommerce: 7-Step Context Transfer",
+      "source_query": "Research To Product Transfer: podcast interview research to product transfer AI teams handoffs ownership evaluation loops",
+      "domain": "alhena.ai",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/dc992b6895436f3b.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://axrp.net/episode/2026/01/03/episode-47-david-rein-metr-time-horizons.html",
+      "title": "47 - David Rein on METR Time Horizons | AXRP - the AI X-risk Research Podcast",
+      "source_query": "Incentives Process And Metrics: AI research organization incentives quality over speed interview podcast metrics",
+      "domain": "axrp.net",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/516ec5990478732f.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://blog.ravi-mehta.com/p/building-ai-products-lessons-from",
+      "title": "Building AI Products: Lessons from Productboard Spark",
+      "source_query": "PM in AI: how AI product teams decide what to build under model uncertainty blog post",
+      "domain": "blog.ravi-mehta.com",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/41e286dbab4fa309.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://blog.sshh.io/p/the-transposed-organization",
+      "title": "The Transposed Organization - by Shrivu Shankar",
+      "source_query": "Org Design Patterns: blog post AI native organization design directly responsible individual DRI mission driven teams research product engineering",
+      "domain": "blog.sshh.io",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/fc39241ec25311e8.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://callsphere.tech/blog/post-mortem-analysis-ai-agent-failures-learning-production-incidents",
+      "title": "Post-Mortem Analysis for AI Agent Failures: Learning from Production Incidents | CallSphere Blog",
+      "source_query": "Failure Modes: podcast interview AI product failures research handoff breakdowns product engineering",
+      "domain": "callsphere.tech",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/84f7cc2272f39201.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://engineeringleadership.buzzsprout.com/1124402/episodes/15961706-what-staff-engineers-need-to-be-successful-in-the-ml-field-with-zilvinas-girenas",
+      "title": "What staff+ engineers need to be successful in the ML field (with \u017dilvinas Gir\u0117nas)",
+      "source_query": "Failure Modes: common mistakes managing machine learning teams startup",
+      "domain": "engineeringleadership.buzzsprout.com",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/022c0ab363af102d.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://fountain.fm/show/743839",
+      "title": "The Engineering Leadership Podcast - Fountain.fm",
+      "source_query": "Large Company Contrasts: OpenAI engineering org podcast DRI mission-driven teams vertical horizontal teams managers as systems designers",
+      "domain": "fountain.fm",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/f250643e17f92899.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://getaigovernance.net/blog/best-ai-compliance-platforms-2026",
+      "title": "Best AI Compliance Platforms 2026 | GetAIGovernance - GetAIGovernance",
+      "source_query": "Execution, Metrics, and Evaluation: podcast interview AI product launch criteria reliability trust evals production monitoring startup",
+      "domain": "getaigovernance.net",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/aaa1688445c9f4b7.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://lexfridman.com/dario-amodei",
+      "title": "#452 \u2013 Dario Amodei: Anthropic CEO on Claude, AGI & the Future of AI & Humanity | Lex Fridman Podcast",
+      "source_query": "Large Company Contrasts: OpenAI Anthropic Google DeepMind product research engineering collaboration interview",
+      "domain": "lexfridman.com",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/b95235c2fa98349d.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://notion.notion.site/2edefdeead058052bda4ea3834e992f9",
+      "title": "/AskLenny Lenny's Podcast Guests | Notion",
+      "source_query": "Smaller Company Operator Voices: contrarian AI startup company building interview avoid blitzscaling product engineering research team",
+      "domain": "notion.notion.site",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/aab038db7beda70f.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://pod.co/human-first/ai-fluency-is-the-new-hiring-litmus-test-for-go-to-market-leaders",
+      "title": "AI Fluency Is the New Hiring Litmus Test for Go-to-Market Leaders - Human-First: The GTM Hiring Show - Podcast.co",
+      "source_query": "Interview Synthesis Gaps: podcast interview AI product leaders what hiring managers want candidates to say about evals monitoring and human-in-the-loop",
+      "domain": "pod.co",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/630c1916eb11b857.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://podwise.ai/dashboard/episodes/3016978",
+      "title": "The Inventors of Deep Research | Latent Space: The AI Engineer Podcast | Podwise",
+      "source_query": "Interview Ready Synthesis: how to talk about product engineering research collaboration in AI interviews",
+      "domain": "podwise.ai",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/e1e9bb626e743a9e.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://productschool.com/blog/artificial-intelligence/evaluation-metrics",
+      "title": "Evaluation Metrics for AI Products That Drive Trust",
+      "source_query": "Execution, Metrics, and Evaluation: YouTube talk scenario-based evaluation AI product metrics silent failures production ML teams",
+      "domain": "productschool.com",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/a16bf8dfd487d995.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.danielphilipjohnson.com/blog/why-80-of-ai-projects-fail-and-how-staff-engineers-can-save-them-hbr-strategy",
+      "title": "Why 80% of AI Projects Fail & How Staff+ Engineers Can Save ...",
+      "source_query": "Smaller Company Voices: startup AI team postmortem product engineering research organization what worked what failed blog",
+      "domain": "www.danielphilipjohnson.com",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/5748c2b9b932a437.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.digitalapplied.com/blog/agentic-ai-maturity-model-enterprise-self-assessment-guide",
+      "title": "Agentic AI Maturity Model: Enterprise Assessment Guide",
+      "source_query": "Failure Modes: podcast interview AI product teams failure modes unclear ownership handoffs research engineering",
+      "domain": "www.digitalapplied.com",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/50047e08a4e1f5f0.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.moderndescartes.com/essays/ml_eng_interviewing/",
+      "title": "Interviewing for ML/AI Engineers - Brian Kihoon Lee",
+      "source_query": "Interview Ready Synthesis: how to talk about product engineering research collaboration in AI interviews",
+      "domain": "www.moderndescartes.com",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/8a2099d6cecc2823.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.tryexponent.com/guides/anthropic-software-engineer-interview",
+      "title": "Anthropic Software Engineer Interview Guide - Exponent",
+      "source_query": "Large Company Contrasts: Anthropic engineering culture interview cross-functional research product engineering operating model",
+      "domain": "www.tryexponent.com",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/2e580164a995af3b.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.yuan-meng.com/posts/mle_interviews_2.0/",
+      "title": "MLE Interview 2.0: Research Engineering and Scary Rounds",
+      "source_query": "Org Design Patterns: YouTube talk applied AI org design research engineering product collaboration vertical teams horizontal teams",
+      "domain": "www.yuan-meng.com",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/b5b069a04fa3fe54.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://yuvalyeret.com/blog/ai-isnt-the-problem-your-operating-system-is/",
+      "title": "Podcast Deep Dive: AI Strategy and the Operating System Mismatch (with Dave West) \u2014 Yuval Yeret",
+      "source_query": "Failure Modes: YouTube talk why gen AI products fail organizational anti-patterns product engineering research",
+      "domain": "yuvalyeret.com",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/7f9c50aac3f4023a.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.news.aakashg.com/p/ai-success-metrics-interview",
+      "title": "The AI Product Success Metrics Interview: Your Complete Guide",
+      "source_query": "Incentives Process And Metrics: metrics for AI product teams and research teams blog",
+      "domain": "www.news.aakashg.com",
+      "category": "general",
+      "tags": [],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/29904c7315aeeebb.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://podscan.fm/podcasts/beyond-the-prompt-how-to-use-ai-in-your-company/episodes/from-roadmaps-to-rampd-how-ai-is-changing-product-development-with-richard-white-founder-of-fathom-ai",
+      "title": "From Roadmaps to R&amp;D: How AI Is Changing Product Development - with Richard White, Founder of Fathom AI - Beyond The Prompt - How to use AI in your company - Podcast Episode - Podscan.fm",
+      "source_query": "Research-Product Interface: how research teams and product teams collaborate in AI companies blog",
+      "domain": "podscan.fm",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/57122b6afb013150.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://podcasts.apple.com/us/podcast/ai-engineering-podcast/id1626358243",
+      "title": "AI Engineering Podcast",
+      "source_query": "Org Design Patterns: small AI startup product engineering research collaboration operating model",
+      "domain": "podcasts.apple.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/18b5ce163fa09f4e.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://pod.wave.co/podcast/lennys-podcast-product-career-growth-b65486a6-7cff-4966-bbea-2bc239e90aa4/engineers-are-becoming-sorcerers-the-future-of-software-development-with-openais-sherwin-wu",
+      "title": "\u201cEngineers are becoming sorcerers\u201d | The future of software development with OpenAI\u2019s Sherwin Wu - Lenny's Podcast: Product | Career | Growth | Wave AI Podcast Notes",
+      "source_query": "Large Company Contrasts: OpenAI engineering org podcast DRI mission-driven teams vertical horizontal teams managers as systems designers",
+      "domain": "pod.wave.co",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/91efd7b749626368.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://getpodcast.com/podcast/the-engineering-leadership-podcast/the-ai-distribution-shift-navigating-pmf-collapse-and-building-ai-nati_0317944216",
+      "title": "The AI Distribution Shift, Navigating PMF Collapse & Building AI-Native EPD Systems w/ Brian Balfour #241 - The Engineering Leadership Podcast",
+      "source_query": "Org Design Patterns: AI-native org design podcast research engineering product decision rights mission teams DRI interview",
+      "domain": "getpodcast.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/930a05f4b13293bf.md"
+    }
+  ]
+}

@@ -5,3 +5,4 @@ data/
 dist/
 build/
 **/__pycache__/
+benchmarks/rust-composed-stack/target/

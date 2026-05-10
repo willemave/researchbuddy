@@ -1,0 +1,67 @@
+{
+  "tool": "rust-composed",
+  "mode": "live",
+  "manifest": "/Users/willem/Development/researchbuddy/.benchmarks/results/20260409-184917/live-corpus.json",
+  "timeout_ms": 45000,
+  "summary": {
+    "total": 6,
+    "successes": 5,
+    "failures": 1,
+    "mean_elapsed_ms": 8620.0353168,
+    "median_elapsed_ms": 398.714584,
+    "p95_elapsed_ms": 33441.317958199994,
+    "min_elapsed_ms": 243.292334,
+    "max_elapsed_ms": 41697.903375,
+    "mean_markdown_chars": 3584.8
+  },
+  "results": [
+    {
+      "url": "https://podscan.fm/podcasts/lennys-podcast-product-career-growth/episodes/the-100-person-ai-lab-that-became-anthropic-and-googles-secret-weapon-edwin-chen-surge-ai",
+      "mode": "live",
+      "success": true,
+      "elapsed_ms": 398.714584,
+      "markdown_chars": 3431,
+      "error": null
+    },
+    {
+      "url": "https://podcasts.apple.com/us/podcast/why-most-ai-products-fail-lessons-from-50-ai-deployments/id1627920305?i=1000744678894",
+      "mode": "live",
+      "success": true,
+      "elapsed_ms": 414.976291,
+      "markdown_chars": 5864,
+      "error": null
+    },
+    {
+      "url": "https://pod.wave.co/podcast/lennys-podcast-product-career-growth-b65486a6-7cff-4966-bbea-2bc239e90aa4/what-openai-and-google-engineers-learned-deploying-50-ai-products-in-production",
+      "mode": "live",
+      "success": true,
+      "elapsed_ms": 41697.903375,
+      "markdown_chars": 204,
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=z7T1pCxgvlA",
+      "mode": "live",
+      "success": false,
+      "elapsed_ms": 988.8335000000001,
+      "markdown_chars": 0,
+      "error": "readability parse failed for https://www.youtube.com/watch?v=z7T1pCxgvlA"
+    },
+    {
+      "url": "https://getpodcast.com/podcast/the-engineering-leadership-podcast/from-research-lab-to-record-breaking-product-how-openai-engineered-for_1d326d694f",
+      "mode": "live",
+      "success": true,
+      "elapsed_ms": 243.292334,
+      "markdown_chars": 6071,
+      "error": null
+    },
+    {
+      "url": "https://launchpod.logrocket.com/linear-secret-building-powerful-ai-products-nan-yu",
+      "mode": "live",
+      "success": true,
+      "elapsed_ms": 345.28999999999996,
+      "markdown_chars": 2354,
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "generated_at": "2026-04-10T01:47:46.239218+00:00",
+  "tool": "crawl4ai",
+  "mode": "live",
+  "manifest": "/Users/willem/Development/researchbuddy/.benchmarks/results/20260409-184736/corpus.json",
+  "limit": 0,
+  "page_timeout_ms": 30000,
+  "headless": true,
+  "platform": {
+    "python": "3.13.12",
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "summary": {
+    "total": 4,
+    "successes": 4,
+    "failures": 0,
+    "mean_elapsed_ms": 1933.7564582529012,
+    "median_elapsed_ms": 1923.0694375000894,
+    "p95_elapsed_ms": 2177.0158080529654,
+    "min_elapsed_ms": 1680.728250008542,
+    "max_elapsed_ms": 2208.158708002884,
+    "mean_markdown_chars": 15206.0
+  },
+  "results": [
+    {
+      "url": "https://www.youtube.com/watch?v=cv9xYnurGIc",
+      "mode": "live",
+      "success": true,
+      "elapsed_ms": 2208.158708002884,
+      "markdown_chars": 13063,
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=sni_-awZTgw",
+      "mode": "live",
+      "success": true,
+      "elapsed_ms": 1845.5994999967515,
+      "markdown_chars": 21620,
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=-5_6HQR0WhA",
+      "mode": "live",
+      "success": true,
+      "elapsed_ms": 1680.728250008542,
+      "markdown_chars": 10157,
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=h98dLRJFHMM",
+      "mode": "live",
+      "success": true,
+      "elapsed_ms": 2000.5393750034273,
+      "markdown_chars": 15984,
+      "error": null
+    }
+  ]
+}

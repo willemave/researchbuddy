@@ -1,0 +1,67 @@
+{
+  "tool": "rust-composed",
+  "mode": "extract-only",
+  "manifest": "/Users/willem/Development/researchbuddy/.benchmarks/results/20260409-184917/extract-corpus.json",
+  "timeout_ms": 45000,
+  "summary": {
+    "total": 6,
+    "successes": 6,
+    "failures": 0,
+    "mean_elapsed_ms": 0.25918749999999996,
+    "median_elapsed_ms": 0.1286455,
+    "p95_elapsed_ms": 0.7585627500000001,
+    "min_elapsed_ms": 0.085042,
+    "max_elapsed_ms": 0.963292,
+    "mean_markdown_chars": 2509.8333333333335
+  },
+  "results": [
+    {
+      "url": "https://www.youtube.com/watch?v=z7T1pCxgvlA",
+      "mode": "extract-only",
+      "success": true,
+      "elapsed_ms": 0.963292,
+      "markdown_chars": 2919,
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+      "mode": "extract-only",
+      "success": true,
+      "elapsed_ms": 0.144375,
+      "markdown_chars": 2882,
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/shorts/z5YrGY-mNN0",
+      "mode": "extract-only",
+      "success": true,
+      "elapsed_ms": 0.085042,
+      "markdown_chars": 728,
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ZuQHYTDDuTU",
+      "mode": "extract-only",
+      "success": true,
+      "elapsed_ms": 0.105125,
+      "markdown_chars": 2748,
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=rzAGo_XML1U",
+      "mode": "extract-only",
+      "success": true,
+      "elapsed_ms": 0.119541,
+      "markdown_chars": 2914,
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=cv9xYnurGIc",
+      "mode": "extract-only",
+      "success": true,
+      "elapsed_ms": 0.13774999999999998,
+      "markdown_chars": 2868,
+      "error": null
+    }
+  ]
+}

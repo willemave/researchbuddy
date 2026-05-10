@@ -133,6 +133,18 @@ class RunRecord(BaseModel):
     output_dir: Path
 
 
+class RunRuntimeRecord(BaseModel):
+    """Stored runtime metadata for a local run process."""
+
+    run_id: str
+    pid: int | None = None
+    log_path: Path | None = None
+    started_at: datetime
+    updated_at: datetime
+    finished_at: datetime | None = None
+    exit_code: int | None = None
+
+
 class FollowupSourceCard(BaseModel):
     """Distilled source card persisted for follow-up answers."""
 

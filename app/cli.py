@@ -2,9 +2,14 @@
 
 import asyncio
 import json
+import os
 import subprocess
+import sys
 import tempfile
+import time
+import uuid
 from dataclasses import dataclass
+from datetime import UTC, datetime
 from pathlib import Path
 
 import click
@@ -17,10 +22,9 @@ from app.agents.base import AgentDeps
 from app.cli_doctor import format_doctor_report, has_doctor_failures, run_doctor_checks
 from app.cli_help import (
     build_command_guidance,
-    build_command_reference,
     build_unknown_command_guidance,
 )
-from app.constants import APP_VERSION, PODCAST_TRANSCRIPTS_FILENAME, YOUTUBE_TRANSCRIPTS_FILENAME
+from app.constants import APP_VERSION
 from app.core.logging import setup_logging
 from app.core.settings import get_settings
 from app.models.homebrew import TapExportRequest
@@ -30,6 +34,7 @@ from app.models.review import (
     ReviewRunRequest,
     ReviewRunResult,
     ReviewRunStats,
+    RunRuntimeRecord,
 )
 from app.services.chatgpt import build_chatgpt_continue_url
 from app.services.followup import answer_followup_question, load_followup_memory
@@ -37,7 +42,6 @@ from app.services.homebrew_tap import detect_github_remote, export_tap_repositor
 from app.services.local_audio_transcriber import transcribe_audio as transcribe_local_audio
 from app.services.podcast_transcriber import (
     PodcastEpisode,
-    PodcastTranscript,
     extract_podcast_transcript,
     is_transcribable_podcast_url,
 )
@@ -48,14 +52,23 @@ from app.services.research_profiles import (
 )
 from app.services.setup_runtime import format_setup_report, has_setup_failures, run_setup
 from app.services.storage import (
+    build_run_paths,
+    create_run,
+    fetch_current_run_id,
     fetch_run,
+    fetch_run_runtime,
     fetch_run_stats,
-    list_run_urls,
+    finish_run_runtime,
+    init_db,
+    list_in_progress_runs,
     list_runs,
+    new_run_record,
     resolve_run_dir,
+    set_current_run_id,
+    update_run_status,
+    upsert_run_runtime,
 )
 from app.services.youtube_transcriber import (
-    YouTubeTranscript,
     extract_youtube_transcript,
     is_youtube_url,
 )
@@ -81,10 +94,7 @@ def _build_missing_parameter_guidance(ctx: click.Context, exc: click.MissingPara
 
     command_name = _command_lookup_key(ctx)
     param_name = exc.param.name if exc.param is not None else "required input"
-    if command_name == "followup" and param_name == "run_id":
-        reason = "Missing run_id. Use `researchbuddy runs` to find a saved run first."
-    else:
-        reason = f"Missing required input: {param_name}."
+    reason = f"Missing required input: {param_name}."
     if command_name is None:
         return reason
     return build_command_guidance(command_name, reason=reason)
@@ -162,7 +172,7 @@ app = typer.Typer(
     name="researchbuddy",
     add_completion=False,
     cls=ResearchBuddyGroup,
-    help="Run ResearchBuddy research workflows, inspect saved runs, and validate local runtime readiness.",
+    help="Start one ResearchBuddy prompt at a time, follow up on it, and inspect local runtime state.",
     invoke_without_command=True,
 )
 tap_app = typer.Typer(
@@ -170,7 +180,7 @@ tap_app = typer.Typer(
     help="Generate and inspect Homebrew tap publishing assets for ResearchBuddy.",
     invoke_without_command=True,
 )
-app.add_typer(tap_app, name="tap")
+app.add_typer(tap_app, name="tap", hidden=True)
 console = Console()
 settings = get_settings()
 
@@ -178,7 +188,6 @@ OPTIONAL_PROMPT_ARGUMENT = typer.Argument(
     None,
     help="Research question or product to investigate.",
 )
-RUN_ID_ARGUMENT = typer.Argument(..., help="Saved run identifier")
 OPTIONAL_QUESTION_ARGUMENT = typer.Argument(
     None,
     help="Follow-up question to answer from saved memory.",
@@ -203,11 +212,24 @@ RESULT_FILE_OPTION = typer.Option(
     "--result-file",
     help="Write the final text output to an explicit file path.",
 )
+WORKER_REQUEST_FILE_OPTION = typer.Option(
+    ...,
+    "--request-file",
+    help="Serialized run request",
+)
 PLANNER_MODEL_OPTION = typer.Option(None, help="Override model for the lane planner agent")
 SUB_AGENT_MODEL_OPTION = typer.Option(None, help="Override model for sub-agents")
 TAP_OUTPUT_OPTION = typer.Option(None, help="Output directory for the generated Homebrew tap repo")
-RUNS_LIMIT_OPTION = typer.Option(20, "--limit", min=1, help="Maximum runs to list")
-STATS_OPTION = typer.Option(False, "--stats", help="Print run statistics before the synthesis")
+LIST_LIMIT_OPTION = typer.Option(20, "--limit", min=1, help="Maximum runs to list")
+RUN_ID_OPTION = typer.Option(None, "--run-id", help="Use an explicit run instead of current")
+JSON_OPTION = typer.Option(False, "--json", help="Print machine-readable JSON")
+WATCH_INTERVAL_OPTION = typer.Option(5.0, "--interval", min=0.25, help="Polling interval seconds")
+WATCH_TIMEOUT_OPTION = typer.Option(
+    None,
+    "--timeout",
+    min=1.0,
+    help="Maximum seconds to watch before exiting with timeout",
+)
 INSTALL_PLAYWRIGHT_OPTION = typer.Option(
     True,
     "--install-playwright/--skip-playwright",
@@ -317,23 +339,6 @@ def _print_chatgpt_continue_action(summary: str) -> None:
     console.print(f"Continue this conversation in ChatGPT: {url}", soft_wrap=True, highlight=False)
 
 
-def _load_saved_transcripts(run_dir: Path) -> list[tuple[str, str, str | None]]:
-    """Load stored transcript metadata for inspect output."""
-
-    items: list[tuple[str, str, str | None]] = []
-    for filename, model_type, label in (
-        (YOUTUBE_TRANSCRIPTS_FILENAME, YouTubeTranscript, "youtube"),
-        (PODCAST_TRANSCRIPTS_FILENAME, PodcastTranscript, "podcast"),
-    ):
-        path = run_dir / filename
-        if not path.exists():
-            continue
-        for item in json.loads(path.read_text(encoding="utf-8")):
-            transcript = model_type.model_validate(item)
-            items.append((label, transcript.url, transcript.title))
-    return items
-
-
 def _resolve_transcribe_type(source: str, source_type: str) -> str:
     """Resolve a concrete transcription type from CLI input."""
 
@@ -364,6 +369,16 @@ def _print_status_line(message: str) -> None:
     """Print an immediate stdout status line for long-running CLI work."""
 
     console.print(message, soft_wrap=True, highlight=False)
+    flush = getattr(console.file, "flush", None)
+    if callable(flush):
+        flush()
+
+
+def _print_json(value: object) -> None:
+    """Print JSON without Rich inserting presentation line breaks."""
+
+    console.file.write(json.dumps(value, indent=2))
+    console.file.write("\n")
     flush = getattr(console.file, "flush", None)
     if callable(flush):
         flush()
@@ -420,6 +435,170 @@ def _build_cli_run_reporter() -> RunReporter:
         on_url_done=on_url_done,
         on_lane_done=on_lane_done,
     )
+
+
+def _build_run_request(
+    prompt: str,
+    *,
+    mode: ResearchModeOption,
+    max_urls: int | None,
+    max_agents: int | None,
+    headful: bool,
+    timeout_ms: int | None,
+    output_dir: Path | None,
+    planner_model: str | None,
+    sub_agent_model: str | None,
+) -> ReviewRunRequest:
+    """Build a validated review request from CLI options."""
+
+    config = ReviewRunConfig(
+        max_urls=max_urls or settings.max_urls,
+        max_agents=max_agents or settings.max_agents,
+        headful=headful,
+        navigation_timeout_ms=timeout_ms or settings.navigation_timeout_ms,
+        output_dir=output_dir or settings.storage_path,
+        research_mode=parse_research_mode_option(mode),
+        planner_model=planner_model,
+        sub_agent_model=sub_agent_model,
+    )
+    return ReviewRunRequest(prompt=prompt, **config.model_dump())
+
+
+def _pid_is_running(pid: int | None) -> bool:
+    """Return whether a process id appears to still be alive."""
+
+    if pid is None or pid <= 0:
+        return False
+    try:
+        os.kill(pid, 0)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+    return True
+
+
+async def _find_live_run() -> tuple[str, int] | None:
+    """Return the first in-progress run with a live worker process."""
+
+    await init_db(settings.database_path)
+    for run_record in await list_in_progress_runs(settings.database_path):
+        runtime = await fetch_run_runtime(settings.database_path, run_record.run_id)
+        if runtime is not None and _pid_is_running(runtime.pid):
+            return run_record.run_id, runtime.pid or 0
+    return None
+
+
+async def _resolve_run_id_or_exit(run_id: str | None) -> str:
+    """Resolve explicit or current run ID, exiting with agent-friendly guidance."""
+
+    if run_id:
+        return run_id
+    current_run_id = await fetch_current_run_id(settings.database_path)
+    if current_run_id:
+        return current_run_id
+    console.print('No current run. Start one with `researchbuddy start "research prompt"`.')
+    raise typer.Exit(code=1)
+
+
+def _tail_text(path: Path, max_lines: int) -> str:
+    """Return the last lines of a UTF-8-ish text file."""
+
+    if max_lines <= 0 or not path.exists():
+        return ""
+    lines = path.read_text(encoding="utf-8", errors="ignore").splitlines()
+    return "\n".join(lines[-max_lines:])
+
+
+async def _run_status_payload(run_id: str, output_dir: Path | None = None) -> dict[str, object]:
+    """Build a status payload for one run."""
+
+    run_record = await fetch_run(settings.database_path, run_id)
+    if run_record is None:
+        console.print(f"Run not found: {run_id}")
+        raise typer.Exit(code=1)
+
+    run_dir = resolve_run_dir(run_record.output_dir, run_id, output_dir)
+    runtime = await fetch_run_runtime(settings.database_path, run_id)
+    total, fetched, failed = await fetch_run_stats(settings.database_path, run_id)
+    pid = runtime.pid if runtime else None
+    is_running = _pid_is_running(pid)
+    log_path = runtime.log_path if runtime and runtime.log_path else run_dir / "run.log"
+    synthesis_path = run_dir / "synthesis.md"
+    return {
+        "run_id": run_record.run_id,
+        "prompt": run_record.prompt,
+        "created_at": run_record.created_at.isoformat(),
+        "status": run_record.status,
+        "pid": pid,
+        "is_process_running": is_running,
+        "output_dir": str(run_dir),
+        "log_path": str(log_path),
+        "synthesis_path": str(synthesis_path) if synthesis_path.exists() else None,
+        "urls": {"total": total, "fetched": fetched, "failed": failed},
+        "started_at": runtime.started_at.isoformat() if runtime else None,
+        "finished_at": runtime.finished_at.isoformat() if runtime and runtime.finished_at else None,
+        "exit_code": runtime.exit_code if runtime else None,
+    }
+
+
+def _print_status_payload(payload: dict[str, object]) -> None:
+    """Print a compact human-readable status block."""
+
+    urls = payload["urls"]
+    assert isinstance(urls, dict)
+    pid = payload["pid"]
+    process_label = "running" if payload["is_process_running"] else "not running"
+    console.print(f"Run ID: {payload['run_id']}")
+    console.print(f"Status: {payload['status']}")
+    console.print(f"Process: {pid or '-'} ({process_label})")
+    console.print(f"Prompt: {payload['prompt']}", soft_wrap=True)
+    console.print(
+        f"URLs: total={urls['total']} fetched={urls['fetched']} failed={urls['failed']}"
+    )
+    console.print(f"Output Dir: {payload['output_dir']}")
+    console.print(f"Log: {payload['log_path']}")
+    if payload["synthesis_path"]:
+        console.print(f"Synthesis: {payload['synthesis_path']}")
+
+
+async def _record_runtime_start(run_id: str, pid: int | None, log_path: Path) -> None:
+    """Persist runtime metadata for a process."""
+
+    now = datetime.now(UTC)
+    await upsert_run_runtime(
+        settings.database_path,
+        RunRuntimeRecord(
+            run_id=run_id,
+            pid=pid,
+            log_path=log_path,
+            started_at=now,
+            updated_at=now,
+        ),
+    )
+
+
+def _spawn_worker(run_id: str, request_file: Path, log_path: Path) -> int:
+    """Spawn a detached worker process and return its PID."""
+
+    command = [
+        sys.executable,
+        "-m",
+        "app.cli",
+        "_worker",
+        run_id,
+        "--request-file",
+        str(request_file),
+    ]
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    with log_path.open("a", encoding="utf-8") as log_file:
+        process = subprocess.Popen(
+            command,
+            stdout=log_file,
+            stderr=subprocess.STDOUT,
+            start_new_session=True,
+        )
+    return process.pid
 
 
 async def _ensure_followup_memory(state: FollowupSessionState) -> FollowupMemory:
@@ -502,10 +681,10 @@ def tap_callback(ctx: typer.Context) -> None:
 
 
 @app.command(
-    help="Run a new research workflow and print the final synthesis, with optional saved output.",
+    help="Start a new research prompt in the background and make it current.",
     cls=ResearchBuddyCommand,
 )
-def run(
+def start(
     prompt: str | None = OPTIONAL_PROMPT_ARGUMENT,
     prompt_file: Path | None = PROMPT_FILE_OPTION,
     mode: ResearchModeOption = RESEARCH_MODE_OPTION,
@@ -514,157 +693,208 @@ def run(
     headful: bool = HEADFUL_OPTION,
     timeout_ms: int = TIMEOUT_OPTION,
     output_dir: Path = OUTPUT_DIR_OPTION,
-    result_file: Path | None = RESULT_FILE_OPTION,
     planner_model: str | None = PLANNER_MODEL_OPTION,
     sub_agent_model: str | None = SUB_AGENT_MODEL_OPTION,
-    stats: bool = STATS_OPTION,
+    json_output: bool = JSON_OPTION,
 ) -> None:
-    """Run a new research workflow and return the final synthesis."""
+    """Start a new research workflow in a worker process."""
 
     setup_logging(settings.log_level)
     try:
         resolved_prompt = _resolve_text_input(prompt, prompt_file, field_name="prompt")
     except typer.BadParameter as exc:
-        _exit_with_command_guidance("run", reason=str(exc))
-    _print_status_line(f'Starting ResearchBuddy run for: "{_truncate_text(resolved_prompt, 80)}"')
-
-    config = ReviewRunConfig(
-        max_urls=max_urls or settings.max_urls,
-        max_agents=max_agents or settings.max_agents,
-        headful=headful,
-        navigation_timeout_ms=timeout_ms or settings.navigation_timeout_ms,
-        output_dir=output_dir or settings.storage_path,
-        research_mode=parse_research_mode_option(mode),
-        planner_model=planner_model,
-        sub_agent_model=sub_agent_model,
-    )
-    request = ReviewRunRequest(prompt=resolved_prompt, **config.model_dump())
-
-    deps = AgentDeps(session_id="cli", job_id="cli")
-
-    result = asyncio.run(run_review(request, deps, reporter=_build_cli_run_reporter()))
-    if result_file is not None:
-        _write_result_file(result_file, result.synthesis_markdown)
-
-    console.print(Panel.fit("ResearchBuddy complete", style="green"))
-    console.print(f"Run ID: {result.run_id}")
-    if result_file is not None:
-        console.print(f"Result file: {result_file}", soft_wrap=True)
-    if stats:
-        console.print(
-            f"Fetched {result.stats.fetched}/{result.stats.total_urls} URLs"
-            f" ({result.stats.failed} failed)"
-        )
-    console.print()
-    console.print(result.synthesis_markdown)
-    console.print()
-    _print_chatgpt_continue_action(result.synthesis_markdown)
-
-
-@app.command(
-    help="Inspect saved run artifacts, including sources, lanes, and transcript metadata.",
-    cls=ResearchBuddyCommand,
-)
-def inspect(
-    run_id: str = RUN_ID_ARGUMENT,
-    output_dir: Path = OUTPUT_DIR_OPTION,
-    sources: bool = typer.Option(False, "--sources", help="Show stored source URLs for the run"),
-    lanes: bool = typer.Option(False, "--lanes", help="Show saved lane markdown files"),
-    transcripts: bool = typer.Option(
-        False,
-        "--transcripts",
-        help="Show saved YouTube and podcast transcript metadata",
-    ),
-) -> None:
-    """Inspect stored artifacts for a saved run."""
+        _exit_with_command_guidance("start", reason=str(exc))
 
     async def _run() -> None:
-        run_record = await fetch_run(settings.database_path, run_id)
-        if run_record is None:
-            console.print(f"Run not found: {run_id}")
+        live_run = await _find_live_run()
+        if live_run is not None:
+            live_run_id, pid = live_run
+            console.print(
+                f"Run already in progress: {live_run_id} (pid {pid}). "
+                "Use `researchbuddy status` or `researchbuddy watch`."
+            )
             raise typer.Exit(code=1)
 
-        run_dir = resolve_run_dir(run_record.output_dir, run_id, output_dir)
-        total, fetched, failed = await fetch_run_stats(settings.database_path, run_id)
+        request = _build_run_request(
+            resolved_prompt,
+            mode=mode,
+            max_urls=max_urls,
+            max_agents=max_agents,
+            headful=headful,
+            timeout_ms=timeout_ms,
+            output_dir=output_dir,
+            planner_model=planner_model,
+            sub_agent_model=sub_agent_model,
+        )
+        run_id = uuid.uuid4().hex
+        run_paths = build_run_paths(request.output_dir, run_id)
+        run_record = new_run_record(
+            run_id=run_id,
+            prompt=request.prompt,
+            max_urls=request.max_urls,
+            max_agents=request.max_agents,
+            headful=request.headful,
+            output_dir=run_paths["run"],
+        )
+        await init_db(settings.database_path)
+        await create_run(settings.database_path, run_record)
+        await set_current_run_id(settings.database_path, run_id)
 
-        console.print("# Run")
-        console.print(f"Run ID: {run_record.run_id}")
-        console.print(f"Status: {run_record.status}")
-        console.print(f"Prompt: {run_record.prompt}")
-        console.print(f"Output Dir: {run_dir}")
-        console.print(f"URLs: total={total} fetched={fetched} failed={failed}")
+        request_file = run_paths["run"] / "request.json"
+        request_file.write_text(request.model_dump_json(indent=2), encoding="utf-8")
+        log_path = run_paths["run"] / "worker.log"
+        pid = _spawn_worker(run_id, request_file, log_path)
+        await _record_runtime_start(run_id, pid, log_path)
 
-        if not any((sources, lanes, transcripts)):
-            lane_count = len(list((run_dir / "lanes").glob("*.md")))
-            transcript_items = _load_saved_transcripts(run_dir)
-            console.print(f"Lanes: {lane_count}")
-            console.print(f"Saved transcripts: {len(transcript_items)}")
+        status_command = f"researchbuddy status --run-id {run_id}"
+        watch_command = f"researchbuddy watch --run-id {run_id}"
+        if json_output:
+            _print_json(
+                {
+                    "run_id": run_id,
+                    "pid": pid,
+                    "prompt": request.prompt,
+                    "status": run_record.status,
+                    "output_dir": str(run_paths["run"]),
+                    "log_path": str(log_path),
+                    "status_command": status_command,
+                    "watch_command": watch_command,
+                }
+            )
             return
 
-        if sources:
-            console.print()
-            console.print("## Sources")
-            for record in await list_run_urls(settings.database_path, run_id):
-                title = record.title or "(untitled)"
-                console.print(f"- [{record.status}] {title}: {record.url}")
-
-        if lanes:
-            console.print()
-            console.print("## Lanes")
-            lane_paths = sorted((run_dir / "lanes").glob("*.md"))
-            if not lane_paths:
-                console.print("- No lane files found.")
-            for lane_path in lane_paths:
-                first_line = lane_path.read_text(encoding="utf-8", errors="ignore").splitlines()
-                label = first_line[0] if first_line else lane_path.stem
-                console.print(f"- {label} ({lane_path.name})")
-
-        if transcripts:
-            console.print()
-            console.print("## Transcripts")
-            transcript_items = _load_saved_transcripts(run_dir)
-            if not transcript_items:
-                console.print("- No saved transcripts found.")
-            for source_kind, url, title in transcript_items:
-                label = title or "(untitled)"
-                console.print(f"- [{source_kind}] {label}: {url}")
+        console.print(Panel.fit("ResearchBuddy started", style="green"))
+        console.print(f"Run ID: {run_id}")
+        console.print(f"PID: {pid}")
+        console.print(f"Prompt: {_truncate_text(request.prompt, 120)}", soft_wrap=True)
+        console.print(f"Status: {status_command}")
+        console.print(f"Watch: {watch_command}")
+        console.print(f"Log: {log_path}")
 
     asyncio.run(_run())
 
 
 @app.command(
-    help="Print usage, behavior, and examples for every CLI command.", cls=ResearchBuddyCommand
-)
-def commands(
-    agent: bool = typer.Option(
-        False,
-        "--agent",
-        help="Render a flatter command reference for agents and scripts",
-    ),
-) -> None:
-    """Print a command reference for users, agents, and scripts."""
-
-    console.print(build_command_reference(agent=agent))
-
-
-@app.command(
-    help="List recent saved runs with their run IDs, timestamps, status, and prompt summaries.",
+    "list",
+    help="List saved prompts and mark the current run.",
     cls=ResearchBuddyCommand,
 )
-def runs(limit: int = RUNS_LIMIT_OPTION) -> None:
-    """List recent saved runs so follow-up commands can reuse a run ID."""
+def list_command(
+    limit: int = LIST_LIMIT_OPTION,
+    json_output: bool = JSON_OPTION,
+) -> None:
+    """List saved runs with current-run context."""
 
-    records = asyncio.run(list_runs(settings.database_path, limit=limit))
-    if not records:
-        console.print("No runs found.")
-        return
+    async def _run() -> None:
+        records = await list_runs(settings.database_path, limit=limit)
+        current_run_id = await fetch_current_run_id(settings.database_path)
+        if json_output:
+            _print_json(
+                [
+                    {
+                        "run_id": record.run_id,
+                        "created_at": record.created_at.isoformat(),
+                        "status": record.status,
+                        "prompt": record.prompt,
+                        "is_current": record.run_id == current_run_id,
+                    }
+                    for record in records
+                ]
+            )
+            return
+        if not records:
+            console.print("No runs found.")
+            return
+        console.print("# Runs")
+        console.print()
+        for record in records:
+            marker = "*" if record.run_id == current_run_id else " "
+            created_at = record.created_at.astimezone().strftime("%Y-%m-%d %H:%M")
+            prompt = _truncate_text(record.prompt, 72)
+            console.print(f"{marker} {record.run_id}  {created_at}  {record.status}  {prompt}")
 
-    console.print("# Recent Runs")
-    console.print()
-    for record in records:
-        created_at = record.created_at.astimezone().strftime("%Y-%m-%d %H:%M")
-        prompt = _truncate_text(record.prompt, 72)
-        console.print(f"{record.run_id}  {created_at}  {record.status}  {prompt}")
+    asyncio.run(_run())
+
+
+@app.command(help="Print status for the current run.", cls=ResearchBuddyCommand)
+def status(
+    run_id: str | None = RUN_ID_OPTION,
+    output_dir: Path = OUTPUT_DIR_OPTION,
+    json_output: bool = JSON_OPTION,
+) -> None:
+    """Print status for the current or explicit run."""
+
+    async def _run() -> None:
+        resolved_run_id = await _resolve_run_id_or_exit(run_id)
+        payload = await _run_status_payload(resolved_run_id, output_dir=output_dir)
+        if json_output:
+            _print_json(payload)
+            return
+        _print_status_payload(payload)
+
+    asyncio.run(_run())
+
+
+@app.command(help="Watch the current run until it completes or fails.", cls=ResearchBuddyCommand)
+def watch(
+    run_id: str | None = RUN_ID_OPTION,
+    output_dir: Path = OUTPUT_DIR_OPTION,
+    interval: float = WATCH_INTERVAL_OPTION,
+    timeout: float | None = WATCH_TIMEOUT_OPTION,
+    lines: int = typer.Option(40, "--lines", min=0, help="Initial log lines to print"),
+) -> None:
+    """Stream status and worker logs for the current or explicit run."""
+
+    async def _run() -> None:
+        resolved_run_id = await _resolve_run_id_or_exit(run_id)
+        last_size = 0
+        printed_initial = False
+        started_at = time.monotonic()
+        while True:
+            payload = await _run_status_payload(resolved_run_id, output_dir=output_dir)
+            log_path = Path(str(payload["log_path"]))
+            if not printed_initial:
+                _print_status_payload(payload)
+                initial_text = _tail_text(log_path, lines)
+                if initial_text:
+                    console.print()
+                    console.print(initial_text)
+                last_size = log_path.stat().st_size if log_path.exists() else 0
+                printed_initial = True
+            elif log_path.exists():
+                size = log_path.stat().st_size
+                if size > last_size:
+                    with log_path.open("r", encoding="utf-8", errors="ignore") as file:
+                        file.seek(last_size)
+                        chunk = file.read()
+                    if chunk:
+                        console.print(chunk.rstrip("\n"))
+                    last_size = size
+
+            if payload["status"] in {"completed", "failed"}:
+                console.print()
+                _print_status_payload(payload)
+                raise typer.Exit(code=0 if payload["status"] == "completed" else 1)
+            if (
+                payload["status"] == "in_progress"
+                and payload["pid"] is not None
+                and not payload["is_process_running"]
+            ):
+                console.print()
+                console.print(
+                    "Run worker is no longer running while status is in_progress. "
+                    "Run `researchbuddy doctor --fix` to mark stale runs failed."
+                )
+                _print_status_payload(payload)
+                raise typer.Exit(code=1)
+            if timeout is not None and time.monotonic() - started_at >= timeout:
+                console.print()
+                console.print(f"Timed out after {timeout:g}s while watching run.")
+                _print_status_payload(payload)
+                raise typer.Exit(code=124)
+            await asyncio.sleep(interval)
+
+    asyncio.run(_run())
 
 
 @app.command(
@@ -686,6 +916,29 @@ def doctor(
     Use ``--fix`` to run setup actions before printing the final doctor report.
     """
 
+    async def _repair_stale_runs() -> int:
+        repaired = 0
+        for run_record in await list_in_progress_runs(settings.database_path):
+            runtime = await fetch_run_runtime(settings.database_path, run_record.run_id)
+            if runtime is not None and _pid_is_running(runtime.pid):
+                continue
+            await update_run_status(settings.database_path, run_record.run_id, "failed")
+            await finish_run_runtime(settings.database_path, run_record.run_id, exit_code=1)
+            repaired += 1
+        return repaired
+
+    async def _current_run_report() -> str:
+        current_run_id = await fetch_current_run_id(settings.database_path)
+        if current_run_id is None:
+            return "Current run: none"
+        run_record = await fetch_run(settings.database_path, current_run_id)
+        if run_record is None:
+            return f"Current run: {current_run_id} (missing run record)"
+        runtime = await fetch_run_runtime(settings.database_path, current_run_id)
+        pid = runtime.pid if runtime else None
+        process_label = "running" if _pid_is_running(pid) else "not running"
+        return f"Current run: {current_run_id} ({run_record.status}, pid {pid or '-'} {process_label})"
+
     setup_failed = False
     if fix:
         result = run_setup(settings, install_playwright=install_playwright)
@@ -693,54 +946,43 @@ def doctor(
         console.print()
         checks = result.doctor_checks
         setup_failed = has_setup_failures(result.actions)
+        repaired_count = asyncio.run(_repair_stale_runs())
+        if repaired_count:
+            console.print(f"Repaired {repaired_count} stale run record(s).")
     else:
         checks = run_doctor_checks(settings)
     console.print(format_doctor_report(checks))
+    console.print()
+    console.print(asyncio.run(_current_run_report()))
     if setup_failed or has_doctor_failures(checks):
         raise typer.Exit(code=1)
 
 
 @app.command(
-    help="Prepare local config, storage, and browser dependencies, then rerun doctor checks.",
-    cls=ResearchBuddyCommand,
-)
-def setup(
-    install_playwright: bool = INSTALL_PLAYWRIGHT_OPTION,
-) -> None:
-    """Prepare the local environment and print setup plus readiness reports."""
-
-    result = run_setup(settings, install_playwright=install_playwright)
-    console.print(format_setup_report(result.actions))
-    console.print()
-    console.print(format_doctor_report(result.doctor_checks))
-    if has_setup_failures(result.actions) or has_doctor_failures(result.doctor_checks):
-        raise typer.Exit(code=1)
-
-
-@app.command(
     "followup",
-    help="Answer a follow-up question from a saved run without rerunning the crawl.",
+    help="Answer a follow-up question from the current completed run.",
     cls=ResearchBuddyCommand,
 )
 def followup(
-    run_id: str = RUN_ID_ARGUMENT,
     question: str | None = OPTIONAL_QUESTION_ARGUMENT,
+    run_id: str | None = RUN_ID_OPTION,
     question_file: Path | None = QUESTION_FILE_OPTION,
     output_dir: Path = OUTPUT_DIR_OPTION,
     result_file: Path | None = RESULT_FILE_OPTION,
     sub_agent_model: str | None = SUB_AGENT_MODEL_OPTION,
 ) -> None:
-    """Answer a follow-up question from a previous session and print the result."""
+    """Answer a follow-up question from the current or explicit run."""
 
     setup_logging(settings.log_level)
     try:
         resolved_question = _resolve_text_input(question, question_file, field_name="question")
     except typer.BadParameter as exc:
         _exit_with_command_guidance("followup", reason=str(exc))
-    _print_status_line(f"Loading saved run {run_id} for follow-up.")
 
     async def _run() -> None:
-        _report, followup_state = await _load_followup_state_for_run(run_id, output_dir)
+        resolved_run_id = await _resolve_run_id_or_exit(run_id)
+        _print_status_line(f"Loading run {resolved_run_id} for follow-up.")
+        _report, followup_state = await _load_followup_state_for_run(resolved_run_id, output_dir)
         memory = await _ensure_followup_memory(followup_state)
         _print_status_line(
             f'Running follow-up answer for: "{_truncate_text(resolved_question, 80)}"'
@@ -760,8 +1002,39 @@ def followup(
     asyncio.run(_run())
 
 
+@app.command("_worker", hidden=True, cls=ResearchBuddyCommand)
+def worker(
+    run_id: str = typer.Argument(..., help="Precreated run identifier"),
+    request_file: Path = WORKER_REQUEST_FILE_OPTION,
+) -> None:
+    """Run a precreated research workflow in a background worker."""
+
+    setup_logging(settings.log_level)
+    request = ReviewRunRequest.model_validate_json(request_file.read_text(encoding="utf-8"))
+
+    async def _run() -> None:
+        exit_code = 0
+        try:
+            await _record_runtime_start(run_id, os.getpid(), request.output_dir / run_id / "worker.log")
+            await run_review(
+                request,
+                AgentDeps(session_id="cli", job_id=run_id),
+                reporter=_build_cli_run_reporter(),
+                run_id=run_id,
+                create_record=False,
+            )
+        except Exception:
+            exit_code = 1
+            raise
+        finally:
+            await finish_run_runtime(settings.database_path, run_id, exit_code=exit_code)
+
+    asyncio.run(_run())
+
+
 @app.command(
     help="Transcribe a local audio file, YouTube URL, or podcast URL with local Whisper.",
+    hidden=True,
     cls=ResearchBuddyCommand,
 )
 def transcribe(
@@ -853,6 +1126,41 @@ def export_tap(
     console.print(f"Output: {result.output_dir}")
     for path in result.files:
         console.print(f"- {path.relative_to(result.output_dir)}")
+
+
+def _registered_command_name(command_info) -> str:
+    """Return a stable command name for Typer registration ordering."""
+
+    explicit_name = getattr(command_info, "name", None)
+    if explicit_name:
+        return explicit_name
+    callback = getattr(command_info, "callback", None)
+    callback_name = getattr(callback, "__name__", "")
+    if callback_name == "list_command":
+        return "list"
+    return callback_name
+
+
+def _order_registered_commands() -> None:
+    """Keep help output aligned with the agent-first command contract."""
+
+    command_order = {
+        "start": 0,
+        "followup": 1,
+        "status": 2,
+        "watch": 3,
+        "doctor": 4,
+        "list": 5,
+    }
+    app.registered_commands.sort(
+        key=lambda command_info: command_order.get(
+            _registered_command_name(command_info),
+            100,
+        )
+    )
+
+
+_order_registered_commands()
 
 
 def main() -> None:

@@ -1,0 +1,75 @@
+{
+  "generated_at": "2026-04-10T01:49:54.713956+00:00",
+  "tool": "crawl4ai",
+  "mode": "live",
+  "manifest": "/Users/willem/Development/researchbuddy/.benchmarks/results/20260409-184917/live-corpus.json",
+  "limit": 0,
+  "page_timeout_ms": 30000,
+  "headless": true,
+  "platform": {
+    "python": "3.13.12",
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "summary": {
+    "total": 6,
+    "successes": 5,
+    "failures": 1,
+    "mean_elapsed_ms": 1348.3635663927998,
+    "median_elapsed_ms": 1167.2727080003824,
+    "p95_elapsed_ms": 2062.161966395797,
+    "min_elapsed_ms": 772.4712079798337,
+    "max_elapsed_ms": 2154.991457995493,
+    "mean_markdown_chars": 19464.2
+  },
+  "results": [
+    {
+      "url": "https://podscan.fm/podcasts/lennys-podcast-product-career-growth/episodes/the-100-person-ai-lab-that-became-anthropic-and-googles-secret-weapon-edwin-chen-surge-ai",
+      "mode": "live",
+      "success": true,
+      "elapsed_ms": 1167.2727080003824,
+      "markdown_chars": 15334,
+      "error": null
+    },
+    {
+      "url": "https://podcasts.apple.com/us/podcast/why-most-ai-products-fail-lessons-from-50-ai-deployments/id1627920305?i=1000744678894",
+      "mode": "live",
+      "success": true,
+      "elapsed_ms": 956.2384579912759,
+      "markdown_chars": 9882,
+      "error": null
+    },
+    {
+      "url": "https://pod.wave.co/podcast/lennys-podcast-product-career-growth-b65486a6-7cff-4966-bbea-2bc239e90aa4/what-openai-and-google-engineers-learned-deploying-50-ai-products-in-production",
+      "mode": "live",
+      "success": false,
+      "elapsed_ms": 30056.8851249991,
+      "markdown_chars": 0,
+      "error": "Unexpected error in _crawl_web at line 696 in _crawl_web (.venv/lib/python3.13/site-packages/crawl4ai/async_crawler_strategy.py):\nError: Failed on navigating ACS-GOTO:\nPage.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"https://pod.wave.co/podcast/lennys-podcast-product-career-growth-b65486a6-7cff-4966-bbea-2bc239e90aa4/what-openai-and-google-engineers-learned-deploying-50-ai-products-in-production\", waiting until \"domcontentloaded\"\n\n\nCode context:\n 691                               tag=\"GOTO\",\n 692                               params={\"url\": url},\n 693                           )\n 694                           response = None\n 695                       else:\n 696 \u2192                         raise RuntimeError(f\"Failed on navigating ACS-GOTO:\\n{str(e)}\")\n 697   \n 698                   await self.execute_hook(\n 699                       \"after_goto\", page, context=context, url=url, response=response, config=config\n 700                   )\n 701   "
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=z7T1pCxgvlA",
+      "mode": "live",
+      "success": true,
+      "elapsed_ms": 2154.991457995493,
+      "markdown_chars": 17268,
+      "error": null
+    },
+    {
+      "url": "https://getpodcast.com/podcast/the-engineering-leadership-podcast/from-research-lab-to-record-breaking-product-how-openai-engineered-for_1d326d694f",
+      "mode": "live",
+      "success": true,
+      "elapsed_ms": 1690.8439999970142,
+      "markdown_chars": 53108,
+      "error": null
+    },
+    {
+      "url": "https://launchpod.logrocket.com/linear-secret-building-powerful-ai-products-nan-yu",
+      "mode": "live",
+      "success": true,
+      "elapsed_ms": 772.4712079798337,
+      "markdown_chars": 1729,
+      "error": null
+    }
+  ]
+}

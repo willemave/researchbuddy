@@ -1,0 +1,624 @@
+### [**Episode 63: How Twilio and the PGA of America Are Reinventing Fan Engagement with Omnichannel Experiences**](https://thecuberesearch.com/twilio-and-the-pga-of-america-signal-the-rise-of-data-driven-fan-engagement-platforms/)
+
+Sports fandom is evolving beyond the confines of the game itself, as audiences increasingly expect immersive, always-on digital experiences that extend before, during, and after events. In this episode of AppDevANGLE, Paul Nashawaty sits down with Chris Koehler, CMO of Twilio, to explore how the partnership between Twilio and the PGA of America is redefining fan engagement through personalized, real-time interactions. With nearly 70% of fans seeking deeper digital insights during live events, sports organizations are embracing platforms that integrate messaging, email, voice, and AI to create seamless, connected experiences that keep fans engaged year-round.
+
+The conversation highlights how organizations are shifting from transactional, event-based interactions to long-term relationship building powered by first-party data and omnichannel strategies. Through examples spanning the PGA of America, Chelsea FC, and AEG, the episode illustrates how scalable engagement platforms enable tailored communications at every touchpoint. As AI and conversational technologies continue to advance, sports brands are positioning themselves to deliver the next generation of fan experiences—where personalization, immediacy, and continuous connection define the modern sports ecosystem.
+
+[![](https://thecuberesearch.com/wp-content/uploads/TCR-Thumbnail-15-1024x576.png)](https://www.youtube.com/watch?v=A-Wnr6--K0A)
+
+### [**Episode 62: Kubernetes Ingress Migration & Gateway API Adoption in the Age of AI Runtime Governance**](https://thecuberesearch.com/kubernetes-networking-enters-a-transition-moment-as-ingress-architectures-evolve/)
+
+Kubernetes networking is entering a pivotal transition as platform teams reassess long-standing ingress architectures and prepare for a new era of traffic management. With roughly half of cloud-native environments relying on NGINX Ingress controllers, organizations are now evaluating how to migrate existing deployments while modernizing for hybrid infrastructure, distributed services, and increasingly complex application environments. In this episode of AppDevANGLE, Principal Analyst Paul Nashawaty speaks with Sudeep Goswami, CEO of Traefik Labs, about the broader implications of this shift and how emerging standards such as the Kubernetes Gateway API are redefining how traffic enters and moves through modern platforms.
+
+The conversation explores how ingress is evolving beyond simple routing into a unified control layer responsible for security policy, observability, and runtime governance. As enterprises integrate AI workloads, span deployments across containers, virtual machines, and edge infrastructure, and manage thousands of configuration annotations in legacy environments, the need for policy-driven ingress architectures is accelerating. Goswami outlines migration strategies, the strategic role of Gateway API in next-generation application networking, and why organizations increasingly require consistent policy enforcement across APIs, large language models, and agentic workflows operating within modern cloud-native systems.
+
+[![](https://thecuberesearch.com/wp-content/uploads/TCR-Thumbnail-14-1024x576.png)](https://www.youtube.com/watch?v=9nweev9vdsA)
+
+### [**Special Edition: RelationalAI & Snowflake on Decision Intelligence in Telecom**](https://thecuberesearch.com/decision-intelligence-becomes-the-control-layer-for-ai-native-telecom/)
+
+Decision Intelligence (DI) is rapidly emerging as the critical bridge between AI experimentation and measurable enterprise outcomes—particularly in telecom, where programmable networks and SLA-backed APIs are redefining digital infrastructure. In a recent episode of AppDevANGLE, Principal Analyst Paul Nashawaty speaks with Molham Aref of RelationalAI, alongside Joji Philip and Sreedar Rao of Snowflake, to examine how DI platforms are reshaping autonomous telecom operations. The conversation frames DI as the missing prescriptive layer that transforms data and AI models into operational decisions—embedded directly within governed data environments—rather than remaining confined to dashboards or retrospective business intelligence.
+
+The discussion highlights how DI differs fundamentally from traditional BI by shifting from descriptive reporting to predictive, prescriptive, and auditable decision engines. As telecom operators advance toward L4 and L5 autonomous networks, auditability and governance become essential for trust and compliance. By integrating DI capabilities within platforms like Snowflake and augmenting them with relational reasoning from RelationalAI, enterprises can embed decision logic directly into core data architectures. When combined with generative AI, DI enables measurable business outcomes across high-impact telecom use cases, including churn reduction, network optimization, fraud detection, and infrastructure planning. As frontier LLMs continue to evolve, the panel emphasizes a central insight: models alone do not create enterprise value—decision intelligence does.
+
+[![](https://thecuberesearch.com/wp-content/uploads/TCR-Thumbnail-13-1-1024x576.png)](https://www.youtube.com/watch?v=VXJ_cuhOAm0)
+
+### [**Episode 61: NetApp on Managing Open Source at Scale Across Hybrid and Multi-Cloud Environments**](https://thecuberesearch.com/managing-open-source-at-scale-in-hybrid-enterprise-environments/)
+
+Open source software underpins modern enterprise infrastructure, yet operationalizing technologies such as Apache Cassandra, Apache Kafka, PostgreSQL, and OpenSearch at scale requires far more than a simple download. In this episode of AppDevANGLE, Principal Analyst Paul Nashawaty speaks with Ben Slater, VP and GM of Instaclustr at NetApp, about the growing divide between open source adoption and operational maturity. With 61% of organizations running hybrid deployments and 32% taking hours to detect production issues, enterprises are discovering that managing distributed data systems across hybrid and multi-cloud environments demands deep expertise, continuous monitoring, and disciplined operational frameworks.
+
+The conversation explores why many enterprises struggle to manage Cassandra, Kafka, and PostgreSQL in-house, highlighting the widening expertise gap and the high cost of operational mistakes. It also examines the strategic importance of true open source versus proprietary forks, and how enterprise-grade SLAs, 24/7 monitoring, and unified multi-technology platforms can reduce vendor sprawl while preserving flexibility. From hybrid cloud portability as a FinOps and negotiation strategy to operational maturity as the new competitive differentiator, the discussion outlines how organizations can responsibly scale open source infrastructure—without sacrificing control, performance, or long-term optionality.
+
+[![](https://thecuberesearch.com/wp-content/uploads/TCR-Thumbnail-13-1024x576.png)](https://www.youtube.com/watch?v=oQ6lhvA44Fo)
+
+### [**Episode 60: Deterministic Code Modernization, Multi-Repo Governance, and AI-Driven Technical Debt**](https://thecuberesearch.com/deterministic-modernization-becomes-the-missing-layer-in-the-ai-coding-era/)
+
+AI coding tools are accelerating software development productivity, but they are also accelerating the accumulation of technical debt. In this episode of AppDevANGLE, Principal Analyst Paul Nashawaty speaks with Jonathan Schneider, CEO and Co-Founder of Moderne, about why deterministic, cross-repository modernization is becoming essential in the era of AI-assisted development. As 84% of developers now use or plan to use AI coding tools, enterprises face a growing challenge in governing hundreds of millions—and in some cases billions—of lines of code across multi-repository and multi-language environments. While generative AI can rapidly produce new code, it lacks the deterministic controls required to safely refactor and modernize entire application portfolios at enterprise scale, creating new risks around maintainability, security exposure, and architectural drift.
+
+The conversation explores how semantic code modeling, structured transformations, and repeatable modernization “recipes” enable auditable and consistent change across large software estates. Nashawaty and Schneider examine the distinction between probabilistic AI-generated code and deterministic transformation approaches, and why traditional DevOps tooling struggles to address multi-repository complexity. The discussion also highlights how evolving governance requirements, including software supply chain security and regulations such as the EU Cyber Resilience Act, are forcing organizations to adopt more structured remediation strategies. Ultimately, the episode introduces the concept of a “liquid tech stack,” where enterprises can continuously modernize and shift vendors or frameworks with reduced friction, positioning deterministic modernization as a foundational capability for the next generation of AI-driven software development.
+
+[![](https://thecuberesearch.com/wp-content/uploads/TCR-Thumbnail-12-1024x576.png)](https://www.youtube.com/watch?v=eSosD8f8Jio)
+
+### [**Episode 59: Agentic AI Governance, Data Quality, and API-First Enterprise Architecture**](https://thecuberesearch.com/agentic-ai-governance-becomes-the-enterprise-differentiator/)
+
+Agentic AI is rapidly transitioning from experimental pilots into core enterprise operations, introducing a new class of autonomous systems that make decisions, initiate actions, and orchestrate workflows with minimal human intervention. Yet most organizations remain unprepared for the governance models, data discipline, and architectural rigor required to support this shift. In this AppDevANGLE episode recorded for theCUBE Research, Principal Analyst Paul Nashawaty speaks with Tiago Azevedo, Chief Information Officer at OutSystems, about how enterprises must approach agentic AI adoption with measurable intent and structural discipline. Rather than treating agents as incremental automation, the discussion frames them as operational actors that demand rethinking accountability, oversight, and business alignment.
+
+The conversation explores how agentic AI surfaces hidden data debt, exposing weaknesses in quality, lineage, and trust that undermine outcomes at scale. It examines why governance must evolve in parallel with autonomy, how API-first and modular architectures have become prerequisites for scalability, and where early adopters are reporting up to 40% reductions in decision latency. Instead of focusing on specific tools, the episode centers on operating models, integration maturity, and aligning intelligent agents to strategic business objectives—offering CIOs a pragmatic roadmap for prioritizing AI investments over the next three years while balancing innovation with risk.
+
+[![](https://thecuberesearch.com/wp-content/uploads/TCR-Thumbnail-11-1024x576.png)](https://www.youtube.com/watch?v=pQtdQ6AHn_Q)
+
+### [**Episode 58: Ingress NGINX EOL Exposes Open Source Governance Gaps**](https://thecuberesearch.com/open-source-at-scale-requires-stewardship-not-assumptions/)
+
+With 97% of modern applications relying on open source software, the industry has built its digital economy on community-driven components that few enterprises directly fund or govern. But what happens when critical infrastructure suddenly reaches end of life? In this episode, Paul Nashawaty, Practice Lead and Principal Analyst at theCUBE Research, speaks with Dan Lorenc, CEO of Chainguard, about the end-of-life (EOL) of Ingress NGINX and why it triggered widespread enterprise concern. The conversation examines how widely adopted open source projects can become orphaned, how maintainer burnout exposes structural sustainability challenges, and why perimeter-facing infrastructure like ingress controllers creates disproportionate security, compliance, and operational risk when left unmaintained.
+
+The discussion also explores the growing regulatory pressure reshaping open source governance, including the implications of frameworks such as the EU Cyber Resilience Act, which increase accountability for software supply chain integrity. Dan outlines Chainguard’s stewardship model and how archived or EOL projects can be securely maintained without forcing disruptive, large-scale migrations across thousands of enterprise teams. For CISOs, platform leaders, security architects, and executive decision-makers, this episode provides a pragmatic look at open source lifecycle blind spots and what responsible, long-term risk management must look like at scale.
+
+[![](https://thecuberesearch.com/wp-content/uploads/TCR-Thumbnail-10-1024x576.png)](https://www.youtube.com/watch?v=2Lbu4Gt0_LI)
+
+### [**Episode 57: Dynatrace on Feature Management and the Future of Enterprise Software Delivery**](https://thecuberesearch.com/feature-management-becomes-a-control-plane-for-modern-software-delivery/)
+
+Enterprise software delivery is entering a new phase where release velocity, AI-generated code, and continuous experimentation are accelerating faster than traditional reliability and governance models can keep up. As teams push more changes into production, the risk shifts from whether they can ship to how they control, observe, and govern change in real time. In this AppDevANGLE episode, Principal Analyst Paul Nashawaty is joined by Michael Beemer, Senior Product Manager at Dynatrace, and Andrew Norris, Principal Product Manager at Dynatrace and former CEO of DevCycle, to explore how feature management is emerging as a critical layer in modern application delivery.
+
+The conversation examines how integrating feature flags with observability transforms monitoring from a passive, after-the-fact activity into an active system of release governance. By connecting developer intent, operational risk, and business impact within a single workflow, organizations gain the ability to experiment safely, respond faster to production signals, and demonstrate measurable ROI from AI-driven delivery. This episode is particularly relevant for technology leaders, platform owners, and executives navigating the challenge of scaling innovation while maintaining production confidence, accountability, and trust.
+
+[![](https://thecuberesearch.com/wp-content/uploads/TCR-Thumbnail-9-1-1024x576.png)](https://www.youtube.com/watch?v=lRcBRdCM49o)
+
+### [**Episode 56: Moving From Faster Delivery to Smarter Product Decisions**](https://thecuberesearch.com/ai-in-devops-shifts-from-faster-delivery-to-smarter-decisions/)
+
+In this episode of AppDevANGLE, Paul Nashawaty sits down with Martin Gaston, Software Delivery Manager at 8th Light, to explore how AI is reshaping DevOps, digital transformation, and modern software engineering inside large enterprises. With DevOps now viewed as essential to transformation by most organizations, the conversation goes beyond speed of delivery to focus on smarter decision-making, managing technical debt, and embedding intelligence across the entire software development lifecycle. From observability and automation to the blurring lines between strategy, design, and engineering, this episode examines what it really means to build AI driven DevOps practices that deliver sustainable business value.
+
+Martin shares practical, experience-based insights on where AI is already driving impact today, including improving visibility into complex systems, accelerating cross functional understanding, and supporting human plus machine collaboration through multi agent workflows. The discussion also tackles the harder organizational challenges, such as trust, incentives, tooling sprawl, and the realities of enterprise operating models, offering a grounded perspective on how leaders and practitioners can evolve skills, structures, and mindsets for the future. It is a candid, thoughtful conversation for anyone navigating the convergence of AI, DevOps, and product driven delivery.
+
+[![Moving From Faster Delivery to Smarter Product Decisions](https://thecuberesearch.com/wp-content/uploads/TCR-Thumbnail-9-1024x576.png)](https://www.youtube.com/watch?v=WmH6rvXTfVU)
+
+### [**Episode 55: Inside the Twilio–AEG Partnership: How Real-Time Data Is Transforming Live Sports & Entertainment**](https://thecuberesearch.com/twilio-and-aeg-signal-the-platformization-of-fan-engagement/)
+
+Live sports and entertainment are becoming a proving ground for real-time, AI-driven customer engagement.  
+In this episode of AppDevANGLE, Paul Nashawaty sits down with Chris Kohler, CMO of Twilio, and Nick Baker, President & COO of AEG Global Partnerships, to unpack their new strategic partnership and what it signals for the future of fan engagement platforms.
+
+Drawing on real-world use cases across Crypto.com Arena, the LA Kings, and AXS, the conversation explores how data platforms, AI, and real-time communications are reshaping the fan experience before, during, and after live events.  
+Why it matters: theCUBE Research finds that 89% of fans are more likely to return to venues that offer personalized experiences, pushing sports and entertainment organizations to treat fan engagement as a data and platform challenge, not just marketing.
+
+[![](https://thecuberesearch.com/wp-content/uploads/TCR-Thumbnail-8-1024x576.png)](https://www.youtube.com/watch?v=_tytIQjMuhc)
+
+### [**Episode 54: Enterprise AI Value Gap: Why Only 5% of Companies Are “Future-Built”**](https://thecuberesearch.com/closing-the-enterprise-ai-value-gap/)
+
+In this theCUBE Research interview, Paul Nashawaty, Practice Lead and Principal Analyst for Application Development, sits down with Kevin Camel, Head of Product Management for AI at Mirantis, to explore why only 5% of global enterprises can truly be considered “future-built.” Together, they unpack what separates organizations generating real business value from AI from those still trapped in perpetual pilots. The conversation frames today’s AI moment as analogous to the early internet era—full of promise, experimentation, and confusion around ROI—while highlighting why proving “AI value” remains elusive for most enterprises.
+
+The discussion goes deeper into the structural shifts required to scale AI, from the move toward purpose-built infrastructure with GPUs, high-performance networking, and specialized storage, to the often-overlooked realities of GPU economics, data protection, and operational readiness. Nashawaty and Camel examine why the biggest constraint is no longer hardware budgets, but a widening skills and platform expertise gap, and how agentic AI is beginning to account for a growing share of enterprise value. They also address emerging security and governance risks, including AI-generated data exposure and new agent protocols like MCP, and explain how AIOps and event intelligence enable human-in-the-loop operations at scale. The episode closes with practical guidance on assessing enterprise maturity, including insights from Mirantis’ AI readiness assessment and maturity model.
+
+[![](https://thecuberesearch.com/wp-content/uploads/TCR-Thumbnail-7-1024x576.png)](https://www.youtube.com/watch?v=-kPfUn6k770)
+
+### [**Episode 53: Slop Squatting & Human-in-the-Loop: Defensive UX for Safe LLM Deployment**](https://thecuberesearch.com/slop-squatting-defensive-ux-and-governing-llms-in-the-enterprise/)
+
+Enterprises are racing to adopt large language models, but the skills needed to oversee, govern, and safely operate them are lagging behind. In this episode, Paul Nashawaty sits down with Saurabh, Distinguished AI Researcher at Vectra AI, to unpack the new security and reliability risks emerging from LLM-driven development and automation. The conversation dives into slop squatting—where LLMs hallucinate plausible package names that attackers can weaponize—highlighting how AI is often “good enough to trust,” yet not safe enough to run unattended. Together, they explore why narrow automation works today, where full automation becomes dangerous, and how the gradual erosion of human review creates hidden risk in modern software and AI workflows.
+
+The discussion also tackles governance and accountability head-on: who actually owns AI decisions inside the enterprise, why existing policy frameworks remain immature, and how organizations can avoid catastrophic failures as AI systems scale. Saurabh introduces the concept of defensive UX—designing LLM systems that fail safely rather than disastrously—and explains why many enterprises need a GenAI Center of Excellence to establish guardrails around AI usage, PII, and intellectual property. Packed with practical guidance and real-world examples, this episode is essential listening for developers, security leaders, and platform teams building LLM-enabled workflows who want to move fast without breaking trust.
+
+[![Slop Squatting &amp; Human-in-the-Loop: Defensive UX for Safe LLM Deployment](https://thecuberesearch.com/wp-content/uploads/TCR-Thumbnail-6-1024x576.png)](https://www.youtube.com/watch?v=NjPoRQkAxbI)
+
+### [**Episode 52: Is Traditional Coding Dead?**](https://thecuberesearch.com/low-code-fusion-teams-and-the-rise-of-the-orchestrator-developer/)
+
+AI is rapidly transforming software engineering—and accelerating low-code from a niche productivity tool into a core enterprise development strategy. In this episode, Paul Nashawaty sits down with Ray Kok, CEO of Mendix, to explore how agentic AI is reshaping the developer role, blurring the lines between pro-code and low-code, and pushing organizations toward model-based software engineering. They unpack why 76% of technology leaders believe AI will make low-code platforms significantly more efficient, how agentic IDEs are emerging across both traditional and low-code environments, and why developers are shifting from “makers” of code to orchestrators of systems, agents, and outcomes.
+
+The conversation digs into why non-functional requirements—security, scalability, performance, and reliability—are becoming the true competitive differentiators in an AI-driven SDLC, even as AI lowers the barrier to writing functional code. Ray explains how fusion teams are evolving beyond business-plus-builders into business leaders working alongside architects, how hiring priorities are shifting from “who gives the right answers” to “who asks the right questions,” and which skills will define success as AI becomes embedded in every layer of development. If you’re a software engineer, platform leader, enterprise architect, or evaluating low-code and AI-assisted development, this episode offers a practical framework for understanding where software development is headed—and why the convergence of pro-code and low-code may define the next era of enterprise engineering.
+
+[![](https://thecuberesearch.com/wp-content/uploads/TCR-Thumbnail-5-1024x576.png)](https://www.youtube.com/watch?v=tGx70Z8VY0c)
+
+### [**Episode 51: Vibe Coding & AI Code Review Can We Trust AI-Generated Code?**](https://thecuberesearch.com/vibe-coding-ai-code-review-and-the-new-trust-gap-in-ai-generated-code/)
+
+Over 60% of enterprise code commits now include AI-generated content—but that speed comes with a trade-off: AI-written code is roughly 30% more prone to logic errors. In this episode of AppDevANGLE, Paul Nashawaty sits down with David Loker, Director of AI at CodeRabbit, to unpack the rapid rise of vibe coding and AI-assisted development, and what it really means for software quality. As tools like GitHub Copilot accelerate productivity and compress delivery timelines, engineering teams are left asking a hard question: are we building better software faster, or just generating more code that humans now have to review and fix?
+
+The conversation digs into where AI helps, where it breaks down, and what it will take for AI to truly “earn the commit.” Paul and David explore why bug density is higher in AI-generated code, how AI-powered code review can scale quality assurance as human reviewers get overwhelmed, and whether AI should act as a reviewer, a validator, or eventually a lead reviewer. They also tackle governance, trust thresholds, and the “self-driving car” analogy for autonomous code merging—along with practical advice for using AI tools intellectually rather than blindly. If you’re a developer, engineering leader, platform engineer, or part of a DevSecOps team, this episode goes deep on balancing speed, stability, and trust in the AI coding era.
+
+
+
+[![](https://thecuberesearch.com/wp-content/uploads/TCR-Thumbnail-4-1024x576.png)](https://www.youtube.com/watch?v=ZT3Hul2hTKk)
+
+### [**Special Edition: Docker Hardened Images and the Future of Secure Software Supply Chains**](https://thecuberesearch.com/docker-pushes-secure-by-default-containers-into-the-mainstream/)
+
+Over 90% of modern applications depend on open source, and container images can include hundreds of dependencies, making the image layer one of the biggest and least visible attack surfaces in the software supply chain.
+
+In this episode, Paul Nashawaty speaks with Michael Donovan (VP of Product Management, Docker) about why container images are the control point for supply chain security, what Docker Hardened Images change for developer workflows, and how secure-by-default foundations reduce friction between speed and security.  
+We also explore how these same supply chain risks extend to AI-era infrastructure, especially MCP servers and agent workloads, and why Docker is introducing hardened MCP server building blocks through Docker Hub. Finally, we discuss extended lifecycle support for hardened images to reduce end-of-life risk and help enterprises stay compliant without derailing their backlog.
+
+[![](https://thecuberesearch.com/wp-content/uploads/TCR-Thumbnail-3-1024x576.png)](https://www.youtube.com/watch?v=U5SDvsWufp0)
+
+### [**Episode 50: Shift-Left, Agentless Cloud Security, and AI-Native AppSec**](https://thecuberesearch.com/securing-cloud-native-apps-without-hitting-the-brakes/)
+
+Security is increasingly seen as a bottleneck to speed, with 67% of organizations saying it slows release cycles and nearly 60% of cloud breaches in 2025 traced back to misconfigurations or gaps introduced during rapid development. In this episode of AppDevANGLE, Paul Nashawaty sits down with Gil Geron, CEO and co-founder of Orca Security, to explore why this tradeoff persists—and how cloud-native teams can break it. The conversation reframes DevSecOps around context and visibility, examining how modern architectures like microservices and serverless widen the gap between development and security teams, even as pressure to ship faster continues to rise.
+
+Geron explains why “shift left,” when implemented correctly, is a speed enabler rather than a drag, catching risk during design and build instead of in production firefights. The discussion unpacks Orca’s agentless, API- and graph-based approach to cloud security, and why partial agent coverage leaves many organizations exposed. From prioritizing risk based on data sensitivity, exposure, and blast radius to consolidating telemetry and reducing noise, the episode outlines practical patterns for securing at scale. The conversation also looks ahead to AI and AI-native applications, exploring how AI agents can embed security directly into development workflows—while keeping humans in the loop to balance automated guardrails with real-world risk management.
+
+[![](https://thecuberesearch.com/wp-content/uploads/TCR-Thumbnail-2-1024x576.png)](https://www.youtube.com/watch?v=rEnbHi0BOzc)
+
+### [**Special Edition: Akuity at AWS re:Invent 2025: GitOps Beyond Kubernetes + AI SRE with Human-in-the-Loop Runbooks**](https://www.youtube.com/watch?v=z2Z3SrQi77w)
+
+Live from AWS re:Invent 2025, theCUBE Research Principal Analyst Paul Nashawaty sits down with Hong Wang, co-founder and CEO of Akuity and original creator of the Argo Project, to explore the next phase of enterprise software delivery—and why GitOps is evolving far beyond Kubernetes.
+
+Hong unpacks Akuity’s latest platform updates, including multi-cloud, multi-region, and multi-environment promotion that spans Kubernetes alongside real-world enterprise infrastructure such as VMs, serverless deployments, Terraform workflows, and observability pipelines. The conversation grounds GitOps in the reality of hybrid estates, where legacy systems and cloud-native services must coexist for years, and where application maturity varies widely across the portfolio.
+
+The discussion also tackles a defining shift in 2025: the move from AI hype to ROI-driven automation. As AI accelerates code generation and feature velocity, the operational bottleneck moves squarely into Day 2 operations. Hong explains Akuity’s focus on AI-powered SRE capabilities, emphasizing why trust, governance, and human-in-the-loop controls remain essential. Runbooks emerge as the control plane for AI—clearly defining what agents can change, what they cannot, and when humans must intervene.
+
+For platform engineers, DevOps, and SRE leaders navigating large-scale modernization, this episode offers a pragmatic roadmap for building trust incrementally as software delivery and operations evolve in the AI era.
+
+[![](https://thecuberesearch.com/wp-content/uploads/TCR-Thumbnail-1-1024x576.png)](https://www.youtube.com/watch?v=z2Z3SrQi77w)
+
+### [**Episode 49: How AI Agents Are Changing Digital Identity and Domain Management**](https://thecuberesearch.com/the-next-era-of-building-online-with-ai-agents/)
+
+In this episode, Principal Analyst Paul Nashawaty sits down with Carlos Armada, Head of Product at name.com, to explore how AI agents are reshaping the digital landscape. With 23% of developers now using AI agents in their regular workflows, the shift from experimental adoption to real-world application is well underway. Carlos explains how name.com is evolving into an AI-native registrar—one that prioritizes intent-driven workflows over traditional, often cumbersome interfaces. This transition not only lowers the barrier to building and managing an online presence but also expands who can participate in application development. Product managers, marketers, and other non-technical users are increasingly becoming “the new builders,” relying on AI-powered tools to translate intent into action without navigating complex coding or configuration steps.
+
+The conversation also digs into the importance of trust, security, and infrastructure in enabling this new agentic web. Domain management is emerging as a natural starting point for AI automation due to its predictable workflows—from DNS updates to SSL provisioning—which historically create friction for developers. Carlos highlights how name.com’s modern REST/JSON API stack has positioned the company to integrate quickly with emerging AI frameworks, ensuring both Developer Experience (DX) and Agent Experience (AX) are first-class considerations. As agents take on more autonomy, the need for robust error handling, strict security protocols, and guardrails becomes critical. Platforms must be designed so agents can safely act on behalf of users, especially in high-stakes areas like domain ownership and digital identity.
+
+[![](https://thecuberesearch.com/wp-content/uploads/TCR-Cover-Image-1024x576.png)](https://www.youtube.com/watch?v=tiOzaliXp6M)
+
+### [**Episode 48: Enterprise AI Agents in Practice: Amplitude’s Playbook for Operationalizing AI**](https://thecuberesearch.com/enterprise-ai-agents-move-from-experiments-to-operations/)
+
+In this episode of AppDevANGLE, Paul Nashawaty (Principal Analyst, Application Development) sits down with James, Head of AI at Amplitude, for a candid, deeply practical conversation on what it really takes to operationalize enterprise AI agents at scale. With 96% of 1,500 IT leaders planning to expand AI agent adoption in the next 12 months, the discussion focuses on moving beyond isolated pilots and into org-wide workflows that deliver durable business value. James breaks down why Amplitude is “all-in” on agents that run in the background—turning behavioral data into proactive analysis and recommendations—while still keeping humans in the approval loop. The result? Agents that “do 95% of the work,” accelerating execution without risking trust, brand, or unintended actions.
+
+The conversation also digs into the operational realities leaders often overlook: how to tune agents like an evolved form of anomaly detection to avoid alert fatigue, how scenario-based evaluations become the new QA layer for AI systems, and why governance matters even more as AI lets generalists perform specialist-level tasks. James and Paul explore where AI delivers value today—support workflows, coding assistants, rapid prototyping (“vibe coding”)—and why the future of SaaS isn’t death by agent, but a shift toward personalized, hybrid experiences where search-like flows streamline tasks while rich, creative interfaces remain essential. This episode offers a grounded, high-signal roadmap for organizations ready to operationalize AI agents with trust, safety, and measurable impact..
+
+[![](https://thecuberesearch.com/wp-content/uploads/TCR-YouTube-Thumbnail-1024x576.png)](https://www.youtube.com/watch?v=kFHP9nbCLBI)
+
+### [**Episode 47: Why Data Is the Real Bottleneck in Enterprise AI**](https://thecuberesearch.com/why-data-is-the-real-bottleneck-in-enterprise-ai/)
+
+In this episode of AppDevANGLE, Paul Nashawaty sits down with A.B. Periasamy, co-founder and co-CEO of MinIO, to unpack a hard truth in today’s AI race: your GPUs aren’t the problem—your data is. With 86% of organizations now prioritizing data unification over pure compute investment, according to theCUBE Research (2025), the conversation dives into why the industry’s GPU gold rush missed the point. Periasamy explains how fragmented systems, inconsistent pipelines, and legacy silos are creating massive “data swamps” that AI models simply can’t use, regardless of how much GPU capacity sits idle.
+
+Together, they explore why patchwork API integrations can’t deliver true AI-ready data, how emergent behavior depends on both the size and quality of your datasets, and why regulatory philosophies differ so sharply between the U.S. and Europe. Most importantly, listeners will walk away with a practical framework for unifying their data estate—from modern object storage strategies to policy, governance, and architectural patterns that unlock real AI throughput. If you want to turn your idle GPUs into productive AI engines, this episode breaks down the steps to get there.
+
+[![](https://thecuberesearch.com/wp-content/uploads/TCR-Thumbnail-1024x576.png)](https://www.youtube.com/watch?v=u0hJF6MjtxM)
+
+### [**Special Edition: Palo Alto Networks Acquires Chronosphere: What It Means for AI Observability, Security & Agentic Ops**](https://thecuberesearch.com/palo-alto-networks-3-35b-chronosphere-bet-signals-the-next-era-of-ai-observability/)
+
+Palo Alto Networks’ $3.35B acquisition of Chronosphere marks one of the most
+significant shifts yet in the evolution of AI-era infrastructure. In this
+special edition of AppDevANGLE, Paul Nashawaty and Bob Laliberte break down what
+the deal means for customers, competitors, and the future of AI-driven
+observability, security, and agentic operations. We explore why unified
+telemetry is becoming the foundation of resilient AI systems, how Chronosphere’s
+scale and OpenTelemetry-first architecture fits into Palo Alto’s platform
+strategy, and what this consolidation signals for the broader ecosystem.
+
+Whether
+you’re in platform engineering, cloud security, SRE, or AI operations, this
+episode unpacks the real implications behind one of 2025’s biggest industry
+moves. Key Highlights: Why Palo Alto Networks is making a major bet on
+observability as the backbone of AI-native security How Chronosphere’s
+OpenTelemetry-aligned, high-scale architecture complements Palo Alto’s platform
+The role of telemetry in powering agentic investigation, correlation, and
+remediation Insights from theCUBE Research on tool sprawl, consolidation
+pressures, and unified operational views How distributed GPU clusters (“scale
+across”) are reshaping observability demands Why agentic AI still requires
+human-in-the-loop oversight—and how this acquisition accelerates that future
+Competitive implications for Datadog, Dynatrace, Elastic, and the broader
+observability and security ecosystem The significance of Chronosphere’s 21× ARR
+valuation and what it signals about AI infrastructure priorities What
+practitioners should expect next in integration, platformization, and AI-driven
+operations
+
+[![](https://thecuberesearch.com/wp-content/uploads/Screenshot-2025-11-21-at-9.19.22 AM.png)](https://www.youtube.com/watch?v=-sSPeSP997E)
+
+### [**Episode 46: Real-Time Data Access for AI Apps: Starburst CEO on Query Engines**](https://thecuberesearch.com/fueling-real-time-ai-with-federated-queries/)
+
+In today’s fast-paced enterprise landscape, 82% of companies make critical decisions based on stale data, yet only 23% can access real-time ERP information. In this episode of AppDevANGLE, Paul Nashawaty explores the real-time data challenge with Justin Borgman, CEO and Co-Founder of Starburst. They discuss how modern query engines are redefining AI application development by enabling seamless access to distributed data sources without moving data, bridging legacy systems with modern architectures, and embedding AI features safely into CI/CD pipelines. Key topics also include the concept of “Data as a Product,” empowering citizen developers, and leveraging open-source solutions like Trino and Apache Iceberg for cost-effective data management, all while maintaining governance, security, and compliance.
+
+Justin Borgman shares insights on building data platforms that allow analytics and applications to operate across lakes and enterprise sources efficiently. The conversation highlights how real-time data access is essential for AI-powered applications, enabling organizations to make accurate, timely decisions. Listeners will gain practical guidance on rethinking application design, experimenting safely with AI in development workflows, and optimizing agent-to-agent communication and MCP servers. This episode provides a roadmap for teams seeking to unlock the full potential of their data while navigating the complexities of modern enterprise environments.
+
+[![](https://thecuberesearch.com/wp-content/uploads/UPDATED-Starburst-Unifying-Access-Governance-with-Data-Products-1024x576.png)](https://www.youtube.com/watch?v=wz_lurLF6xs)
+
+### [**Special Edition: Union.ai’s Next Ascent: Modernizing AI Orchestration for Scale, Safety, and Open Innovation**](https://www.youtube.com/watch?v=xJRLefjQW28)
+
+In this KubeCon + CloudNativeCon NA 2025 conversation, Union.ai leaders Niels Bantilan and Chris Matteson take viewers inside the company’s evolution—from its early origins to its expanding influence across the AI infrastructure ecosystem. They unpack how Union.ai’s leadership principles, market understanding, and engineering philosophy have shaped a platform designed to bring order and predictability to increasingly complex AI workflows.
+
+Bantilan and Matteson draw compelling parallels between aviation, orchestration, and modern AI infrastructure, illustrating how principles like safety, coordination, and cost efficiency translate into scalable machine learning operations. They examine the challenges teams face when balancing performance with rising operational costs and share how Union.ai’s architecture streamlines complexity while supporting compliance, security, and enterprise governance needs.
+
+The discussion further explores the newly introduced Flight 2 enhancements, detailing how the next phase of Union’s stack resolves legacy limitations in workflow management and data-intensive workloads. The conversation closes with a forward-looking perspective on Union.ai’s open source strategy and the pathways they see for the community to accelerate innovation in the next generation of AI and cloud-native orchestration.
+
+[![](https://thecuberesearch.com/wp-content/uploads/Screenshot-2025-11-16-at-5.42.06 PM-1024x570.png)](https://www.youtube.com/watch?v=xJRLefjQW28)
+
+### [**Special Edition: Advancing the Kubernetes Ecosystem: Sudeep Goswami on Partnerships, AI, and Open Source Leadership**](https://www.youtube.com/watch?v=t74LZzLy3VY)
+
+In this KubeCon + CloudNativeCon NA 2025 conversation, Traefik Labs CEO Sudeep Goswami outlines how the company is reshaping cloud-native networking and application connectivity for the AI-driven era. He begins by highlighting the foundational partnerships and cloud-flexible design principles that are accelerating Traefik’s ecosystem momentum, enabling organizations to adopt resilient, multi-environment architectures without sacrificing operational simplicity.
+
+Goswami then explores Traefik’s advancements in operational models and AI gateways, emphasizing new offline-capable AI and governance features that strengthen application reliability across distributed systems. He shares insights on a major shift emerging within the Kubernetes ecosystem—one that prioritizes intelligent automation, policy-driven control, and platform-level interoperability. The discussion concludes with a forward-looking view of Traefik Labs’ roadmap, reaffirming its open source commitment and showcasing innovations that will power the next generation of Kubernetes, edge, and AI-native platforms.
+
+
+
+[![](https://thecuberesearch.com/wp-content/uploads/Screenshot-2025-11-16-at-5.38.43 PM-1024x576.png)](https://www.youtube.com/watch?v=t74LZzLy3VY)
+
+### [**Episode 45: Cloud-Agnostic Governance & Offline Safety Pipelines**](https://thecuberesearch.com/defining-sovereign-ai-for-the-enterprise-era/)
+
+In this episode of AppDevANGLE, analyst Paul Nashawaty sits down with Sudeep Goswami, CEO of Traefik Labs, to unpack one of the most transformative shifts in enterprise technology, the rise of sovereign AI infrastructure. As global investments in sovereign AI climb toward a projected $1.5 trillion market, organizations are redefining how they build, secure, and govern intelligent systems. The conversation dives into the three pillars of sovereignty, architectural control, operational independence, and escape velocity, and examines why true sovereignty extends far beyond traditional notions of data residency. From cloud-agnostic architectures to offline AI safety pipelines, Nashawaty and Goswami explore the design patterns enabling enterprises to maintain control over their models, data, and decision loops.
+
+Listeners will gain an inside look at how sectors like defense, healthcare, and financial services are achieving compliance and resilience through air-gapped deployments, MCP gateways, and NVIDIA NIM–powered AI safety frameworks. The discussion also highlights the Oracle–Traefik partnership and how hybrid, sovereign AI architectures are reshaping the hyperscaler landscape. With analyst insight from theCUBE Research, “Treat governance as code, decouple safety from the cloud, and test for escape velocity early,” this episode reveals why sovereignty is not a constraint, but a catalyst for innovation in the era of AI autonomy.
+
+[![](https://thecuberesearch.com/wp-content/uploads/Traefik-Labs-CEO-Sudeep-Goswami-on-Cloud-Agnostic-Governance-Offline-Safety-Pipelines-1024x576.png)](https://www.youtube.com/watch?v=eCKt3mcaEpg)
+
+### [**Episode 44: Why Distributed Databases are Key to Auto-Remediation in the AI Era**](https://thecuberesearch.com/the-ultra-resilience-mandate-of-standardizing-data-for-the-ai-era/)
+
+Despite 88% of enterprises now using AI, many remain unprepared for the unprecedented surge in data volume, diversity, and velocity that AI workloads demand. Traditional “always-on” databases are no longer sufficient—organizations must evolve toward ultra-resilient data architectures capable of self-healing, scaling dynamically, and surviving not only outages but also degradation and unpredictable shifts. In this episode of AppDevANGLE, host Paul Nashawaty sits down with Karthik Ranganathan, Co-founder & CEO of Yugabyte, and Kirill Gavriluk, VP & GM of Azure Cosmos DB at Microsoft, to unpack how enterprises can close the AI readiness gap by standardizing on Postgres—the open foundation unifying modern data ecosystems across cloud and on-premises environments.
+Together, they explore how the industry’s consolidation around Postgres—evidenced by moves from Databricks, Snowflake, Microsoft, and Yugabyte—signals a defining shift toward open, standardized data infrastructure.
+
+The discussion dives into how this transition enables auto-remediation, accelerates developer velocity for hourly releases, and supports AI-scale workloads through open APIs like Cosmos DB’s Postgres-based DocumentDB. The guests also debate the enduring innovation advantage of open source versus closed ecosystems and outline how modular, Postgres-centric architectures are cutting deployment cycles from months to minutes. Ultimately, the episode frames ultra-resilience as the new baseline for enterprises modernizing to meet the exponential growth and complexity of AI-driven data operations..
+
+[![](https://thecuberesearch.com/wp-content/uploads/YouTube-Image_Why-Distributed-Databases-are-Key-to-Auto-Remediation-in-the-AI-Era-1024x576.png)](https://www.youtube.com/watch?v=pa0INLb_em4)
+
+### [**Episode 43: How AI Is Reshaping Software Development Insights from the 2025 DORA Report**](https://thecuberesearch.com/turning-ai-into-performance-with-devops-discipline/)
+
+In this episode of AppDevANGLE, Paul Nashawaty, Principal Analyst for Application Development at theCUBE Research, sits down with Nathan Harvey, Lead for DORA at Google Cloud, to unpack the findings of the 2025 DORA Report: State of AI-Assisted Software Development. With 90% of developers now using AI daily, the conversation explores how AI is reshaping the fundamentals of software creation—from coding and documentation to automation and delivery. Paul and Nathan examine how teams with mature DevOps practices are harnessing AI to accelerate velocity and improve code quality, while others are facing growing pains in the form of rework, burnout, and governance challenges.
+
+The discussion delves into DORA’s new AI Capabilities Model, highlighting how organizations can assess and operationalize AI adoption across the software lifecycle. Together, they explore the emergence of the “Team Architect” role, where developers evolve from code creators to AI curators, and emphasize why DevOps discipline still reigns supreme—with version control, observability, and small batch delivery serving as guardrails for success. Rounding out the conversation, Paul and Nathan consider the importance of AI governance, psychological safety, and continuous learning, underscoring how forward-thinking leaders can balance innovation with sustainability to future-proof developers in an AI-augmented world.
+
+[![How AI Is Reshaping Software Development Insights from the 2025 DORA Report](https://thecuberesearch.com/wp-content/uploads/DORA-the-Future-of-Software-Delivery-Performance-1024x576.png)](https://www.youtube.com/watch?v=wEbdRqDV1CA)
+
+### [**Episode 42: How to Cut Cloud Costs and Govern AI in Developer Workspaces**](https://thecuberesearch.com/eliminating-setup-debt-and-governing-ai-workflows/)
+
+In this episode of AppDevANGLE, Paul Nashawaty, Principal Analyst in Application Development, sits down with Rob Whiteley, CEO of Coder, to explore the growing challenges facing modern software developers. Research indicates that developers spend up to 66% of their time managing environments and addressing maintenance tasks rather than driving innovation, a statistic that underscores the urgent need for new approaches. Rob discusses how Coder is addressing this productivity crisis by moving the entire software development lifecycle to the cloud, leveraging secure, modular, container-based workspaces that streamline coding, onboarding, and continuous integration processes. Listeners will gain insight into how platform engineering is evolving to support scale, security, and the integration of AI coding agents without compromising governance or intellectual property.
+
+The conversation also dives into the changing definition of a developer in today’s landscape, where data scientists, low-code users, and “vibe coders” are increasingly contributing to application creation. This shift highlights the importance of centralized governance and standardized environments, achieved through configuration as code and containerized workspaces. Rob explains how these approaches not only accelerate developer productivity but also reduce cloud costs by up to 75% through on-demand and auto-scaling compute. Finally, the episode examines the future of platform engineering: creating secure, sandboxed environments where both human developers and AI agents—treated as untrusted third parties—can safely collaborate, paving the way for more scalable, efficient, and secure software development.
+
+[![](https://thecuberesearch.com/wp-content/uploads/Updated_How-to-Cut-Cloud-Costs-and-Govern-AI-in-Developer-Workspaces-1024x576.png)](https://www.youtube.com/watch?v=wUqGBuCuMvs)
+
+### [**Episode 41: Why Traditional Security Fails Against AI Threats in the Cloud**](https://thecuberesearch.com/securing-appdev-in-the-ai-explosion/)
+
+In this episode of AppDevANGLE, host Paul Nashawaty sits down with Chaim Mazal, Chief AI and Security Officer at Gigamon, to unpack why 70% of IT leaders now view the public cloud as the riskiest part of their tech stack. With AI workloads surging and network traffic spiking by over 200% in just a year, traditional security tools are failing to keep pace. Paul and Chaim dive into the widening skills gap, the struggle to manage both human and non-human (AI-driven) access, and the urgent need for visibility across hybrid and multi-cloud environments. The conversation explores how these pressures are reshaping the way enterprises think about governance, threat detection, and operational resilience in an AI-saturated landscape.
+
+Chaim introduces the concept of Deep Observability—leveraging immutable network telemetry to create a unified, tamper-proof source of truth across security, network, and cloud domains. He explains how this approach enables organizations to detect rogue AI behaviors, spot traffic anomalies in real time, and reduce blind spots that legacy tools can’t address. Together, they outline the “winning recipe” for securing AI-era infrastructure: fusing network intelligence with AI-driven insights to turn risk into resilience. From redefining the CISO’s role in AI strategy to solving the access management crisis, this episode provides essential guidance for leaders aiming to secure the next generation of cloud-native, agentic environments.
+
+[![](https://thecuberesearch.com/wp-content/uploads/Why-Traditional-Security-Fails-Against-AI-Threats-in-the-Cloud-1024x576.png)](https://www.youtube.com/watch?v=bE6NDJlJe7E)
+
+### [**Episode 40: Data Sovereignty for DoD & Intel**](https://thecuberesearch.com/data-ai-and-the-new-mission-imperative/)
+
+In this mission-critical episode of AppDevANGLE, host Paul Nashawaty sits down with Cameron Chehreh, President & GM of MinIO Government and veteran of Northrop Grumman, General Dynamics, and Intel, to explore how the U.S. Intelligence Community (IC) and Department of Defense (DoD) are rethinking data operations in an AI-driven world. With more than $100 billion in active programs now reliant on data, the conversation dives into why traditional storage models break down at the tactical edge—and how modern, high-performance Object Storage is enabling Sovereign AI initiatives with the speed, security, and scalability national defense demands.
+
+From the transition of AI pilots to full-scale programs like Task Force Lima to the race toward Zero Trust compliance by FY2027, the discussion reveals how edge architectures, encryption from the silicon up, and new regulatory frameworks such as the EU Cyber Resilience Act (CRA) are reshaping how federal agencies build and secure mission-critical systems. Listeners will gain insights into why storage has become a strategic weapon, the complexities of managing multi-classified data environments, and how traceable AI governance is now essential for operational readiness. This episode underscores an urgent truth: in an era of near-peer competition and escalating cyber threats, modernization is not optional—it’s survival.
+
+[![](https://thecuberesearch.com/wp-content/uploads/Data-Sovereignty-for-DoD-Intel-1024x576.png)](https://www.youtube.com/watch?v=rI668DHIfAo&list=PLenh213llmcZ_fgYPm3j8qnJpVhxbSwxa)
+
+### [**Episode 39: Why Your Software Supply Chain is Broken**](https://thecuberesearch.com/securing-appdev-in-the-age-of-ai-and-open-source-risk/)
+
+By 2026, nearly half of all organizations are projected to experience a software supply chain attack—a staggering escalation that highlights just how fragile modern software delivery has become. With more than 90% of code in today’s applications being open source, enterprises are essentially relying on contributions from unknown developers across the internet. High-profile breaches such as SolarWinds and Log4J exposed not only the potential for catastrophic disruption but also the limits of traditional vulnerability scanning. The reality is that security teams can no longer keep up by playing defense alone; the attack surface is too broad, the dependencies too opaque, and the speed of development too relentless.
+
+In this episode of AppDevANGLE, Paul Nashawaty and Chainguard CEO Dan Lorenc dive deep into why security needs to be re-architected around integrity, trust, and governance. They explore the tension between developer velocity—where 24% of organizations aim to push code hourly—and the mounting requirements of DevSecOps. From the accelerating role of AI-generated code to sweeping regulations like the EU Cyber Resilience Act, the industry is being forced into a catch-up cycle that can no longer be ignored. Their discussion unpacks how to harden the supply chain without slowing innovation, why SBOMs and compliance checkboxes are insufficient, and how a new model of proactive, embedded security can finally bring balance between speed and safety in application development.
+
+[![](https://thecuberesearch.com/wp-content/uploads/Why-Your-Software-Supply-Chain-is-Broken-1024x576.png)](https://www.youtube.com/watch?v=AcZXEK9nnbE)
+
+### [**Episode 38: Stop Wasting Cloud Spend and Understand The FinOps & AppDev Connection**](https://thecuberesearch.com/developers-need-to-rethink-cloud-cost-management/)
+
+In this episode of AppDevANGLE, host Paul Nashawaty sits down with Mike Julian, CEO and Co-founder of Duckbill, to confront one of the most overlooked challenges in cloud adoption: wasted spend. With nearly 30% of cloud investments going unused, organizations are accelerating application development without the financial guardrails to ensure efficiency. The conversation goes beyond surface-level cost-cutting and dives into the structural and cultural issues that drive overspending, particularly the architectural decisions made in production environments that carry the heaviest financial impact.
+
+
+
+Together, Paul and Mike explore how embedding cost accountability directly into development workflows is essential for shifting left on cost. Listeners will learn why minor operational tweaks often fail to deliver meaningful savings, why finance teams struggle to influence outcomes without engineering buy-in, and how organizations can create a cultural shift toward a true FinOps mindset. From identifying red flags in current practices to redefining the balance between innovation and efficiency, this episode delivers practical insights for leaders looking to transform their approach to cloud cost governance and drive lasting financial discipline in their AppDev strategies.
+
+[![](https://thecuberesearch.com/wp-content/uploads/Stop-Wasting-Cloud-Spend-and-Understand-The-FinOps-AppDev-Connection-1024x576.png)](https://www.youtube.com/watch?v=Oii8XT438A4)
+
+### [**Episode 37: End-of-Life Software and What Comes Next**](https://thecuberesearch.com/herodevs-brings-end-of-life-software-back-into-focus/)
+
+In this episode of AppDevANGLE, host Paul Nashawaty sits down with Steven Fluin, Vice President of Product at HeroDevs, to tackle one of the most overlooked challenges in enterprise software: the security risks of end-of-life (EOL) open source frameworks. With research showing that 86% of codebases contain vulnerabilities tied to open-source components, organizations are increasingly exposed when foundational projects like AngularJS, Apache Struts, or legacy versions of Spring fall out of upstream support. Fluin explains how HeroDevs provides commercial support and drop-in replacements for these critical but aging technologies, buying companies the time they need to modernize while maintaining compliance and security.
+
+The conversation expands beyond individual projects to the broader ecosystem, where gaps in awareness, inconsistent reporting of CVEs, and the lack of lifecycle metadata create systemic risks. Fluin shares how HeroDevs is reinvesting in open-source communities, collaborating with partners like the OpenJS Foundation, and advocating for new standards that improve software hygiene across the board. Together, Nashawaty and Fluin highlight the need for enterprises to balance modernization with responsibility, ensuring that both cutting-edge and legacy systems remain secure in a landscape where open source underpins mission-critical applications worldwide.
+
+[![](https://thecuberesearch.com/wp-content/uploads/End-of-Life-Software-and-What-Comes-Next-1-1024x576.png)](https://www.youtube.com/watch?v=s4tQoJb96bw&feature=youtu.be)
+
+### [**Episode 36: Inside Kubernetes Release Management, SIGs, and Open Source Contribution**](https://thecuberesearch.com/inside-kubernetes-how-the-community-keeps-one-of-the-worlds-largest-open-source-projects-moving/)
+
+Kubernetes has become the backbone of modern cloud-native infrastructure, but its continued stability, security, and scalability don’t happen by accident. In this episode of AppDevANGLE, Paul Nashawaty sits down with Kat Cosgrove, Head of Developer Advocacy at Minimus, Kubernetes Release Team Subproject Owner, and Tech Lead for SIG Docs, to unpack the mechanics of the Kubernetes release process. With three major releases each year, Kubernetes relies on a carefully structured governance model, driven by Special Interest Groups (SIGs) like SIG Release and SIG Docs, to coordinate contributor workflows, maintain rigorous testing standards, and ensure updates are production-ready. The conversation highlights how the open-source community blends automation with human oversight to deliver predictable innovation without compromising reliability.
+
+Beyond the release cadence, Nashawaty and Cosgrove explore how Kubernetes nurtures its contributor base and reinforces the value of community-driven development. They discuss the training, mentorship, and documentation strategies that onboard new contributors and sustain long-term expertise, as well as the challenges organizations face when modernizing toolchains or closing skill gaps. With insights into why AI won’t replace technical documentation—at least not yet—and lessons learned from Kubernetes’ governance practices, the episode provides takeaways for enterprises grappling with CI/CD complexity, security expectations, and workforce readiness. Ultimately, the Kubernetes community shows how open collaboration and disciplined release engineering can scale to meet enterprise-grade demands year after year.
+
+[![](https://thecuberesearch.com/wp-content/uploads/Inside-Kubernetes-Release-Management-SIGs-and-Open-Source-Contribution-1024x576.png)](https://www.youtube.com/watch?v=zzWy0yI33Sg)
+
+### [**Episode 35: AI-Powered DevOps Analytics Slashes Software Delivery Time**](https://thecuberesearch.com/truxt-ai-unlocks-devops-intelligence-with-ai-analytics/)
+
+Artificial intelligence is rapidly becoming a force multiplier in modern software delivery, enabling organizations to move beyond surface-level metrics and toward actionable insights that directly impact business outcomes. In this episode of AppDevANGLE, Paul Nashawaty, Principal Analyst at theCUBE Research, sits down with Naveen Kumar, Founder and CEO of Truxt.ai, to discuss how AI is reshaping DevOps analytics, streamlining the software development lifecycle (SDLC), and influencing decision-making at scale. According to theCUBE Research, enterprises embedding AI into analytics workflows are twice as likely to derive measurable value from their data initiatives—a gap that Truxt.ai seeks to close by turning raw DevOps data into predictive intelligence. By automating analysis and contextualizing KPIs across development and business teams, Truxt.ai helps organizations accelerate feedback loops and elevate their software delivery maturity.
+
+
+
+The conversation dives into why traditional DORA metrics, while useful, don’t tell the full story. Instead, Truxt.ai uses AI-driven analytics to uncover the why behind performance trends, reduce reliance on manual analysis, and accelerate decision-making through agentic AI. From standardizing toolchains across sprawling enterprises to compressing release cycles from quarterly to hourly, the episode highlights practical strategies for scaling DevOps consistency and maturity. By integrating with platforms like GitHub, Jira, and Jenkins, Truxt.ai helps reduce tool sprawl from 6–15 platforms down to actionable recommendations. As Naveen explains, “Knowing your deployment frequency isn’t enough. AI shows you why it’s happening—and how to fix it.” For organizations seeking to improve lead time for changes, mean time to recovery (MTTR), and alignment between software delivery and business impact, AI is proving to be the missing link between metrics and meaningful insights.
+
+[![](https://thecuberesearch.com/wp-content/uploads/AI-Powered-DevOps-Analytics-Slashes-Software-Delivery-Time-1-1024x576.png)](https://www.youtube.com/watch?v=TscdyL1gGWY)
+
+### [**Episode 34: 75x Faster Runtime for Java, Python, JavaScript & More**](https://thecuberesearch.com/elide-is-reimagining-runtimes-for-modern-development/)
+
+What if your runtime was 75x faster out of the box? In this episode of AppDevANGLE, Paul Nashawaty, Principal Analyst at theCUBE Research, sits down with Sam, software developer and co-founder of Elide, to discuss a next-generation runtime designed for speed, security, and cross-language development. Elide is a drop-in replacement for Node.js, but with performance gains that go far beyond. Built on Oracle GraalVM, it claims to run JavaScript 75x faster, Ruby 24x faster, and Python 3x faster, while delivering compiler speeds up to 20x faster.
+
+For developers and enterprises, these improvements translate into optimized CI/CD pipelines, lower cloud infrastructure costs, and stronger security through memory-safe Java-based runtimes.
+Beyond raw performance, Elide brings polyglot development to the forefront, enabling teams to work seamlessly across Java, JavaScript, Python, Kotlin, and more, all while pulling packages from NPM, Maven, and PyPI in a single unified system. Compared to other Node.js alternatives like Deno or Bun, Elide promises easier integration, enterprise-grade stability, and a business impact that accelerates both development and release cycles. Currently in beta with a stable release expected within three months, Elide is already available on GitHub—positioned to redefine runtime innovation for developers, DevOps teams, CTOs, and engineering leaders navigating the demands of modern cloud-native applications.
+
+
+
+[![](https://thecuberesearch.com/wp-content/uploads/75x-Faster-Runtime-for-Java-Python-JavaScript-More-1024x576.png)](https://www.youtube.com/watch?v=a99EfeqRoAo)
+
+### [**Episode 33: The Future of Embedded Linux & Edge AI with Peridio**](https://thecuberesearch.com/how-avocado-os-simplifies-the-path-to-scale/)
+
+Can embedded Linux finally become easier for developers, systems integrators, and data scientists? In this live episode of AppDevANGLE from Open Source Summit North America 2025, Paul Nashawaty, Principal Analyst at theCUBE Research, speaks with Justin Schneck, Chief Product Officer at Peridio, about Avocado OS—a new, developer-friendly Linux distribution designed for embedded systems and Edge AI.
+
+The conversation explores how Avocado OS simplifies embedded Linux development, bridges the gap between Yocto and desktop distributions like Ubuntu, and delivers optimizations for AI-native runtimes at the edge.
+
+Listeners will gain insight into its public beta launch with support for NVIDIA Jetson, NXP i.MX 93, and Raspberry Pi, as well as how Avocado enables faster collaboration across developers, integrators, and data scientists. Schneck also shares how Peridio is rethinking embedded tooling with cloud-inspired architecture, leveraging SystemD and OS Tree to eliminate risky repartitioning, and addressing silicon manufacturers’ evolving go-to-market strategies for Edge AI.
+
+This episode covers key themes including embedded Linux in edge environments, AI on constrained devices, build-time vs. runtime package management, and hardware-in-the-loop testing for machine learning. Whether you’re an embedded systems developer, Edge AI practitioner, or product team working on IoT, robotics, or industrial automation, this discussion provides a practical look at the future of embedded operating systems.
+
+[![](https://thecuberesearch.com/wp-content/uploads/The-Future-of-Embedded-Linux-Edge-AI-with-Peridio-1024x576.png)](https://www.youtube.com/watch?v=WT5-eR1VmK4&t=19s)
+
+### [**Episode 32: Fermyon Is Using WebAssembly + AI to Power Edge Workloads**](https://thecuberesearch.com/suses-secure-portable-approach-to-hybrid-workloads/)
+
+WebAssembly (WASM), Edge Computing, and AI Agents are converging, and Fermyon is right at the center. With 39% of organizations already adopting WebAssembly (WASM) for modern app development, the technology is quickly becoming a cornerstone for building scalable, portable, and secure workloads, especially as AI moves from experimentation to production.
+
+Fermyon’s partnership with Akamai extends WASM’s reach by enabling AI workloads to run at the edge, reducing latency and unlocking new real-time use cases for AI agents and bots, which are now appearing in production environments at unprecedented rates. Projects like Spin and SpinKube, which were donated to the CNCF and developed in collaboration with Microsoft and SUSE, enable the faster, safer, and more portable deployment of multi-architecture, serverless WASM apps. As Fermyon CEO Matt Butcher notes, “We’ve gone from blue-sky AI exploration to real-world problems fast. WebAssembly is the platform that can scale with those needs.”
+
+In this AppDevANGLE episode recorded live at Open Source Summit North America 2025, Paul Nashawaty, Principal Analyst at theCUBE Research, sits down with Matt Butcher, CEO and Co-founder of Fermyon, to talk about the next era of cloud-native development and the evolving landscape of open source innovation.
+
+[![](https://thecuberesearch.com/wp-content/uploads/Fermyon-Is-Using-WebAssembly-AI-to-Power-Edge-Workloads-1024x576.png)](https://www.youtube.com/watch?v=3QSU64KduEY)
+
+### [**Episode 31: Open Source, Open Future: SUSE on AI & AppDev**](https://thecuberesearch.com/suses-secure-portable-approach-to-hybrid-workloads/)
+
+In this special edition of AppDevANGLE, recorded live at Open Source Summit North America 2025, Paul Nashawaty, Principal Analyst at theCUBE Research, is joined by Robert Sirchia, Director of Technical and Community Marketing at SUSE, for an insightful conversation on the evolving landscape of open source innovation.
+
+Together, they examine how choice-driven development is empowering organizations to build and deploy AI-powered applications more flexibly and securely. Sirchia shares how SUSE is enabling developers and enterprises to harness the full potential of open ecosystems—where innovation thrives, vendor lock-in fades, and AI can be deployed on your terms, across any environment.
+
+[![](https://thecuberesearch.com/wp-content/uploads/SUSEs-Vision-for-Secure-Open-Innovation-1-1024x576.png)](https://www.youtube.com/watch?v=j0h3M_GAW_g)
+
+### [**Episode 30: Securing Python for the AI Era**](https://thecuberesearch.com/securing-python-for-the-ai-era/)
+
+Over 50 million users depend on Anaconda to streamline Python development for data science, machine learning, and AI.
+
+In this episode of AppDevANGLE, Paul Nashawaty, Principal Analyst at theCUBE Research, sits down with Peter Wang, co-founder and Chief AI Officer at Anaconda, to explore how Python’s ecosystem is evolving to support the next wave of enterprise AI.
+
+[![](https://thecuberesearch.com/wp-content/uploads/Anaconda-Powers-Python-for-AI-at-Scale-1024x576.png)](https://www.youtube.com/watch?v=gS7b7CGXU9M)
+
+### [**Episode 29: Why Unified Control Planes Matter**](https://thecuberesearch.com/from-fragmentation-to-focus-with-unified-control-planes/)
+
+Across industries, data teams spend over 40% of their time preparing infrastructure and searching for data instead of driving innovation.
+
+In this episode of AppDevANGLE, Paul Nashawaty, Principal Analyst at theCUBE Research, is joined by Mathew Shaxted, CEO of Parallel Works, to unpack how a unified control plane can accelerate time-to-insight and enable scalable innovation in multi-cloud and hybrid environments.
+
+[![](https://thecuberesearch.com/wp-content/uploads/Why-Unified-Control-Planes-Matter-1024x576.png)](https://www.youtube.com/watch?v=GGVAULvT_Wg)
+
+### [**Episode 28: Vector Search May Be the Key to Real-Time AI**](https://thecuberesearch.com/vector-search-may-be-the-missing-link-in-ai-ready-data-strategy/)
+
+Unstructured data makes up more than 80% of enterprise data and traditional search tools just can’t keep up.
+
+In this episode of AppDevANGLE, Paul Nashawaty, Principal Analyst at theCUBE Research, sits down with Manuel Meyer, VP of Growth & Marketing at Qdrant, to explore how vector search is transforming real-time AI applications across industries.
+
+[![Vector Search May Be the Key to Real-Time AI](https://thecuberesearch.com/wp-content/uploads/Vector-Search-May-Be-the-Key-to-Real-Time-AI-1024x576.png)](https://www.youtube.com/watch?v=KrRiNLMrfjI)
+
+### [**Episode 27: Fixing the Hidden Risk Behind Cloud Downtime**](https://thecuberesearch.com/rethinking-configuration-as-a-shared-system-of-record/)
+
+Misconfigurations are responsible for nearly 70% of major cloud outages and yet they’re rarely treated with the urgency they deserve.
+
+In this episode of AppDevANGLE, Paul Nashawaty, Principal Analyst at theCUBE Research, sits down with industry veterans Alexis Richardson (RabbitMQ, Weaveworks), Brian Grant (Kubernetes co-creator), and Jesper Joergensen (Salesforce, Heroku) who came together to create ConfigHub, to unpack why configuration has become one of the biggest hidden risks in cloud-native environments.
+
+[https://www.youtube.com/watch?v=7mjOnLcwVCs&t=47s](https://www.youtube.com/watch?v=7mjOnLcwVCs&t=47s)
+
+### [**Episode 26: Reimagining Computer Vision with OpenFilter and VisOps**](https://thecuberesearch.com/a-framework-for-operationalizing-computer-vision-at-scale/)
+
+Over 90% of the world’s data is unstructured and computer vision may hold the key to unlocking its value.
+
+In this episode of AppDevANGLE, Paul Nashawaty, Principal Analyst at theCUBE Research, sits down with Kit Merker, CEO of Plainsight, to explore how enterprises can operationalize vision AI at scale. Kit introduces the concept of VisOps, explains the role of the new open source OpenFilter project, and breaks down the three essential lifecycles (software, machine learning, and video data) that must align for successful computer vision deployment.
+
+[![Reimagining Computer Vision with OpenFilter and VisOps](https://thecuberesearch.com/wp-content/uploads/Reimagining-Computer-Vision-with-OpenFilter-and-VisOps-1-1024x576.png)](https://www.youtube.com/watch?v=AMMZuKiyHVY)
+
+### [**Episode 25: Avoiding Vendor Lock-In with Open Source Databases**](https://thecuberesearch.com/simplicity-scale-and-the-future-of-secure-communication/)
+
+74% of database professionals report being impacted by downtime and performance issues, while 53% of organizations cite security and compliance risks as key concerns in their data infrastructure.
+
+In this episode of AppDevANGLE, Paul Nashawaty, Principal Analyst at theCUBE Research, is joined by Peter Zaitsev, Founder of Percona, to discuss how open source database platforms like MySQL, PostgreSQL, and MongoDB (source-available) are reshaping enterprise data strategies.
+
+As organizations prioritize avoiding vendor lock-in, this episode explores how Percona delivers enterprise-grade support, automation tools, and security features to help companies modernize their database operations in cloud-native and Kubernetes environments without compromising performance, cost, or compliance.
+
+[![Avoiding Vendor Lock-In with Open Source Databases](https://thecuberesearch.com/wp-content/uploads/Avoiding-Vendor-Lock-In-with-Open-Source-Databases-1024x576.png)](https://www.youtube.com/watch?v=pKdXlgyqY_8)
+
+### [**Episode 24: Why Service Mesh Maturity Is Critical to Kubernetes Success**](https://thecuberesearch.com/simplicity-scale-and-the-future-of-secure-communication/)
+
+By 2026, 65% of enterprises will rely on partners to manage complex, cloud-native workloads—and service mesh adoption is playing a critical role in that transformation.
+
+In this episode of AppDevANGLE, Paul Nashawaty, Practice Lead at theCUBE Research, is joined by William Morgan, CEO of Buoyant and co-creator of Linkerd, the first CNCF-graduated service mesh, to explore the evolution of service mesh adoption and the real-world strategies for achieving operational simplicity at scale. From multi-cluster connectivity and mesh expansion to GitOps, Windows, and VM support, this discussion breaks down how Linkerd is helping organizations overcome complexity and build production-grade Kubernetes platforms that are secure, observable, and resilient.
+
+[![](https://thecuberesearch.com/wp-content/uploads/Why-Service-Mesh-Maturity-Is-Critical-to-Kubernetes-Success-1024x576.png)](https://www.youtube.com/watch?v=YE0AYJHQsmQ)
+
+### [**Episode 23: Why Service Delivery Partners Are Key to Cloud Native Success**](https://www.youtube.com/watch?v=E_JY0q-_OxA)
+
+By 2026, 65% of enterprises will rely on service delivery partners to manage complex cloud-native workloads, up from 45% in 2023. As modernization accelerates and the skills gap widens, organizations are increasingly turning to open-source-focused integrators for agile, scalable, and secure transformation.
+
+In this episode of AppDevANGLE, Paul Nashawaty, Practice Lead at theCUBE Research, speaks with Nicholas Christener, CEO of Adfinis, a global open source system integrator. Together, they explore the pivotal role of service delivery partners in enabling application modernization, open-source adoption, platform migrations, and DevSecOps enablement.
+
+[![Why Service Delivery Partners Are Key to Cloud Native Success](https://thecuberesearch.com/wp-content/uploads/Why-Service-Delivery-Partners-Are-Key-to-Cloud-Native-Success-1-1024x576.png)](https://www.youtube.com/watch?v=E_JY0q-_OxA)
+
+### [**Episode 22: Why Service Partners Are the Backbone of Modern App Dev**](https://siliconangle.com/2025/06/06/unified-observability-matters-multicloud-security-thecube/)
+
+Cloud-native development has unlocked unprecedented flexibility and speed—but it’s also introduced new layers of complexity across operations and security.
+
+In a recent episode of AppDevANGLE, Paul Nashawaty hosted Ryan Sosin, Principal Product Manager at DoiT, and Matthew Warner, CEO of Blumira, to unpack what this means for developers. The key message? Developers sit at the intersection of cloud costs and security risks, and the tools we use need to reflect that reality.
+
+[![](https://thecuberesearch.com/wp-content/uploads/Why-Service-Partners-Are-the-Backbone-of-Modern-App-Dev-1024x576.png)](https://www.youtube.com/watch?v=poRX4CoGtJo)
+
+### [**Special Edition: Interview with Ajay Singh from Pure Storage, and Joselito Angeles & John Durko From Fiserv, Inc.**](https://www.youtube.com/watch?v=tACO7Oa89l0)
+
+In this special edition,”Embracing Innovation: The AnalystANGLE Approach to Modern Infrastructure Transformation,” the discussion centers on how organizations can strategically navigate the shift from legacy systems to modern, container-based environments live from the Red Hat Summit 2025 show floor. It begins by unpacking the challenges of bridging traditional infrastructure with emerging containerization technologies, highlighting operational complexity and cultural resistance.
+
+The conversation progresses to the tangible outcomes of modernization efforts—namely, improved efficiency, cost optimization, and sustainability gains. A deep dive into OpenShift architecture reveals how integrated platforms are enabling scalable and secure application delivery. Finally, the session concludes with insights on unifying storage, AI capabilities, and operational workflows to build resilient, adaptive, and future-ready IT strategies.
+
+[![](https://thecuberesearch.com/wp-content/uploads/Screenshot-2025-05-29-at-12.34.52 PM-1024x565.png)](https://www.youtube.com/watch?v=tACO7Oa89l0)
+
+### [**Episode 21: How Usage Based Billing is Reshaping AppDev**](https://thecuberesearch.com/navigating-monetization-complexity-in-modern-app-dev/)
+
+66% of developers report spending significant time managing billing logic, pricing models, and payment integration, stealing time away from core product innovation. From real-time usage metering to flexible monetization strategies, the conversation unpacks why billing is no longer just a finance function—it’s a product and engineering challenge that influences everything from customer experience to competitive advantage.
+
+In this episode of AppDevANGLE, Paul Nashawaty, Practice Lead at theCUBE Research, sits down with Cosmo Wolfe, Head of Technology at Metronome, to explore how usage-based billing is becoming an integral part of the modern software product lifecycle.
+
+[![How Usage Based Billing is Reshaping AppDev](https://thecuberesearch.com/wp-content/uploads/How-Usage-Based-Billing-is-Reshaping-AppDev-1024x576.png)](https://www.youtube.com/watch?v=T0cfEqWb75U)
+
+### [**Episode 20: Solving Observability at Scale with Insights from Last9**](https://thecuberesearch.com/from-tool-sprawl-to-intelligence-driven-automation/)
+
+SRE teams spend 20–40% of their time managing observability infrastructure, while telemetry data grows at 30% year over year. With budgets tightening and tool sprawl rising, organizations are struggling to keep observability sustainable, scalable, and actionable.
+
+In this episode of AppDevANGLE, Paul Nashawaty, Practice Lead for Application Development & Modernization at theCUBE Research, is joined by Nishant Modak, Founder & CEO of Last9, to unpack the challenges and opportunities in modern observability—including high-cardinality workloads, siloed telemetry data, and the shift toward self-managing observability platforms.
+
+[![Solving Observability at Scale with Insights from Last9](https://thecuberesearch.com/wp-content/uploads/Solving-Observability-at-Scale-with-Insights-from-Last9-1024x576.png)](https://www.youtube.com/watch?v=SPWbtg9odGE)
+
+### [**Episode 19: AI, vLLM, and Virtualization at Red Hat Summit 2025**](https://thecuberesearch.com/red-hat-summit-2025-ai-virtualization-and-the-future-of-open-hybrid-cloud/)
+
+The global AI market is projected to hit $757 billion in 2025, while virtualization spending approaches $11 billion, driven by enterprise modernization and the rising demand for efficient AI deployment.
+
+In this special episode of AppDevANGLE, Paul Nashawaty, Practice Lead at theCUBE Research, is joined by Stu Miniman, Senior Director at Red Hat, to preview key themes and announcements ahead of Red Hat Summit 2025.
+
+This year’s event promises a strong focus on trusted AI, software supply chain security, virtualization, and open hybrid cloud innovation—with hands-on labs, breakout sessions, and real-world customer stories that demonstrate how organizations are preparing for the next wave of enterprise transformation.
+
+[![AI, vLLM, and Virtualization at Red Hat Summit 2025](https://thecuberesearch.com/wp-content/uploads/AI-vLLM-and-Virtualization-at-Red-Hat-Summit-2025-1024x576.png)](https://www.youtube.com/watch?v=kGAZwu7zR6Y)
+
+### **[Episode 18: Edge, AI, and Agentic Architectures are the Future of Connectivity](https://www.youtube.com/watch?v=-TXRLhKe-og)**
+
+As 49% of organizations report growing investment in edge computing, the pressure is on to modernize connectivity and messaging infrastructure.
+
+In this episode, Paul Nashawaty, Practice Lead for Application Development & Modernization at theCUBE Research, is joined by Derek Collison, Founder & CEO of Synadia, to explore the evolving role of edge-native computing, AI agents, and secure, scalable messaging systems like NATS.io.
+
+With organizations operating across multi-cloud and edge environments, and 94% using two or more clouds, the demand for flexible, secure, and lightweight communication frameworks is reaching new heights—especially as AI inference and agentic architectures become part of the application landscape.
+
+[![](https://thecuberesearch.com/wp-content/uploads/Edge-AI-and-Agentic-Architectures-are-the-Future-of-Connectivity-1024x576.png)](https://www.youtube.com/watch?v=-TXRLhKe-og)
+
+### **[Episode 17: Addressing Application Modernization at the Edge](https://thecuberesearch.com/simplifying-infrastructure-and-driving-innovation-at-the-edge/)**
+
+Global spending on edge computing is projected to reach $317 billion by 2026, driven by the rising demand for real-time processing, AI workloads, and resilient infrastructure at the edge. As organizations modernize their distributed environments, the role of lightweight, high-availability infrastructure becomes increasingly critical.
+
+In this episode, Paul Nashawaty, Practice Lead for Application Development & Modernization at theCUBE Research, is joined by Bruce Kornfeld, Chief Product Officer at StorMagic, to discuss the evolving edge computing landscape and how organizations can simplify infrastructure without compromising performance.
+
+[![Addressing Application Modernization at the Edge](https://thecuberesearch.com/wp-content/uploads/Addressing-Application-Modernization-at-the-Edge-1024x576.png)](https://www.youtube.com/watch?v=ldV-Kb9IiRk)
+
+### **[Special Edition: Interview with Sudeep Goswami, Traefik Labs at KubeCon+CloudNativeCon EU 2025](https://thecuberesearch.com/navigating-the-next-chapter-of-cloud-native-innovation-with-ai-apis-and-app-dev/)**
+
+Sudeep Goswami, CEO of Traefik Labs, wraps up theCUBE’s KubeCon + CloudNativeCon EU 2025 coverage in a conversation with hosts Savannah Peterson and Paul Nashawaty.
+
+In this episode, Navigating Innovation to Tackling Market Challenges, we explore key trends shaping the tech landscape. We dive into curated solutions and insights on AI’s impact in driving technology evolution. The conversation shifts to accelerating application development through AI gateways. We examine how AI-driven collaboration is reshaping development and partnerships. Finally, we discuss the future of AI and API integration, addressing the challenges, the critical role of education, and aspirations for what lies ahead.
+
+*Read more on this topic in [our coverage](https://siliconangle.com/2025/04/24/ai-gateways-emerge-key-cloud-native-infrastructure-thecube/) on SiliconANGLE.*
+
+[![](https://thecuberesearch.com/wp-content/uploads/Screenshot-2025-04-27-at-5.07.39 PM-1024x566.png)](https://www.youtube.com/watch?v=48YkiGXNeYM&t=13s)
+
+### **[Episode 16: What Developers Need to Know About the EU Cyber Resilience Act](https://thecuberesearch.com/navigating-the-eu-cyber-resilience-act-in-a-global-software-supply-chain/)**
+
+The European software market is projected to reach $166.5 billion USD by 2025, and with the EU Cyber Resilience Act (CRA) taking effect, software developers and enterprises alike are facing a major shift in how software is designed, maintained, and secured.
+
+In this episode, Paul Nashawaty, Practice Lead for Application Development & Modernization at theCUBE Research, is joined by Mike Milinkovich, Executive Director of the Eclipse Foundation, to discuss how the CRA is reshaping secure
+
+[![](https://thecuberesearch.com/wp-content/uploads/What-Developers-Need-to-Know-About-the-EU-Cyber-Resilience-Act-1024x576.png)](https://www.youtube.com/watch?v=dAUmRgTzsrQ)
+
+### **[Episode 15: Why FinOps Maturity Matters and How to Get There](https://thecuberesearch.com/how-cloudbolt-and-stormforge-are-making-cloud-cost-optimization-actionable/)**
+
+Only 13% of organizations have reached a mature FinOps program, according to the FinOps Foundation. Most are still trying to understand how to operationalize cloud cost management—especially as Kubernetes environments grow in complexity and spending.
+
+In this episode of AppDevANGLE, Paul Nashawaty, Practice Lead for Application Development & Modernization at theCUBE Research, is joined by Yasmin Rajabi, Chief Strategy Officer at StormForge, now part of CloudBolt, to talk about what it takes to bring FinOps maturity to Kubernetes and why bridging the gap between insight and action is key to long-term success.
+
+*Read more on this topic in [our coverage](https://siliconangle.com/2025/04/22/stormforge-cloudbolt-unite-cloud-cost-optimization-tools-thecube/) on SiliconANGLE.*
+
+[![](https://thecuberesearch.com/wp-content/uploads/Why-FinOps-Maturity-Matters-and-How-to-Get-There-1-1-1024x576.png)](https://www.youtube.com/watch?v=zzN9tVuoKyI)
+
+### **[Episode 14: WebAssembly (WASM) for High-Performance, Cross-Platform Innovation](https://thecuberesearch.com/the-new-rules-of-application-development-in-the-ai-era/)**
+
+64% of developers using WebAssembly (Wasm) say they’re using it to port existing applications to new platforms—and with growing enterprise focus on performance, cost-efficiency, and speed, the rise of serverless Wasm is hard to ignore.
+
+In this episode, Paul Nashawaty, Practice Lead for Application Development & Modernization at theCUBE Research, sits down with Matt Butcher, CEO and co-founder of Fermyon, to explore how serverless WebAssembly and the concept of edge-native computing are reshaping the application development landscape.
+
+[![WebAssembly (WASM) for High-Performance, Cross-Platform Innovation](https://thecuberesearch.com/wp-content/uploads/WebAssembly-WASM-for-High-Performance-Cross-Platform-Innovation-1024x576.png)](https://www.youtube.com/watch?v=yy2Du9AQ2is)
+
+### **[Episode 13: AI’s Acceleration of Application Development](https://thecuberesearch.com/the-new-rules-of-application-development-in-the-ai-era/)**
+
+24% of organizations want to release code on an hourly basis, yet only 8% can achieve it. The pace of application development is accelerating, with 500 to 1,000 new applications being developed at the edge alone. Meanwhile, AI adoption in production applications has jumped from 18% to over 54% in just a year.
+
+In this episode, Paul Nashawaty, Practice Lead for Application Development & Modernization at theCUBE Research, sits down with Richard Seroter, Google Cloud’s Chief Evangelist, to discuss the future of application development, automation, and AI-driven modernization.
+
+*Read more on this topic in [our coverage](https://siliconangle.com/2025/04/11/ai-application-development-maturity-matters-speed-thecube/) on SiliconANGLE.*
+
+[![AI’s Acceleration of Application Development](https://thecuberesearch.com/wp-content/uploads/AIs-Acceleration-of-Application-Development-1024x576.png)](https://www.youtube.com/watch?v=oE9bt03FzZU)
+
+### **[Episode 12: Bridging FinOps & CloudOps The Future of Cloud Governance](https://www.youtube.com/watch?v=xpz7EaVZ0Fk)**
+
+Cloud spending is projected to reach $1.35 trillion by 2027, but 30% of that will go to waste without better FinOps practices. Organizations struggle to align cloud costs with business priorities, and only 22% have fully integrated FinOps into their cloud management strategy. How can enterprises move from reactive cost control to proactive cloud governance?
+
+In this episode, Paul Nashawaty, Practice Lead for Application Development & Modernization at theCUBE Research, sits down with Tatum Tummins from Kion to explore the intersection of FinOps & CloudOps, and how businesses can optimize cloud efficiency, security, and automation to prevent waste and scale cloud adoption.
+
+*Read more on this topic in [our coverage](https://siliconangle.com/2025/03/31/proactive-finops-critical-modern-cloud-governance-thecube/) on SiliconANGLE.*
+
+[![Bridging FinOps &amp; CloudOps The Future of Cloud Governance | AppDevANGLE](https://thecuberesearch.com/wp-content/uploads/Screenshot-2025-03-26-at-3.35.06 PM.png)](https://www.youtube.com/watch?v=xpz7EaVZ0Fk)
+
+### **[Episode 11: DORA & the Future of Software Delivery Performance](https://thecuberesearch.com/the-state-of-devops-and-ais-growing-influence/)**
+
+In this episode, Paul Nashawaty, Practice Lead for Application Development & Modernization at theCUBE Research, sits down with Nathen Harvey, DORA Lead and Developer Advocate from Google Cloud to discuss DORA (DevOps Research and Assessment) and its impact on software delivery performance.
+
+Elite performers deploy 182 times more frequently and recover from failed deployments 2293 times faster. But how do they achieve this? The DORA research provides data-driven insights into high-performing software teams and how they leverage AI, automation, and modern DevOps practices to optimize efficiency.
+
+*Read more on this topic in [our coverage](https://siliconangle.com/2025/03/21/dora-boosts-software-delivery-performance-devops-thecube/) on SiliconANGLE.*
+
+[![How AI Is Reshaping Software Development Insights from the 2025 DORA Report](https://thecuberesearch.com/wp-content/uploads/DORA-the-Future-of-Software-Delivery-Performance-1024x576.png)](https://www.youtube.com/watch?v=tC3OrvFqOBc)
+
+### **[Episode 10: The Rise of Data Quality in Data Governance](https://www.youtube.com/watch?v=OiktKgzZzTQ)**
+
+In this episode, Paul Nashawaty, Practice Lead for Application Development & Modernization at theCUBE Research, sits down with Amy Reams, VP of Marketing and Business Development at Anomalo, to explore the growing importance of data quality (DQ) in modern data governance programs.
+
+As organizations accelerate their application modernization initiatives, ensuring data quality becomes more than just a best practice is a critical success factor. By 2026, 60% of organizations are expected to actively monitor data quality as part of their data governance strategies, up from just 20% in 2022. This shift highlights how democratized access to data and strong governance leadership are shaping the future of enterprise data strategies.
+
+[![The Rise of Data Quality in Data Governance | AppDevANGLE](https://thecuberesearch.com/wp-content/uploads/Screenshot-2025-03-11-at-3.28.14 PM.png)](https://www.youtube.com/watch?v=OiktKgzZzTQ)
+
+### **[Episode 9: Application Insights On The Real Time Analytics Revolution](https://www.youtube.com/watch?v=c-xyYF_mQwM)**
+
+In this episode, Paul Nashawaty, Practice Lead for Application Development & Modernization at theCUBE Research, is joined by Kishore Gopalakrishna, Co-Founder and CEO of Startree, to explore the growth of the real-time analytics market and the transformative role it’s playing across industries.
+
+With the real-time analytics market projected to grow from $27.6 billion in 2024 to $147.5 billion by 2031, organizations are increasingly relying on instantaneous data processing to drive decision-making, operational efficiency, and customer satisfaction. From AI-powered agents to real-time retrieval-augmented generation (RAG), the shift to real-time observability and the disaggregation of monolithic stacks, businesses are embracing real-time analytics to stay competitive.
+
+[![Application Insights On The Real-Time Analytics Revolution](https://thecuberesearch.com/wp-content/uploads/Application-Insights-On-The-Real-Time-Analytics-Revolution-1024x576.png)](https://www.youtube.com/watch?v=c-xyYF_mQwM)
+
+### **[Episode 8: Wiring the Future of Government Tech – Takeaways from Prodacity 2025](https://thecuberesearch.com/wiring-the-future-of-government-tech-takeaways-from-prodacity-2025/)[https://thecuberesearch.com/cisco-live-2025-highlights-the-ai-era-with-scalable-secure-and-sustainable-innovation/](https://thecuberesearch.com/cisco-live-2025-highlights-the-ai-era-with-scalable-secure-and-sustainable-innovation/)**
+
+The *Prodacity* 2025 conference was more than just another tech conference—it was a gathering of the people driving real change in government technology. Between deep discussions on software modernization and off-the-record insights on government restructuring, one thing was clear: the people in this room are ready to shake things up.
+
+[![](https://thecuberesearch.com/wp-content/uploads/AppDevAngle-eps8-1024x557.png)](https://www.youtube.com/watch?v=MmGUJskIHEs)
+
+[![](https://thecuberesearch.com/wp-content/uploads/AppdevAngle-eps7-1024x576.png)](https://www.youtube.com/watch?v=jeRiNq_Nr9I&t=3s)
+
+### **[Episode 6: The Future of AppDev and DevSecOps](https://thecuberesearch.com/the-future-of-appdev-and-devsecops/)[https://thecuberesearch.com/the-future-of-application-development-and-cloud-in-2025-key-predictions/](https://thecuberesearch.com/the-future-of-application-development-and-cloud-in-2025-key-predictions/)**
+
+As organizations continue to modernize their application development strategies, the intersection of AppDev and DevSecOps has never been more critical.
+
+In the latest episode of AppDevANGLE, Paul Nashawaty, Practice Lead for AppDev at theCUBE Research, sat down with Jack Poller, Founder and Principal Analyst at Paradigm Technica, to discuss the evolving landscape of software development, security challenges, and the impact of AI on DevSecOps.
+
+*Read more on this topic in [our coverage](https://siliconangle.com/2025/03/03/ai-security-reshaping-devsecops-devops-tooling-thecube/) on SiliconANGLE.*
+
+[![](https://thecuberesearch.com/wp-content/uploads/AppDevAngle-eps6-1024x566.png)](https://www.youtube.com/watch?v=m7_Vh7B4gu0)
+
+### **[Episode 5: The Future of Application Development and Cloud in 2025 Key Predictions](https://thecuberesearch.com/the-future-of-application-development-and-cloud-in-2025-key-predictions/)[https://thecuberesearch.com/2025-predictions-for-application-development-cyber-resiliency-and-data-protection/](https://thecuberesearch.com/2025-predictions-for-application-development-cyber-resiliency-and-data-protection/)**
+
+As we look ahead to 2025, the intersection of application development and cloud technologies redefines how organizations innovate and operate. Together, we’ve examined the trends shaping this space and the opportunities and challenges they bring. Below, we explore five critical predictions highlighting how cloud advancements will transform application development.
+
+*Read more on this topic in [our coverage](https://siliconangle.com/2025/02/20/hybrid-operating-models-cloud-ai-2025-thecube/) on SiliconANGLE.*
+
+[![](https://thecuberesearch.com/wp-content/uploads/AppDevAngle-eps5-1024x562.png)](https://www.youtube.com/watch?v=5KTUCCegAwY)
+
+### **[Episode 4: The Future of App Development & Cybersecurity – 2025 Predictions](https://thecuberesearch.com/the-future-of-app-development-cybersecurity-2025-predictions/)[https://thecuberesearch.com/2025-predictions-for-application-development-cyber-resiliency-and-data-protection/](https://thecuberesearch.com/2025-predictions-for-application-development-cyber-resiliency-and-data-protection/)**
+
+Our 2025 Predictions series explored the transformative and sometimes daunting intersection of application development and cybersecurity. Industry veteran Jackie McGuire joined host Paul Nashawaty for this dynamic discussion, sharing her extensive real-world insights. Together, they uncovered key trends and strategies shaping the future of app development and cybersecurity.
+
+*Read more on this topic in [our coverage](https://siliconangle.com/2025/01/27/devops-platforms-shape-application-development-cybersecurity-thecube/) on SiliconANGLE.*
+
+[![](https://thecuberesearch.com/wp-content/uploads/AppDevAngle-eps4-1024x571.png)](https://www.youtube.com/watch?v=qq59b2gLEmk)
+
+### [**Episode 3:** **2025 Predictions for Application Development, Cyber Resiliency, and Data Protection**](https://thecuberesearch.com/2025-predictions-for-application-development-cyber-resiliency-and-data-protection/)
+
+As organizations navigate the evolving technology landscape, application development, cyber resiliency, and data protection are converging as critical focus areas for 2025. The theme of these interconnected domains revolves around the growing importance of integrating security measures from the onset of application development to ensure protection against cyber threats. Organizations are increasingly prioritizing resilience in their cybersecurity strategies to mitigate risks associated with data breaches and ransomware attacks.
+
+*Read more on this topic in [our coverage](https://siliconangle.com/2025/01/23/application-security-trends-thecube-research-thecube/) on SiliconANGLE.*
+
+[![](https://thecuberesearch.com/wp-content/uploads/AppDevAngle-eps3-1024x572.png)](https://www.youtube.com/watch?v=I6RZMMbCSuM&t=8s)
+
+### **[Episode 2:](https://thecuberesearch.com/the-agentic-ai-revolution-in-appdev-and-devops/)**[**2025 Predictions – The Convergence of Application Development and Networking**](https://thecuberesearch.com/2025-predictions-the-convergence-of-application-development-and-networking/)
+
+As the pace of digital transformation accelerates, application development and networking are increasingly interwoven in their impact on modern enterprises. TheCUBE Research’s latest insights into 2025 trends reveal critical shifts shaping the future of DevOps, networking, and their intersection. Here’s a breakdown of the top predictions and their implications.
+
+###### *Read more on this topic in [our coverage](https://siliconangle.com/2025/01/10/key-trends-appdev-networking-2025-thecube/) on SiliconANGLE.*
+
+[![](https://thecuberesearch.com/wp-content/uploads/AppDevAngle-eps2-1024x572.png)](https://www.youtube.com/watch?v=QChPBY37TiU)
+
+### **[Episode 1: The Agentic AI Revolution in AppDev and DevOps](https://thecuberesearch.com/the-agentic-ai-revolution-in-appdev-and-devops/)**
+
+Learn about the integration of artificial intelligence (AI) into application development and DevOps is set to revolutionize the way software is built, deployed, and maintained. As we begin 2025, we continue to expect AI to significantly impact various aspects of these fields, especially with the emergence of AI agents and agentic systems.
+
+[![](https://thecuberesearch.com/wp-content/uploads/AppDevAngle-eps1-1024x574.png)](https://www.youtube.com/watch?v=1Yiwh-Tlvxg)

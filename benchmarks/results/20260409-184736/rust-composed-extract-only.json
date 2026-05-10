@@ -1,0 +1,51 @@
+{
+  "tool": "rust-composed",
+  "mode": "extract-only",
+  "manifest": "/Users/willem/Development/researchbuddy/.benchmarks/results/20260409-184736/corpus.json",
+  "timeout_ms": 45000,
+  "summary": {
+    "total": 4,
+    "successes": 4,
+    "failures": 0,
+    "mean_elapsed_ms": 0.46395825,
+    "median_elapsed_ms": 0.219771,
+    "p95_elapsed_ms": 1.1414955499999997,
+    "min_elapsed_ms": 0.116083,
+    "max_elapsed_ms": 1.300208,
+    "mean_markdown_chars": 2916.75
+  },
+  "results": [
+    {
+      "url": "https://www.youtube.com/watch?v=cv9xYnurGIc",
+      "mode": "extract-only",
+      "success": true,
+      "elapsed_ms": 1.300208,
+      "markdown_chars": 2868,
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=sni_-awZTgw",
+      "mode": "extract-only",
+      "success": true,
+      "elapsed_ms": 0.24212499999999998,
+      "markdown_chars": 2901,
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=-5_6HQR0WhA",
+      "mode": "extract-only",
+      "success": true,
+      "elapsed_ms": 0.197417,
+      "markdown_chars": 2974,
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=h98dLRJFHMM",
+      "mode": "extract-only",
+      "success": true,
+      "elapsed_ms": 0.116083,
+      "markdown_chars": 2924,
+      "error": null
+    }
+  ]
+}

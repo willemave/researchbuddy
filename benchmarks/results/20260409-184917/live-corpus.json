@@ -1,0 +1,65 @@
+{
+  "generated_at": "2026-04-10T01:49:17.222277+00:00",
+  "db_path": "/Users/willem/Development/researchbuddy/data/researchbuddy.db",
+  "run_id": null,
+  "all_runs": true,
+  "require_html": false,
+  "total_fetched_urls": 160,
+  "sample_size": 6,
+  "entries": [
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://podscan.fm/podcasts/lennys-podcast-product-career-growth/episodes/the-100-person-ai-lab-that-became-anthropic-and-googles-secret-weapon-edwin-chen-surge-ai",
+      "title": "The 100-person AI lab that became Anthropic and Google's secret weapon | Edwin Chen (Surge AI)",
+      "source_query": "Smaller Company Voices: startup founder blog AI team structure product engineering research",
+      "domain": "podscan.fm",
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/ac0cc54a8fd76e02.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://podcasts.apple.com/us/podcast/why-most-ai-products-fail-lessons-from-50-ai-deployments/id1627920305?i=1000744678894",
+      "title": "Why most AI products fail: Lessons from 50+ AI deployments at OpenAI, Google, and Amazon",
+      "source_query": "Smaller Company Voices: lessons learned building an AI startup team product research engineering",
+      "domain": "podcasts.apple.com",
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/4699b801eb76ce54.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://pod.wave.co/podcast/lennys-podcast-product-career-growth-b65486a6-7cff-4966-bbea-2bc239e90aa4/what-openai-and-google-engineers-learned-deploying-50-ai-products-in-production",
+      "title": "What OpenAI and Google engineers learned deploying 50+ AI products in production - Lenny's Podcast: Product | Career | Growth | Wave AI Podcast Notes",
+      "source_query": "Smaller Company Voices: lessons learned building an AI startup team product research engineering",
+      "domain": "pod.wave.co",
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/b729c89fdbaa13e4.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.youtube.com/watch?v=z7T1pCxgvlA",
+      "title": "Why most AI products fail: Lessons from 50+ AI ... - YouTube",
+      "source_query": "Failure Modes: podcast interview AI product teams failure modes unclear ownership handoffs research engineering",
+      "domain": "www.youtube.com",
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/html/6c07189f77664e4d.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/6c07189f77664e4d.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://getpodcast.com/podcast/the-engineering-leadership-podcast/from-research-lab-to-record-breaking-product-how-openai-engineered-for_1d326d694f",
+      "title": "From Research Lab to Record-Breaking Product: How OpenAI Engineered for Unprecedented Scale w/ Sulman Choudhry, Samir Ahmed & Lawrence Bruhmeller #242 - The Engineering Leadership Podcast",
+      "source_query": "Talent, Culture, and Leadership: leadership patterns in successful AI product engineering research organizations",
+      "domain": "getpodcast.com",
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/1c11bfbf4b29baea.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://launchpod.logrocket.com/linear-secret-building-powerful-ai-products-nan-yu",
+      "title": "LaunchPod | Product Management Podcast: Linear\u2019s Secret to Building Powerful AI Products | Nan Yu, VP of Product (Linear)",
+      "source_query": "PM in AI: best product management practices in AI companies blog post",
+      "domain": "launchpod.logrocket.com",
+      "html_path": null,
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/edc66f8f839a3bbd.md"
+    }
+  ]
+}

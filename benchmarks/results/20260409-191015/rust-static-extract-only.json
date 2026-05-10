@@ -1,0 +1,196 @@
+{
+  "tool": "rust-static",
+  "mode": "extract-only",
+  "manifest": "benchmarks/results/20260409-191015/extract-corpus.json",
+  "markdown_dir": "benchmarks/results/20260409-191015/rust-static-extract-only-markdown",
+  "timeout_ms": 30000,
+  "summary": {
+    "total": 11,
+    "successes": 11,
+    "failures": 0,
+    "mean_elapsed_ms": 0.21667027272727274,
+    "median_elapsed_ms": 0.132583,
+    "p95_elapsed_ms": 0.568521,
+    "min_elapsed_ms": 0.107166,
+    "max_elapsed_ms": 0.9313750000000001,
+    "mean_markdown_chars": 2701.818181818182
+  },
+  "results": [
+    {
+      "url": "https://www.youtube.com/watch?v=z7T1pCxgvlA",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "extract-only",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 0.9313750000000001,
+      "markdown_chars": 2919,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-extract-only-markdown/000-www_youtube_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "extract-only",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 0.16691699999999998,
+      "markdown_chars": 2882,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-extract-only-markdown/001-www_youtube_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/shorts/z5YrGY-mNN0",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "extract-only",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 0.107166,
+      "markdown_chars": 728,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-extract-only-markdown/002-www_youtube_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ZuQHYTDDuTU",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "extract-only",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 0.12520799999999999,
+      "markdown_chars": 2748,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-extract-only-markdown/003-www_youtube_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=rzAGo_XML1U",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "extract-only",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 0.12966599999999998,
+      "markdown_chars": 2914,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-extract-only-markdown/004-www_youtube_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=cv9xYnurGIc",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "extract-only",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 0.20566700000000002,
+      "markdown_chars": 2868,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-extract-only-markdown/005-www_youtube_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=sni_-awZTgw",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "extract-only",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 0.178333,
+      "markdown_chars": 2901,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-extract-only-markdown/006-www_youtube_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=-5_6HQR0WhA",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "extract-only",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 0.15675,
+      "markdown_chars": 2974,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-extract-only-markdown/007-www_youtube_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=h98dLRJFHMM",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "extract-only",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 0.132583,
+      "markdown_chars": 2924,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-extract-only-markdown/008-www_youtube_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ifPjwirY8kY",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "extract-only",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 0.12520799999999999,
+      "markdown_chars": 2943,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-extract-only-markdown/009-www_youtube_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=B26CwKm5C1k",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "extract-only",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 0.12449999999999999,
+      "markdown_chars": 2919,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-static-extract-only-markdown/010-www_youtube_com.md",
+      "error": null
+    }
+  ]
+}

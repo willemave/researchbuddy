@@ -41,12 +41,15 @@ brew tap willemave/researchbuddy && brew install researchbuddy
 git clone https://github.com/willemave/researchbuddy && cd researchbuddy
 uv sync && uv run playwright install
 
-# Configure
-researchbuddy setup          # auto-detects keys from Hermes/OpenClaw if available
+# Validate
 researchbuddy doctor         # validate everything is ready
+researchbuddy doctor --fix   # repair local setup gaps
 
-# Run
-researchbuddy run "best dishwasher for quiet apartment"
+# Start, monitor, and follow up
+researchbuddy start "best dishwasher for quiet apartment"
+researchbuddy status
+researchbuddy watch --timeout 900
+researchbuddy followup "What were the strongest recommendations?"
 ```
 
 Each run writes artifacts to `data/storage/<run_id>/` including `synthesis.md` (the final report), per-lane snapshots, captured source material, and follow-up memory.
@@ -107,7 +110,7 @@ ResearchBuddy uses a **hierarchical task decomposition** architecture. The pipel
 
 **Hierarchical synthesis.** Lane summaries are produced first, then merged through intermediate nodes for large runs, then a final synthesis step generates the user-facing answer. This avoids a single giant prompt and keeps long evidence sets usable.
 
-**Follow-up memory.** After a run, `researchbuddy followup <run_id> "..."` answers new questions from stored evidence instead of re-crawling. Evidence cards and synthesis are persisted for later Q&A.
+**Follow-up memory.** After a run, `researchbuddy followup "..."` answers new questions from the current run's stored evidence instead of re-crawling. Evidence cards and synthesis are persisted for later Q&A.
 
 **Local ingestion.** Playwright crawling with headful fallback, Reddit API integration, YouTube captions with Whisper fallback, podcast RSS parsing and local Whisper transcription, and PDF extraction -- all running locally.
 
@@ -116,30 +119,28 @@ ResearchBuddy uses a **hierarchical task decomposition** architecture. The pipel
 ## CLI Reference
 
 ```bash
-researchbuddy run "<prompt>" [--mode auto|product|restaurant|research] [--stats]
+researchbuddy start "<prompt>" [--mode auto|product|restaurant|research] [--json]
 ```
-Execute a research run. Prints the synthesis and writes all artifacts to `data/storage/<run_id>/`.
+Start a research run in the background, make it current, and write all artifacts to `data/storage/<run_id>/`.
 
 ```bash
-researchbuddy followup <run_id> "<question>"
+researchbuddy status [--run-id RUN_ID] [--json]
+```
+Print progress, process health, URL counts, and output paths for the current run.
+
+```bash
+researchbuddy watch [--run-id RUN_ID] [--interval SECONDS] [--timeout SECONDS]
+```
+Stream the current run's worker log until completion or failure.
+
+```bash
+researchbuddy followup "<question>" [--run-id RUN_ID]
 ```
 Answer a follow-up from stored evidence without re-crawling.
 
 ```bash
-researchbuddy inspect <run_id> [--sources] [--lanes] [--transcripts]
-```
-Inspect saved artifacts for a completed run.
-
-```bash
-researchbuddy transcribe <source> [--type auto|youtube|podcast|audio]
-```
-Transcribe a local audio file or URL with local Whisper.
-
-```bash
-researchbuddy setup [--skip-playwright]    # configure environment
 researchbuddy doctor [--fix]               # validate readiness
-researchbuddy commands [--agent]           # print command reference
-researchbuddy tap export                   # generate Homebrew tap repo
+researchbuddy list [--limit 20] [--json]   # list saved prompts
 ```
 
 Full reference: [`docs/cli-reference.md`](docs/cli-reference.md) and [`docs/agent-cli-reference.md`](docs/agent-cli-reference.md).
@@ -232,9 +233,9 @@ Before asking for any new search-provider key, check ~/.openclaw/openclaw.json.
 If exa, tavily, or firecrawl is already configured there, ask whether
 ResearchBuddy should reuse that existing provider/key.
 
-researchbuddy commands --agent
 researchbuddy doctor
 researchbuddy doctor --fix
+researchbuddy list
 
 Install the bundled skill from:
 $(brew --prefix)/opt/researchbuddy/share/researchbuddy/skills/researchbuddy-cli
@@ -243,6 +244,8 @@ Read:
 - $(brew --prefix)/opt/researchbuddy/share/researchbuddy/skills/researchbuddy-cli/SKILL.md
 
 Do not start research runs until researchbuddy doctor passes.
+Use researchbuddy start, researchbuddy status, researchbuddy watch, and
+researchbuddy followup for normal agent operation.
 ```
 
 Repository skill path: `skills/researchbuddy-cli`

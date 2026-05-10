@@ -1,0 +1,51 @@
+{
+  "tool": "rust-composed",
+  "mode": "live",
+  "manifest": "/Users/willem/Development/researchbuddy/.benchmarks/results/20260409-184736/corpus.json",
+  "timeout_ms": 45000,
+  "summary": {
+    "total": 4,
+    "successes": 0,
+    "failures": 4,
+    "mean_elapsed_ms": null,
+    "median_elapsed_ms": null,
+    "p95_elapsed_ms": null,
+    "min_elapsed_ms": null,
+    "max_elapsed_ms": null,
+    "mean_markdown_chars": null
+  },
+  "results": [
+    {
+      "url": "https://www.youtube.com/watch?v=cv9xYnurGIc",
+      "mode": "live",
+      "success": false,
+      "elapsed_ms": 1047.84125,
+      "markdown_chars": 0,
+      "error": "readability parse failed for https://www.youtube.com/watch?v=cv9xYnurGIc"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=sni_-awZTgw",
+      "mode": "live",
+      "success": false,
+      "elapsed_ms": 965.958708,
+      "markdown_chars": 0,
+      "error": "readability parse failed for https://www.youtube.com/watch?v=sni_-awZTgw"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=-5_6HQR0WhA",
+      "mode": "live",
+      "success": false,
+      "elapsed_ms": 720.39425,
+      "markdown_chars": 0,
+      "error": "readability parse failed for https://www.youtube.com/watch?v=-5_6HQR0WhA"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=h98dLRJFHMM",
+      "mode": "live",
+      "success": false,
+      "elapsed_ms": 789.691834,
+      "markdown_chars": 0,
+      "error": "readability parse failed for https://www.youtube.com/watch?v=h98dLRJFHMM"
+    }
+  ]
+}

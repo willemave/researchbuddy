@@ -1,0 +1,45 @@
+Most recruiters think they know how to spot talent. They scan resumes for keywords, check for brand-name employers, look for a college degree, and move on in about three seconds. But the reality is that when a thousand AI-polished applications land overnight and every candidate looks flawless on paper, the best person for the role is almost certainly getting buried. The resume has become a wall between great candidates and the companies that need them, and the tools hiring teams rely on are only making that wall thicker.
+
+Ophir Samson is the Founder and CEO of Ezra AI Labs, a company that uses voice AI to interview every candidate in an applicant pool and surface the ones who actually deserve a human conversation, before a recruiter ever picks up the phone.
+
+In this episode of Lead with AI, Dr. Tamara Nall speaks with Ophir about why voice is the most natural and trustworthy interface for evaluating talent, how Ezra trains on your company's culture before it talks to a single applicant, and why his team built AI that doesn't replace recruiters but instead gives them back the time to build real human relationships. Ophir also shares his unlikely background as a professional magician and why studying misdirection taught him that visual cues during interviews are mostly noise.
+
+ The resume problem AI made worse 
+
+Here is what the hiring landscape actually looks like right now. A company posts a job opening. By morning, a thousand applications are sitting in the inbox. Every resume has been polished by ChatGPT. Every cover letter sounds perfect. The recruiter knows that somewhere in that pile are maybe 20 people who would genuinely thrive in the role. But with two seconds per resume and a shortlist to fill by Friday, the filter defaults to shortcuts: keywords, logos, school names. The best candidates without those surface-level signals get passed over before they ever have a chance to speak. The deeper problem is universal: the volume of AI-generated content has made the signal-to-noise ratio almost unbearable, and the old filtering methods cannot keep up. That is the gap Ezra was built to close.
+
+ How Ezra actually works 
+
+Ezra is not another resume screener and it is not trying to replace your recruiting team. The process starts the same way you would onboard a new team member. You feed Ezra the job description, your preferred interview questions, your company culture documents, and compensation details. Then Ezra interviews you and your hiring managers by voice to understand what you are really looking for. Once trained, Ezra has a real voice conversation with every applicant. Not a chatbot exchange. A live, adaptive conversation. It asks the questions you wanted asked, then follows up with detailed probing questions drawn from the expertise of 200 leading talent professionals. It knows when to dig deeper and when to move on.
+
+When the conversations are done, your team still conducts the same number of human interviews they always did. The difference is that the 20 people sitting across from you are the 20 best fits out of the entire applicant pool, not 20 random resumes you grabbed because they had the right keywords.
+
+ The hire nobody else would have made 
+
+One of Ezra's customers was searching for a senior front-end engineer. They received 1,200 applications in two days. Their normal process was to scan LinkedIn profiles and resumes for about three seconds each, looking for logos like Meta or Google and checking for a college degree. The person they ended up hiring had none of that. No degree. No brand-name employers. No recognizable logos. If his resume had been judged the traditional way, he would have been filtered out immediately. But Ezra gave him a voice conversation like everyone else, and he scored a 3.8 out of 4. The recruiter watched the interview recording, read the responses, and realized this person was exceptional. He got the job. He was the best candidate out of 1,200, and without Ezra, he would have been invisible.
+
+That story is the entire thesis of the product in one hire. Voice gives people a chance to make their case. Resumes do not.
+
+ Why voice and not video 
+
+Ophir's background in magic gave him a unique lens on human behavior. As a professional magician, he has studied how people move, where they look, and how easy it is to misdirect attention. That experience taught him that visual signals during interviews are wildly unreliable. The idea that someone looking to the left means they are lying might hold up as a statistical average across millions of people, but applying it to a single conversation is a gamble with someone's career. Ezra deliberately uses only voice. No facial analysis. No body language scoring. Voice carries an extraordinary depth of information about how someone thinks and communicates, without the noise and regulatory risk that comes with video-based analysis.
+
+ Catching what humans cannot see 
+
+About two months before this episode aired, Ezra caught its first deepfake candidate. One applicant replaced themselves with an AI-generated avatar so realistic that four experienced recruiters could not tell the difference. Ezra flagged it. This is not a hypothetical threat. Fraudulent candidates are using deepfakes to collect paychecks, sign bonuses, and company laptops. State-sponsored actors have used fake identities to land jobs at American companies, receive corporate hardware, and install malware to exfiltrate intellectual property. Ezra is now a frontline defense against that kind of infiltration.
+
+ The ethical compass behind the technology 
+
+Ophir is vocal about the fact that Ezra is not built to replace recruiters or reduce candidates to a single score. The ethical framework was the starting point, not an afterthought. Every design decision feeds back into two principles: give recruiters an easier path to finding the right people, and give candidates a genuine opportunity to stand out beyond a piece of paper. Large enterprise clients running thousands of AI interviews per month trust Ezra to represent their brand, and that trust depends on the technology operating within those boundaries.
+
+ The future is more human, not less 
+
+Ophir has a contrarian take on where AI is headed. He believes that as misinformation and deepfakes become more common, trust will become the most valuable currency in business and in life. Rather than pushing us further apart, he predicts AI will actually drive us back toward more in-person interactions and a deeper appreciation for the people we choose to spend time with. He compares it to road expansion: when you widen a highway, traffic does not decrease; more people just use it. AI will not give us leisure time. It will free us to invest more of ourselves into the relationships and decisions that actually matter. Ezra sits right at the center of that vision, handling the high-volume screening so that recruiters can invest their energy where it counts: getting to know real people and making hiring decisions that shape their organizations for years to come.
+
+For recruiters, hiring managers, and founders ready to stop losing great candidates to broken resume filters, Ezra AI Labs is live at ezrarecruiting.com. You can also try an example interview yourself to experience the technology firsthand. For more insights on how AI is transforming business and hiring, subscribe to the Lead with AI podcast, where we explore the frontiers of artificial intelligence with the innovators who are shaping its future.
+
+Follow or Subscribe to Lead with AI Podcast on your favorite platforms: Website: LeadwithAIPodcast.com | Apple Podcasts: Lead-with-AI | Spotify: Lead with AI | Podbean: Lead-with-AI-Podcast | YouTube: @LeadwithAIPodcast | Facebook: Lead with AI | Instagram: @LeadwithAIpodcast | TikTok: @LeadwithAIpodcast | Twitter (X): @LeadwithAI
+
+Follow Dr. Tamara Nall: LinkedIn: @TamaraNall | Website: TamaraNall.com | Email: <Tamara@LeadwithAIPodcast.com>
+
+Follow Ophir Samson (Founder & CEO, Ezra AI Labs): LinkedIn: @ophirsamson | Instagram: @shakshukadiaries | Website: ezrarecruiting.com

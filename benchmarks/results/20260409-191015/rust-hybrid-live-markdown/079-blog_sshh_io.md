@@ -1,0 +1,130 @@
+One of the most common mistakes when building multi-agent systems is giving each sub-agent a specialized role: the “dev ops” agent, the “tester” agent, the “senior architect” agent. It mirrors how we organize humans but in my experience it doesn’t work well[1](https://blog.sshh.io/p/the-transposed-organization#footnote-1-192525800).
+
+I’m starting to think the same thing is true for the humans who make up an organization. Most companies organize by what people know how to do but as AI pushes towards generalists (“Product Engineers”) and faster iteration cycles (“software factories”), I think they should instead organize by what problems people close.
+
+[https://substackcdn.com/image/fetch/$s_!vdzh!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b342abe-c3ec-48f7-a3d5-a821bdf4c3e6_2528x1696.jpeg](https://substackcdn.com/image/fetch/$s_!vdzh!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b342abe-c3ec-48f7-a3d5-a821bdf4c3e6_2528x1696.jpeg)
+
+*Cartoon via Nano Banana.*
+
+This post proposes CompanyT (“company-transpose”[2](https://blog.sshh.io/p/the-transposed-organization#footnote-2-192525800)), an operation that fundamentally flips how software companies organize talent and operate. Why I think this will happen, what will go wrong, and how an AI-native software company probably doesn’t even really look like a ‘software company’.
+
+The transposed organization organizes around what I’ll call “loops” rather than traditional specialities.
+> A loop is the full chain of decisions between a problem and a deployed solution, owned by one person. It’s recurring, not one-shot, which is what makes it an org design unit rather than a project. Customer bugs → fixes in prod is a loop. Revenue pipeline → closed deals is a loop. The strongest loops close back to an external source (the customer who reported the bug gets the fix), but internal loops exist too.
+
+Here’s today’s org matrix. Rows are problems to solve, columns are specialist roles. Each cell is the person who handles that step. A single problem touches many people:
+
+[https://substackcdn.com/image/fetch/$s_!oSv8!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffc6bf8b5-4cb5-4ab2-8701-af2c3a86a7a2_3660x1144.png](https://substackcdn.com/image/fetch/$s_!oSv8!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffc6bf8b5-4cb5-4ab2-8701-af2c3a86a7a2_3660x1144.png)
+
+*A toy example of the org matrix, where rows are problems and columns are specialists. Traditional organizations organize around specialists.*
+
+Read down any column: the same set of specialists handle that function across every problem. Bob writes the code, Carol does the design, Dave handles ops. A customer reports a bug and it touches five people across four handoffs. Frank, the person closest to the customer, has zero ability to fix the problem. Bob, the person who can fix it, has no direct relationship with the customer.
+
+Now transpose it. Same grid, but read across any row: the same generalist closes every step of that problem.
+
+[https://substackcdn.com/image/fetch/$s_!icUS!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdc310e5a-86fb-46c5-980a-2cad79118249_3952x1144.png](https://substackcdn.com/image/fetch/$s_!icUS!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdc310e5a-86fb-46c5-980a-2cad79118249_3952x1144.png)
+
+*A toy example of the “transposed” org matrix, where rows are loops and columns are specialties. Transposed organizations organize around loops. Bold means native skill; regular means AI-augmented.*
+
+Alice was a PM; now she owns the full product loop, with agents handling the code, design, and ops she couldn’t do before. Eve was in sales; now she closes the full revenue loop. Frank was in support; now he diagnoses and fixes issues rather than just logging them.
+
+The loop owner’s role is closer to an architect than a traditional individual contributor. They’re not writing code the way an engineer writes code. They’re directing agent execution, making architectural and judgment calls across the full chain, deciding what to build and what “good” looks like before delivery. The primary output is decisions, not artifacts.
+
+Bob, Carol, and Dave didn’t disappear. Their roles shifted from direct execution to platform: encoding their specialist taste into the systems, guardrails, and context that every loop owner’s agents rely on. While this has always been the promise of platform teams, AI makes it more tractable because the encoding target is now a context layer that agents can interpret. It’s still hard, but it’s now the dedicated role rather than a side-effect. Bob doesn’t write the fix for Alice’s customer bug anymore, but he built the testing framework and code quality standards that Alice’s agents run against. Carol encoded the design system that ensures Eve’s agent-generated demos meet the brand bar. Dave built the deployment pipeline and observability stack that Frank’s agents use to ship and monitor fixes. Their expertise became infrastructure. They run their own loops now (platform reliability, design systems, etc.), and their output compounds across every other loop without requiring direct coordination with any of them. The relay chain between them collapsed into a shared context layer, made possible by agents that can absorb and apply specialist judgment at the point of execution rather than requiring the specialist to be in the chain.
+
+Today this works for some loops better than others. The gap between agent-assisted and specialist-quality output is real, and it narrows unevenly. A PM shipping production code via agents is not yet the same as a staff engineer shipping it. But the trajectory is directional, and the organizational question is whether you begin to restructure around where the capability is heading, wait until it arrives, or continue to assume things will stay where they are today.
+
+Every handoff in a relay chain has (at least) three costs: delay (waiting for the next person to pick it up), context loss (the next person only gets a summary of what the last person understood), and coordination overhead (syncs, updates, ticket management). These costs can be so deeply embedded in how companies operate that often we’ve stopped seeing them as costs.
+
+In a loop, there’s nobody to hand off to. The same person who heard the customer describe the problem is the one deploying the fix. There’s no “let me loop in engineering.” The context is native because the same human carried it the entire way.
+
+For external-facing loops, the output ships directly back to the source of the problem: customer reports a bug, customer gets a fix in prod. Prospect asks a question, prospect gets a live demo built for their use case. For internal loops, the closure is the same structure: system hits a scaling wall, the infra loop owner ships the fix; new hire joins, the people-development loop owner ramps them into a functioning loop owner. The topology is the same whether the source is a customer or the organization itself.
+
+This also changes accountability in ways that are hard to overstate. When six people touch a customer issue, responsibility diffuses. “X is working on it” is a phrase that defacto implies nobody specific is responsible for the outcome. When one person owns the full loop, they own the outcome.
+
+Innovation in a transposed org is encouraged and diffuses rapidly. It’s each loop owner getting better at their end-to-end vertical and being creative about how they close it. The product loop owner who finds a novel way to diagnose customer problems, the revenue loop owner who invents a new demo format that converts better: these emerge from depth within a loop, not from a separate R&D department. That doesn’t mean loop owners innovate in isolation. Shared skills and harnesses propagate ideas between loops through agents. Demo hours, brownbags, and on-the-loop peer review across loop owners propagate them between humans. The innovation surface is the combination both depth within a loop plus breadth across the shared context layer. The codified institutional knowledge (standards, conventions, judgment artifacts) compounds across every loop without requiring direct coordination between them.
+
+This doesn’t happen automatically. Skill and context governance, deciding which artifacts propagate, resolving conflicts between competing approaches, maintaining quality as the context layer grows, becomes a critical organizational capacity in an AI-native company.
+
+When you reorganize around loops, the company compresses. Not necessarily fewer people, but fewer coordination surfaces. Each loop operates with a degree of independence that looks a lot like a startup within a company[3](https://blog.sshh.io/p/the-transposed-organization#footnote-3-192525800), shared infrastructure, shared values, shared context, but autonomous execution. The weekly meeting where twelve teams give status updates starts to feel unnecessary when each loop is self-contained enough to not need the other eleven to unblock it.
+
+This also changes what “management” means. In a function-based org, managers exist partly to coordinate across the relay chain, to make sure the handoff from Product to Engineering actually happens, that priorities align, that nothing falls through the cracks. In a loop-based org, that coordination job mostly evaporates. What remains is setting direction (which loops should exist, what problems they should target) and developing people (training the taste, agency, and judgment that make loops work).
+
+The claim is “one person closes a much wider loop,” not “one person does everything.” An Account Owner who closes the full revenue loop is not also the person who takes a customer bug to a fix in production. The loops are distinct; they share infrastructure and context, not responsibilities.
+
+The common binding constraint is cross-domain taste. A person can only hold good judgment across so many domains simultaneously. Every artifact on the loop that doesn’t meet the bar is slop, and there’s no (*in the loop*) downstream review to catch it. This is what determines how wide a loop can get: not execution capacity (agents handle that), but the breadth of judgment one person can maintain with quality. The pool of people who can close a full product loop, from customer problem to deployed fix, with taste at every step, is smaller than the pool of people who can do any one step well. Training taste is hard; you can teach someone a new framework in a week, but teaching them to recognize when an architecture decision will cause problems six months from now takes years of pattern-matching.
+
+When a loop is too wide for one person’s taste to cover, you pair loops. A revenue loop that requires both deep technical credibility and relationship selling splits into a technical loop co-owner and a commercial one working the same customer from complementary angles.
+
+This mirrors what happens in agent systems. A single agent with tools has zero internal coordination cost. But the moment you have two agents sharing a database or a file system, you need orchestration. You’ve reduced coordination from O(n) handoffs per problem to O(k) dependencies between loops, where k is much smaller than n.
+
+Two loops sharing a dependency (a demo environment, a roadmap, a brand promise, a production database) still create coordination costs between them. Between loops, you still need shared context, shared infrastructure, and someone who holds the picture of how the loops interact. That “someone” is probably the exec team or an uber-architect.
+
+Some steps in a loop are irreducibly human. Enterprise sales requires being in a room with a business leader. People management requires the kind of trust that doesn’t transfer through an API. These touchpoints are an additional hard floor on how much a loop can compress. A revenue loop can collapse AE, SE, and Deal Desk into one person, but that person still needs to show up to the dinner, still needs to have the relationship, still needs to read the room. The agent handles the demo, the quote, the technical deep-dive. It doesn’t handle the handshake.
+
+This also means that the loops with the most human touchpoints can be the ones that compress the least. Support for a self-serve product can compress dramatically. Enterprise sales to Fortune 500 accounts, less so. The transpose is not uniform across the matrix.
+
+A human can make a fixed number of high-quality decisions per day[4](https://blog.sshh.io/p/the-transposed-organization#footnote-4-192525800). Agents handle execution, but every loop still requires judgment calls: what to prioritize, when to ship, whether the output meets the bar. The number of loops a person can own is also bounded by their decision capacity.
+
+And not all decisions are equal. Thirty deployment calls are different from five calls that each blend technical judgment, customer empathy, and business risk. The weight and variety of decisions matters as much as the count. A loop that requires constant high-stakes calls across multiple domains drains capacity faster than one with routine decisions in a familiar domain.
+
+This means you can’t just keep adding loops to a person until they’re doing everything. At some point, decision fatigue degrades the quality of every loop they touch. The right load is the number of loops where taste stays high, and that number is probably lower than most executives think.
+
+Even if you buy the model, most organizations are actively incentivizing against it. Performance frameworks often reward functional depth: you get promoted for being a better engineer, not for closing a wider loop. Compensation structures may assume specialization. Career ladders push for a specific function to climb. The latent motivation of what people think their job is, “I’m a designer,” “I’m in sales”, cements as identity-level, not just structural.
+
+Transposing the org requires transposing the reward functions. Performance need to measure loop ownership and outcomes, not functional output. Compensation needs to reward breadth of judgment, not depth of specialization. And the bar needs to move continuously: what counted as “full loop ownership” three months ago is the baseline today, because the agents keep getting better and the definition of what one person can drive execution on keeps expanding. Expectations ratchet every N months. Organizations that don’t explicitly reset this bar will find their people settling into a comfortable local maximum that’s already behind.
+
+If one person owns an end-to-end loop and they leave, you lose the entire capability. Specialist orgs have redundancy baked in: three engineers all know the billing system, so losing one is survivable. In a transposed org, the product loop owner carries the full context of their vertical.
+
+The mitigation is structural, and it introduces two roles that survive the transpose: loop managers and trainees.
+
+A loop manager owns the people-development loop: new hire → ramped loop owner is their recurring end-to-end responsibility. They set the targets for their loops (what problems to attack, what the bar looks like), develop the people running them, and step in when someone is out or ramping. They don’t coordinate handoffs, because there are no handoffs. They develop loop owners.
+
+Training someone into a loop is the harder problem. In a specialist org, onboarding is narrow: learn one tool, one codebase, one function. In a loop, the new person needs to develop judgment across the full chain. The ramp could look something like: shadow the current loop owner, run the loop with training wheels (the loop manager reviews output and flags where taste is off), then take full ownership as the manager steps back. The shared organizational context, the system guardrails, skill files, and encoded judgment that every loop inherits, means the trainee doesn’t start from zero. They start from the accumulated taste of the institution.
+
+The more the organization invests in making its context explicit and portable, the lower the risk on any individual loop and the faster new people ramp.
+
+If the transpose compresses loops and agents handle execution, why have a company at all? Why not a single “make money” loop run by one person with a swarm of agents?
+
+You can. And for many problems, a solo operator with agents will outperform a team. But companies still exist for the things that don’t fit inside a single loop: pooled trust, legal liability, shared infrastructure, the cross-org context layer that makes every loop better. A cluster of individuals with taste, sharing context and compounding each other’s judgment, outperforms the same individuals operating independently.
+
+The size of a transposed company is something like:
+
+**Size = sum of all loops, where each loop is bounded by:**
+
+1. **The generalist bound.** Can you hire someone capable of closing the full loop with taste? The wider the loop, the rarer the person.
+
+2. **The human touchpoint floor.** How many steps in the loop require a human talking to another human? These are the execution steps agents can’t absorb.
+
+3. **The decision capacity ceiling.** How many high-judgment calls does the loop require per day, and how heavy are they? Weight and variety matter as much as count.
+
+4. **The volume threshold.** A support loop for 10 customers and one for 10,000 are different loops entirely. At volume, loops split into sub-verticals, each still owned end-to-end.
+
+5. **The authority surface.** Can the person actually close the loop? Deploy access, customer access, spending authority. Without these, wider ownership is just more steps in the same relay chain.
+
+6. **The shared surface.** How many dependencies does this loop share with other loops? A production database, a brand promise, a deployment pipeline: each creates a coordination edge. More loops sharing more surfaces means more governance overhead, even with zero handoffs within any single loop.
+
+The company ends up feeling smaller than its pre-transpose version, not because it necessarily has fewer people, but because each person is more autonomous and the coordination overhead between them drops. The “startup within a startup” cliche becomes more structurally real rather than aspirationally fake.
+
+The hiring question follows directly from the formula. In the old model, you hire to fill columns: another engineer, another designer, another sales rep. In CompanyT, you hire to widen rows: people who can span more of the loop with judgment, not just execution. The value of a hire is roughly how many columns they can cover with taste, multiplied by how many loops they can carry at once.
+
+The profile that thrives in a transposed org is the person who has built things end-to-end before, someone who has shipped a product, closed a deal, debugged a system, and talked to the customer[5](https://blog.sshh.io/p/the-transposed-organization#footnote-5-192525800). Builders, founders, people who’ve run their own thing. You’ll see companies [increasingly marketing to exactly this profile](https://ramp.com/careers), and it won’t just be for engineering roles. The revenue loop owner who can build their own demos, the support loop owner who can ship their own fixes.
+
+If you’re currently in a specialist role reading this, the question isn’t whether your function disappears; it’s whether you’re the person whose judgment becomes a loop, or the person whose execution becomes an agent. The path from specialist to loop owner is: widen.
+
+- **What infrastructure does CompanyT need?** The loop only works if agents can actually provide the specialist capabilities at every step. That means the right agent tooling, the right context systems, and the right permissions model that gives loop owners the authority to actually close their loops.
+
+- **Just how generalist can a person be?** The system creates incentives for maximal generalists, people who can close the widest possible loop with taste. But there’s presumably some bound on how many domains a person can hold enough judgment in simultaneously. Or maybe post-ai-neo-SaaS does just look like a group of micro-CEOs.
+
+- **Who owns organizational taste?** A company of micro-CEOs each closing their own loops will develop their own judgment about what good looks like. Some of that divergence is healthy: the support loop owner knows what good support feels like better than the exec does. But the product a company sells still needs to be cohesive (at least I think so). The customer shouldn’t experience three different philosophies depending on which loop they touch. What gets decided at the loop level versus the org level, and how you maintain a shared thesis across independent loop owners without re-introducing the coordination overhead you just eliminated, is a core architectural challenge of the transposed org.
+
+[1](https://blog.sshh.io/p/the-transposed-organization#footnote-anchor-1-192525800)
+
+I discuss this a bit in my more technical posts on [Building Multi-Agent Systems](https://blog.sshh.io/p/building-multi-agent-systems-part-c0c). People building on AI consistently underestimate the cross-domain expertise of LLMs while underestimating the coordination and confusion cost of co-execution. This post in some ways is my realization that this is true for AI-augmented human organizational design as well.
+
+[3](https://blog.sshh.io/p/the-transposed-organization#footnote-anchor-3-192525800)
+
+This isn’t a new aspiration. “Pizza teams”, “squads”, “microenterprises” all promised autonomous units within a larger org. Most delivered partial results with significant coordination tradeoffs. What’s structurally different now is that agents collapse the execution gap that previously required those units to either stay small and limited or grow and re-specialize. The loop owner has access to specialist execution without needing specialist headcount.
+
+[5](https://blog.sshh.io/p/the-transposed-organization#footnote-anchor-5-192525800)
+
+On top of generalization, I think adaptable is another key characteristic. Ideally what I call ‘[derivative thinkers](https://blog.sshh.io/i/185693126/find-derivative-thinkers)’.

@@ -95,7 +95,7 @@ def test_settings_use_lower_search_defaults() -> None:
 
     assert settings.search_num_results == 20
     assert settings.search_min_results_per_query == 10
-    assert settings.search_query_budget == 80
+    assert settings.search_query_budget == 40
     assert settings.semantic_dedupe_enabled is True
     assert settings.semantic_embedding_model_id == "Qwen/Qwen3-Embedding-0.6B"
     assert settings.semantic_query_similarity_threshold == 0.92

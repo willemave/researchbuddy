@@ -1,0 +1,59 @@
+{
+  "generated_at": "2026-04-10T01:47:46.855816+00:00",
+  "tool": "crawl4ai",
+  "mode": "extract-only",
+  "manifest": "/Users/willem/Development/researchbuddy/.benchmarks/results/20260409-184736/corpus.json",
+  "limit": 0,
+  "page_timeout_ms": 30000,
+  "headless": true,
+  "platform": {
+    "python": "3.13.12",
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "summary": {
+    "total": 4,
+    "successes": 4,
+    "failures": 0,
+    "mean_elapsed_ms": 2.2923227516002953,
+    "median_elapsed_ms": 1.5500415029237047,
+    "p95_elapsed_ms": 4.438728549575898,
+    "min_elapsed_ms": 1.1816670012194663,
+    "max_elapsed_ms": 4.8875409993343055,
+    "mean_markdown_chars": 2637.75
+  },
+  "results": [
+    {
+      "url": "https://www.youtube.com/watch?v=cv9xYnurGIc",
+      "mode": "extract-only",
+      "success": true,
+      "elapsed_ms": 4.8875409993343055,
+      "markdown_chars": 2659,
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=sni_-awZTgw",
+      "mode": "extract-only",
+      "success": true,
+      "elapsed_ms": 1.8954580009449273,
+      "markdown_chars": 2608,
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=-5_6HQR0WhA",
+      "mode": "extract-only",
+      "success": true,
+      "elapsed_ms": 1.1816670012194663,
+      "markdown_chars": 2629,
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=h98dLRJFHMM",
+      "mode": "extract-only",
+      "success": true,
+      "elapsed_ms": 1.204625004902482,
+      "markdown_chars": 2655,
+      "error": null
+    }
+  ]
+}

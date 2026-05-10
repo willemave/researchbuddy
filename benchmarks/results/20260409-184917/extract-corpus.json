@@ -1,0 +1,65 @@
+{
+  "generated_at": "2026-04-10T01:49:17.249819+00:00",
+  "db_path": "/Users/willem/Development/researchbuddy/data/researchbuddy.db",
+  "run_id": null,
+  "all_runs": true,
+  "require_html": true,
+  "total_fetched_urls": 11,
+  "sample_size": 6,
+  "entries": [
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.youtube.com/watch?v=z7T1pCxgvlA",
+      "title": "Why most AI products fail: Lessons from 50+ AI ... - YouTube",
+      "source_query": "Failure Modes: podcast interview AI product teams failure modes unclear ownership handoffs research engineering",
+      "domain": "www.youtube.com",
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/html/6c07189f77664e4d.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/6c07189f77664e4d.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+      "title": "If You Don\u2019t Understand AI Evals, Don\u2019t Build AI",
+      "source_query": "PM in AI: AI product management ambiguity roadmap evaluation customer discovery podcast interview",
+      "domain": "www.youtube.com",
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/html/95f838bf44f847f7.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/95f838bf44f847f7.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.youtube.com/shorts/z5YrGY-mNN0",
+      "title": "How Top US Engineers Stay Relevant in AI #podcast ... - YouTube",
+      "source_query": "Talent, Culture, and Leadership: podcast interview AI native engineering leadership hiring barbell talent mentorship junior engineers",
+      "domain": "www.youtube.com",
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/html/d70f53ff9d40e83e.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/d70f53ff9d40e83e.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.youtube.com/watch?v=ZuQHYTDDuTU",
+      "title": "Beyond the Pilot: The AI-Native Product Operating Model - YouTube",
+      "source_query": "Org Design Patterns: AI-native org design podcast research engineering product decision rights mission teams DRI interview",
+      "domain": "www.youtube.com",
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/html/7b9902608a02f7c9.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/7b9902608a02f7c9.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.youtube.com/watch?v=rzAGo_XML1U",
+      "title": "This AI Expert's Method Will Change How You Do Customer Research",
+      "source_query": "Research-Product Interface: AI product research engineering interface podcast founder interview translating research into roadmap experiments",
+      "domain": "www.youtube.com",
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/html/dc56af33752f4f22.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/dc56af33752f4f22.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.youtube.com/watch?v=cv9xYnurGIc",
+      "title": "Human in the Loop with Scale AI: Episode 1 - YouTube",
+      "source_query": "Interview Ready Synthesis: podcast interview AI product leaders organizational patterns human-in-the-loop autonomy evaluation culture",
+      "domain": "www.youtube.com",
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/html/de92ec57339831e3.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/de92ec57339831e3.md"
+    }
+  ]
+}

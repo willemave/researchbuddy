@@ -1,0 +1,14 @@
+Vanishing Gradients
+Hugo speaks with Ravin Kumar,*Senior Research Data Scientist at Google Labs. Ravin’s career has taken him from building rockets at SpaceX to driving data science and technology at Sweetgreen, and now to advancing generative AI research and applications at Google Labs and DeepMind. His multidisciplinary experience gives him a rare perspective on building AI systems that combine technical rigor with practical utility.
+In this episode, we dive into: • Ravin’s fascinating career path, including the skills and mindsets needed to work effectively with AI and machine learning models at different stages of the pipeline. • How to build generative AI systems that are scalable, reliable, and aligned with user needs. • Real-world applications of generative AI, such as using open weight models such as Gemma to help a bakery streamline operations—an example of delivering tangible business value through AI. • The critical role of UX in AI adoption, and how Ravin approaches designing tools like Notebook LM with the user journey in mind.
+We also include a live demo where Ravin uses Notebook LM to analyze my website, extract insights, and even generate a podcast-style conversation about me. While some of the demo is visual, much can be appreciated through audio, and we’ve added a link to the video in the show notes for those who want to see it in action. We’ve also included the generated segment at the end of the episode for you to enjoy.
+**LINKS**
+  * [The livestream on YouTube](https://www.youtube.com/live/ffS6NWqoo_k)
+  * [Ravin's GenAI Handbook](https://ravinkumar.com/GenAiGuidebook/book_intro.html)
+  * [Breadboard: A library for prototyping generative AI applications](https://breadboard-ai.github.io/breadboard/)
+
+
+As mentioned in the episode, Hugo is teaching a four-week course, **Building LLM Applications for Data Scientists and SWEs** , co-led with Stefan Krawczyk (Dagworks, ex-StitchFix). The course focuses on building scalable, production-grade generative AI systems, with hands-on sessions, $1,000+ in cloud credits, live Q&As, and guest lectures from industry experts.
+Listeners of Vanishing Gradients can get 25% off the course using [this special link](https://maven.com/hugo-stefan/building-llm-apps-ds-and-swe-from-first-principles?promoCode=VG25) or by applying the code VG25 at checkout.
+[llms](https://vanishinggradients.fireside.fm/tags/llms) [ai](https://vanishinggradients.fireside.fm/tags/ai) [machine learning](https://vanishinggradients.fireside.fm/tags/machine%20learning) [data science](https://vanishinggradients.fireside.fm/tags/data%20science)
+##### Social Network Quick Links

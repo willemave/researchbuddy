@@ -1,0 +1,95 @@
+![](https://arize.com/wp-content/themes/arize-2022/images/2025/listing/podcast/header-light.png) ![](https://arize.com/wp-content/themes/arize-2022/images/2025/listing/podcast/header-dark.png)
+
+## Top AI Podcasts for AI Engineers, Entrepreneurs, and Aspirers
+
+Essential Listening for AI Engineering and Industry Trends in 2026
+
+Host: Dwarkesh Patel
+
+**Why Listen**: Dwarkesh Patel’s podcast has quickly gained a reputation for engaging, in-depth conversations with some of the most influential figures in AI. He’s interviewed pioneers like Jeff Dean (Google Brain co-founder) and Mark Zuckerberg alongside rising stars in the field, often managing to extract fresh perspectives even from well-trodden topics. The strength of Dwarkesh’s approach lies in focusing on the intellectual underpinnings of AI research. Episodes don’t just rehash what a guest did; they explore the “why” behind AI breakthroughs, the thought processes of the innovators, and the implications of their work. For AI builders, this is both inspirational and educational. It’s a bit like attending a masterclass or a fireside chat with AI’s thought leaders. Dwarkesh asks the kind of sharp questions we might pose if we had an hour with these experts.
+
+## Latent Space: The AI Engineer Podcast
+
+Hosts: Alessio Fanelli and Shawn “Swyx” Wang
+
+**Why Listen**: Latent Space is a podcast dedicated to AI engineers eager to explore the evolving world of AI engineering. Each episode is a deep dive into the nuts and bolts of modern AI innovation – from dissecting foundation models and AI code generation to discussing multimodal systems and autonomous agents. The hosts aim to bridge the gap between cutting-edge research and real-world practice. If you want to hear how industry experts are building and deploying generative AI systems (and learn from their war stories), Latent Space delivers a unique blend of technical insight and forward-looking discussion. It’s essentially two builders geeking out about what’s under the hood of today’s AI – perfect for fellow builders.
+
+## Lex Fridman Podcast (AI Conversations)
+
+Host: Lex Fridman
+
+**Why Listen**: Lex Fridman’s podcast has become iconic in tech circles for its marathon deep-dive conversations about science and the nature of intelligence. Lex is an AI researcher at MIT, and many of his most notable episodes are with AI luminaries – think Yoshua Bengio on deep learning, Sam Altman on GPT-4, Yann LeCun on AI research directions, Andrej Karpathy on Tesla AI, and so on. The show spans beyond AI (philosophy, physics, history come up), but as an AI builder you’ll find an incredible archive of interviews with the very people pushing generative AI forward. Lex’s style is thoughtful and unhurried; he’ll spend 2–3 hours to really unpack a guest’s insights. This means you get much deeper context and philosophy than a typical chat show. It’s not unusual to hear discussions on the future of AGI, the ethics of AI, or the technical nuances of neural networks. If you want to hear uncut wisdom from AI pioneers, Lex Fridman’s podcast is the place – it’s essentially oral history in the making, delivered in an accessible conversational format.
+
+## No Priors
+
+Hosts: Sarah Guo and Elad Gil
+
+**Why Listen**: No Priors guides listeners through the AI revolution from a startup and investor perspective. Sarah Guo (VC at Conviction) and Elad Gil (serial entrepreneur and investor) host engaging discussions with leading AI researchers and founders. The show addresses big questions about where AI is heading – topics like how close we are to AGI, which markets are ripe for AI disruption, and how generative AI will reshape commerce, culture, and society. With their combined tech and business experience, Guo and Gil extract insights on both the technology and the market. This mix makes No Priors especially relevant to AI builders who are also entrepreneurially minded. You’ll hear cutting-edge AI concepts discussed in the context of real-world impact and opportunities. It’s like sitting in on a candid chat between a researcher and a VC about what’s hype, what’s real, and what’s coming next in AI.
+
+## Lenny's Podcast
+
+Lenny Rachitsky
+
+**Why Listen**: Lenny Rachitsky (an alum of AirBnB and Neustar) hosts this popular podcast at the intersection of AI and product management. While the show doesn’t cater exclusively to AI engineers, it caters to a growing class of vibe coders and AI PMs that are blending the line between product management and traditional software engineering. It also offers pretty spot-on career advice and TL;DRs on emerging techniques for building AI-native products.
+
+## The Cognitive Revolution
+
+Hosts: Nathan Labenz and Erik Torenberg
+
+**Why Listen**: The Cognitive Revolution is a biweekly podcast exploring the transformative potential of AI across industries. Nathan Labenz (a founder who built and sold an AI company) and Erik Torenberg (investor and tech commentator) interview builders, researchers, and investors leading the AI charge. The show keeps a broad audience in mind – from business leaders and policymakers to engineers – and unpacks the latest developments along with their far-reaching implications. Recent episodes have even delved into how politics and governance intersect with AI progress. For AI builders, this podcast offers a well-rounded perspective: technical breakthroughs, startup tactics, and policy considerations all get air time. It’s a great way to understand not just how to build with generative AI, but also the context in which you’re building (market trends, regulatory climate, etc.).
+
+## The TWIML AI Podcast (This Week in Machine Learning & AI)
+
+Host: Sam Charrington
+
+**Why Listen**: TWIML AI is one of the stalwarts in the AI podcast arena, and for good reason. Hosted by Sam Charrington, a respected analyst and community builder, this podcast brings top minds from the world of ML and AI to share insights. TWIML covers everything from the latest research breakthroughs to industry applications across healthcare, finance, robotics, and beyond. Importantly, the mission is to make AI accessible to a broad community of researchers, engineers, and tech-savvy business leaders. Notable episodes have featured people like Ben Goertzel discussing paths to AGI and OpenAI’s Greg Brockman on code generation advances. For builders, TWIML offers both breadth and depth: you might learn about a new algorithm one week and an implementation case study the next. It’s a fantastic way to stay informed on state-of-the-art developments and see how they translate into real-world impact.
+
+## The AI Podcast (NVIDIA)
+
+Host: Noah Kravitz
+
+**Why Listen**: NVIDIA’s long-running The AI Podcast is a biweekly series that explores how AI is transforming just about every industry. Each ~25 minute episode features “one person, one interview, one story,” often highlighting a unique or unexpected application of AI. Noah Kravitz interviews experts ranging from wildlife biologists using AI for conservation, to astrophysicists using AI to sift through cosmic data. For generative AI builders, this podcast offers a real-time oral history of AI’s impact. It’s acclaimed as one of the best AI podcasts and has over 3.4 million listeners. You won’t get hands-on coding tips here, but you will get inspiration and a broader view of AI’s possibilities. Hearing how others apply machine learning in creative ways might just spark an idea for your next project or help you explain AI’s value to stakeholders in relatable terms.
+
+## Practical AI
+
+Hosts: Chris Benson and Daniel Whitenack
+
+**Why Listen**: As its name suggests, Practical AI is all about making artificial intelligence practical, productive, and accessible for everyone. This weekly podcast breaks down complex AI topics into approachable conversations. Benson (an AI strategist) and Whitenack (a data scientist) cover a broad spectrum – from machine learning and deep learning fundamentals to MLOps and large language models. The focus is on real-world use cases and implementations: how are organizations using AI today, and what can you learn from their experiences? The hosts frequently bring on engineers, data scientists, and industry experts to share project stories and lessons learned. For an AI builder, Practical AI feels like a weekly refresher or mini-workshop; you’ll pick up new ideas about tools, best practices, and ways to solve everyday AI challenges. It’s especially useful if you appreciate clear explanations without excessive jargon.
+
+## Eye on AI
+
+Host: Craig S. Smith
+
+**Why Listen**: Eye on AI is a biweekly podcast hosted by Craig S. Smith, a former New York Times correspondent, that puts the latest AI developments into a broader context. Smith interviews guests who are making waves in AI and probes both the technology and its implications. Episodes cover topics like AI-powered code generation, AI in music, and the ethical considerations of advanced AI models. One standout episode featured Ilya Sutskever (OpenAI’s co-founder) discussing GPT-4, the future of large language models, and the societal impacts of AI. For builders, Eye on AI provides a balanced diet of technical insight and reflection on consequences. It’s helpful to step back from pure engineering once in a while and consider how our AI applications fit into the bigger picture. This podcast helps you do exactly that – keeping “incremental advances” in perspective and exploring global implications.
+
+## All-In Podcast
+
+Hosts: Chamath Palihapitiya, Jason Calacanis, David Sacks, David Friedberg
+
+**Why Listen**: All-In is a roundtable-style podcast where four well-known tech investors dissect entrepreneurship, tech trends, market news, and lately — be warned — politics! While it’s not solely about AI, in the past year AI has become a constant topic of discussion on the show. The hosts – Chamath, Jason, David S., and Friedberg – bring candid (and sometimes very spicy) takes on how generative AI is shaking up startups, big tech, and society. For builders, All-In offers valuable perspective on the business and investment side of AI: how VCs are thinking about the AI boom, which areas are getting funded, and how AI advancements could translate into new opportunities or threats. The conversations are unfiltered and insightful, ranging from technical breakthroughs to ethical dilemmas to the latest AI rumors in Silicon Valley. Think of it as listening in on what the tech elite chat about over dinner. Love them or not, these personalities are influential among the builder community, and their take can help you anticipate industry directions.
+
+## Machine Learning Street Talk (MLST)
+
+Hosts: Dr. Tim Scarfe and colleagues (Keith Duggar, etc.)
+
+**Why Listen**: Machine Learning Street Talk proudly bills itself as the “top technical AI podcast” on Spotify and YouTube. This is the podcast for those who want to nerd out hard on AI theory and research. Tim Scarfe and his co-hosts (who include researchers and engineers) often tackle advanced topics: dissecting seminal AI research papers, debating AI alignment and consciousness, reviewing the latest large model capabilities, and more. They’ve been covering many concepts years before they went mainstream, from transformers and GPT-n to neurosymbolic AI. The discussions are unscripted and in-depth, frequently crossing into philosophical territory. As a builder, MLST can help you understand the cutting edge (and the limitations) of generative AI techniques. It’s like sitting in on a grad-level lab meeting or a heated Reddit debate among experts – you’ll gain technical nuance and a critical perspective. Be prepared for occasional divergences into theory, but that’s part of the charm. If you want to keep your finger on the pulse of AI research and enjoy intellectual banter, MLST is a gem.
+
+## Last Week in AI
+
+Hosts: Andrey Kurenkov and Jeremie Harris
+
+**Why Listen**: Keeping up with the AI news deluge can feel like chasing lightning. Last Week in AI is here to help. This is a biweekly roundup that delivers a comprehensive yet digestible summary of the most important AI news and research from the past week. The hosts Kurenkov (also associated with The Gradient) and Harris discuss breakthroughs in ML, product releases, policy moves, and ethical debates – basically anything that made AI headlines. They don’t just read the news; they add insightful commentary on what these developments mean for the future. For an AI builder, this podcast is a convenient way to stay informed without spending hours scrolling forums or Twitter. In one episode you might catch up on the latest GPT-4 update, a new open-source model release, an AI ethics controversy, and a notable research paper – all with the hosts’ perspective on why it matters.
+
+## AI in Business (Emerj)
+
+Host: Daniel Faggella
+
+**Why Listen**: Hosted by Emerj’s CEO Dan Faggella, AI in Business zeroes in on the intersection of AI technology and enterprise strategy. This podcast is tailored for non-technical leaders, but it’s equally valuable for builders who need to align their projects with business goals. Each week, Faggella interviews AI executives from Fortune 500s or founders of AI startups to uncover trends, use-cases, and best practices for practical AI adoption. The discussions might cover how a bank is using an AI agent to automate customer service, or how a supply chain firm deploys AI to better forecast sales – always with an eye on ROI and strategic fit. As an AI developer, listening to AI in Business can give you insight into the challenges and expectations your clients or bosses might have. It offers a window into how decision-makers think about AI (“What’s the ROI? What’s the risk?”) and what problems companies are trying to solve with generative AI. In short, it helps translate between the language of tech and the language of business, which is crucial if you’re building AI solutions that need to prove value.
+
+## Hard Fork
+
+Hosts: Kevin Roose and Casey Newton
+
+**Why Listen**: Hard Fork isn’t exclusively about AI, but it has become the weekly tech news podcast with a huge focus on AI’s rapid rise. This award-winning New York Times show is hosted by tech journalists Kevin Roose and Casey Newton. They offer entertaining yet fairly objective commentary on the latest in tech – and lately, that means a lot of AI coverage. Hard Fork excels at succinctly analyzing news without hype or doom, bringing in guests from tech reporters to researchers to add insight.
+
+![SVG Image](data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjUgMjQiIHdpZHRoPSIyNSIgaGVpZ2h0PSIyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTE5LjUgNi40MUwxOC4wOSA1TDEyLjUgMTAuNTlMNi45MSA1TDUuNSA2LjQxTDExLjA5IDEyTDUuNSAxNy41OUw2LjkxIDE5TDEyLjUgMTMuNDFMMTguMDkgMTlMMTkuNSAxNy41OUwxMy45MSAxMkwxOS41IDYuNDFaIiBmaWxsPSIjMTIxMjIxIiAvPgogICAgICAgICAgICAgICAgPC9zdmc+)

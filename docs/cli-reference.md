@@ -4,83 +4,72 @@ Primary entry points:
 - Installed command: `researchbuddy`
 - Local wrapper: `scripts/researchbuddy`
 
-## `researchbuddy run "<prompt>" [--mode auto|product|restaurant|research] [--stats]`
-Execute a new one-shot research run and print the synthesis.
+## `researchbuddy start "<prompt>" [--mode auto|product|restaurant|research] [--json]`
+Start a new research prompt in the background and make it current.
 
-- Runs planning, search, crawl, synthesis, and writes artifacts under `data/storage/<run_id>/`.
-- Use `--mode` to force product-review, restaurant, or general-research behavior instead of automatic prompt inference.
-- Use `--stats` when you also want the fetched/failed URL counts printed in the terminal output.
-- Best when you want a final answer in a single command.
-
-Example:
-- `researchbuddy run "best dishwasher for quiet apartment"`
-- `researchbuddy run "best sushi in portland" --mode restaurant`
-
-## `researchbuddy inspect <run_id> [--sources] [--lanes] [--transcripts]`
-Inspect saved artifacts for a run without re-running the workflow.
-
-- Prints the saved run metadata and output directory.
-- Use `--sources` to list stored source URLs and statuses.
-- Use `--lanes` to list saved lane markdown files.
-- Use `--transcripts` to list saved YouTube and podcast transcript metadata.
+- Refuses to start when another ResearchBuddy run is already active.
+- Returns the run ID, PID, log path, and exact status/watch commands.
+- Writes artifacts under `data/storage/<run_id>/`.
+- Use `--json` when another agent or script needs the startup response.
+- Use `--mode` to force product-review, restaurant, or general-research behavior.
+- Use `--prompt-file` only when you explicitly want to read the prompt from a UTF-8 text file.
 
 Example:
-- `researchbuddy inspect abc123 --sources --transcripts`
+- `researchbuddy start "best dishwasher for quiet apartment"`
+- `researchbuddy start "best sushi in portland" --mode restaurant`
 
-## `researchbuddy followup <run_id> "<question>"`
-Answer a follow-up question from a saved run without re-crawling.
+## `researchbuddy followup "<question>" [--run-id RUN_ID] [--result-file answer.txt]`
+Answer a follow-up question from the current completed run.
 
-- Use `researchbuddy runs` first when you need to look up the saved run ID.
-- Loads persisted follow-up memory from the saved session.
-- Useful for previous-session Q&A in scripts or agent workflows.
-
-Example:
-- `researchbuddy followup abc123 "What were the main warranty concerns?"`
-
-## `researchbuddy commands [--agent]`
-Print a compact command reference.
-
-- Use `--agent` for a flatter, machine-friendly reference format.
-- Points to the markdown reference files under `docs/`.
+- Defaults to the current run selected by `researchbuddy start`.
+- Use `--run-id` only when you intentionally want an older run.
+- Loads persisted follow-up memory and does not re-crawl sources.
+- Prints the answer to stdout and can also write it to `--result-file`.
 
 Example:
-- `researchbuddy commands --agent`
+- `researchbuddy followup "What were the main warranty concerns?"`
 
-## `researchbuddy transcribe <source> [--type auto|youtube|podcast|audio]`
-Transcribe one local audio file or supported URL with local Whisper.
+## `researchbuddy status [--run-id RUN_ID] [--json]`
+Print status for the current run.
 
-- Accepts local audio files, YouTube URLs, and podcast URLs.
-- Use `--type` when auto-detection is ambiguous.
-- Prints the transcript to stdout and can also write it to `--result-file`.
-
-Example:
-- `researchbuddy transcribe ./episode.mp3 --type audio`
-
-## `researchbuddy setup [--skip-playwright]`
-Prepare the local machine to run the CLI, then rerun doctor checks.
-
-- Persists detected search-provider settings into the local `.env` when possible.
-- Creates the storage/database paths and optionally installs Playwright browsers.
+- Defaults to the current run selected by `researchbuddy start`.
+- Shows run ID, status, PID health, URL counts, output directory, log path, and synthesis path when available.
+- Use `--json` for scripts and agents.
 
 Example:
-- `researchbuddy setup`
+- `researchbuddy status`
+- `researchbuddy status --json`
+
+## `researchbuddy watch [--run-id RUN_ID] [--interval SECONDS] [--timeout SECONDS]`
+Watch the current run until it completes or fails.
+
+- Defaults to the current run selected by `researchbuddy start`.
+- Prints a compact status block and streams worker log output.
+- Exits non-zero when the worker process disappears while the run is still in progress.
+- Exits zero when the run completes and non-zero when it fails.
+
+Example:
+- `researchbuddy watch`
+- `researchbuddy watch --interval 2 --timeout 900`
 
 ## `researchbuddy doctor [--fix] [--skip-playwright]`
 Check whether the current machine is ready to run the CLI, and optionally fix local setup gaps.
 
 - Validates required API keys, required binaries, Codex auth, Playwright browser launch, and writable storage paths.
 - Use `--fix` to run setup before the final report when local dependencies need remediation.
-- Use this before handing the tool to another bot or promoting a runtime to production.
+- Reports current-run health and repairs stale in-progress run records when `--fix` is used.
 
 Example:
 - `researchbuddy doctor`
 - `researchbuddy doctor --fix`
 
-## `researchbuddy tap export [--output-dir PATH]`
-Generate a Homebrew tap repository for publishing ResearchBuddy.
+## `researchbuddy list [--limit 20] [--json]`
+List saved prompts and mark the current run.
 
-- Writes `Formula/`, `README.md`, a validation workflow, and a tap-maintainer skill.
-- Defaults to the GitHub origin remote and writes to `../homebrew-researchbuddy` when possible.
+- Reads the recent run history from the local SQLite database.
+- Outputs run ID, created time, status, and a truncated prompt summary.
+- Marks the current run with `*` in human output.
+- Use `--json` for scripts and agents.
 
 Example:
-- `researchbuddy tap export`
+- `researchbuddy list --limit 10`

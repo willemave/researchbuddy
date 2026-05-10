@@ -1,0 +1,75 @@
+{
+  "generated_at": "2026-04-10T01:49:55.426917+00:00",
+  "tool": "crawl4ai",
+  "mode": "extract-only",
+  "manifest": "/Users/willem/Development/researchbuddy/.benchmarks/results/20260409-184917/extract-corpus.json",
+  "limit": 0,
+  "page_timeout_ms": 30000,
+  "headless": true,
+  "platform": {
+    "python": "3.13.12",
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "summary": {
+    "total": 6,
+    "successes": 6,
+    "failures": 0,
+    "mean_elapsed_ms": 1.889527838405532,
+    "median_elapsed_ms": 1.5728750004200265,
+    "p95_elapsed_ms": 3.5580937401391566,
+    "min_elapsed_ms": 0.8127920154947788,
+    "max_elapsed_ms": 3.96137498319149,
+    "mean_markdown_chars": 2307.5
+  },
+  "results": [
+    {
+      "url": "https://www.youtube.com/watch?v=z7T1pCxgvlA",
+      "mode": "extract-only",
+      "success": true,
+      "elapsed_ms": 3.96137498319149,
+      "markdown_chars": 2646,
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+      "mode": "extract-only",
+      "success": true,
+      "elapsed_ms": 2.348250010982156,
+      "markdown_chars": 2609,
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/shorts/z5YrGY-mNN0",
+      "mode": "extract-only",
+      "success": true,
+      "elapsed_ms": 1.861541997641325,
+      "markdown_chars": 667,
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ZuQHYTDDuTU",
+      "mode": "extract-only",
+      "success": true,
+      "elapsed_ms": 1.0690000199247152,
+      "markdown_chars": 2639,
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=rzAGo_XML1U",
+      "mode": "extract-only",
+      "success": true,
+      "elapsed_ms": 1.284208003198728,
+      "markdown_chars": 2625,
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=cv9xYnurGIc",
+      "mode": "extract-only",
+      "success": true,
+      "elapsed_ms": 0.8127920154947788,
+      "markdown_chars": 2659,
+      "error": null
+    }
+  ]
+}

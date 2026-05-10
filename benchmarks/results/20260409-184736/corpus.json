@@ -1,0 +1,46 @@
+{
+  "generated_at": "2026-04-10T01:47:36.274939+00:00",
+  "db_path": "/Users/willem/Development/researchbuddy/data/researchbuddy.db",
+  "run_id": "31d109b32680471c90c7d29197778071",
+  "require_html": true,
+  "total_fetched_urls": 6,
+  "sample_size": 4,
+  "entries": [
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.youtube.com/watch?v=cv9xYnurGIc",
+      "title": "Human in the Loop with Scale AI: Episode 1 - YouTube",
+      "source_query": "Interview Ready Synthesis: podcast interview AI product leaders organizational patterns human-in-the-loop autonomy evaluation culture",
+      "domain": "www.youtube.com",
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/html/de92ec57339831e3.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/de92ec57339831e3.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.youtube.com/watch?v=sni_-awZTgw",
+      "title": "AI Agent Development Tradeoffs You NEED to Know - YouTube",
+      "source_query": "Research To Product Transfer: podcast interview research to product transfer AI teams handoffs ownership evaluation loops",
+      "domain": "www.youtube.com",
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/html/8aa043bea84d6018.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/8aa043bea84d6018.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.youtube.com/watch?v=-5_6HQR0WhA",
+      "title": "The State of AI Adoption in Engineering Teams \u2014 with Matt McClernan",
+      "source_query": "Large Company Patterns: YouTube interview large AI lab product engineering org design research product engineering collaboration vertical horizontal teams",
+      "domain": "www.youtube.com",
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/html/b2ef31db26c3a3a0.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/b2ef31db26c3a3a0.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.youtube.com/watch?v=h98dLRJFHMM",
+      "title": "Inside Reducto: From Pivot to Fortune 10 Customers, How to Build AI Products | CEO Adit Abraham",
+      "source_query": "Smaller Company Operator Voices: AI startup founder podcast product engineering org lessons learned small elite team research culture",
+      "domain": "www.youtube.com",
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/html/cc84d5a777fb3170.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/cc84d5a777fb3170.md"
+    }
+  ]
+}

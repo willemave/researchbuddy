@@ -1,0 +1,18 @@
+[package]
+name = "researchbuddy-rust-composed-bench"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4.6", features = ["derive"] }
+chromiumoxide = "0.9"
+dom_smoothie = "0.17"
+futures-util = "0.3"
+html-to-markdown-rs = "3.1"
+reqwest = { version = "0.13", default-features = false, features = ["http2", "charset", "rustls"] }
+rusty_ytdl = { version = "0.7.4", default-features = false, features = ["rustls-tls", "search"] }
+scraper = "0.24"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["fs", "macros", "rt-multi-thread", "time"] }

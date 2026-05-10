@@ -190,6 +190,9 @@ def test_followup_command_answers_previous_session(monkeypatch, tmp_path: Path) 
         assert output_dir is None
         return report, state
 
+    async def fake_current(_db_path):  # noqa: ANN001, ANN202
+        return "run-123"
+
     async def fake_ensure_memory(_state):  # noqa: ANN001, ANN202
         return memory
 
@@ -199,11 +202,12 @@ def test_followup_command_answers_previous_session(monkeypatch, tmp_path: Path) 
         assert model_name is None
         return "Answer text"
 
+    monkeypatch.setattr(cli, "fetch_current_run_id", fake_current)
     monkeypatch.setattr(cli, "_load_followup_state_for_run", fake_load_state)
     monkeypatch.setattr(cli, "_ensure_followup_memory", fake_ensure_memory)
     monkeypatch.setattr(cli, "answer_followup_question", fake_answer)
 
-    result = runner.invoke(cli.app, ["followup", "run-123", "How is lumbar support?"])
+    result = runner.invoke(cli.app, ["followup", "How is lumbar support?"])
 
     assert result.exit_code == 0
     assert "Answer text" in result.stdout
@@ -259,6 +263,7 @@ def test_followup_command_accepts_question_file_and_result_file(
         cli.app,
         [
             "followup",
+            "--run-id",
             "run-123",
             "--question-file",
             str(question_path),
@@ -281,19 +286,30 @@ def test_followup_command_rejects_empty_question_file(monkeypatch, tmp_path: Pat
 
     result = runner.invoke(
         cli.app,
-        ["followup", "run-123", "--question-file", str(question_path)],
+        ["followup", "--run-id", "run-123", "--question-file", str(question_path)],
     )
 
     assert result.exit_code == 2
     assert "question file is empty:" in result.output
-    assert 'Usage: researchbuddy followup <run_id> "<question>" [--result-file answer.txt]' in result.output
+    assert 'Usage: researchbuddy followup "<question>" [--run-id RUN_ID]' in result.output
     assert question_path.name in result.output
 
 
-def test_followup_command_missing_run_id_shows_guidance() -> None:
+def test_followup_command_missing_question_shows_guidance() -> None:
     result = runner.invoke(cli.app, ["followup"])
 
     assert result.exit_code == 2
-    assert "Missing run_id. Use `researchbuddy runs` to find a saved run first." in result.output
-    assert "Usage: researchbuddy followup [OPTIONS] RUN_ID [QUESTION]" in result.output
-    assert "researchbuddy runs" in result.output
+    assert "Missing question." in result.output
+    assert 'Usage: researchbuddy followup "<question>" [--run-id RUN_ID]' in result.output
+
+
+def test_followup_command_without_current_run_exits(monkeypatch) -> None:
+    async def fake_current(_db_path):  # noqa: ANN001, ANN202
+        return None
+
+    monkeypatch.setattr(cli, "fetch_current_run_id", fake_current)
+
+    result = runner.invoke(cli.app, ["followup", "How is lumbar support?"])
+
+    assert result.exit_code == 1
+    assert "No current run." in result.stdout

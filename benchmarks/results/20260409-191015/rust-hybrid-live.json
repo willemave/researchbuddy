@@ -1,0 +1,1486 @@
+{
+  "tool": "rust-hybrid",
+  "mode": "live",
+  "manifest": "benchmarks/results/20260409-191015/live-corpus.json",
+  "markdown_dir": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown",
+  "timeout_ms": 30000,
+  "summary": {
+    "total": 100,
+    "successes": 100,
+    "failures": 0,
+    "mean_elapsed_ms": 2420.06140205,
+    "median_elapsed_ms": 890.4464375,
+    "p95_elapsed_ms": 4049.4575214499996,
+    "min_elapsed_ms": 48.535957999999994,
+    "max_elapsed_ms": 40271.867709,
+    "mean_markdown_chars": 17958.95
+  },
+  "results": [
+    {
+      "url": "https://www.youtube.com/watch?v=z7T1pCxgvlA",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "youtube-rusty_ytdl",
+      "success": true,
+      "elapsed_ms": 968.9665,
+      "markdown_chars": 5097,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/000-www_youtube_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "youtube-rusty_ytdl",
+      "success": true,
+      "elapsed_ms": 924.7505,
+      "markdown_chars": 4180,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/001-www_youtube_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/shorts/z5YrGY-mNN0",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "youtube-rusty_ytdl",
+      "success": true,
+      "elapsed_ms": 796.002875,
+      "markdown_chars": 1024,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/002-www_youtube_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ZuQHYTDDuTU",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "youtube-rusty_ytdl",
+      "success": true,
+      "elapsed_ms": 856.12,
+      "markdown_chars": 2964,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/003-www_youtube_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=rzAGo_XML1U",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "youtube-rusty_ytdl",
+      "success": true,
+      "elapsed_ms": 873.410666,
+      "markdown_chars": 3606,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/004-www_youtube_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=cv9xYnurGIc",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "youtube-rusty_ytdl",
+      "success": true,
+      "elapsed_ms": 790.6800000000001,
+      "markdown_chars": 1741,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/005-www_youtube_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=sni_-awZTgw",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "youtube-rusty_ytdl",
+      "success": true,
+      "elapsed_ms": 746.167959,
+      "markdown_chars": 3004,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/006-www_youtube_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=-5_6HQR0WhA",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "youtube-rusty_ytdl",
+      "success": true,
+      "elapsed_ms": 827.866125,
+      "markdown_chars": 1647,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/007-www_youtube_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=h98dLRJFHMM",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "youtube-rusty_ytdl",
+      "success": true,
+      "elapsed_ms": 907.482209,
+      "markdown_chars": 2470,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/008-www_youtube_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ifPjwirY8kY",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "youtube-rusty_ytdl",
+      "success": true,
+      "elapsed_ms": 969.3123340000001,
+      "markdown_chars": 2012,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/009-www_youtube_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=B26CwKm5C1k",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "youtube-rusty_ytdl",
+      "success": true,
+      "elapsed_ms": 1089.631334,
+      "markdown_chars": 4778,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/010-www_youtube_com.md",
+      "error": null
+    },
+    {
+      "url": "https://podscan.fm/podcasts/lennys-podcast-product-career-growth/episodes/the-100-person-ai-lab-that-became-anthropic-and-googles-secret-weapon-edwin-chen-surge-ai",
+      "domain": "podscan.fm",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 493.681333,
+      "markdown_chars": 3431,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/011-podscan_fm.md",
+      "error": null
+    },
+    {
+      "url": "https://podcasts.apple.com/us/podcast/why-most-ai-products-fail-lessons-from-50-ai-deployments/id1627920305?i=1000744678894",
+      "domain": "podcasts.apple.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 2835.21875,
+      "markdown_chars": 5864,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/012-podcasts_apple_com.md",
+      "error": null
+    },
+    {
+      "url": "https://pod.wave.co/podcast/lennys-podcast-product-career-growth-b65486a6-7cff-4966-bbea-2bc239e90aa4/what-openai-and-google-engineers-learned-deploying-50-ai-products-in-production",
+      "domain": "pod.wave.co",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 26784.789541,
+      "markdown_chars": 204,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/013-pod_wave_co.md",
+      "error": null
+    },
+    {
+      "url": "https://getpodcast.com/podcast/the-engineering-leadership-podcast/from-research-lab-to-record-breaking-product-how-openai-engineered-for_1d326d694f",
+      "domain": "getpodcast.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 230.283333,
+      "markdown_chars": 6071,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/014-getpodcast_com.md",
+      "error": null
+    },
+    {
+      "url": "https://launchpod.logrocket.com/linear-secret-building-powerful-ai-products-nan-yu",
+      "domain": "launchpod.logrocket.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 376.692708,
+      "markdown_chars": 2354,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/015-launchpod_logrocket_com.md",
+      "error": null
+    },
+    {
+      "url": "https://open.spotify.com/show/0MKtLYdJs6CABS9wnNZPUx",
+      "domain": "open.spotify.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 3023.011541,
+      "markdown_chars": 38248,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/016-open_spotify_com.md",
+      "error": null
+    },
+    {
+      "url": "https://creators.spotify.com/pod/profile/engineeringleadership/episodes/Building-Autonomous-Teams--Engineering-Career-Ladders-with-Sri-Viswanath-65-e18ko44",
+      "domain": "creators.spotify.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "browser-readability",
+      "success": true,
+      "elapsed_ms": 3262.961667,
+      "markdown_chars": 139261,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/017-creators_spotify_com.md",
+      "error": null
+    },
+    {
+      "url": "https://sfelc.com/podcasts",
+      "domain": "sfelc.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 307.293584,
+      "markdown_chars": 54319,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/018-sfelc_com.md",
+      "error": null
+    },
+    {
+      "url": "https://vanishinggradients.fireside.fm/39",
+      "domain": "vanishinggradients.fireside.fm",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 335.738625,
+      "markdown_chars": 2365,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/019-vanishinggradients_fireside_fm.md",
+      "error": null
+    },
+    {
+      "url": "https://fundbuildscale.podbean.com/e/building-an-enterprise-ai-startup-from-day-zero/",
+      "domain": "fundbuildscale.podbean.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 514.178,
+      "markdown_chars": 2686,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/020-fundbuildscale_podbean_com.md",
+      "error": null
+    },
+    {
+      "url": "https://nzpod.co.nz/podcast/lenny-s-podcast-product-growth-career/why-most-ai-products-fail-lessons-from-50-ai-deplo",
+      "domain": "nzpod.co.nz",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 2384.560541,
+      "markdown_chars": 6182,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/021-nzpod_co_nz.md",
+      "error": null
+    },
+    {
+      "url": "https://plinkhq.com/i/1627920305/e/1000744678894",
+      "domain": "plinkhq.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 1059.401583,
+      "markdown_chars": 10242,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/022-plinkhq_com.md",
+      "error": null
+    },
+    {
+      "url": "https://aireadyrva.com/podcast",
+      "domain": "aireadyrva.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-metadata",
+      "success": true,
+      "elapsed_ms": 4047.929709,
+      "markdown_chars": 258,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/023-aireadyrva_com.md",
+      "error": null
+    },
+    {
+      "url": "https://arize.com/ai-podcasts/",
+      "domain": "arize.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 282.196917,
+      "markdown_chars": 14898,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/024-arize_com.md",
+      "error": null
+    },
+    {
+      "url": "https://clarivate.com/blog/demonstrating-real-world-outcomes-and-the-future-of-research-evaluation-podcast",
+      "domain": "clarivate.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 2373.587458,
+      "markdown_chars": 3365,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/025-clarivate_com.md",
+      "error": null
+    },
+    {
+      "url": "https://dexibit.com/resource-types/podcast/",
+      "domain": "dexibit.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 439.580417,
+      "markdown_chars": 48296,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/026-dexibit_com.md",
+      "error": null
+    },
+    {
+      "url": "https://en.zarza.com/podcasts/machine-learning-engineered-1064836/episodio/managing-data-science-teams-and-hiring-machine-learning-engineers-with-harikrishna-narayanan-yc-stealth-startup",
+      "domain": "en.zarza.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 462.154833,
+      "markdown_chars": 1781,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/027-en_zarza_com.md",
+      "error": null
+    },
+    {
+      "url": "https://highsignal.fireside.fm/35",
+      "domain": "highsignal.fireside.fm",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 583.978125,
+      "markdown_chars": 2541,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/028-highsignal_fireside_fm.md",
+      "error": null
+    },
+    {
+      "url": "https://leadwithaipodcast.com/blog/he-built-an-ai-interviewer-that-found-the-best-candidate-out-of-1200-and-no-human-would-have-spotted-them-1",
+      "domain": "leadwithaipodcast.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 1655.030416,
+      "markdown_chars": 8096,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/029-leadwithaipodcast_com.md",
+      "error": null
+    },
+    {
+      "url": "https://metacast.app/podcast/the-engineering-leadership-podcast/hereHPAV",
+      "domain": "metacast.app",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 308.123333,
+      "markdown_chars": 1038,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/030-metacast_app.md",
+      "error": null
+    },
+    {
+      "url": "https://music.amazon.com/podcasts/9cd1a9fe-22c4-4a85-9d5a-f2fb74176c9f/ai-with-bry-podcast",
+      "domain": "music.amazon.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 3082.4764999999998,
+      "markdown_chars": 105,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/031-music_amazon_com.md",
+      "error": null
+    },
+    {
+      "url": "https://podcast.pragmaticmarketing.com/e/building-the-products-of-the-future-with-ai-with-jonathan-evens-of-google-deepmind/",
+      "domain": "podcast.pragmaticmarketing.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 417.695417,
+      "markdown_chars": 1729,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/032-podcast_pragmaticmarketing_com.md",
+      "error": null
+    },
+    {
+      "url": "https://podscript.ai/podcasts/lex-fridman-podcast/367-sam-altman-openai-ceo-on-gpt-4-chatgpt-and-the-future-of-ai/",
+      "domain": "podscript.ai",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 1358.647333,
+      "markdown_chars": 148517,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/033-podscript_ai.md",
+      "error": null
+    },
+    {
+      "url": "https://shapeoftomorrow.substack.com/p/podcast-episode-174-your-ai-isnt",
+      "domain": "shapeoftomorrow.substack.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 2850.4215830000003,
+      "markdown_chars": 1622,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/034-shapeoftomorrow_substack_com.md",
+      "error": null
+    },
+    {
+      "url": "https://thecuberesearch.com/podcasts/appdevangle-where-innovation-meets-insight-in-application-development/",
+      "domain": "thecuberesearch.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 448.387208,
+      "markdown_chars": 99604,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/035-thecuberesearch_com.md",
+      "error": null
+    },
+    {
+      "url": "https://thehotfixpodcast.substack.com/p/we-spent-years-on-an-ai-featureand",
+      "domain": "thehotfixpodcast.substack.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 3099.8080840000002,
+      "markdown_chars": 3759,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/036-thehotfixpodcast_substack_com.md",
+      "error": null
+    },
+    {
+      "url": "https://uk-podcasts.co.uk/podcast/deepmind-the-podcast/gemini-2-0-and-the-evolution-of-agentic-ai-with-or",
+      "domain": "uk-podcasts.co.uk",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "browser-readability",
+      "success": true,
+      "elapsed_ms": 2467.961083,
+      "markdown_chars": 202,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/037-uk-podcasts_co_uk.md",
+      "error": null
+    },
+    {
+      "url": "https://www.airealizedsummit.com/podcast",
+      "domain": "www.airealizedsummit.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 847.658625,
+      "markdown_chars": 51741,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/038-www_airealizedsummit_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.earley.com/insights/earley-ai-podcast-episode-27-gordon-hart",
+      "domain": "www.earley.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 260.118542,
+      "markdown_chars": 29070,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/039-www_earley_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.edisonresearch.com/is-ai-the-newest-talent-in-podcast-narration/",
+      "domain": "www.edisonresearch.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 356.938042,
+      "markdown_chars": 2034,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/040-www_edisonresearch_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.it-labs.com/podcast-how-to-structure-a-growing-ai-company-with-lightricks-co-founder-cto-yaron-inger/",
+      "domain": "www.it-labs.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "browser-metadata",
+      "success": true,
+      "elapsed_ms": 2481.894542,
+      "markdown_chars": 139,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/041-www_it-labs_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.ivoox.com/en/ep-83-owning-the-system-of-record-ai-native-audios-mp3_rf_171247104_1.html",
+      "domain": "www.ivoox.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 1083.000084,
+      "markdown_chars": 1330,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/042-www_ivoox_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.orinococomms.com/research-comms-blog-podcast/professor-mark-reed",
+      "domain": "www.orinococomms.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 499.82433399999996,
+      "markdown_chars": 15592,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/043-www_orinococomms_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.podcast.de/episode/696081238/012-successfully-defining-okrs-with-the-help-of-the-ai-okr-coach-with-kathrin-falkenstein-notebooklm-version",
+      "domain": "www.podcast.de",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 946.427375,
+      "markdown_chars": 21008,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/044-www_podcast_de.md",
+      "error": null
+    },
+    {
+      "url": "https://www.thoughtspot.com/data-and-ai-chief/podcast",
+      "domain": "www.thoughtspot.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 410.316459,
+      "markdown_chars": 97713,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/045-www_thoughtspot_com.md",
+      "error": null
+    },
+    {
+      "url": "https://podscan.fm/podcasts/the-engineering-leadership-podcast/episodes/how-openais-engineering-org-is-reshaping-teams-roles-and-workflows-w-sulman-choudhry-250",
+      "domain": "podscan.fm",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 330.586333,
+      "markdown_chars": 10744,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/046-podscan_fm.md",
+      "error": null
+    },
+    {
+      "url": "https://podcasts.apple.com/us/podcast/the-engineering-leadership-podcast/id1481996448",
+      "domain": "podcasts.apple.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 3393.051625,
+      "markdown_chars": 6302,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/047-podcasts_apple_com.md",
+      "error": null
+    },
+    {
+      "url": "https://pod.wave.co/podcast/lennys-podcast-product-career-growth/why-ai-evals-are-the-hottest-new-skill-for-product-builders-hamel-husain-shreya-shankar-creators-of-",
+      "domain": "pod.wave.co",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 33029.058915999994,
+      "markdown_chars": 204,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/048-pod_wave_co.md",
+      "error": null
+    },
+    {
+      "url": "https://getpodcast.com/podcast/the-engineering-leadership-podcast/how-openais-engineering-org-is-reshaping-teams-roles-and-workflows-w-s_4f399d8b89",
+      "domain": "getpodcast.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 48.535957999999994,
+      "markdown_chars": 4818,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/049-getpodcast_com.md",
+      "error": null
+    },
+    {
+      "url": "http://launchpod.logrocket.com/how-to-avoid-ai-fomo-like-patagonia-angela-clark",
+      "domain": "launchpod.logrocket.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 333.47608299999996,
+      "markdown_chars": 2958,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/050-launchpod_logrocket_com.md",
+      "error": null
+    },
+    {
+      "url": "https://open.spotify.com/show/1wIytRQ4Ub8McXSP1iDwVX",
+      "domain": "open.spotify.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 3216.0372920000004,
+      "markdown_chars": 48876,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/051-open_spotify_com.md",
+      "error": null
+    },
+    {
+      "url": "https://creators.spotify.com/pod/profile/jasdeep-garcha/episodes/Episode-52---Ken-Babcock-Tango-ai-e2tf2sg",
+      "domain": "creators.spotify.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "browser-readability",
+      "success": true,
+      "elapsed_ms": 2579.246833,
+      "markdown_chars": 139614,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/052-creators_spotify_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.linkedin.com/posts/lennyrachitsky_building-ai-product-sense-part-2-activity-7427022933702762496-pu01",
+      "domain": "www.linkedin.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 4078.4859579999998,
+      "markdown_chars": 1926,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/053-www_linkedin_com.md",
+      "error": null
+    },
+    {
+      "url": "https://medium.com/@deepthi.sudharsan/inside-ai-interviews-stories-patterns-and-what-actually-matters-555684c38598",
+      "domain": "medium.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 2846.640417,
+      "markdown_chars": 10398,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/054-medium_com.md",
+      "error": null
+    },
+    {
+      "url": "https://hugobowne.substack.com/p/episode-70-1400-production-ai-deployments",
+      "domain": "hugobowne.substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 3088.487042,
+      "markdown_chars": 6055,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/055-hugobowne_substack_com.md",
+      "error": null
+    },
+    {
+      "url": "https://aakashgupta.medium.com/i-interviewed-100-ai-product-managers-heres-what-they-actually-do-9e55d393a287",
+      "domain": "aakashgupta.medium.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 2580.37025,
+      "markdown_chars": 1277,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/056-aakashgupta_medium_com.md",
+      "error": null
+    },
+    {
+      "url": "https://elevateyouraiq.substack.com/p/ep-77-distilling-interview-data-into",
+      "domain": "elevateyouraiq.substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 2964.1082499999998,
+      "markdown_chars": 4213,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/057-elevateyouraiq_substack_com.md",
+      "error": null
+    },
+    {
+      "url": "https://harshalpatil.substack.com/p/premortem-ai-pm-role-growth-startup-25q4",
+      "domain": "harshalpatil.substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 2735.3337500000002,
+      "markdown_chars": 6771,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/058-harshalpatil_substack_com.md",
+      "error": null
+    },
+    {
+      "url": "https://natesnewsletter.substack.com/p/the-complete-ai-interview-guide-what",
+      "domain": "natesnewsletter.substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 2641.0284580000002,
+      "markdown_chars": 3545,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/059-natesnewsletter_substack_com.md",
+      "error": null
+    },
+    {
+      "url": "https://productimpactpod.substack.com/p/75-of-enterprise-ai-fails-the-fix",
+      "domain": "productimpactpod.substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 2886.9914169999997,
+      "markdown_chars": 16824,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/060-productimpactpod_substack_com.md",
+      "error": null
+    },
+    {
+      "url": "https://substack.com/home/post/p-187741497?autoPlay=true",
+      "domain": "substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 4308.121749999999,
+      "markdown_chars": 90303,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/061-substack_com.md",
+      "error": null
+    },
+    {
+      "url": "https://turingpost.substack.com/p/inside-reflection-ai-the-20b-open",
+      "domain": "turingpost.substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 2838.645208,
+      "markdown_chars": 8156,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/062-turingpost_substack_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.linkedin.com/posts/kapilsurlaker_episode-183-ai-will-not-save-you-reinvention-activity-7432848510179241986-t6_8",
+      "domain": "www.linkedin.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 3653.516834,
+      "markdown_chars": 6888,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/063-www_linkedin_com.md",
+      "error": null
+    },
+    {
+      "url": "https://medium.com/@theBotGroup/why-85-of-ml-projects-fail-and-how-yours-wont-f53c02d0875e",
+      "domain": "medium.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 2636.800334,
+      "markdown_chars": 1651,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/064-medium_com.md",
+      "error": null
+    },
+    {
+      "url": "https://hugobowne.substack.com/p/episode-59-patterns-and-anti-patterns-340",
+      "domain": "hugobowne.substack.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 3333.370125,
+      "markdown_chars": 2267,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/065-hugobowne_substack_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.linkedin.com/posts/gregnudelman_something-interesting-is-happening-in-ai-activity-7425574887034937345-1IL5",
+      "domain": "www.linkedin.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 3559.933208,
+      "markdown_chars": 1866,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/066-www_linkedin_com.md",
+      "error": null
+    },
+    {
+      "url": "https://medium.com/@ivanperaltasantana/from-big-crews-to-fast-ships-org-design-after-ai-cabb3fe55ee6",
+      "domain": "medium.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 2304.051333,
+      "markdown_chars": 10691,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/067-medium_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.linkedin.com/posts/areganti_why-most-ai-products-fail-lessons-from-50-activity-7416320569282887681-XLBB",
+      "domain": "www.linkedin.com",
+      "category": "js_heavy",
+      "tags": [
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 3945.623208,
+      "markdown_chars": 3193,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/068-www_linkedin_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.news.aakashg.com/p/the-ai-product-design-interview-your",
+      "domain": "www.news.aakashg.com",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 184.47116599999998,
+      "markdown_chars": 2999,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/069-www_news_aakashg_com.md",
+      "error": null
+    },
+    {
+      "url": "https://osmu.app/en/blog/ai-engineering-leaders-the-next-12-24-months-of-ai-transform",
+      "domain": "osmu.app",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 3868.471583,
+      "markdown_chars": 97,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/070-osmu_app.md",
+      "error": null
+    },
+    {
+      "url": "https://pmhub.tech/the-agile-data-science-playbook-quarterly-sprints-to-ml-success-featuring-lauren-creedon/",
+      "domain": "pmhub.tech",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 530.497,
+      "markdown_chars": 3534,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/071-pmhub_tech.md",
+      "error": null
+    },
+    {
+      "url": "https://www.kalviumlabs.ai/blog/why-most-ai-products-fail/",
+      "domain": "www.kalviumlabs.ai",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 184.51387499999998,
+      "markdown_chars": 14500,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/072-www_kalviumlabs_ai.md",
+      "error": null
+    },
+    {
+      "url": "http://www.sundeepteki.org/advice/the-ultimate-ai-research-engineer-interview-guide-cracking-openai-anthropic-google-deepmind-top-ai-labs",
+      "domain": "www.sundeepteki.org",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 272.541084,
+      "markdown_chars": 18306,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/073-www_sundeepteki_org.md",
+      "error": null
+    },
+    {
+      "url": "https://8allocate.com/blog/how-to-structure-an-ai-enabled-product-team/",
+      "domain": "8allocate.com",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 2407.065083,
+      "markdown_chars": 23893,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/074-8allocate_com.md",
+      "error": null
+    },
+    {
+      "url": "https://aetherlink.ai/en/blog/agentic-ai-multi-agent-systems-enterprise-governance-in-2026",
+      "domain": "aetherlink.ai",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 192.345292,
+      "markdown_chars": 21504,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/075-aetherlink_ai.md",
+      "error": null
+    },
+    {
+      "url": "https://alhena.ai/blog/ai-human-escalation-chatbot-handoff-best-practices/",
+      "domain": "alhena.ai",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 302.390166,
+      "markdown_chars": 19442,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/076-alhena_ai.md",
+      "error": null
+    },
+    {
+      "url": "https://axrp.net/episode/2026/01/03/episode-47-david-rein-metr-time-horizons.html",
+      "domain": "axrp.net",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 116.76825000000001,
+      "markdown_chars": 82678,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/077-axrp_net.md",
+      "error": null
+    },
+    {
+      "url": "https://blog.ravi-mehta.com/p/building-ai-products-lessons-from",
+      "domain": "blog.ravi-mehta.com",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 164.30904099999998,
+      "markdown_chars": 23216,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/078-blog_ravi-mehta_com.md",
+      "error": null
+    },
+    {
+      "url": "https://blog.sshh.io/p/the-transposed-organization",
+      "domain": "blog.sshh.io",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 176.670917,
+      "markdown_chars": 22487,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/079-blog_sshh_io.md",
+      "error": null
+    },
+    {
+      "url": "https://callsphere.tech/blog/post-mortem-analysis-ai-agent-failures-learning-production-incidents",
+      "domain": "callsphere.tech",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 826.16175,
+      "markdown_chars": 12746,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/080-callsphere_tech.md",
+      "error": null
+    },
+    {
+      "url": "https://engineeringleadership.buzzsprout.com/1124402/episodes/15961706-what-staff-engineers-need-to-be-successful-in-the-ml-field-with-zilvinas-girenas",
+      "domain": "engineeringleadership.buzzsprout.com",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 185.397708,
+      "markdown_chars": 545,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/081-engineeringleadership_buzzsprout_com.md",
+      "error": null
+    },
+    {
+      "url": "https://fountain.fm/show/743839",
+      "domain": "fountain.fm",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 2738.085916,
+      "markdown_chars": 56,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/082-fountain_fm.md",
+      "error": null
+    },
+    {
+      "url": "https://getaigovernance.net/blog/best-ai-compliance-platforms-2026",
+      "domain": "getaigovernance.net",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 693.064166,
+      "markdown_chars": 16161,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/083-getaigovernance_net.md",
+      "error": null
+    },
+    {
+      "url": "https://lexfridman.com/dario-amodei",
+      "domain": "lexfridman.com",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 539.3082909999999,
+      "markdown_chars": 3962,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/084-lexfridman_com.md",
+      "error": null
+    },
+    {
+      "url": "https://notion.notion.site/2edefdeead058052bda4ea3834e992f9",
+      "domain": "notion.notion.site",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "browser-readability",
+      "success": true,
+      "elapsed_ms": 3249.79325,
+      "markdown_chars": 197,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/085-notion_notion_site.md",
+      "error": null
+    },
+    {
+      "url": "https://pod.co/human-first/ai-fluency-is-the-new-hiring-litmus-test-for-go-to-market-leaders",
+      "domain": "pod.co",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 377.234709,
+      "markdown_chars": 5451,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/086-pod_co.md",
+      "error": null
+    },
+    {
+      "url": "https://podwise.ai/dashboard/episodes/3016978",
+      "domain": "podwise.ai",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 2947.655166,
+      "markdown_chars": 0,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/087-podwise_ai.md",
+      "error": null
+    },
+    {
+      "url": "https://productschool.com/blog/artificial-intelligence/evaluation-metrics",
+      "domain": "productschool.com",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 1486.420708,
+      "markdown_chars": 47006,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/088-productschool_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.danielphilipjohnson.com/blog/why-80-of-ai-projects-fail-and-how-staff-engineers-can-save-them-hbr-strategy",
+      "domain": "www.danielphilipjohnson.com",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 295.5895,
+      "markdown_chars": 15752,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/089-www_danielphilipjohnson_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.digitalapplied.com/blog/agentic-ai-maturity-model-enterprise-self-assessment-guide",
+      "domain": "www.digitalapplied.com",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 179.706125,
+      "markdown_chars": 21138,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/090-www_digitalapplied_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.moderndescartes.com/essays/ml_eng_interviewing/",
+      "domain": "www.moderndescartes.com",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 80.835791,
+      "markdown_chars": 16053,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/091-www_moderndescartes_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.tryexponent.com/guides/anthropic-software-engineer-interview",
+      "domain": "www.tryexponent.com",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 378.834834,
+      "markdown_chars": 5737,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/092-www_tryexponent_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.yuan-meng.com/posts/mle_interviews_2.0/",
+      "domain": "www.yuan-meng.com",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 227.85829199999998,
+      "markdown_chars": 94538,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/093-www_yuan-meng_com.md",
+      "error": null
+    },
+    {
+      "url": "https://yuvalyeret.com/blog/ai-isnt-the-problem-your-operating-system-is/",
+      "domain": "yuvalyeret.com",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 184.182833,
+      "markdown_chars": 2582,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/094-yuvalyeret_com.md",
+      "error": null
+    },
+    {
+      "url": "https://www.news.aakashg.com/p/ai-success-metrics-interview",
+      "domain": "www.news.aakashg.com",
+      "category": "general",
+      "tags": [],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 70.29370899999999,
+      "markdown_chars": 5081,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/095-www_news_aakashg_com.md",
+      "error": null
+    },
+    {
+      "url": "https://podscan.fm/podcasts/beyond-the-prompt-how-to-use-ai-in-your-company/episodes/from-roadmaps-to-rampd-how-ai-is-changing-product-development-with-richard-white-founder-of-fathom-ai",
+      "domain": "podscan.fm",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 297.694625,
+      "markdown_chars": 11226,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/096-podscan_fm.md",
+      "error": null
+    },
+    {
+      "url": "https://podcasts.apple.com/us/podcast/ai-engineering-podcast/id1626358243",
+      "domain": "podcasts.apple.com",
+      "category": "podcast",
+      "tags": [
+        "podcast",
+        "js_heavy"
+      ],
+      "mode": "live",
+      "strategy": "browser-readability",
+      "success": true,
+      "elapsed_ms": 2902.652791,
+      "markdown_chars": 51084,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/097-podcasts_apple_com.md",
+      "error": null
+    },
+    {
+      "url": "https://pod.wave.co/podcast/lennys-podcast-product-career-growth-b65486a6-7cff-4966-bbea-2bc239e90aa4/engineers-are-becoming-sorcerers-the-future-of-software-development-with-openais-sherwin-wu",
+      "domain": "pod.wave.co",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 40271.867709,
+      "markdown_chars": 204,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/098-pod_wave_co.md",
+      "error": null
+    },
+    {
+      "url": "https://getpodcast.com/podcast/the-engineering-leadership-podcast/the-ai-distribution-shift-navigating-pmf-collapse-and-building-ai-nati_0317944216",
+      "domain": "getpodcast.com",
+      "category": "podcast",
+      "tags": [
+        "podcast"
+      ],
+      "mode": "live",
+      "strategy": "static-readability",
+      "success": true,
+      "elapsed_ms": 219.600166,
+      "markdown_chars": 5992,
+      "markdown_output_path": "benchmarks/results/20260409-191015/rust-hybrid-live-markdown/099-getpodcast_com.md",
+      "error": null
+    }
+  ]
+}

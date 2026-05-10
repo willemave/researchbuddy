@@ -204,6 +204,8 @@ async def run_review(
     request: ReviewRunRequest,
     deps: AgentDeps,
     reporter: RunReporter | None = None,
+    run_id: str | None = None,
+    create_record: bool = True,
 ) -> ReviewRunResult:
     """Run the full review research workflow.
 
@@ -219,23 +221,24 @@ async def run_review(
     logger.info("Starting review run")
     await init_db(settings.database_path)
 
-    run_id = uuid.uuid4().hex
-    run_paths = build_run_paths(request.output_dir, run_id)
+    resolved_run_id = run_id or uuid.uuid4().hex
+    run_paths = build_run_paths(request.output_dir, resolved_run_id)
     usage_tracker = UsageTracker()
     research_profile = resolve_research_profile(request.prompt, request.research_mode)
     run_record = new_run_record(
-        run_id=run_id,
+        run_id=resolved_run_id,
         prompt=request.prompt,
         max_urls=request.max_urls,
         max_agents=request.max_agents,
         headful=request.headful,
         output_dir=run_paths["run"],
     )
-    await create_run(settings.database_path, run_record)
+    if create_record:
+        await create_run(settings.database_path, run_record)
     add_run_file_handler(run_paths["run"] / "run.log", settings.log_level)
     logger.info(
         "Run initialized: run_id=%s max_urls=%d max_agents=%d headful_fallback=%s research_mode=%s",
-        run_id,
+        resolved_run_id,
         request.max_urls,
         request.max_agents,
         request.headful,
@@ -296,7 +299,7 @@ async def run_review(
             try:
                 lane_tasks = [
                     _run_lane(
-                        run_id=run_id,
+                        run_id=resolved_run_id,
                         lane=lane,
                         search_query_budget=search_budget,
                         prompt=request.prompt,
@@ -331,9 +334,9 @@ async def run_review(
         )
         logger.info("Synthesis complete")
 
-        await update_run_status(settings.database_path, run_id, RUN_STATUS_COMPLETED)
+        await update_run_status(settings.database_path, resolved_run_id, RUN_STATUS_COMPLETED)
 
-        total, fetched, failed = await fetch_run_stats(settings.database_path, run_id)
+        total, fetched, failed = await fetch_run_stats(settings.database_path, resolved_run_id)
         stats = ReviewRunStats(total_urls=total, fetched=fetched, failed=failed)
         logger.info("Run stats: %d total, %d fetched, %d failed", total, fetched, failed)
         _log_usage_snapshot(usage_snapshot)
@@ -342,7 +345,7 @@ async def run_review(
         synthesis_path.write_text(synthesis_markdown, encoding="utf-8")
         _persist_followup_artifacts(
             run_dir=run_paths["run"],
-            run_id=run_id,
+            run_id=resolved_run_id,
             prompt=request.prompt,
             synthesis_markdown=synthesis_markdown,
             lane_results=lane_results,
@@ -352,7 +355,7 @@ async def run_review(
         )
 
         return ReviewRunResult(
-            run_id=run_id,
+            run_id=resolved_run_id,
             prompt=request.prompt,
             created_at=run_record.created_at,
             stats=stats,
@@ -360,7 +363,7 @@ async def run_review(
         )
     except Exception:
         logger.exception("Run failed")
-        await update_run_status(settings.database_path, run_id, RUN_STATUS_FAILED)
+        await update_run_status(settings.database_path, resolved_run_id, RUN_STATUS_FAILED)
         raise
 
 

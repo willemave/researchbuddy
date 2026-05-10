@@ -1,0 +1,191 @@
+{
+  "generated_at": "2026-04-10T02:10:15.131884+00:00",
+  "db_path": "/Users/willem/Development/researchbuddy/data/researchbuddy.db",
+  "run_id": null,
+  "all_runs": true,
+  "require_html": true,
+  "total_fetched_urls": 11,
+  "available_by_category": {
+    "youtube": 11,
+    "podcast": 0,
+    "js_heavy": 0,
+    "general": 0
+  },
+  "available_by_tag": {
+    "js_heavy": 11,
+    "youtube": 11
+  },
+  "sample_targets": {
+    "youtube": 11,
+    "podcast": 0,
+    "js_heavy": 0,
+    "general": 0
+  },
+  "selected_by_category": {
+    "youtube": 11,
+    "podcast": 0,
+    "js_heavy": 0,
+    "general": 0
+  },
+  "selected_by_tag": {
+    "js_heavy": 11,
+    "youtube": 11
+  },
+  "sample_size": 11,
+  "entries": [
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.youtube.com/watch?v=z7T1pCxgvlA",
+      "title": "Why most AI products fail: Lessons from 50+ AI ... - YouTube",
+      "source_query": "Failure Modes: podcast interview AI product teams failure modes unclear ownership handoffs research engineering",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/html/6c07189f77664e4d.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/6c07189f77664e4d.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+      "title": "If You Don\u2019t Understand AI Evals, Don\u2019t Build AI",
+      "source_query": "PM in AI: AI product management ambiguity roadmap evaluation customer discovery podcast interview",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/html/95f838bf44f847f7.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/95f838bf44f847f7.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.youtube.com/shorts/z5YrGY-mNN0",
+      "title": "How Top US Engineers Stay Relevant in AI #podcast ... - YouTube",
+      "source_query": "Talent, Culture, and Leadership: podcast interview AI native engineering leadership hiring barbell talent mentorship junior engineers",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/html/d70f53ff9d40e83e.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/d70f53ff9d40e83e.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.youtube.com/watch?v=ZuQHYTDDuTU",
+      "title": "Beyond the Pilot: The AI-Native Product Operating Model - YouTube",
+      "source_query": "Org Design Patterns: AI-native org design podcast research engineering product decision rights mission teams DRI interview",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/html/7b9902608a02f7c9.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/7b9902608a02f7c9.md"
+    },
+    {
+      "run_id": "ae1aceb76c7e4c90bdd0003bf252f0ab",
+      "url": "https://www.youtube.com/watch?v=rzAGo_XML1U",
+      "title": "This AI Expert's Method Will Change How You Do Customer Research",
+      "source_query": "Research-Product Interface: AI product research engineering interface podcast founder interview translating research into roadmap experiments",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/html/dc56af33752f4f22.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/dc56af33752f4f22.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.youtube.com/watch?v=cv9xYnurGIc",
+      "title": "Human in the Loop with Scale AI: Episode 1 - YouTube",
+      "source_query": "Interview Ready Synthesis: podcast interview AI product leaders organizational patterns human-in-the-loop autonomy evaluation culture",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/html/de92ec57339831e3.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/de92ec57339831e3.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.youtube.com/watch?v=sni_-awZTgw",
+      "title": "AI Agent Development Tradeoffs You NEED to Know - YouTube",
+      "source_query": "Research To Product Transfer: podcast interview research to product transfer AI teams handoffs ownership evaluation loops",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/html/8aa043bea84d6018.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/8aa043bea84d6018.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.youtube.com/watch?v=-5_6HQR0WhA",
+      "title": "The State of AI Adoption in Engineering Teams \u2014 with Matt McClernan",
+      "source_query": "Large Company Patterns: YouTube interview large AI lab product engineering org design research product engineering collaboration vertical horizontal teams",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/html/b2ef31db26c3a3a0.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/b2ef31db26c3a3a0.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.youtube.com/watch?v=h98dLRJFHMM",
+      "title": "Inside Reducto: From Pivot to Fortune 10 Customers, How to Build AI Products | CEO Adit Abraham",
+      "source_query": "Smaller Company Operator Voices: AI startup founder podcast product engineering org lessons learned small elite team research culture",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/html/cc84d5a777fb3170.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/cc84d5a777fb3170.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.youtube.com/watch?v=ifPjwirY8kY",
+      "title": "The Silent Failure of Your AI Products - Product Impact e01 - YouTube",
+      "source_query": "Failure Modes: podcast interview AI product failures research handoff breakdowns product engineering",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/html/3d2e1ad863bebc27.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/3d2e1ad863bebc27.md"
+    },
+    {
+      "run_id": "31d109b32680471c90c7d29197778071",
+      "url": "https://www.youtube.com/watch?v=B26CwKm5C1k",
+      "title": "OpenAI\u2019s head of platform engineering on the next 12-24 months of AI | Sherwin Wu",
+      "source_query": "Org Design Patterns: podcast interview on how AI companies structure product engineering research teams and decision rights across model, platform, and application groups",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "html_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/html/91121856c627c0cb.html",
+      "markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/91121856c627c0cb.md"
+    }
+  ]
+}

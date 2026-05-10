@@ -20,48 +20,31 @@ class CliCommandHelp:
 
 CLI_COMMANDS: tuple[CliCommandHelp, ...] = (
     CliCommandHelp(
-        name="run",
-        usage='researchbuddy run "<prompt>" [--mode auto|product|restaurant|research] [--result-file answer.md] [--stats]',
-        summary="Execute a new one-shot research run and print the synthesis.",
+        name="start",
+        usage='researchbuddy start "<prompt>" [--mode auto|product|restaurant|research]',
+        summary="Start a new research prompt in the background and make it current.",
         details=(
-            "Runs planning, search, crawl, synthesis, and writes artifacts under data/storage/<run_id>/.",
+            "Refuses to start when another ResearchBuddy run is already active.",
+            "Returns the run ID, PID, log path, and exact status/watch commands.",
+            "Writes artifacts under data/storage/<run_id>/.",
+            "Use --json when another agent or script needs the startup response.",
             "Use --mode to force product-review, restaurant, or general-research behavior instead of automatic prompt inference.",
-            "Prints the run ID and final synthesis to stdout, and can also write the synthesis to --result-file.",
-            "Prints a ChatGPT continuation link based on the final synthesis so you can continue the conversation there.",
-            "Use the positional prompt for normal CLI usage.",
             "Use --prompt-file only when you explicitly want to read the prompt from a UTF-8 text file.",
-            "Use --result-file when you want the final synthesis at a deterministic path.",
-            "Use --stats when you also want the fetched/failed URL counts printed in the terminal output.",
-            "Best when you want a final answer in a single command.",
         ),
         examples=(
-            'researchbuddy run "best dishwasher for quiet apartment"',
-            'researchbuddy run "best sushi in portland" --mode restaurant',
-            "researchbuddy run --prompt-file prompt.txt --result-file output/synthesis.md",
-        ),
-    ),
-    CliCommandHelp(
-        name="inspect",
-        usage="researchbuddy inspect <run_id> [--sources] [--lanes] [--transcripts]",
-        summary="Inspect saved artifacts for a run without rerunning the workflow.",
-        details=(
-            "Prints the saved run metadata and output directory.",
-            "Use --sources to list stored source URLs and statuses.",
-            "Use --lanes to list saved lane markdown files.",
-            "Use --transcripts to list saved YouTube and podcast transcript metadata.",
-        ),
-        examples=(
-            "researchbuddy inspect abc123",
-            "researchbuddy inspect abc123 --sources --transcripts",
+            'researchbuddy start "best dishwasher for quiet apartment"',
+            'researchbuddy start "best sushi in portland" --mode restaurant',
+            "researchbuddy start --prompt-file prompt.txt",
         ),
     ),
     CliCommandHelp(
         name="followup",
-        usage='researchbuddy followup <run_id> "<question>" [--result-file answer.txt]',
-        summary="Answer a follow-up question from a saved run without re-crawling.",
+        usage='researchbuddy followup "<question>" [--run-id RUN_ID] [--result-file answer.txt]',
+        summary="Answer a follow-up question from the current completed run.",
         details=(
-            "Pass the saved <run_id> as the first argument. Use researchbuddy runs when you need to look one up.",
-            "Loads persisted follow-up memory from the saved session.",
+            "Defaults to the current run selected by researchbuddy start.",
+            "Use --run-id only when you intentionally want an older run.",
+            "Loads persisted follow-up memory and does not re-crawl sources.",
             "Prints the follow-up answer to stdout, and can also write the answer to --result-file.",
             "Prints a ChatGPT continuation link based on the answer so you can keep the thread going in ChatGPT.",
             "Use the positional question for normal CLI usage.",
@@ -70,56 +53,38 @@ CLI_COMMANDS: tuple[CliCommandHelp, ...] = (
             "Useful for previous-session Q&A in scripts or agent workflows.",
         ),
         examples=(
-            'researchbuddy followup abc123 "What were the main warranty concerns?"',
-            "researchbuddy followup abc123 --question-file question.txt --result-file answer.txt",
+            'researchbuddy followup "What were the main warranty concerns?"',
+            "researchbuddy followup --run-id abc123 --question-file question.txt --result-file answer.txt",
         ),
     ),
     CliCommandHelp(
-        name="commands",
-        usage="researchbuddy commands [--agent]",
-        summary="Print a command reference with usage, behavior, and examples for every CLI command.",
+        name="status",
+        usage="researchbuddy status [--run-id RUN_ID] [--json]",
+        summary="Print status for the current run.",
         details=(
-            "Use --agent for a flatter, machine-friendly reference format.",
-            "Returns enough detail to drive scripts or agents without opening the docs first.",
-            "Points to the markdown reference files under docs/ for the longer reference text.",
-        ),
-        examples=("researchbuddy commands --agent",),
-    ),
-    CliCommandHelp(
-        name="transcribe",
-        usage="researchbuddy transcribe <source> [--type auto|youtube|podcast|audio] [--result-file transcript.txt]",
-        summary="Transcribe one local audio file or supported URL with local Whisper.",
-        details=(
-            "Accepts local audio files, YouTube URLs, and podcast URLs.",
-            "Use --type when auto-detection is ambiguous.",
-            "Prints the transcript to stdout and can also write it to --result-file.",
+            "Defaults to the current run selected by researchbuddy start.",
+            "Shows run ID, status, PID health, URL counts, output directory, log path, and synthesis path when available.",
+            "Use --json for scripts and agents.",
         ),
         examples=(
-            "researchbuddy transcribe ./episode.mp3 --type audio",
-            'researchbuddy transcribe "https://www.youtube.com/watch?v=abc123"',
+            "researchbuddy status",
+            "researchbuddy status --json",
         ),
     ),
     CliCommandHelp(
-        name="runs",
-        usage="researchbuddy runs [--limit 20]",
-        summary="List recent saved runs so you can grab a run ID for follow-up commands.",
+        name="watch",
+        usage="researchbuddy watch [--run-id RUN_ID] [--interval SECONDS] [--timeout SECONDS]",
+        summary="Watch the current run until it completes or fails.",
         details=(
-            "Reads the recent run history from the local SQLite database.",
-            "Outputs run ID, created time, status, and a truncated prompt summary.",
-            "Use this when you need to find a prior run before calling researchbuddy followup.",
+            "Defaults to the current run selected by researchbuddy start.",
+            "Prints a compact status block and streams worker log output.",
+            "Exits non-zero when the worker process disappears while the run is still in progress.",
+            "Exits zero when the run completes and non-zero when it fails.",
         ),
-        examples=("researchbuddy runs --limit 10",),
-    ),
-    CliCommandHelp(
-        name="setup",
-        usage="researchbuddy setup [--skip-playwright]",
-        summary="Prepare the local machine to run the CLI, then rerun doctor checks.",
-        details=(
-            "Persists detected search-provider settings into the local .env when possible.",
-            "Creates the storage/database paths and optionally installs Playwright browsers.",
-            "Prints both the setup report and a follow-up doctor report, then exits non-zero if readiness problems remain.",
+        examples=(
+            "researchbuddy watch",
+            "researchbuddy watch --interval 2 --timeout 900",
         ),
-        examples=("researchbuddy setup",),
     ),
     CliCommandHelp(
         name="doctor",
@@ -128,27 +93,29 @@ CLI_COMMANDS: tuple[CliCommandHelp, ...] = (
         details=(
             "Validates required API keys, required binaries, Codex auth, Playwright browser launch, and writable storage paths.",
             "Use --fix to run the setup flow first so local storage, config, and Playwright browsers are repaired before the final report.",
+            "Reports current-run health and repairs stale in-progress run records when --fix is used.",
             "Use this before handing the tool to another bot or promoting a runtime to production.",
             "Prints a full readiness report and exits non-zero when setup or runtime checks fail.",
         ),
         examples=("researchbuddy doctor", "researchbuddy doctor --fix"),
     ),
     CliCommandHelp(
-        name="tap export",
-        usage="researchbuddy tap export [--output-dir PATH]",
-        summary="Generate a Homebrew tap repository for publishing ResearchBuddy.",
+        name="list",
+        usage="researchbuddy list [--limit 20] [--json]",
+        summary="List saved prompts and mark the current run.",
         details=(
-            "Writes Formula/, README.md, a validation workflow, and a tap-maintainer skill.",
-            "Defaults to the GitHub origin remote and writes to ../homebrew-researchbuddy when possible.",
-            "Prints the export directory and the files written so a release bot can continue without extra discovery.",
+            "Reads the recent run history from the local SQLite database.",
+            "Outputs run ID, created time, status, and a truncated prompt summary.",
+            "Marks the current run with * in human output.",
+            "Use --json for scripts and agents.",
         ),
-        examples=("researchbuddy tap export",),
+        examples=("researchbuddy list --limit 10",),
     ),
 )
 
 CLI_REFERENCE_PATH = "docs/cli-reference.md"
 AGENT_REFERENCE_PATH = "docs/agent-cli-reference.md"
-RENAMED_COMMANDS: dict[str, str] = {"ask": "followup"}
+RENAMED_COMMANDS: dict[str, str] = {}
 CLI_COMMANDS_BY_NAME = {command.name: command for command in CLI_COMMANDS}
 
 
@@ -250,7 +217,7 @@ def build_unknown_command_guidance(
         (
             "",
             "Use `researchbuddy --help` for the full command list.",
-            "Use `researchbuddy commands` for the extended reference.",
+            "See docs/cli-reference.md for the extended reference.",
         )
     )
     return "\n".join(lines).strip()

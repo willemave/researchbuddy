@@ -25,10 +25,11 @@ brew install researchbuddy
 
 Before asking for any new search-provider key, check ~/.openclaw/openclaw.json.
 If exa, tavily, or firecrawl is already configured there, ask whether ResearchBuddy should reuse that existing provider/key.
-If the user says yes, do not ask for a duplicate secret. Let ResearchBuddy setup/doctor use the OpenClaw config.
+If the user says yes, do not ask for a duplicate secret. Let ResearchBuddy doctor --fix use the OpenClaw config.
 
-researchbuddy commands --agent
 researchbuddy doctor
+researchbuddy doctor --fix
+researchbuddy list
 
 If you support SKILL.md directories, load:
 $(brew --prefix)/opt/researchbuddy/share/researchbuddy/skills/researchbuddy-cli
@@ -68,13 +69,12 @@ $skill-installer https://github.com/<owner>/<repo>/tree/main/skills/researchbudd
 From Git:
 ```bash
 uv tool install git+https://github.com/<owner>/<repo>.git
-researchbuddy commands --agent
 researchbuddy doctor
 ```
 
 From a release wheel:
 ```bash
-uv tool install researchbuddy-0.1.4-py3-none-any.whl
+uv tool install researchbuddy-0.1.6-py3-none-any.whl
 researchbuddy doctor
 ```
 
@@ -136,7 +136,7 @@ Recommended setup sequence:
 uv sync
 uv run playwright install
 researchbuddy doctor
-researchbuddy commands --agent
+researchbuddy --help
 ```
 
 ## Important limitation

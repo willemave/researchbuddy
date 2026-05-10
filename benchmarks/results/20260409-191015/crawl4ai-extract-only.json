@@ -1,0 +1,204 @@
+{
+  "generated_at": "2026-04-10T02:13:14.830585+00:00",
+  "tool": "crawl4ai",
+  "mode": "extract-only",
+  "manifest": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/extract-corpus.json",
+  "limit": 0,
+  "page_timeout_ms": 30000,
+  "headless": true,
+  "markdown_dir": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only-markdown",
+  "platform": {
+    "python": "3.13.12",
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "summary": {
+    "total": 11,
+    "successes": 11,
+    "failures": 0,
+    "mean_elapsed_ms": 1.3383105423682453,
+    "median_elapsed_ms": 0.9680000075604767,
+    "p95_elapsed_ms": 3.0256040045060217,
+    "min_elapsed_ms": 0.6828749901615083,
+    "max_elapsed_ms": 4.330208001192659,
+    "mean_markdown_chars": 2457.5454545454545
+  },
+  "results": [
+    {
+      "url": "https://www.youtube.com/watch?v=z7T1pCxgvlA",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "extract-only",
+      "strategy": "crawl4ai-browser",
+      "success": true,
+      "elapsed_ms": 4.330208001192659,
+      "markdown_chars": 2646,
+      "markdown_output_path": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only-markdown/a8b756678939.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "extract-only",
+      "strategy": "crawl4ai-browser",
+      "success": true,
+      "elapsed_ms": 1.7210000078193843,
+      "markdown_chars": 2609,
+      "markdown_output_path": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only-markdown/a07d23fc2691.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/shorts/z5YrGY-mNN0",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "extract-only",
+      "strategy": "crawl4ai-browser",
+      "success": true,
+      "elapsed_ms": 0.9145829826593399,
+      "markdown_chars": 667,
+      "markdown_output_path": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only-markdown/7463632b36ba.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ZuQHYTDDuTU",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "extract-only",
+      "strategy": "crawl4ai-browser",
+      "success": true,
+      "elapsed_ms": 0.8291249978356063,
+      "markdown_chars": 2639,
+      "markdown_output_path": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only-markdown/eadb1efd846c.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=rzAGo_XML1U",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "extract-only",
+      "strategy": "crawl4ai-browser",
+      "success": true,
+      "elapsed_ms": 1.0345839837100357,
+      "markdown_chars": 2625,
+      "markdown_output_path": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only-markdown/ea1d016f7222.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=cv9xYnurGIc",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "extract-only",
+      "strategy": "crawl4ai-browser",
+      "success": true,
+      "elapsed_ms": 0.9788750030566007,
+      "markdown_chars": 2659,
+      "markdown_output_path": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only-markdown/598f86129669.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=sni_-awZTgw",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "extract-only",
+      "strategy": "crawl4ai-browser",
+      "success": true,
+      "elapsed_ms": 0.8275419822894037,
+      "markdown_chars": 2608,
+      "markdown_output_path": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only-markdown/080d2bda7b89.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=-5_6HQR0WhA",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "extract-only",
+      "strategy": "crawl4ai-browser",
+      "success": true,
+      "elapsed_ms": 0.7855829899199307,
+      "markdown_chars": 2629,
+      "markdown_output_path": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only-markdown/cc8f21ca611d.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=h98dLRJFHMM",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "extract-only",
+      "strategy": "crawl4ai-browser",
+      "success": true,
+      "elapsed_ms": 0.6828749901615083,
+      "markdown_chars": 2655,
+      "markdown_output_path": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only-markdown/b0a3c48fdabc.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ifPjwirY8kY",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "extract-only",
+      "strategy": "crawl4ai-browser",
+      "success": true,
+      "elapsed_ms": 1.649041019845754,
+      "markdown_chars": 2654,
+      "markdown_output_path": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only-markdown/352b7b8a0a4d.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=B26CwKm5C1k",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "mode": "extract-only",
+      "strategy": "crawl4ai-browser",
+      "success": true,
+      "elapsed_ms": 0.9680000075604767,
+      "markdown_chars": 2642,
+      "markdown_output_path": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only-markdown/a83544a5f10b.md",
+      "error": null
+    }
+  ]
+}

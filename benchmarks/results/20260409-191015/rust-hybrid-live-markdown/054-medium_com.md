@@ -1,0 +1,76 @@
+[Deepthi Sudharsan](https://medium.com/@deepthi.sudharsan?source=post_page---byline--555684c38598---------------------------------------)
+
+7 min read
+
+Jan 21, 2026
+
+--
+
+What AI Job Interviews Are Really Like (From Someone Who’s Been Through Many)
+
+For a long time, I thought my AI interviews were unusually chaotic. After interviewing with over **20+ companies** — often across **multiple roles within the same company** — I started seeing a pattern in the interview process for these different AI roles. I wouldn’t say this made my interview completely devoid of chaos, but rather, it was more organized chaos. My preparation process became more structured and streamlined.
+
+Across **AI Research, Research Engineer, Applied Scientist, AI Engineer, Data Scientist, and AI PM roles**, I’ve been through what easily adds up to **50+ interview rounds**. Some companies interviewed me for one role. Some for two or three. Some are across different teams with completely different expectations. At the same time, through mentoring on [**Topmate**](https://topmate.io/deepthi_sudharsan), I’ve helped **dozens of candidates** prepare for AI interviews — many of whom went on to land roles at companies like **Microsoft, PwC, Palo Alto Networks, Accenture**, and others. Being on *both sides* of the table gave me a rare vantage point: I could see **how interviewers think**, **where candidates consistently struggle**, and **what to expect in these interviews**.
+
+Press enter or click to view image in full size
+
+*Photo by [Maranda Vandergriff](https://unsplash.com/@mkvandergriff?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)*
+
+While interview preparation is a topic that is a lot to unpack, I wanted to share a free guide, a high-level overview of how the interview process for different AI roles looks, that has helped me and my mentees prepare for our interviews.
+
+## How AI Interview Processes Usually Differ by Role
+
+*Note: These are some of the patterns I identified from my own personal experiences and from the experiences of my mentees. Each individual’s experience might differ based on the role, company, interviewer, etc., and hence, this might not necessarily be an exhaustive list of patterns.*
+> *TL;DR:*
+>
+> Depending on the AI role, organization, and team, the interview process comprises a mix of some of the following types of interviews, either one or more rounds of each.
+>
+> 1. Resume-based round that touches a bit upon the technical implementation and concepts of the techniques that you have used in your previous projects or organizations.
+>
+> 2. DSA round with one or more LeetCode questions.
+>
+> 3. ML coding round that tests your ability to implement AI/ML algorithms from scratch or complete an incomplete AI/ML code.
+>
+> 4. ML fundamentals round, which tests your basic AI/ML concepts, and the follow-up questions dig a bit deeper into the breadth and depth of the core concepts.
+>
+> 5. ML System Design round tests your ability to design and implement systems that solve a specific problem while ensuring it is scalable and optimized.
+
+### 1. AI Research (Predoctoral roles)
+
+I have had the pleasure of interviewing for Predoctoral research positions at FAANGM companies (and even worked with Microsoft as a Research Fellow), and from my experiences, some of the types of interviews you can expect are definitely as follows:
+
+- A basic resume-based round to understand why you would like to pursue research, and for your interviewer to understand if you have what it takes to research and build upon existing works or ideas, as well as constantly learn and keep up with the numerous publications that are put out in the area of interest.
+- A round or two where you are asked to “peer-review” some of the recent or trending papers as if you are an actual reviewer for any of the top paper conferences, to test your ability to read, analyze, and evaluate research publications. You are often asked to report the strengths and weaknesses of the paper(s), suggest changes or modifications to the overall work, explain interconnected concepts or ideas (and even propose new ones extending the read papers).
+- A DSA round that tests more of your problem-solving capability, and checks whether you consider all possible test cases and scenarios while implementing your solution.
+- A fundamental AI/ML round where you are evaluated on your AI/ML basics. It usually starts off a resume-based discussion to set the stage for some of the concepts that you have already applied in your previous work, and accordingly, subsequent follow-up questions would be asked to test the depth and breadth of your basic knowledge.
+- Behavioural round to understand your inclination towards research.
+
+
+### **2. AI Research Engineer**
+
+While for the most part, the AI Research Engineer roles that I interviewed for had a similar process to that of the predoctoral research fellow or research scientist roles, there were a few minute differences.
+
+- The DSA round had a bit more emphasis — you might have multiple coding questions, or the problem statement provided would be extended further to test more of your approach, etc.
+- In a couple of US-based startups, I was asked to not just report and give feedback on the research papers assigned, but I was also tasked with reproducing one of the papers or writing a pseudo-working implementation of the problem solved in the paper.
+
+
+### **3–5. Data Scientist/AI Engineer roles/Applied Scientist**
+
+Similar to how the Research and Research Engineer roles shared a lot of similarities, these three common and important roles share a lot of similarities amongst one another and also have a lot of similarities to the interview process of AI Research Engineer roles.
+
+- Unlike Research roles, you aren’t really technically tested on your research skills here (although research experience is an added advantage for Applied Science roles).
+- Data Scientist roles, especially in some of the big MNCs and a handful of startups, usually start with/have DBMS-related questions in their OA (Online Assessment) or as a part of their coding round. I also noticed that these roles gave more emphasis to core and fundamental AI questions rather than GenAI (but again, it differs company to company based on the problem that they are trying to solve). I was often given take-home assignments that tested my AI/ML coding proficiency and implementation. Weirdly, there were also a lot of times where I noticed the job role changing in the title of the interviews scheduled, where some companies used Data Scientist and AI engineer so synonymously.
+- For AI Engineer and Applied Science roles, especially, I noticed that there were distinct coding rounds that usually followed one another — the DSA round and the AI/ML coding round. While you can expect LeetCode questions in your DSA round, the AI/ML coding round tests more of your knowledge in implementing some of the basic AI/ML algorithms from scratch. A lot of emphasis was also given on the system design round to understand your thought process when it comes to implementing scalable or optimized systems, or how you would handle the specific scenario that the organization is working on, and which you would be solving if you make it through the interview process successfully. (Edit: I also want to add that in some places, the AI/ML coding round was to fill up the proper commands or lines in an incomplete code snippet/template to get it working).
+- For all of these roles, apart from the AI/ML Basics interview, these roles tend to have multiple such interviews where the interviewer delves much deeper into the technical questions, including mathematical derivations or the basic math behind some of the core concepts. A commonly asked example to explain what I mean: the interviewer doesn’t just want to know how your LLM behaves if the temperature is shifted to 0 or 1, but rather how the softmax function is affected and what exactly happens to the probability distribution when the temperatures are changed.
+
+
+### **6. Others (AI Product Manager, AI Consultant)**
+
+- While I haven’t personally interviewed for a lot of these roles, and neither have my mentees, I wanted to shed a bit of light on these roles as well.
+- AI PM — In the handful of times I have interviewed for these kinds of roles, I was asked to write PRDs for an AI product (existing or imaginary), come up with some of the features or things that can be improved or added to an AI product, how I would go about choosing or navigating different components and features to prioritize and build a roadmap, etc.
+- AI Consultant — Funnily enough, all of my experience with this role was with the Big 4 companies (out of which, I interned in one), and I think a lot of emphasis was put on my problem-solving skills more. A common experience with a lot of these roles was the initial online assessment that, at a stretch, tested my problem-solving skills, Python skills, DBMS/SQL knowledge, and tested if I could complete an incomplete AI/ML code with the appropriate commands and function definitions.
+
+
+P.S. Speaking of “AI interviews”, I also had the opportunity to be interviewed by AI — thrice in fact — as a part of the interview process for some of the upcoming, US-based AI companies. And I must say, while the interview process was different and everyone on Reddit had a lot of different views and opinions on that, it isn’t really that hard to crack. If you end up having an AI interview at the start of any interview process, it most likely asks you general questions or scenario-based questions, and only in rare cases, they have a RAG system of sorts in place or upload your resume as context for the AI to ask you resume-specific questions and validate your technical strengths.
+
+This was quite a long post to write, and it especially feels like a win these days to write posts without AI, haha! While this post covers the different types of interview processes I had, it doesn’t necessarily cover any specific type of questions or FAQ. Apart from just figuring out what to expect in terms of the type of interviews, over the period of time, after interviewing a lot, you can also roughly guess or know the questions that are very frequently asked and that you can most commonly expect. I might or might not create a separate post on this in the future!

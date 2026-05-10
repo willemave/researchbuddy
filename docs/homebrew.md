@@ -32,10 +32,10 @@ researchbuddy tap export --output-dir /absolute/path/to/homebrew-researchbuddy
 
 ## Publish flow
 
-1. Create and push a tagged release in the source repo, for example `v0.1.4`.
+1. Create and push a tagged release in the source repo, for example `v0.1.6`.
 2. Compute the release tarball SHA:
    ```bash
-   curl -L https://github.com/<owner>/researchbuddy/archive/refs/tags/v0.1.4.tar.gz | shasum -a 256
+   curl -L https://github.com/<owner>/researchbuddy/archive/refs/tags/v0.1.6.tar.gz | shasum -a 256
    ```
 3. Update `Formula/researchbuddy.rb` with the real `sha256`.
 4. Validate the tap:
@@ -65,10 +65,10 @@ brew install researchbuddy
 
 Before asking for any new search-provider key, check ~/.openclaw/openclaw.json.
 If exa, tavily, or firecrawl is already configured there, ask whether ResearchBuddy should reuse that existing provider/key.
-If the user says yes, do not collect a duplicate secret. Let ResearchBuddy setup/doctor use the OpenClaw config.
+If the user says yes, do not collect a duplicate secret. Let ResearchBuddy doctor --fix use the OpenClaw config.
 
-researchbuddy commands --agent
 researchbuddy doctor --fix
+researchbuddy list
 
 If you support SKILL.md directories, load this bundled skill:
 $(brew --prefix)/opt/researchbuddy/share/researchbuddy/skills/researchbuddy-cli

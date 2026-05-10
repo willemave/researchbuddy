@@ -1,0 +1,287 @@
+{
+  "generated_at": "2026-04-10T02:15:59.013096+00:00",
+  "manifest": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/extract-corpus.json",
+  "benchmark": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only.json",
+  "tool": "crawl4ai",
+  "mode": "extract-only",
+  "summary": {
+    "total": 11,
+    "successes": 11,
+    "failures": 0,
+    "overall_score": {
+      "mean": 0.9989397650361529,
+      "median": 0.9991657756625368,
+      "min": 0.9966876241800714,
+      "max": 0.9991720546854693
+    },
+    "metric_means": {
+      "token_f1": 1.0,
+      "sequence_ratio": 0.9980693573799555,
+      "heading_recall": 1.0,
+      "length_score": 0.9961495046077605
+    },
+    "by_category": {
+      "youtube": {
+        "mean": 0.9989397650361529,
+        "median": 0.9991657756625368,
+        "min": 0.9966876241800714,
+        "max": 0.9991720546854693
+      }
+    },
+    "by_tag": {
+      "js_heavy": {
+        "mean": 0.9989397650361529,
+        "median": 0.9991657756625368,
+        "min": 0.9966876241800714,
+        "max": 0.9991720546854693
+      },
+      "youtube": {
+        "mean": 0.9989397650361529,
+        "median": 0.9991657756625368,
+        "min": 0.9966876241800714,
+        "max": 0.9991720546854693
+      }
+    },
+    "by_domain": {
+      "www.youtube.com": {
+        "mean": 0.9989397650361529,
+        "median": 0.9991657756625368,
+        "min": 0.9966876241800714,
+        "max": 0.9991720546854693
+      }
+    }
+  },
+  "results": [
+    {
+      "url": "https://www.youtube.com/watch?v=z7T1pCxgvlA",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "strategy": "crawl4ai-browser",
+      "success": true,
+      "overall_score": 0.9991679841252676,
+      "token_f1": 1.0,
+      "sequence_ratio": 0.9984859954579863,
+      "heading_recall": 1.0,
+      "length_score": 0.9969765684051397,
+      "reference_chars": 2638,
+      "output_chars": 2646,
+      "markdown_output_path": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only-markdown/a8b756678939.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/6c07189f77664e4d.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=71qvIkO9d_A",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "strategy": "crawl4ai-browser",
+      "success": true,
+      "overall_score": 0.9991561765010972,
+      "token_f1": 1.0,
+      "sequence_ratio": 0.9984644913627639,
+      "heading_recall": 1.0,
+      "length_score": 0.9969336910693753,
+      "reference_chars": 2601,
+      "output_chars": 2609,
+      "markdown_output_path": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only-markdown/a07d23fc2691.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/95f838bf44f847f7.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/shorts/z5YrGY-mNN0",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "strategy": "crawl4ai-browser",
+      "success": true,
+      "overall_score": 0.9966876241800714,
+      "token_f1": 1.0,
+      "sequence_ratio": 0.9939577039274925,
+      "heading_recall": 1.0,
+      "length_score": 0.9879879879879881,
+      "reference_chars": 658,
+      "output_chars": 666,
+      "markdown_output_path": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only-markdown/7463632b36ba.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/d70f53ff9d40e83e.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ZuQHYTDDuTU",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "strategy": "crawl4ai-browser",
+      "success": true,
+      "overall_score": 0.9991657756625368,
+      "token_f1": 1.0,
+      "sequence_ratio": 0.9984819734345352,
+      "heading_recall": 1.0,
+      "length_score": 0.9969685486926865,
+      "reference_chars": 2631,
+      "output_chars": 2639,
+      "markdown_output_path": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only-markdown/eadb1efd846c.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/7b9902608a02f7c9.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=rzAGo_XML1U",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "strategy": "crawl4ai-browser",
+      "success": true,
+      "overall_score": 0.9991613233771188,
+      "token_f1": 1.0,
+      "sequence_ratio": 0.9984738649370469,
+      "heading_recall": 1.0,
+      "length_score": 0.996952380952381,
+      "reference_chars": 2617,
+      "output_chars": 2625,
+      "markdown_output_path": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only-markdown/ea1d016f7222.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/ae1aceb76c7e4c90bdd0003bf252f0ab/markdown/dc56af33752f4f22.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=cv9xYnurGIc",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "strategy": "crawl4ai-browser",
+      "success": true,
+      "overall_score": 0.9991720546854693,
+      "token_f1": 1.0,
+      "sequence_ratio": 0.9984934086629002,
+      "heading_recall": 1.0,
+      "length_score": 0.9969913501316284,
+      "reference_chars": 2651,
+      "output_chars": 2659,
+      "markdown_output_path": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only-markdown/598f86129669.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/de92ec57339831e3.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=sni_-awZTgw",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "strategy": "crawl4ai-browser",
+      "success": true,
+      "overall_score": 0.9991558527230406,
+      "token_f1": 1.0,
+      "sequence_ratio": 0.9984639016897081,
+      "heading_recall": 1.0,
+      "length_score": 0.9969325153374234,
+      "reference_chars": 2600,
+      "output_chars": 2608,
+      "markdown_output_path": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only-markdown/080d2bda7b89.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/8aa043bea84d6018.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=-5_6HQR0WhA",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "strategy": "crawl4ai-browser",
+      "success": true,
+      "overall_score": 0.9991626003006756,
+      "token_f1": 1.0,
+      "sequence_ratio": 0.9984761904761905,
+      "heading_recall": 1.0,
+      "length_score": 0.99695701787752,
+      "reference_chars": 2621,
+      "output_chars": 2629,
+      "markdown_output_path": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only-markdown/cc8f21ca611d.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/b2ef31db26c3a3a0.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=h98dLRJFHMM",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "strategy": "crawl4ai-browser",
+      "success": true,
+      "overall_score": 0.999170806454019,
+      "token_f1": 1.0,
+      "sequence_ratio": 0.998491135420596,
+      "heading_recall": 1.0,
+      "length_score": 0.9969868173258004,
+      "reference_chars": 2647,
+      "output_chars": 2655,
+      "markdown_output_path": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only-markdown/b0a3c48fdabc.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/cc84d5a777fb3170.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ifPjwirY8kY",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "strategy": "crawl4ai-browser",
+      "success": true,
+      "overall_score": 0.9991704938078515,
+      "token_f1": 1.0,
+      "sequence_ratio": 0.9984905660377359,
+      "heading_recall": 1.0,
+      "length_score": 0.99698568198945,
+      "reference_chars": 2646,
+      "output_chars": 2654,
+      "markdown_output_path": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only-markdown/352b7b8a0a4d.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/3d2e1ad863bebc27.md",
+      "error": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=B26CwKm5C1k",
+      "domain": "www.youtube.com",
+      "category": "youtube",
+      "tags": [
+        "youtube",
+        "js_heavy"
+      ],
+      "strategy": "crawl4ai-browser",
+      "success": true,
+      "overall_score": 0.9991667235805347,
+      "token_f1": 1.0,
+      "sequence_ratio": 0.9984836997725549,
+      "heading_recall": 1.0,
+      "length_score": 0.9969719909159728,
+      "reference_chars": 2634,
+      "output_chars": 2642,
+      "markdown_output_path": "/Users/willem/Development/researchbuddy/benchmarks/results/20260409-191015/crawl4ai-extract-only-markdown/a83544a5f10b.md",
+      "reference_markdown_path": "/Users/willem/Development/researchbuddy/data/storage/31d109b32680471c90c7d29197778071/markdown/91121856c627c0cb.md",
+      "error": null
+    }
+  ]
+}
