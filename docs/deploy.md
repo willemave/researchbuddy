@@ -12,7 +12,7 @@ It is not yet a generic hosted web service:
 For bots, the shortest path is:
 1. Push the repo to GitHub.
 2. Let the bot install the CLI from Git or from a release artifact.
-3. Let the bot install the skill from `skills/researchbuddy-cli` if it supports SKILL.md skills.
+3. Let the bot install the skill from `skills/research` if it supports SKILL.md skills.
 4. Run `researchbuddy doctor` inside the bot environment.
 
 For Hermes/OpenClaw-style agents, the easiest install prompt is:
@@ -25,14 +25,17 @@ brew install researchbuddy
 
 Before asking for any new search-provider key, check ~/.openclaw/openclaw.json.
 If exa, tavily, or firecrawl is already configured there, ask whether ResearchBuddy should reuse that existing provider/key.
-If the user says yes, do not ask for a duplicate secret. Let ResearchBuddy doctor --fix use the OpenClaw config.
+If the user says yes, do not ask for a duplicate secret. Let ResearchBuddy doctor --fix use the OpenClaw config without copying credentials into ResearchBuddy .env.
 
 researchbuddy doctor
 researchbuddy doctor --fix
 researchbuddy list
 
-If you support SKILL.md directories, load:
-$(brew --prefix)/opt/researchbuddy/share/researchbuddy/skills/researchbuddy-cli
+Install the bundled OpenClaw skill:
+researchbuddy skills install openclaw --scope shared
+
+For a single OpenClaw workspace instead:
+researchbuddy skills install openclaw --scope workspace --workspace /path/to/workspace
 
 Do not start research runs until `researchbuddy doctor` passes.
 ```
@@ -55,13 +58,13 @@ Only `SKILL.md` is required. `references/`, `scripts/`, and `assets/` are option
 This repository now exposes the skill at:
 
 ```text
-skills/researchbuddy-cli
+skills/research
 ```
 
 Example Codex install URL:
 
 ```text
-$skill-installer https://github.com/<owner>/<repo>/tree/main/skills/researchbuddy-cli
+$skill-installer https://github.com/<owner>/<repo>/tree/main/skills/research
 ```
 
 ## Bot install paths

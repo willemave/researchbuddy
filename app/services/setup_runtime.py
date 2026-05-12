@@ -7,8 +7,6 @@ import subprocess
 from dataclasses import dataclass
 from pathlib import Path
 
-from dotenv import dotenv_values
-
 from app.cli_doctor import DoctorCheck, run_doctor_checks
 from app.core.settings import Settings, get_settings
 
@@ -49,7 +47,7 @@ def run_setup(
 
     workspace_root = resolve_workspace_root(cwd or Path.cwd())
     actions = [
-        _persist_search_config(workspace_root, settings),
+        _check_search_config(settings),
         _prepare_storage(settings.storage_path),
         _prepare_database(settings.database_path),
     ]
@@ -88,7 +86,7 @@ def has_setup_failures(actions: list[SetupAction]) -> bool:
     return any(not action.ok for action in actions)
 
 
-def _persist_search_config(workspace_root: Path | None, settings: Settings) -> SetupAction:
+def _check_search_config(settings: Settings) -> SetupAction:
     provider = settings.get_effective_search_provider()
     key_name = settings.get_search_provider_key_name(provider)
     key_value = settings.get_search_provider_api_key(provider)
@@ -97,59 +95,16 @@ def _persist_search_config(workspace_root: Path | None, settings: Settings) -> S
         return SetupAction(
             name="search config",
             ok=False,
-            detail="no configured provider key available to persist",
+            detail=(
+                "no configured provider key available "
+                "(set local .env, process env, ~/.hermes/.env, or ~/.openclaw/openclaw.json)"
+            ),
         )
-    if workspace_root is None:
-        return SetupAction(
-            name="search config",
-            ok=True,
-            detail=f"{key_name} available but no local workspace root was found",
-        )
-
-    env_path = workspace_root / ".env"
-    existing_values = {
-        key: value
-        for key, value in dotenv_values(env_path).items()
-        if isinstance(value, str)
-    }
-    additions: list[str] = []
-    if not env_path.exists():
-        env_path.write_text("", encoding="utf-8")
-        additions.append("created .env")
-
-    _append_env_line(env_path, existing_values, "SEARCH_PROVIDER", provider, additions)
-    _append_env_line(env_path, existing_values, key_name, key_value, additions)
-    if provider == "exa":
-        _append_env_line(
-            env_path,
-            existing_values,
-            "EXA_SEARCH_TYPE",
-            settings.exa_search_type,
-            additions,
-        )
-
-    if not additions:
-        return SetupAction(name="search config", ok=True, detail=f"{env_path} already configured")
-    return SetupAction(name="search config", ok=True, detail=f"{env_path} ({', '.join(additions)})")
-
-
-def _append_env_line(
-    env_path: Path,
-    existing_values: dict[str, str],
-    key: str,
-    value: str,
-    additions: list[str],
-) -> None:
-    if not value.strip() or key in existing_values:
-        return
-
-    existing_text = env_path.read_text(encoding="utf-8")
-    with env_path.open("a", encoding="utf-8") as file_handle:
-        if existing_text and not existing_text.endswith("\n"):
-            file_handle.write("\n")
-        file_handle.write(f"{key}={value.strip()}\n")
-    existing_values[key] = value.strip()
-    additions.append(f"set {key}")
+    return SetupAction(
+        name="search config",
+        ok=True,
+        detail=f"{key_name} available from environment or shared agent config; no credentials copied",
+    )
 
 
 def _prepare_storage(path: Path) -> SetupAction:

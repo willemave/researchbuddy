@@ -34,6 +34,7 @@ def test_build_command_reference_includes_agent_first_commands() -> None:
     assert "researchbuddy status [--run-id RUN_ID] [--json]" in reference
     assert "researchbuddy watch [--run-id RUN_ID]" in reference
     assert "researchbuddy doctor [--fix]" in reference
+    assert "researchbuddy skills install openclaw" in reference
     assert "researchbuddy list [--limit 20] [--json]" in reference
     assert "researchbuddy run" not in reference
     assert "researchbuddy runs" not in reference
@@ -45,6 +46,7 @@ def test_build_command_reference_agent_mode_is_machine_friendly() -> None:
     assert "ResearchBuddy CLI For Agents" in reference
     assert "## start" in reference
     assert "## status" in reference
+    assert "## skills install" in reference
     assert "Purpose:" in reference
     assert 'Usage: `researchbuddy followup "<question>" [--run-id RUN_ID]' in reference
 
@@ -59,6 +61,7 @@ def test_top_level_help_uses_agent_first_surface() -> None:
     assert "status" in result.stdout
     assert "watch" in result.stdout
     assert "doctor" in result.stdout
+    assert "skills" in result.stdout
     assert "list" in result.stdout
     assert "runs" not in result.stdout
 
@@ -70,6 +73,38 @@ def test_top_level_invocation_defaults_to_help() -> None:
     assert "Usage: researchbuddy [OPTIONS] COMMAND [ARGS]..." in result.stdout
     assert "start" in result.stdout
     assert "doctor" in result.stdout
+
+
+def test_skills_install_openclaw_workspace_json(tmp_path: Path) -> None:
+    source_path = tmp_path / "source" / "research"
+    source_path.mkdir(parents=True)
+    (source_path / "SKILL.md").write_text(
+        "---\nname: research\ndescription: Test skill.\n---\n",
+        encoding="utf-8",
+    )
+    workspace_path = tmp_path / "workspace"
+
+    result = runner.invoke(
+        cli.app,
+        [
+            "skills",
+            "install",
+            "openclaw",
+            "--scope",
+            "workspace",
+            "--workspace",
+            str(workspace_path),
+            "--source",
+            str(source_path),
+            "--json",
+        ],
+    )
+
+    assert result.exit_code == 0
+    payload = json.loads(result.stdout)
+    assert payload["status"] == "installed"
+    assert payload["target_path"] == str(workspace_path / "skills" / "research")
+    assert (workspace_path / "skills" / "research").is_symlink()
 
 
 def test_old_run_command_is_not_registered() -> None:

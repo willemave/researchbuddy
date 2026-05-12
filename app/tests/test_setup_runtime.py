@@ -15,7 +15,7 @@ class FakeSettingsLoader:
         return None
 
 
-def test_run_setup_persists_detected_provider_to_local_env(
+def test_run_setup_uses_detected_provider_without_copying_credentials(
     monkeypatch,
     tmp_path: Path,
 ) -> None:
@@ -41,12 +41,10 @@ def test_run_setup_persists_detected_provider_to_local_env(
     result = run_setup(settings, cwd=workspace_root, install_playwright=False)
 
     assert result.actions[0].ok is True
-    env_lines = (workspace_root / ".env").read_text(encoding="utf-8").splitlines()
-    assert env_lines == [
-        "SEARCH_PROVIDER=exa",
-        "EXA_API_KEY=openclaw-exa",
-        "EXA_SEARCH_TYPE=auto",
-    ]
+    assert result.actions[0].detail == (
+        "EXA_API_KEY available from environment or shared agent config; no credentials copied"
+    )
+    assert not (workspace_root / ".env").exists()
     assert (workspace_root / "data" / "storage").is_dir()
     assert (workspace_root / "data" / "researchbuddy.db").exists()
 

@@ -58,6 +58,19 @@ Example:
 - `researchbuddy doctor`
 - `researchbuddy doctor --fix`
 
+## skills install
+Usage: `researchbuddy skills install openclaw [--scope shared|workspace] [--method symlink|copy] [--json]`
+Purpose: Install the bundled research skill into OpenClaw.
+Behavior:
+- Defaults to a shared install at `~/.openclaw/skills/research`.
+- Use `--scope workspace` to install into `<workspace>/skills/research`.
+- Uses a symlink by default so Homebrew upgrades update the installed skill.
+- Refuses to replace an existing different skill unless `--force` is passed.
+- Use `--dry-run` to preview the install plan without writing.
+- Use `--json` for machine-readable output.
+Example:
+- `researchbuddy skills install openclaw --json`
+
 ## list
 Usage: `researchbuddy list [--limit 20] [--json]`
 Purpose: List saved prompts and mark the current run.

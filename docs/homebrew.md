@@ -65,16 +65,16 @@ brew install researchbuddy
 
 Before asking for any new search-provider key, check ~/.openclaw/openclaw.json.
 If exa, tavily, or firecrawl is already configured there, ask whether ResearchBuddy should reuse that existing provider/key.
-If the user says yes, do not collect a duplicate secret. Let ResearchBuddy doctor --fix use the OpenClaw config.
+If the user says yes, do not collect a duplicate secret. Let ResearchBuddy doctor --fix use the OpenClaw config without copying credentials into ResearchBuddy .env.
 
 researchbuddy doctor --fix
 researchbuddy list
 
-If you support SKILL.md directories, load this bundled skill:
-$(brew --prefix)/opt/researchbuddy/share/researchbuddy/skills/researchbuddy-cli
+Install the bundled OpenClaw skill:
+researchbuddy skills install openclaw --scope shared
 
-Read:
-- $(brew --prefix)/opt/researchbuddy/share/researchbuddy/skills/researchbuddy-cli/SKILL.md
+For a single OpenClaw workspace instead:
+researchbuddy skills install openclaw --scope workspace --workspace /path/to/workspace
 
 Do not start research runs until `researchbuddy doctor` passes.
 ```

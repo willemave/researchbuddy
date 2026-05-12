@@ -11,6 +11,7 @@ import uuid
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
+from typing import cast
 
 import click
 import typer
@@ -36,6 +37,12 @@ from app.models.review import (
     ReviewRunStats,
     RunRuntimeRecord,
 )
+from app.models.skills import (
+    SkillInstallMethod,
+    SkillInstallRequest,
+    SkillInstallResult,
+    SkillInstallScope,
+)
 from app.services.chatgpt import build_chatgpt_continue_url
 from app.services.followup import answer_followup_question, load_followup_memory
 from app.services.homebrew_tap import detect_github_remote, export_tap_repository
@@ -51,6 +58,7 @@ from app.services.research_profiles import (
     parse_research_mode_option,
 )
 from app.services.setup_runtime import format_setup_report, has_setup_failures, run_setup
+from app.services.skill_installer import install_skill
 from app.services.storage import (
     build_run_paths,
     create_run,
@@ -180,7 +188,13 @@ tap_app = typer.Typer(
     help="Generate and inspect Homebrew tap publishing assets for ResearchBuddy.",
     invoke_without_command=True,
 )
+skills_app = typer.Typer(
+    cls=ResearchBuddyGroup,
+    help="Install bundled ResearchBuddy skills into local agent runtimes.",
+    invoke_without_command=True,
+)
 app.add_typer(tap_app, name="tap", hidden=True)
+app.add_typer(skills_app, name="skills")
 console = Console()
 settings = get_settings()
 
@@ -244,6 +258,26 @@ SOURCE_TYPE_OPTION = typer.Option(
     "auto",
     "--type",
     help="Transcription input type: auto, youtube, podcast, or audio.",
+)
+SKILL_SCOPE_OPTION = typer.Option(
+    "shared",
+    "--scope",
+    help="Install scope: shared or workspace.",
+)
+SKILL_METHOD_OPTION = typer.Option(
+    "symlink",
+    "--method",
+    help="Install method: symlink or copy.",
+)
+SKILL_SOURCE_OPTION = typer.Option(
+    None,
+    "--source",
+    help="Explicit ResearchBuddy skill directory containing SKILL.md.",
+)
+SKILL_WORKSPACE_OPTION = typer.Option(
+    None,
+    "--workspace",
+    help="OpenClaw workspace path when --scope workspace is used.",
 )
 
 
@@ -562,6 +596,40 @@ def _print_status_payload(payload: dict[str, object]) -> None:
         console.print(f"Synthesis: {payload['synthesis_path']}")
 
 
+def _parse_skill_scope(value: str) -> SkillInstallScope:
+    """Parse a skill install scope option."""
+
+    if value in {"shared", "workspace"}:
+        return cast(SkillInstallScope, value)
+    raise typer.BadParameter("scope must be one of: shared, workspace")
+
+
+def _parse_skill_method(value: str) -> SkillInstallMethod:
+    """Parse a skill install method option."""
+
+    if value in {"symlink", "copy"}:
+        return cast(SkillInstallMethod, value)
+    raise typer.BadParameter("method must be one of: symlink, copy")
+
+
+def _print_skill_install_result(result: SkillInstallResult) -> None:
+    """Print a compact human-readable skill install result."""
+
+    console.print(f"Status: {result.status}")
+    console.print(f"Skill: {result.skill_name}")
+    console.print(f"Agent: {result.agent}")
+    console.print(f"Scope: {result.scope}")
+    console.print(f"Method: {result.method}")
+    if result.source_path is not None:
+        console.print(f"Source: {result.source_path}")
+    console.print(f"Target: {result.target_path}")
+    console.print(f"Detail: {result.detail}", soft_wrap=True)
+    if result.next_steps:
+        console.print("Next steps:")
+        for step in result.next_steps:
+            console.print(f"- {step}", soft_wrap=True)
+
+
 async def _record_runtime_start(run_id: str, pid: int | None, log_path: Path) -> None:
     """Persist runtime metadata for a process."""
 
@@ -673,6 +741,16 @@ def cli_callback(ctx: typer.Context) -> None:
 @tap_app.callback()
 def tap_callback(ctx: typer.Context) -> None:
     """Render tap help when the tap group is invoked without a subcommand."""
+
+    if ctx.invoked_subcommand is not None:
+        return
+    console.print(ctx.get_help(), highlight=False)
+    raise typer.Exit()
+
+
+@skills_app.callback()
+def skills_callback(ctx: typer.Context) -> None:
+    """Render skills help when the skills group is invoked without a subcommand."""
 
     if ctx.invoked_subcommand is not None:
         return
@@ -955,6 +1033,50 @@ def doctor(
     console.print()
     console.print(asyncio.run(_current_run_report()))
     if setup_failed or has_doctor_failures(checks):
+        raise typer.Exit(code=1)
+
+
+@skills_app.command(
+    "install",
+    help="Install the bundled research skill into a supported local agent.",
+    cls=ResearchBuddyCommand,
+)
+def install_agent_skill(
+    agent: str = typer.Argument(..., help="Agent target: openclaw"),
+    scope: str = SKILL_SCOPE_OPTION,
+    method: str = SKILL_METHOD_OPTION,
+    source_path: Path | None = SKILL_SOURCE_OPTION,
+    workspace_path: Path | None = SKILL_WORKSPACE_OPTION,
+    force: bool = typer.Option(False, "--force", help="Replace an existing target skill"),
+    dry_run: bool = typer.Option(False, "--dry-run", help="Show the install plan without writing"),
+    json_output: bool = JSON_OPTION,
+) -> None:
+    """Install the bundled ResearchBuddy skill into a local agent skill directory."""
+
+    if agent != "openclaw":
+        _exit_with_command_guidance("skills install", reason="agent must be openclaw.")
+    try:
+        parsed_scope = _parse_skill_scope(scope)
+        parsed_method = _parse_skill_method(method)
+    except typer.BadParameter as exc:
+        _exit_with_command_guidance("skills install", reason=str(exc))
+
+    result = install_skill(
+        SkillInstallRequest(
+            agent="openclaw",
+            scope=parsed_scope,
+            method=parsed_method,
+            source_path=source_path,
+            workspace_path=workspace_path,
+            force=force,
+            dry_run=dry_run,
+        )
+    )
+    if json_output:
+        _print_json(result.model_dump(mode="json"))
+    else:
+        _print_skill_install_result(result)
+    if not result.ok:
         raise typer.Exit(code=1)
 
 

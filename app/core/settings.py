@@ -204,12 +204,12 @@ def get_settings() -> Settings:
 
 
 def _load_env() -> None:
-    """Force-load .env from repo root with override."""
+    """Load shared agent config first, then local .env defaults."""
 
     repo_root = Path(__file__).resolve().parents[2]
     env_path = repo_root / ".env"
-    load_dotenv(env_path, override=True)
     load_agent_search_env(Path.home())
+    load_dotenv(env_path, override=False)
 
 
 def load_agent_search_env(

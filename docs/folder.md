@@ -57,6 +57,7 @@ Notes:
 - `app/models/homebrew.py`: validated request/result models for generating a Homebrew tap repository.
 - `app/models/review.py`: core workflow data contracts for runs, search responses, URL tasks, persistence records, and follow-up memory.
 - `app/models/rlm.py`: models for context documents and RLM-style interactive runs/refinement loops.
+- `app/models/skills.py`: validated request/result models for installing bundled skills into agent runtimes.
 
 ### `app/services/`
 
@@ -76,7 +77,8 @@ Notes:
 - `app/services/rlm_engine.py`: executes the REPL-like “RLM” loop, including subquery calls and `FINAL(...)` extraction.
 - `app/services/search_provider.py`: provider abstraction plus concrete Exa/Tavily/Firecrawl search adapters and normalized result parsing.
 - `app/services/semantic_dedupe.py`: local embeddings, clustering, semantic dedupe, and MMR ranking.
-- `app/services/setup_runtime.py`: local setup workflow for `.env`, storage, database, and Playwright browser installation.
+- `app/services/setup_runtime.py`: local setup workflow for search config validation, storage, database, and Playwright browser installation.
+- `app/services/skill_installer.py`: safe symlink/copy installation of bundled ResearchBuddy skills into OpenClaw skill directories.
 - `app/services/storage.py`: SQLite schema/init plus run/url persistence and artifact path helpers.
 - `app/services/token_estimator.py`: token counting/budgeting based on `tiktoken`.
 - `app/services/transcript_summarizer.py`: compresses podcast/YouTube transcripts through the coding-agent harness.
@@ -118,6 +120,7 @@ Notes:
 - `app/tests/test_semantic_dedupe.py`: tests clustering, dedupe, and MMR ranking semantics.
 - `app/tests/test_settings.py`: tests loading provider config from Hermes/OpenClaw files.
 - `app/tests/test_setup_runtime.py`: tests `.env` persistence and workspace setup behavior.
+- `app/tests/test_skill_installer.py`: tests OpenClaw shared/workspace skill install behavior.
 - `app/tests/test_storage.py`: tests SQLite run persistence and run-dir resolution.
 - `app/tests/test_transcript_summarizer.py`: tests transcript summarization fallback behavior.
 - `app/tests/test_url_handlers.py`: tests Reddit/YouTube/PDF URL detection and markdown formatting helpers.
@@ -139,16 +142,15 @@ Notes:
 
 - `scripts/release-check.sh`: release gate that runs `uv sync`, `ruff check`, `pytest`, and `uv build`.
 - `scripts/researchbuddy`: local wrapper that executes the installed CLI through `uv run --project`.
-- `scripts/startup.sh`: very small wrapper that delegates to `scripts/researchbuddy`.
 
 ## Skills
 
 ### `skills/`
 
-- `skills/researchbuddy-cli/`: bundled agent skill for installing and operating the CLI.
-- `skills/researchbuddy-cli/SKILL.md`: main usage instructions for agents.
-- `skills/researchbuddy-cli/references/commands.md`: compact command semantics.
-- `skills/researchbuddy-cli/references/troubleshooting.md`: recovery steps for missing dependencies or credentials.
+- `skills/research/`: bundled agent skill for installing and operating the CLI.
+- `skills/research/SKILL.md`: main usage instructions for agents.
+- `skills/research/references/commands.md`: compact command semantics.
+- `skills/research/references/troubleshooting.md`: recovery steps for missing dependencies or credentials.
 
 ## Runtime / Generated Trees
 

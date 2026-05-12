@@ -16,7 +16,7 @@ Fix:
 
 Verify:
 - Run `ffmpeg -version`
-- Then rerun `scripts/researchbuddy doctor`
+- Then rerun `researchbuddy doctor`
 
 If package-manager access is blocked:
 - Report the exact install command needed for the host OS.
@@ -31,16 +31,26 @@ Symptom:
 Fix:
 - Install the `codex` CLI for that machine.
 - Authenticate it with `codex login`.
-- Rerun `scripts/researchbuddy doctor`.
+- Rerun `researchbuddy doctor`.
 
 ## Search provider key missing
 
 Symptom:
 - `researchbuddy doctor` fails the selected search provider check.
 
-Fix:
-- Set the API key for the configured provider:
+OpenClaw-first fix:
+- Inspect `~/.openclaw/openclaw.json` for:
+  - `tools.web.search.provider`
+  - `tools.web.search.<provider>.apiKey`
+- Supported providers are `exa`, `tavily`, and `firecrawl`.
+- Ask once whether ResearchBuddy should reuse that provider/key.
+- If approved, run `researchbuddy doctor --fix` so ResearchBuddy loads OpenClaw config without copying credentials into local `.env`.
+
+Manual fix:
+- Set `SEARCH_PROVIDER` plus exactly one matching API key in the process environment or local `.env`:
   - `EXA_API_KEY`
   - `TAVILY_API_KEY`
   - `FIRECRAWL_API_KEY`
-- Rerun `scripts/researchbuddy doctor`.
+- Rerun `researchbuddy doctor`.
+
+Do not store provider secrets in skill files, docs, or chat logs.

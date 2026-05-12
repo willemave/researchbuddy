@@ -87,7 +87,7 @@ def render_formula(request: TapExportRequest) -> str:
     class_name = request.formula_name.replace("-", " ").replace("_", " ").title().replace(" ", "")
     source_url = build_source_tarball_url(request)
     homepage = build_source_homepage(request)
-    skill_path = "#{opt_pkgshare}/skills/researchbuddy-cli"
+    skill_path = "#{opt_pkgshare}/skills/research"
     bootstrap_url = (
         f"git+https://github.com/{request.github_owner}/{request.source_repo}.git@v{request.version}"
     )
@@ -104,6 +104,7 @@ def render_formula(request: TapExportRequest) -> str:
     (bin/"researchbuddy").write <<~SH
       #!/usr/bin/env bash
       set -euo pipefail
+      export RESEARCHBUDDY_SKILL_DIR="#{{opt_pkgshare}}/skills/research"
       exec "#{{Formula["uv"].opt_bin}}/uv" tool run --from "{bootstrap_url}" researchbuddy "$@"
     SH
     pkgshare.install "skills"
@@ -118,20 +119,21 @@ def render_formula(request: TapExportRequest) -> str:
       Additional runtime setup:
         - Install Playwright browsers after bootstrap if `researchbuddy doctor` reports they are missing
         - Install and authenticate codex: codex login
-        - Set at least one search provider key (EXA_API_KEY, TAVILY_API_KEY, or FIRECRAWL_API_KEY)
+        - Configure at least one search provider key through environment, ~/.hermes/.env, ~/.openclaw/openclaw.json, or manual ResearchBuddy .env
         - Optionally set SEARCH_PROVIDER to override auto-selection
         - In OpenClaw, first check ~/.openclaw/openclaw.json and reuse an existing exa/tavily/firecrawl key when the user approves
-        - ResearchBuddy also auto-loads provider config from ~/.hermes/.env and ~/.openclaw/openclaw.json
+        - ResearchBuddy auto-loads provider config from ~/.hermes/.env and ~/.openclaw/openclaw.json without copying credentials
+        - Install the OpenClaw skill with: researchbuddy skills install openclaw --scope shared
         - Run `researchbuddy doctor` before first use
 
-      Tap maintenance skill:
+      Bundled research skill:
         {skill_path}
     EOS
   end
 
   test do
     assert_match "tool run --from", (bin/"researchbuddy").read
-    assert_path_exists pkgshare/"skills/researchbuddy-cli/SKILL.md"
+    assert_path_exists pkgshare/"skills/research/SKILL.md"
   end
 end
 '''
@@ -160,7 +162,7 @@ If another formula with the same name ever exists, use the fully qualified name:
 brew install {short_tap}/{formula_name}
 ```
 
-If you are installing into OpenClaw, check `~/.openclaw/openclaw.json` before asking for search-provider credentials. When it already has `exa`, `tavily`, or `firecrawl` configured, ask whether ResearchBuddy should reuse that existing provider/key and let `researchbuddy doctor --fix` auto-load it instead of collecting a duplicate secret.
+If you are installing into OpenClaw, check `~/.openclaw/openclaw.json` before asking for search-provider credentials. When it already has `exa`, `tavily`, or `firecrawl` configured, ask whether ResearchBuddy should reuse that existing provider/key and let `researchbuddy doctor --fix` auto-load it without copying credentials.
 
 ## Update the formula for a new ResearchBuddy release
 

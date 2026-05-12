@@ -155,7 +155,7 @@ It also auto-loads search settings from local agent installs:
 - **Hermes:** `~/.hermes/.env`
 - **OpenClaw:** `~/.openclaw/openclaw.json`
 
-Copy `.env.example` to `.env` for manual configuration. Common settings:
+Hermes/OpenClaw search config is treated as the shared credential source and is not copied into ResearchBuddy `.env`. Copy `.env.example` to `.env` only for manual fallback configuration. Common settings:
 
 | Variable | Default | Purpose |
 |----------|---------|---------|
@@ -237,18 +237,18 @@ researchbuddy doctor
 researchbuddy doctor --fix
 researchbuddy list
 
-Install the bundled skill from:
-$(brew --prefix)/opt/researchbuddy/share/researchbuddy/skills/researchbuddy-cli
+Install the bundled OpenClaw skill:
+researchbuddy skills install openclaw --scope shared
 
-Read:
-- $(brew --prefix)/opt/researchbuddy/share/researchbuddy/skills/researchbuddy-cli/SKILL.md
+For a single OpenClaw workspace instead:
+researchbuddy skills install openclaw --scope workspace --workspace /path/to/workspace
 
 Do not start research runs until researchbuddy doctor passes.
 Use researchbuddy start, researchbuddy status, researchbuddy watch, and
 researchbuddy followup for normal agent operation.
 ```
 
-Repository skill path: `skills/researchbuddy-cli`
+Repository skill path: `skills/research`
 
 ---
 

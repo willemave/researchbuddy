@@ -100,6 +100,28 @@ CLI_COMMANDS: tuple[CliCommandHelp, ...] = (
         examples=("researchbuddy doctor", "researchbuddy doctor --fix"),
     ),
     CliCommandHelp(
+        name="skills install",
+        usage=(
+            "researchbuddy skills install openclaw "
+            "[--scope shared|workspace] [--method symlink|copy] [--json]"
+        ),
+        summary="Install the bundled research skill into OpenClaw.",
+        details=(
+            "Defaults to a shared install at ~/.openclaw/skills/research.",
+            "Use --scope workspace to install into <workspace>/skills/research.",
+            "Uses a symlink by default so Homebrew upgrades update the installed skill.",
+            "Use --method copy only when the target agent cannot follow symlinks.",
+            "Refuses to replace an existing different skill unless --force is passed.",
+            "Use --dry-run to preview the install plan without writing.",
+            "Use --json for scripts and agents.",
+        ),
+        examples=(
+            "researchbuddy skills install openclaw",
+            "researchbuddy skills install openclaw --scope workspace --workspace /path/to/workspace",
+            "researchbuddy skills install openclaw --dry-run --json",
+        ),
+    ),
+    CliCommandHelp(
         name="list",
         usage="researchbuddy list [--limit 20] [--json]",
         summary="List saved prompts and mark the current run.",
